@@ -1,0 +1,2 @@
+parameters:
+    orocrm_abandoned_cart.list.entity.class:  OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList

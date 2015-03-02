@@ -1,0 +1,12 @@
+orocrm:
+    abandonedCart:
+        list:
+            entity_plural_label: Abandoned Cart Lists
+
+            id.label:            Id
+            name.label:          Name
+            description.label:   Description
+            owner.label:         Owner
+            segment.label:       Segment
+            created_at.label:    Created At
+            updated_at.label:    Updated At

@@ -1,0 +1,4 @@
+orocrm_abandoned_cart_bundle:
+    resource:     "@OroCRMAbandonedCartBundle/Controller"
+    type:         annotation
+    prefix:       /

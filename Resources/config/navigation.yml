@@ -1,0 +1,14 @@
+oro_menu_config:
+    items:
+        abandoned_cart_list:
+            label: 'orocrm.abandonedCart.list.entity_plural_label'
+            route: 'orocrm_abandoned_cart_list'
+    tree:
+        application_menu:
+            children:
+                marketing_tab:
+                    children:
+                        abandoned_cart_list: ~
+
+oro_titles:
+    orocrm_abandoned_cart_list:  ~
