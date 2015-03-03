@@ -125,6 +125,19 @@ class AbandonedCartList extends ExtendAbandonedCartList
     }
 
     /**
+     * Set name
+     *
+     * @param string $name
+     * @return AbandonedCartList
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
      * Retrieves description
      *
      * @return string
@@ -132,6 +145,19 @@ class AbandonedCartList extends ExtendAbandonedCartList
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return AbandonedCartList
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -165,6 +191,19 @@ class AbandonedCartList extends ExtendAbandonedCartList
     }
 
     /**
+     * Set organization
+     *
+     * @param Organization $organization
+     * @return AbandonedCartList
+     */
+    public function setOrganization(Organization $organization = null)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
      * Retrieves created at Date and Time
      *
      * @return \DateTime
@@ -182,5 +221,41 @@ class AbandonedCartList extends ExtendAbandonedCartList
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Get this segment definition in YAML format
+     *
+     * @return string
+     */
+    public function getDefinition()
+    {
+        if ($this->segment) {
+            return $this->segment->getDefinition();
+        }
+
+        return null;
+    }
+
+    /**
+     * Set this segment definition in YAML format
+     *
+     * @param string $definition
+     */
+    public function setDefinition($definition)
+    {
+        if ($this->segment) {
+            $this->segment->setDefinition($definition);
+        }
+    }
+
+    /**
+     * Get the full name of an entity
+     *
+     * @return string
+     */
+    public function getEntity()
+    {
+        return 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList';
     }
 }

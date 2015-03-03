@@ -1,0 +1,75 @@
+datagrid:
+    orocrm-abandonedcart-list-grid:
+        extended_entity_name: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList
+        source:
+            type: orm
+            query:
+                select:
+                    - ac.id
+                    - ac.name
+                    - ac.createdAt
+                from:
+                    - { table: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList, alias: ac }
+                join:
+                    left:
+                        - { join: ac.segment, alias: segment }
+        columns:
+            name:
+                label:          orocrm.abandonedcart.abandonedcartlist.name.label
+            createdAt:
+                label:          orocrm.abandonedcart.abandonedcartlist.created_at.label
+                frontend_type:  datetime
+        filters:
+            columns:
+                name:
+                    type:        string
+                    data_name:   ac.name
+                createdAt:
+                    type:       datetime
+                    data_name:  ac.createdAt
+        sorters:
+            columns:
+                name:        { data_name: ac.name }
+                createdAt:   { data_name: ac.createdAt }
+        properties:
+            id: ~
+            view_link:
+                type: url
+                route: orocrm_abandoned_cart_list_view
+                params: [ id ]
+            update_link:
+                type: url
+                route: orocrm_abandoned_cart_list_update
+                params:
+                    - id
+            delete_link:
+                type: url
+                route: orocrm_abandoned_cart_list_delete
+                params:
+                    - id
+        actions:
+            view:
+                type:         navigate
+                label:        oro.grid.action.view
+                link:         view_link
+                icon:         eye-open
+                acl_recource: orocrm_abandoned_cart_list_view
+                rowAction:    true
+            update:
+                type:          navigate
+                acl_resource:  orocrm_abandoned_cart_list_update
+                label:         oro.grid.action.update
+                icon:          edit
+                link:          update_link
+                launcherOptions:
+                    className: 'no-hash mobile-hide'
+            delete:
+                type:          delete
+                acl_resource:  orocrm_abandoned_cart_list_delete
+                label:         oro.grid.action.delete
+                icon:          trash
+                link:          delete_link
+                launcherOptions:
+                    className: 'no-hash mobile-hide'
+        options:
+            entity_pagination: true

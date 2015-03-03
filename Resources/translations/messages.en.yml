@@ -5,9 +5,15 @@ orocrm:
             entity_label: Abandoned Cart List
             id.label: Id
             name.label: Name
-            description.label: Descriptioin
+            description.label: Description
             owner.label: Owner
             organization.label: Organization
             segment.label: Segment
             created_at.label: Created At
             updated_at.label: Updated At
+
+        block:
+            general: General Information
+            items: Items
+            removed: Removed Items
+

@@ -12,3 +12,7 @@ oro_menu_config:
 
 oro_titles:
     orocrm_abandoned_cart_list:  ~
+    orocrm_abandoned_cart_list_view: '%%entityName%%'
+
+
+
