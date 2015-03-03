@@ -4,6 +4,7 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Entity;
 
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Doctrine\ORM\Mapping as ORM;
+use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Oro\Bundle\OrganizationBundle\Entity\Organization;
 use Oro\Bundle\SegmentBundle\Entity\Segment;
 use Oro\Bundle\UserBundle\Entity\User;
@@ -37,6 +38,8 @@ use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendAbandonedCartList;
  */
 class AbandonedCartList extends ExtendAbandonedCartList
 {
+    const ENTITY_FULL_NAME = 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList';
+
     /**
      * @var int
      *
@@ -170,6 +173,28 @@ class AbandonedCartList extends ExtendAbandonedCartList
         return $this->segment;
     }
 
+    public function updateSegment($name, $definition)
+    {
+        if (is_null($this->segment)) {
+            throw new \RuntimeException('The segment does not exist in the AbandonedCartList entity.');
+        }
+        $this->segment->setName($name);
+        $this->segment->setDefinition($definition);
+        $this->segment->setOwner($this->getOwnerBusinessUnit());
+    }
+
+    /**
+     * Set segment
+     *
+     * @param Segment $segment
+     * @return AbandonedCartList
+     */
+    public function setSegment(Segment $segment)
+    {
+        $this->segment = $segment;
+        return $this;
+    }
+
     /**
      * Retrieves owner
      *
@@ -178,6 +203,25 @@ class AbandonedCartList extends ExtendAbandonedCartList
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    public function setOwner(User $owner)
+    {
+        $this->owner = $owner;
+        return $this;
+    }
+
+    /**
+     * Retrieves owner's business unit
+     *
+     * @return BusinessUnit
+     */
+    public function getOwnerBusinessUnit()
+    {
+        if (is_null($this->owner)) {
+            return null;
+        }
+        return $this->owner->getOwner();
     }
 
     /**
@@ -256,6 +300,6 @@ class AbandonedCartList extends ExtendAbandonedCartList
      */
     public function getEntity()
     {
-        return 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList';
+        return self::ENTITY_FULL_NAME;
     }
 }
