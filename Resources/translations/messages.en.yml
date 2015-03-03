@@ -17,3 +17,8 @@ orocrm:
             items: Items
             removed: Removed Items
 
+        form:
+            importance: Important
+            columns_notice: At least one column with contact information must be selected. Available contact information fields
+
+

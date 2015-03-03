@@ -1,0 +1,4 @@
+config:
+    paths:
+        'orocrmabandonedcart/js/app/components/grid-linker': 'bundles/orocrmabandonedcart/js/app/components/grid-linker.js'
+        'orocrmabandonedcart/js/app/components/columns-component': 'bundles/orocrmabandonedcart/js/app/components/columns-component.js'

@@ -13,6 +13,7 @@ oro_menu_config:
 oro_titles:
     orocrm_abandoned_cart_list:  ~
     orocrm_abandoned_cart_list_view: '%%entityName%%'
-
+    orocrm_abandoned_cart_list_update: '%%entityName%% - Edit'
+    orocrm_abandoned_cart_list_create: oro.ui.create_entity
 
 

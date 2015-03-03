@@ -1,2 +1,11 @@
 parameters:
-    orocrm_abandoned_cart.list.entity.class:  OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList
+    orocrm_abandonedcart_list.entity.class:  OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList
+    orocrm_abandonedcart_list.twig.extension.contact_information_fields.class: OroCRM\Bundle\AbandonedCartBundle\Twig\ContactInformationFieldsExtension
+
+services:
+    orocrm_abandonedcart_list.twig.extension.contact_information_fields:
+        class: %orocrm_abandonedcart_list.twig.extension.contact_information_fields.class%
+        arguments:
+            - @orocrm_marketing_list.contact_information_field_helper
+        tags:
+            - { name: twig.extension }

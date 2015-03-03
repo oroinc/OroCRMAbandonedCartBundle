@@ -27,7 +27,7 @@ class AbandonedCartController extends Controller
     public function listAction()
     {
         return [
-            'entity_class' => $this->container->getParameter('orocrm_abandoned_cart.list.entity.class')
+            'entity_class' => $this->container->getParameter('orocrm_abandonedcart_list.entity.class')
         ];
     }
 
@@ -131,6 +131,16 @@ class AbandonedCartController extends Controller
             },
             $this->get('translator')->trans('orocrm.abandonedcartlist.entity.saved')
         );
+
+        if (is_array($response)) {
+            return array_merge(
+                $response,
+                [
+                    'entities' => $this->get('oro_entity.entity_provider')->getEntities(),
+                    'metadata' => $this->get('oro_query_designer.query_designer.manager')->getMetadata('segment')
+                ]
+            );
+        }
 
 
 
