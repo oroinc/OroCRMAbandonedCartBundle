@@ -20,13 +20,13 @@ services:
 
     orocrm_abandonedcart_list.form.handler.abandoned_cart_list:
         class: %orocrm_abandonedcart_list.form.handler.abandoned_cart_list.class%
-            scope: request
-            arguments:
-                - @orocrm_abandonedcart_list.form.abandonedcart_list
-                - @request
-                - @doctrine.orm.entity_manager
-                - @orocrm_abandonedcart.abandoned_cart_list.manager
-                - @orocrm_abandonedcart.segment_definition_helper
+        scope: request
+        arguments:
+            - @orocrm_abandonedcart_list.form.abandonedcart_list
+            - @request
+            - @doctrine.orm.entity_manager
+            - @orocrm_abandonedcart.abandoned_cart_list.manager
+            - @orocrm_abandonedcart.segment_definition_helper
             - "orocrm_abandonedcart_list"
 
     orocrm_abandonedcart_list.form.type.entity_choice:
