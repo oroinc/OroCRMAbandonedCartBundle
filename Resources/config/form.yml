@@ -1,5 +1,6 @@
 parameters:
     orocrm_abandonedcart_list.form.type.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType
+    orocrm_abandonedcart_list.form.type.entity_choice.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartEntityChoiceType
 
 services:
     # AbandonedCartList
@@ -15,3 +16,10 @@ services:
         arguments:
             - "orocrm_abandonedcart_list_form"
             - "orocrm_abandonedcart_list"
+
+    orocrm_abandonedcart_list.form.type.entity_choice:
+        class: %orocrm_abandonedcart_list.form.type.entity_choice.class%
+        arguments:
+            - @oro_entity.entity_provider
+        tags:
+            - { name: form.type, alias: orocrm_abandonedcart_list_entity_choice }

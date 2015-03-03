@@ -77,6 +77,12 @@
                                 'class': 'segment-descr'
                             }
                         })
+                    ]
+                },
+                {
+                    'title': '',
+                    'data': [
+                        form_row(form.entity, {'label': 'orocrm.marketinglist.entity.label'}),
                     ] | merge(ownerDataBlock.dataBlocks[0].subblocks[0].data)
                 }
             ]
@@ -86,13 +92,14 @@
     {# TODO: remove this check after full support of manual marketing lists CRM-1878 #}
         {% set hasEntity = form.vars.value is not empty and form.vars.value.entity is defined and form.vars.value.entity is not empty %}
         {% set columnsComponentOptions = {
+        'entityChoiceSelector': '#orocrm_abandonedcart_list_form_entity',
         'fieldsChoiceSelector': '#contact-information-fields-list',
         'contactInformationFields': hasEntity ? get_contact_information_fields_info() : []
         } %}
 
         {% set type = 'orocrm_abandonedcart_list' %}
         {% set columnsDesigner %}
-        <div data-page-component-module="orocrmabandonedcart/js/app/components/columns-component"
+        <div data-page-component-module="orocrmmarketinglist/js/app/components/columns-component"
              data-page-component-options="{{ columnsComponentOptions|json_encode }}"
              class="abandonedcart-list-qd-columns"
                 >
@@ -127,7 +134,20 @@
                     'data': [
                         columnsDesigner
                     ]
-                }
+                },
+                {
+                    'title': 'oro.segment.form.filters'|trans,
+                    'spanClass': type ~  '-filters responsive-cell',
+                    'data': [
+                        segmentQD.query_designer_condition_builder({
+                            'id': type ~ '-condition-builder',
+                            'criteria_list_id': 'filter-criteria-list',
+                            'entity_choice_id': 'orocrm_abandonedcart_list_form_entity',
+                            'currentSegmentId': entity.id|default(null),
+                            'page_limit': constant('\\Oro\\Bundle\\SegmentBundle\\Entity\\Manager\\SegmentManager::PER_PAGE')
+                        })
+                    ]
+                },
             ]
         }] ) %}
 
