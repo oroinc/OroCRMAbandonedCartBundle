@@ -129,7 +129,8 @@ class AbandonedCartController extends Controller
                     'parameters' => array('id' => $entity->getId())
                 );
             },
-            $this->get('translator')->trans('orocrm.abandonedcartlist.entity.saved')
+            $this->get('translator')->trans('orocrm.abandonedcartlist.entity.saved'),
+            $this->get('orocrm_abandonedcart_list.form.handler.abandoned_cart_list')
         );
 
         if (is_array($response)) {
