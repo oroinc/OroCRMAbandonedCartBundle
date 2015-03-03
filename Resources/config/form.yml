@@ -1,5 +1,6 @@
 parameters:
     orocrm_abandonedcart_list.form.type.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType
+    orocrm_abandonedcart_list.form.handler.abandoned_cart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartListHandler
     orocrm_abandonedcart_list.form.type.entity_choice.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartEntityChoiceType
 
 services:
@@ -15,6 +16,17 @@ services:
         factory_service: form.factory
         arguments:
             - "orocrm_abandonedcart_list_form"
+            - "orocrm_abandonedcart_list"
+
+    orocrm_abandonedcart_list.form.handler.abandoned_cart_list:
+        class: %orocrm_abandonedcart_list.form.handler.abandoned_cart_list.class%
+            scope: request
+            arguments:
+                - @orocrm_abandonedcart_list.form.abandonedcart_list
+                - @request
+                - @doctrine.orm.entity_manager
+                - @orocrm_abandonedcart.abandoned_cart_list.manager
+                - @orocrm_abandonedcart.segment_definition_helper
             - "orocrm_abandonedcart_list"
 
     orocrm_abandonedcart_list.form.type.entity_choice:

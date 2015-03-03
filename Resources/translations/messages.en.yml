@@ -21,4 +21,4 @@ orocrm:
             importance: Important
             columns_notice: At least one column with contact information must be selected. Available contact information fields
 
-
+        segment_name_pattern: %name% segment
