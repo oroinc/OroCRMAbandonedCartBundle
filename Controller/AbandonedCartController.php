@@ -72,14 +72,7 @@ class AbandonedCartController extends Controller
      */
     public function createAction()
     {
-        $marketingList = new MarketingList();
-        $marketingList->setEntity('OroCRM\Bundle\MagentoBundle\Entity\Cart');
-
-        /** @var EntityManager $em */
-        $em = $this->get('doctrine.orm.entity_manager');
-        $type = $em->getRepository('OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType')
-            ->findOneBy(array('name' => MarketingListType::TYPE_DYNAMIC));
-        $marketingList->setType($type);
+        $marketingList = $this->get('orocrm_abandonedcart_list.predefined_marketing_list_factory')->create();
 
         return $this->update($marketingList);
     }
@@ -113,12 +106,12 @@ class AbandonedCartController extends Controller
      *      class="OroCRMAbandonedCartBundle:AbandonedCartList"
      * )
      */
-    public function deleteAction(AbandonedCartList $abandonedCartList)
+    public function deleteAction(MarketingList $marketingList)
     {
         /** @var EntityManager $em */
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $em->remove($abandonedCartList);
+        $em->remove($marketingList);
         $em->flush();
 
         return new JsonResponse('', Codes::HTTP_OK);
@@ -145,7 +138,7 @@ class AbandonedCartController extends Controller
                     'parameters' => array('id' => $entity->getId())
                 );
             },
-            $this->get('translator')->trans('orocrm.abandonedcartlist.entity.saved'),
+            $this->get('translator')->trans('orocrm.abandonedcart.entity.saved'),
             $this->get('orocrm_abandonedcart_list.form.handler.abandoned_cart_list')
         );
 

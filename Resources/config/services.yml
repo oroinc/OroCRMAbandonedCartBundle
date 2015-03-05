@@ -5,6 +5,7 @@ parameters:
     orocrm_abandonedcart.abandoned_cart_list.manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartListManager
     orocrm_abandonedcart.dynamic_type_segment.builder.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\DynamicTypeSegmentBuilder
     orocrm_abandonedcart.marketin_list.origin.class: OroCRM\Bundle\AbandonedCartBundle\Model\MarketingList\AbandonedCartSource
+    orocrm_abandonedcart_list.predefined_marketing_list_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory
 
 services:
     orocrm_abandonedcart_list.twig.extension.contact_information_fields:
@@ -38,3 +39,8 @@ services:
             - @orocrm_abandonedcart.marketin_list.origin
         tags:
             - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.after, method: onBuildAfter }
+
+    orocrm_abandonedcart_list.predefined_marketing_list_factory:
+        class: %orocrm_abandonedcart_list.predefined_marketing_list_factory.class%
+        arguments:
+            - @doctrine.orm.entity_manager
