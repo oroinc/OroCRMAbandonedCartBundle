@@ -83,13 +83,13 @@
                     'title': '',
                     'data': [
                         form_row(form.entity, {'label': 'orocrm.marketinglist.entity.label'}),
+                        form_row(form.type, {'label': 'orocrm.marketinglist.type.label'})
                     ] | merge(ownerDataBlock.dataBlocks[0].subblocks[0].data)
                 }
             ]
         }]
     %}
 
-    {# TODO: remove this check after full support of manual marketing lists CRM-1878 #}
         {% set hasEntity = form.vars.value is not empty and form.vars.value.entity is defined and form.vars.value.entity is not empty %}
         {% set columnsComponentOptions = {
         'entityChoiceSelector': '#orocrm_abandonedcart_list_form_entity',

@@ -3,6 +3,7 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Controller;
 
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\Util\Codes;
@@ -14,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList;
+use OroCRM\Bundle\MarketingListBundle\Datagrid\ConfigurationProvider;
 
 /**
  * @Route("/abandoned-cart")
@@ -42,14 +44,19 @@ class AbandonedCartController extends Controller
      * )
      * @Template
      *
-     * @param AbandonedCartList $entity
+     * @param MarketingList $entity
      *
      * @return array
      */
-    public function viewAction(AbandonedCartList $entity)
+    public function viewAction(MarketingList $entity)
     {
+        $entityConfig = $this->get('orocrm_marketing_list.entity_provider')->getEntity($entity->getEntity());
+
         return [
-            'entity'   => $entity
+            'entity'   => $entity,
+            'config'   => $entityConfig,
+            'gridName' => ConfigurationProvider::GRID_PREFIX . $entity->getId()
+
         ];
     }
 
@@ -65,7 +72,16 @@ class AbandonedCartController extends Controller
      */
     public function createAction()
     {
-        return $this->update(new MarketingList());
+        $marketingList = new MarketingList();
+        $marketingList->setEntity('OroCRM\Bundle\MagentoBundle\Entity\Cart');
+
+        /** @var EntityManager $em */
+        $em = $this->get('doctrine.orm.entity_manager');
+        $type = $em->getRepository('OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType')
+            ->findOneBy(array('name' => MarketingListType::TYPE_DYNAMIC));
+        $marketingList->setType($type);
+
+        return $this->update($marketingList);
     }
 
     /**
@@ -79,11 +95,11 @@ class AbandonedCartController extends Controller
      *      class="OroCRMAbandonedCartBundle:AbandonedCartList"
      * )
      *
-     * @param AbandonedCartList $entity
+     * @param MarketingList $entity
      *
      * @return array
      */
-    public function updateAction(AbandonedCartList $entity)
+    public function updateAction(MarketingList $entity)
     {
         return $this->update($entity);
     }
