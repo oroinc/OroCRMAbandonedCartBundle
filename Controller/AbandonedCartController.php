@@ -2,6 +2,7 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Controller;
 
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\Util\Codes;
@@ -54,17 +55,17 @@ class AbandonedCartController extends Controller
 
     /**
      * @Route("/create", name="orocrm_abandoned_cart_list_create")
-     * @Template("OroCRMAbandonedCartBundle:AbandonedCart:update.html.twig")
      * @Acl(
      *      id="orocrm_abandoned_cart_list_create",
      *      type="entity",
      *      permission="CREATE",
      *      class="OroCRMAbandonedCartBundle:AbandonedCartList"
      * )
+     * @Template("OroCRMAbandonedCartBundle:AbandonedCart:update.html.twig")
      */
     public function createAction()
     {
-        return $this->update(new AbandonedCartList());
+        return $this->update(new MarketingList());
     }
 
     /**
@@ -108,22 +109,21 @@ class AbandonedCartController extends Controller
     }
 
     /**
-     * @param AbandonedCartList $entity
-     *
+     * @param MarketingList $entity
      * @return array
      */
-    protected function update(AbandonedCartList $entity)
+    protected function update(MarketingList $entity)
     {
         $response = $this->get('oro_form.model.update_handler')->handleUpdate(
             $entity,
             $this->get('orocrm_abandonedcart_list.form.abandonedcart_list'),
-            function (AbandonedCartList $entity) {
+            function (MarketingList $entity) {
                 return array(
                     'route'      => 'orocrm_abandoned_cart_list_update',
                     'parameters' => array('id' => $entity->getId())
                 );
             },
-            function (AbandonedCartList $entity) {
+            function (MarketingList $entity) {
                 return array(
                     'route'      => 'orocrm_abandoned_cart_list_view',
                     'parameters' => array('id' => $entity->getId())
@@ -134,7 +134,7 @@ class AbandonedCartController extends Controller
         );
 
         if (is_array($response)) {
-            return array_merge(
+            $response = array_merge(
                 $response,
                 [
                     'entities' => $this->get('oro_entity.entity_provider')->getEntities(),
@@ -142,8 +142,6 @@ class AbandonedCartController extends Controller
                 ]
             );
         }
-
-
 
         return $response;
     }
