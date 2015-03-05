@@ -3,8 +3,10 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use OroCRM\Bundle\AbandonedCartBundle\Model\MarketingList\AbandonedCartSource;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
+use OroCRM\Bundle\MarketingListBundle\Model\MarketingListSourceInterface;
 
 class PredefinedMarketingListFactory
 {
@@ -16,11 +18,18 @@ class PredefinedMarketingListFactory
     private $objectManager;
 
     /**
-     * @param ObjectManager $objectManager
+     * @var MarketingListSourceInterface
      */
-    public function __construct(ObjectManager $objectManager)
+    private $source;
+
+    /**
+     * @param ObjectManager $objectManager
+     * @param MarketingListSourceInterface $source
+     */
+    public function __construct(ObjectManager $objectManager, MarketingListSourceInterface $source)
     {
         $this->objectManager = $objectManager;
+        $this->source = $source;
     }
 
     /**
@@ -35,6 +44,7 @@ class PredefinedMarketingListFactory
             MarketingListType::TYPE_DYNAMIC);
 
         $marketingList->setType($type);
+        $marketingList->setSource($this->source->getCode());
 
         return $marketingList;
     }
