@@ -30,7 +30,7 @@ class AbandonedCartController extends Controller
     public function listAction()
     {
         return [
-            'entity_class' => $this->container->getParameter('orocrm_abandonedcart_list.entity.class')
+            'entity_class' => $this->container->getParameter('orocrm_marketing_list.entity.class')
         ];
     }
 
