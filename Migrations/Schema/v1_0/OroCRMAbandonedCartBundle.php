@@ -17,6 +17,7 @@ class OroCRMAbandonedCartBundle implements Migration
      */
     public function up(Schema $schema, QueryBag $queries)
     {
+        /**
         $table = $schema->createTable('orocrm_abandoned_cart_list');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
@@ -32,5 +33,14 @@ class OroCRMAbandonedCartBundle implements Migration
         $table->addIndex(['segment_id'], 'IDX_47A93B9DDB296AAD', []);
         $table->addIndex(['owner_id'], 'IDX_47A93B9D7E3C61F9', []);
         $table->addIndex(['organization_id'], 'IDX_47A93B9D32C8A3DE', []);
+        */
+
+        $table = $schema->createTable('orocrm_campaign_abandoned_cart_list_relation');
+        $table->addColumn('id', 'integer', ['autoincrement' => true]);
+        $table->addColumn('marketing_list_id', 'integer', []);
+        $table->addColumn('campaign_id', 'integer', []);
+        $table->setPrimaryKey(['id']);
+        $table->addUniqueIndex(['marketing_list_id'], 'UNIQ_3BDE1B0796434D04');
+        $table->addUniqueIndex(['campaign_id'], 'UNIQ_3BDE1B07F639F774');
     }
 }

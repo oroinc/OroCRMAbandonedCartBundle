@@ -2,14 +2,19 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Form\Handler;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartListManager;
-use OroCRM\Bundle\AbandonedCartBundle\Model\SegmentDefinitionHelper;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class AbandonedCartListHandler
+use OroCRM\Bundle\MarketingListBundle\Form\Handler\MarketingListHandler;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationFactory;
+
+class AbandonedCartListHandler extends MarketingListHandler
 {
     /**
      * @var FormInterface
@@ -22,64 +27,90 @@ class AbandonedCartListHandler
     protected $request;
 
     /**
-     * @var ObjectManager
+     * @var EntityManager
      */
-    protected $objectManager;
+    protected $manager;
 
     /**
-     * @var AbandonedCartListManager
+     * @var ValidatorInterface
      */
-    protected $abandonedCartListManager;
+    protected $validator;
 
     /**
-     * @var SegmentDefinitionHelper
+     * @var TranslatorInterface
      */
-    protected $segmentDefinitionHelper;
+    protected $translator;
+
+    /**
+     * @var CampaignFactory
+     */
+    protected $campaignFactory;
+
+    /**
+     * @var CampaignAbandonedCartRelationFactory
+     */
+    protected $campaignAbandonedCartRelationFactory;
 
     /**
      * @param FormInterface $form
      * @param Request $request
-     * @param ObjectManager $objectManager
-     * @param AbandonedCartListManager $abandonedCartListManager
-     * @param SegmentDefinitionHelper $segmentDefinitionHelper
+     * @param RegistryInterface $doctrine
+     * @param ValidatorInterface $validator
+     * @param TranslatorInterface $translator
+     * @param CampaignFactory $campaignFactory
+     * @param CampaignAbandonedCartRelationFactory $campaignAbandonedCartRelationFactory
      */
     public function __construct(
         FormInterface $form,
         Request $request,
-        ObjectManager $objectManager,
-        AbandonedCartListManager $abandonedCartListManager,
-        SegmentDefinitionHelper $segmentDefinitionHelper
+        RegistryInterface $doctrine,
+        ValidatorInterface $validator,
+        TranslatorInterface $translator,
+        CampaignFactory $campaignFactory,
+        CampaignAbandonedCartRelationFactory $campaignAbandonedCartRelationFactory
     ) {
         $this->form = $form;
         $this->request = $request;
-        $this->objectManager = $objectManager;
-        $this->abandonedCartListManager = $abandonedCartListManager;
-        $this->segmentDefinitionHelper = $segmentDefinitionHelper;
+        $this->manager = $doctrine->getManager();
+        $this->validator = $validator;
+        $this->translator = $translator;
+        $this->campaignFactory = $campaignFactory;
+        $this->campaignAbandonedCartRelationFactory = $campaignAbandonedCartRelationFactory;
     }
 
     /**
-     * Process form handling and saving of the entity
-     *
-     * @param AbandonedCartList $entity
-     * @return bool True for success processing, False otherwise
+     * @param MarketingList $marketingList
+     * @return bool
      */
-    public function process(AbandonedCartList $entity)
+    public function process(MarketingList $marketingList)
     {
-        $this->form->setData($entity);
-        if ($this->request->isMethod('POST') || $this->request->isMethod('PUT')) {
-            $this->form->submit($this->request);
-
-            $definition = $this->segmentDefinitionHelper->extractFromRequest($this->form, $this->request);
-            if ($definition) {
-                $this->abandonedCartListManager->updateSegment($entity, $definition);
-            }
-
-            if ($this->form->isValid()) {
-                $this->objectManager->persist($entity);
-                $this->objectManager->flush();
-                return true;
-            }
+        if (parent::process($marketingList)) {
+            $this->processCampaign($marketingList);
+            return true;
+        } else {
+            return false;
         }
-        return false;
+    }
+
+    /**
+     * @param MarketingList $marketingList
+     */
+    protected function processCampaign(MarketingList $marketingList)
+    {
+        $campaignRelation = $this->manager->getRepository('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation')
+            ->findOneBy(array('marketingList' => $marketingList->getId()));
+
+        if ($campaignRelation) {
+            return;
+        }
+
+        $campaign = $this->campaignFactory->create($marketingList);
+        $this->manager->persist($campaign);
+        $this->manager->flush();
+
+        $campaignAbandonedCartRelationFactory = $this->campaignAbandonedCartRelationFactory
+            ->create($campaign, $marketingList);
+        $this->manager->persist($campaignAbandonedCartRelationFactory);
+        $this->manager->flush();
     }
 }

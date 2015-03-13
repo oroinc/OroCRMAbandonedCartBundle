@@ -1,6 +1,9 @@
 parameters:
     orocrm_abandonedcart_list.form.type.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType
     orocrm_abandonedcart_list.form.type.entity_choice.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartEntityChoiceType
+    orocrm_abandonedcart_list.form.handler.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartListHandler
+    orocrm_abandonedcart_list.campaign_factory: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
+    orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationFactory
 
 services:
     # AbandonedCartList
@@ -17,8 +20,14 @@ services:
             - "orocrm_abandonedcart_list_form"
             - "orocrm_abandonedcart_list"
 
+    orocrm_abandonedcart_list.campaign_factory:
+        class: %orocrm_abandonedcart_list.campaign_factory.class%
+
+    orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory:
+        class: %orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory.class%
+
     orocrm_abandonedcart_list.form.handler.abandoned_cart_list:
-        class: %orocrm_marketing_list.form.handler.marketing_list.class%
+        class: %orocrm_abandonedcart_list.form.handler.abandonedcart_list.class%
         scope: request
         arguments:
             - @orocrm_abandonedcart_list.form.abandonedcart_list
@@ -26,6 +35,8 @@ services:
             - @doctrine
             - @validator
             - @translator
+            - @orocrm_abandonedcart_list.campaign_factory
+            - @orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory
 
     orocrm_abandonedcart_list.form.type.entity_choice:
         class: %orocrm_abandonedcart_list.form.type.entity_choice.class%
