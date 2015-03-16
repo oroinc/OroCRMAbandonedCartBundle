@@ -34,13 +34,36 @@
     } %}
     {{ parent() }}
 {% endblock pageHeader %}
-
+{% set campaign = get_abandoned_cart_related_campaign(entity) %}
 {% block content_data %}
     {%- set listInformation -%}
     <div class="row-fluid form-horizontal">
         <div class="responsive-block">
             {{ UI.renderProperty('orocrm.abandonedcart.abandonedcartlist.name.label'|trans, entity.name) }}
             {{ UI.renderProperty('orocrm.abandonedcart.abandonedcartlist.description.label'|trans, entity.description) }}
+
+            {% if entity.segment is not empty %}
+                {%- set segmentData -%}
+                {% if resource_granted('oro_segment_view') %}
+                    <a href="{{ path('oro_segment_view', {'id': entity.segment.id}) }}">
+                        {{ entity.segment.name }}
+                    </a>
+                {% else %}
+                    {{ entity.segment.name }}
+                {% endif %}
+                {%- endset -%}
+
+                {{ UI.renderHtmlProperty('oro.segment.entity_label'|trans, segmentData) }}
+            {% endif %}
+
+            {%- if campaign -%}
+                {%- if resource_granted('orocrm_campaign_view') -%}
+                    {% set campaignView = '<a href="' ~ path('orocrm_campaign_view', {'id': campaign.id}) ~ '">' ~ campaign.name ~ '</a>' %}
+                {%- else -%}
+                    {% set campaignView = campaign.name %}
+                {%- endif -%}
+                {{ UI.renderHtmlProperty('orocrm.campaign.emailcampaign.campaign.label'|trans, campaignView) }}
+            {%- endif -%}
 
             {%- set ownerData -%}
             {%- if entity.owner -%}
@@ -54,6 +77,7 @@
             {%- endif -%}
             {%- endset -%}
             {{ UI.renderHtmlProperty('orocrm.abandonedcart.abandonedcartlist.owner.label'|trans, ownerData) }}
+
         </div>
         <div class="responsive-block">
             {{ entityConfig.renderDynamicFields(entity) }}

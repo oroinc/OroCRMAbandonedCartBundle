@@ -1,8 +1,10 @@
 parameters:
     orocrm_abandonedcart_list.entity.class:  OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList
     orocrm_abandonedcart_list.twig.extension.contact_information_fields.class: OroCRM\Bundle\AbandonedCartBundle\Twig\ContactInformationFieldsExtension
+    orocrm_abandonedcart_list.twig.extension.campaign.class: OroCRM\Bundle\AbandonedCartBundle\Twig\CampaignExtension
     orocrm_abandonedcart.segment_definition_helper.class: OroCRM\Bundle\AbandonedCartBundle\Model\SegmentDefinitionHelper
     orocrm_abandonedcart.abandoned_cart_list.manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartListManager
+    orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager
     orocrm_abandonedcart.dynamic_type_segment.builder.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\DynamicTypeSegmentBuilder
     orocrm_abandonedcart.marketing_list.source.class: OroCRM\Bundle\AbandonedCartBundle\Model\MarketingList\AbandonedCartSource
     orocrm_abandonedcart_list.predefined_marketing_list_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory
@@ -13,6 +15,13 @@ services:
         class: %orocrm_abandonedcart_list.twig.extension.contact_information_fields.class%
         arguments:
             - @orocrm_marketing_list.contact_information_field_helper
+        tags:
+            - { name: twig.extension }
+
+    orocrm_abandonedcart_list.twig.extension.campaign:
+        class: %orocrm_abandonedcart_list.twig.extension.campaign.class%
+        arguments:
+            - @orocrm_abandonedcart.abandoned_cart_list.campaign_manager
         tags:
             - { name: twig.extension }
 
@@ -29,6 +38,11 @@ services:
         arguments:
             - @orocrm_abandonedcart.dynamic_type_segment.builder
             - @translator
+
+    orocrm_abandonedcart.abandoned_cart_list.campaign_manager:
+        class: %orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class%
+        arguments:
+            - @doctrine.orm.entity_manager
 
     orocrm_abandonedcart.marketing_list.source:
         class: %orocrm_abandonedcart.marketing_list.source.class%
