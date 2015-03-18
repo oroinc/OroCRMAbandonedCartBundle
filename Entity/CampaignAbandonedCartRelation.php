@@ -10,7 +10,7 @@ use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 /**
  * Campaign relation with Abandoned Cart List
  *
- * @ORM\Table(name="orocrm_campaign_abandoned_cart_list_relation")
+ * @ORM\Table(name="orocrm_abandonedcart_campaign")
  * @ORM\Entity()
  */
 class CampaignAbandonedCartRelation

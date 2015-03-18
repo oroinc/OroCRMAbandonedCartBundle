@@ -2,6 +2,7 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Form\Handler;
 
+use OroCRM\Bundle\MarketingListBundle\Model\MarketingListSourceInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
@@ -16,31 +17,6 @@ use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedC
 
 class AbandonedCartListHandler extends MarketingListHandler
 {
-    /**
-     * @var FormInterface
-     */
-    protected $form;
-
-    /**
-     * @var Request
-     */
-    protected $request;
-
-    /**
-     * @var EntityManager
-     */
-    protected $manager;
-
-    /**
-     * @var ValidatorInterface
-     */
-    protected $validator;
-
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
     /**
      * @var CampaignFactory
      */
@@ -59,6 +35,7 @@ class AbandonedCartListHandler extends MarketingListHandler
      * @param TranslatorInterface $translator
      * @param CampaignFactory $campaignFactory
      * @param CampaignAbandonedCartRelationFactory $campaignAbandonedCartRelationFactory
+     * @param MarketingListSourceInterface $suitableSource
      */
     public function __construct(
         FormInterface $form,
@@ -66,14 +43,11 @@ class AbandonedCartListHandler extends MarketingListHandler
         RegistryInterface $doctrine,
         ValidatorInterface $validator,
         TranslatorInterface $translator,
+        MarketingListSourceInterface $suitableSource,
         CampaignFactory $campaignFactory,
         CampaignAbandonedCartRelationFactory $campaignAbandonedCartRelationFactory
     ) {
-        $this->form = $form;
-        $this->request = $request;
-        $this->manager = $doctrine->getManager();
-        $this->validator = $validator;
-        $this->translator = $translator;
+        parent::__construct($form, $request, $doctrine, $validator, $translator, $suitableSource);
         $this->campaignFactory = $campaignFactory;
         $this->campaignAbandonedCartRelationFactory = $campaignAbandonedCartRelationFactory;
     }
