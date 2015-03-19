@@ -1,8 +1,8 @@
 orocrm:
     abandonedcart:
         abandonedcartlist:
-            entity_plural_label: Abandoned Cart Lists
-            entity_label: Abandoned Cart List
+            entity_plural_label: Abandoned Cart Campaigns
+            entity_label: Abandoned Cart Campaign
             id.label: Id
             name.label: Name
             description.label: Description
