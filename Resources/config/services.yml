@@ -1,11 +1,7 @@
 parameters:
-    orocrm_abandonedcart_list.entity.class:  OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList
     orocrm_abandonedcart_list.twig.extension.contact_information_fields.class: OroCRM\Bundle\AbandonedCartBundle\Twig\ContactInformationFieldsExtension
     orocrm_abandonedcart_list.twig.extension.campaign.class: OroCRM\Bundle\AbandonedCartBundle\Twig\CampaignExtension
-    orocrm_abandonedcart.segment_definition_helper.class: OroCRM\Bundle\AbandonedCartBundle\Model\SegmentDefinitionHelper
-    orocrm_abandonedcart.abandoned_cart_list.manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartListManager
     orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager
-    orocrm_abandonedcart.dynamic_type_segment.builder.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\DynamicTypeSegmentBuilder
     orocrm_abandonedcart.marketing_list.source.class: OroCRM\Bundle\AbandonedCartBundle\Model\MarketingList\AbandonedCartSource
     orocrm_abandonedcart_list.predefined_marketing_list_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory
     orocrm_abandonedcart_list.campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
@@ -24,20 +20,6 @@ services:
             - @orocrm_abandonedcart.abandoned_cart_list.campaign_manager
         tags:
             - { name: twig.extension }
-
-    orocrm_abandonedcart.segment_definition_helper:
-        class: %orocrm_abandonedcart.segment_definition_helper.class%
-
-    orocrm_abandonedcart.dynamic_type_segment.builder:
-        class: %orocrm_abandonedcart.dynamic_type_segment.builder.class%
-        arguments:
-            - @doctrine.orm.entity_manager
-
-    orocrm_abandonedcart.abandoned_cart_list.manager:
-        class: %orocrm_abandonedcart.abandoned_cart_list.manager.class%
-        arguments:
-            - @orocrm_abandonedcart.dynamic_type_segment.builder
-            - @translator
 
     orocrm_abandonedcart.abandoned_cart_list.campaign_manager:
         class: %orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class%
