@@ -82,9 +82,9 @@ class AbandonedCartListHandler extends MarketingListHandler
         $this->manager->persist($campaign);
         $this->manager->flush();
 
-        $campaignAbandonedCartRelationFactory = $this->campaignAbandonedCartRelationFactory
+        $campaignAbandonedCartRelation = $this->campaignAbandonedCartRelationFactory
             ->create($campaign, $marketingList);
-        $this->manager->persist($campaignAbandonedCartRelationFactory);
+        $this->manager->persist($campaignAbandonedCartRelation);
         $this->manager->flush();
     }
 }
