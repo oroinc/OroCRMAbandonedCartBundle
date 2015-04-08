@@ -16,6 +16,7 @@ orocrm:
             general: General Information
             items: Items
             removed: Removed Items
+            conversion: Conversion
 
         form:
             importance: Important
@@ -26,3 +27,17 @@ orocrm:
         entity:
             label:   Entity
             saved:   Abandoned Cart list saved
+
+        conversion:
+            name: Conversion
+            button:
+                enable: 'Workflow Automation Sync'
+            message:
+                update: 'MailChimp Automation Workflows updated'
+            dialog:
+                button:
+                    update: Update
+                    connect: Enable conversion
+                    cancel: Cancel
+                title:
+                    connect: MailChimp Workflow Automation

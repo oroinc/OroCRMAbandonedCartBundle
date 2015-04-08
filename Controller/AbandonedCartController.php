@@ -2,8 +2,9 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Form\Form;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\Util\Codes;
@@ -14,7 +15,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList;
 use OroCRM\Bundle\MarketingListBundle\Datagrid\ConfigurationProvider;
 
 /**
@@ -51,11 +51,13 @@ class AbandonedCartController extends Controller
     public function viewAction(MarketingList $entity)
     {
         $entityConfig = $this->get('orocrm_marketing_list.entity_provider')->getEntity($entity->getEntity());
+        $conversion = $this->get('orocrm_abandonedcart.conversion_manager')->findConversionByMarketingList($entity);
 
         return [
-            'entity'   => $entity,
-            'config'   => $entityConfig,
-            'gridName' => ConfigurationProvider::GRID_PREFIX . $entity->getId(),
+            'entity'     => $entity,
+            'config'     => $entityConfig,
+            'gridName'   => ConfigurationProvider::GRID_PREFIX . $entity->getId(),
+            'conversion' => $conversion
         ];
     }
 

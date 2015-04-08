@@ -1,0 +1,39 @@
+{% import 'OroCRMMailChimpBundle::macros.html.twig' as ui %}
+
+<div class="row-fluid row-fluid-divider form-horizontal">
+    <div class="responsive-cell">
+        {% for workflow in conversion.workflows %}
+            {% set statistic = get_workflow_related_statistic(workflow) %}
+
+            <div class="responsive-block">
+                <strong>{{ workflow.name }}</strong>
+                {{ ui.renderAttributeWithTooltip(
+                    'orocrm.mailchimp.emailcampaign.emailsSent.label',
+                    statistic.emailsSent|oro_format_decimal,
+                    'orocrm.mailchimp.emailcampaign.emailsSent.tooltip'
+                ) }}
+                {{ ui.renderAttributeWithTooltip(
+                    'orocrm.mailchimp.emailcampaign.opens.label',
+                    statistic.opens|oro_format_decimal,
+                    'orocrm.mailchimp.emailcampaign.opens.tooltip')
+                }}
+                {{ ui.renderAttributeWithTooltip(
+                    'orocrm.mailchimp.emailcampaign.clicks.label',
+                    statistic.clicks|oro_format_decimal,
+                    'orocrm.mailchimp.emailcampaign.clicks.tooltip')
+                }}
+                {{ ui.renderAttributeWithTooltip(
+                    'orocrm.mailchimp.emailcampaign.clicks.label',
+                    statistic.convertedToOrders|oro_format_decimal,
+                    'orocrm.mailchimp.emailcampaign.clicks.tooltip')
+                }}
+                {{ ui.renderAttributeWithTooltip(
+                    'orocrm.mailchimp.emailcampaign.clicks.label',
+                    statistic.totalSum,
+                    'orocrm.mailchimp.emailcampaign.clicks.tooltip')
+                }}
+            </div>
+
+        {% endfor %}
+    </div>
+</div>

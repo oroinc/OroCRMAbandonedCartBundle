@@ -1,0 +1,21 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{{ UI.dropdownItem({
+    'path': 'javascript:void(0);',
+    'data': {
+        'url': path('orocrm_abandoned_cart_manage_workflow', {id: marketingList.id}),
+        'page-component-module': 'orocrmmailchimp/js/app/components/connect-btn-component',
+        'page-component-options': {
+            'createOnEvent': 'click',
+            'message': 'orocrm.abandonedcart.conversion.message.update'|trans,
+            'options': {
+                'title': 'orocrm.abandonedcart.conversion.dialog.title.connect'|trans,
+            }
+        }|json_encode|raw
+    },
+    'id': 'mailchimp-connection-btn',
+    'label': 'orocrm.abandonedcart.conversion.button.enable'|trans,
+    'class': 'no-hash',
+    'iCss': 'icon-edit'
+}) }}
+

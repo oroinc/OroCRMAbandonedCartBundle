@@ -1,10 +1,17 @@
 parameters:
     orocrm_abandonedcart_list.twig.extension.contact_information_fields.class: OroCRM\Bundle\AbandonedCartBundle\Twig\ContactInformationFieldsExtension
     orocrm_abandonedcart_list.twig.extension.campaign.class: OroCRM\Bundle\AbandonedCartBundle\Twig\CampaignExtension
+    orocrm_abandonedcart_list.twig.extension.conversion.class: OroCRM\Bundle\AbandonedCartBundle\Twig\ConversionExtension
+
     orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager
+    orocrm_abandonedcart.conversion_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager
+
     orocrm_abandonedcart.marketing_list.source.class: OroCRM\Bundle\AbandonedCartBundle\Model\MarketingList\AbandonedCartSource
+
     orocrm_abandonedcart_list.predefined_marketing_list_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory
     orocrm_abandonedcart_list.campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
+    orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationFactory
+    orocrm_abandonedcart_list.conversion_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\ConversionFactory
 
 services:
     orocrm_abandonedcart_list.twig.extension.contact_information_fields:
@@ -21,8 +28,20 @@ services:
         tags:
             - { name: twig.extension }
 
+    orocrm_abandonedcart_list.twig.extension.conversion:
+        class: %orocrm_abandonedcart_list.twig.extension.conversion.class%
+        arguments:
+            - @orocrm_abandonedcart.conversion_manager
+        tags:
+            - { name: twig.extension }
+
     orocrm_abandonedcart.abandoned_cart_list.campaign_manager:
         class: %orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    orocrm_abandonedcart.conversion_manager:
+        class: %orocrm_abandonedcart.conversion_manager.class%
         arguments:
             - @doctrine.orm.entity_manager
 
@@ -45,3 +64,9 @@ services:
 
     orocrm_abandonedcart_list.campaign_factory:
         class: %orocrm_abandonedcart_list.campaign_factory.class%
+
+    orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory:
+        class: %orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory.class%
+
+    orocrm_abandonedcart_list.conversion_factory:
+        class: %orocrm_abandonedcart_list.conversion_factory.class%

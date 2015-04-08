@@ -102,6 +102,10 @@
 
     {% set generalSectionBlocks = [{'data' : [listInformation]}]%}
 
+    {%- set abandonedCartCampaignStatisticsData -%}
+        {% include 'OroCRMAbandonedCartBundle:AbandonedCart/widget:stats.html.twig' %}
+    {%- endset -%}
+
     {% set dataBlocks = [
         {
             'title': 'orocrm.abandonedcart.block.general'|trans,
@@ -119,7 +123,13 @@
             'subblocks': [
                 {'data' : [removedItemsGrid]}
             ]
-        }
+        },
+        {
+            'title': 'orocrm.abandonedcart.block.conversion'|trans,
+            'subblocks': [
+                {'data' : [abandonedCartCampaignStatisticsData]}
+            ]
+        },
     ] %}
 
     <div data-page-component-module="orocrmmarketinglist/js/app/components/grid-linker"
