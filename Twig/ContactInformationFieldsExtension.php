@@ -32,12 +32,12 @@ class ContactInformationFieldsExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction(
                 'get_contact_information_fields_info',
-                array($this, 'getContactInformationFieldsInfo')
+                [$this, 'getContactInformationFieldsInfo']
             )
-        );
+        ];
     }
 
     /**

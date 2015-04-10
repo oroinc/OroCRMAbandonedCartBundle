@@ -9,7 +9,7 @@ class AbandonedCartSource implements MarketingListSourceInterface
     const SOURCE_CODE = 'abandoned_cart';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCode()
     {

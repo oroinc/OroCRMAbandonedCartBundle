@@ -198,9 +198,9 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
 
     protected function assertProcessSegment()
     {
-        $formData = array(
+        $formData = [
             'definition' => 'test'
-        );
+        ];
 
         $this->form->expects($this->once())
             ->method('getName')

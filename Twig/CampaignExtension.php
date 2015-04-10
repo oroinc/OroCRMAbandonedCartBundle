@@ -27,12 +27,12 @@ class CampaignExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction(
                 'get_abandoned_cart_related_campaign',
-                array($this, 'getAbandonedCartRelatedCampaign')
+                [$this, 'getAbandonedCartRelatedCampaign']
             )
-        );
+        ];
     }
 
     /**

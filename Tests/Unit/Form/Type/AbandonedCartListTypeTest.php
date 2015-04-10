@@ -45,7 +45,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             ->with(
                 'entity',
                 'hidden',
-                array('data' => 'OroCRM\Bundle\MagentoBundle\Entity\Cart')
+                ['data' => 'OroCRM\Bundle\MagentoBundle\Entity\Cart']
             )
             ->will($this->returnSelf());
 

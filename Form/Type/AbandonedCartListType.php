@@ -16,7 +16,7 @@ class AbandonedCartListType extends AbstractQueryDesignerType
         $builder
             ->add('name', 'text', ['required' => true])
             ->add('description', 'textarea', ['required' => false])
-            ->add('entity', 'hidden', array('data' => 'OroCRM\Bundle\MagentoBundle\Entity\Cart'))
+            ->add('entity', 'hidden', ['data' => 'OroCRM\Bundle\MagentoBundle\Entity\Cart'])
             ->add('type', 'orocrm_abandonedcart_list_marketing_list_type_hidden');
 
         parent::buildForm($builder, $options);

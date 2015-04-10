@@ -21,7 +21,7 @@ class AbandonedCartEntityChoiceType extends EntityChoiceType
      */
     protected function getChoices($showPlural)
     {
-        $choices = array();
+        $choices = [];
 
         $entity = $this->provider->getEntity('OroCRM\Bundle\MagentoBundle\Entity\Cart');
 
