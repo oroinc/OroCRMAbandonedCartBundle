@@ -120,9 +120,14 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
         $this->campaignAbandonedCartRelation = new CampaignAbandonedCartRelation();
 
         $this->handler = new AbandonedCartListHandler(
-            $this->form, $this->request, $registry,
-            $this->validator, $this->translator, $this->marketingListSource,
-            $this->campaignFactory, $this->campaignAbandonedCartRelationFactory
+            $this->form,
+            $this->request,
+            $registry,
+            $this->validator,
+            $this->translator,
+            $this->marketingListSource,
+            $this->campaignFactory,
+            $this->campaignAbandonedCartRelationFactory
         );
 
         $this->repository = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectRepository')

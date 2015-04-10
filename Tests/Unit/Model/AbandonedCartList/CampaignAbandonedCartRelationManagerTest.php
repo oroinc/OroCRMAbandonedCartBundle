@@ -71,7 +71,8 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
             ->will($this->returnValue($campaignAbandonedCartRelation));
 
 
-        $returnedCampaign = $this->campaignAbandonedCartRelationManager->getCampaignByMarketingList($this->marketingList);
+        $returnedCampaign = $this->campaignAbandonedCartRelationManager
+            ->getCampaignByMarketingList($this->marketingList);
 
         $this->assertNotNull($returnedCampaign);
         $this->assertEquals($returnedCampaign, $campaignAbandonedCartRelation->getCampaign());
@@ -100,7 +101,8 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
             ->will($this->returnValue(null));
 
 
-        $returnedCampaign = $this->campaignAbandonedCartRelationManager->getCampaignByMarketingList($this->marketingList);
+        $returnedCampaign = $this->campaignAbandonedCartRelationManager
+            ->getCampaignByMarketingList($this->marketingList);
 
         $this->assertNull($returnedCampaign);
     }

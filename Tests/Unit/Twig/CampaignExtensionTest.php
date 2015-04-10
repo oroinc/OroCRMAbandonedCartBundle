@@ -22,7 +22,9 @@ class CampaignExtensionTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->campaignAbandonedCartRelationManager = $this
-            ->getMockBuilder('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager')
+            ->getMockBuilder(
+                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager'
+            )
             ->disableOriginalConstructor()->getMock();
         $this->campaignExtension = new CampaignExtension($this->campaignAbandonedCartRelationManager);
     }

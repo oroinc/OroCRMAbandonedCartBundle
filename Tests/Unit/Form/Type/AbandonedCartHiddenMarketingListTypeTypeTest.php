@@ -40,7 +40,10 @@ class AbandonedCartHiddenMarketingListTypeTypeTest extends \PHPUnit_Framework_Te
 
     public function testGetName()
     {
-        $this->assertEquals('orocrm_abandonedcart_list_marketing_list_type_hidden', $this->abandonedCartHiddenMarketingListTypeType->getName());
+        $this->assertEquals(
+            'orocrm_abandonedcart_list_marketing_list_type_hidden',
+            $this->abandonedCartHiddenMarketingListTypeType->getName()
+        );
     }
 
     public function testGetParent()

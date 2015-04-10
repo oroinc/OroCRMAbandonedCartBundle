@@ -25,10 +25,13 @@ class CampaignAbandonedCartRelationFactoryTest extends \PHPUnit_Framework_TestCa
 
         $campaignAbandonedCartRelation = $this->factory->create($campaign, $marketingList);
 
-        $this->assertInstanceOf('OroCRM\Bundle\AbandonedCartBundle\Entity\CampaignAbandonedCartRelation',
-            $campaignAbandonedCartRelation);
+        $this->assertInstanceOf(
+            'OroCRM\Bundle\AbandonedCartBundle\Entity\CampaignAbandonedCartRelation',
+            $campaignAbandonedCartRelation
+        );
 
         $this->assertEquals($campaign, $campaignAbandonedCartRelation->getCampaign());
         $this->assertEquals($marketingList, $campaignAbandonedCartRelation->getMarketingList());
     }
 }
+

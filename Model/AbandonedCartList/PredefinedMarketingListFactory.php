@@ -40,8 +40,10 @@ class PredefinedMarketingListFactory
         $marketingList = new MarketingList();
         $marketingList->setEntity(self::ENTITY_CART_FULL_NAME);
 
-        $type = $this->objectManager->find('OroCRMMarketingListBundle:MarketingListType',
-            MarketingListType::TYPE_DYNAMIC);
+        $type = $this->objectManager->find(
+        'OroCRMMarketingListBundle:MarketingListType',
+        MarketingListType::TYPE_DYNAMIC
+        );
 
         $marketingList->setType($type);
         $marketingList->setSource($this->source->getCode());

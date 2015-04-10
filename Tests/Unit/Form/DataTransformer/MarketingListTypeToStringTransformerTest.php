@@ -42,7 +42,8 @@ class MarketingListTypeToStringTransformerTest extends \PHPUnit_Framework_TestCa
     public function testTransform()
     {
         $this->assertEquals(
-            MarketingListType::TYPE_DYNAMIC, $this->marketingListTypeToStringTransformer->transform(null)
+            MarketingListType::TYPE_DYNAMIC,
+            $this->marketingListTypeToStringTransformer->transform(null)
         );
     }
 
