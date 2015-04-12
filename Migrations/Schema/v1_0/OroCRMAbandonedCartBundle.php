@@ -24,5 +24,29 @@ class OroCRMAbandonedCartBundle implements Migration
         $table->setPrimaryKey(['id']);
         $table->addUniqueIndex(['marketing_list_id'], 'UNIQ_3BDE1B0796434D04');
         $table->addUniqueIndex(['campaign_id'], 'UNIQ_3BDE1B07F639F774');
+
+        $this->addOrocrmAbandonedcartCampaignForeignKeys($schema);
+    }
+
+    /**
+     * Add orocrm_abandonedcart_campaign foreign keys.
+     *
+     * @param Schema $schema
+     */
+    protected function addOrocrmAbandonedcartCampaignForeignKeys(Schema $schema)
+    {
+        $table = $schema->getTable('orocrm_abandonedcart_campaign');
+        $table->addForeignKeyConstraint(
+            $schema->getTable('orocrm_marketing_list'),
+            ['marketing_list_id'],
+            ['id'],
+            ['onDelete' => 'CASCADE', 'onUpdate' => null]
+        );
+        $table->addForeignKeyConstraint(
+            $schema->getTable('orocrm_campaign'),
+            ['campaign_id'],
+            ['id'],
+            ['onDelete' => 'CASCADE', 'onUpdate' => null]
+        );
     }
 }

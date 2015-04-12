@@ -3,7 +3,7 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartWorkflow;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 /**
  * Abandoned Cart Statistics combined from MailChimp and Magento
@@ -23,48 +23,14 @@ class AbandonedCartStatistics
     protected $id;
 
     /**
-     * @var AbandonedCartWorkflow
+     * @var MarketingList
+     *
      * @ORM\OneToOne(
-     *      targetEntity="AbandonedCartWorkflow"
+     *      targetEntity="OroCRM\Bundle\MarketingListBundle\Entity\MarketingList"
      * )
-     * @ORM\JoinColumn(name="workflow_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="marketing_list_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $workflow;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="emails_sent", type="integer", nullable=true)
-     */
-    protected $emailsSent;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="opens", type="integer", nullable=true)
-     */
-    protected $opens;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="unique_opens", type="integer", nullable=true)
-     */
-    protected $uniqueOpens;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="clicks", type="integer", nullable=true)
-     */
-    protected $clicks;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="unique_clicks", type="integer", nullable=true)
-     */
-    protected $uniqueClicks;
+    protected $marketingList;
 
     /**
      * @var int
@@ -86,96 +52,6 @@ class AbandonedCartStatistics
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getEmailsSent()
-    {
-        return $this->emailsSent;
-    }
-
-    /**
-     * @param $emailsSent
-     * @return $this
-     */
-    public function setEmailsSent($emailsSent)
-    {
-        $this->emailsSent = $emailsSent;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOpens()
-    {
-        return $this->opens;
-    }
-
-    /**
-     * @param $opens
-     * @return $this
-     */
-    public function setOpens($opens)
-    {
-        $this->opens = $opens;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getUniqueOpens()
-    {
-        return $this->uniqueOpens;
-    }
-
-    /**
-     * @param $uniqueOpens
-     * @return $this
-     */
-    public function setUniqueOpens($uniqueOpens)
-    {
-        $this->uniqueOpens = $uniqueOpens;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getClicks()
-    {
-        return $this->clicks;
-    }
-
-    /**
-     * @param $clicks
-     * @return $this
-     */
-    public function setClicks($clicks)
-    {
-        $this->clicks = $clicks;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getUniqueClicks()
-    {
-        return $this->uniqueClicks;
-    }
-
-    /**
-     * @param $uniqueClicks
-     * @return $this
-     */
-    public function setUniqueClicks($uniqueClicks)
-    {
-        $this->uniqueClicks = $uniqueClicks;
-        return $this;
     }
 
     /**
@@ -215,20 +91,21 @@ class AbandonedCartStatistics
     }
 
     /**
-     * @return AbandonedCartWorkflow
+     * @return MarketingList
      */
-    public function getWorkflow()
+    public function getMarketingList()
     {
-        return $this->workflow;
+        return $this->marketingList;
     }
 
     /**
-     * @param AbandonedCartWorkflow $workflow
+     * @param $marketingList
      * @return $this
      */
-    public function setWorkflow(AbandonedCartWorkflow $workflow)
+    public function setMarketingList(MarketingList $marketingList)
     {
-        $this->workflow = $workflow;
+        $this->marketingList = $marketingList;
+
         return $this;
     }
 }

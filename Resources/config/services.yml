@@ -1,4 +1,6 @@
 parameters:
+    orocrm_abandonedcart.entity.workflow.class: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartWorkflow
+
     orocrm_abandonedcart_list.twig.extension.contact_information_fields.class: OroCRM\Bundle\AbandonedCartBundle\Twig\ContactInformationFieldsExtension
     orocrm_abandonedcart_list.twig.extension.campaign.class: OroCRM\Bundle\AbandonedCartBundle\Twig\CampaignExtension
     orocrm_abandonedcart_list.twig.extension.conversion.class: OroCRM\Bundle\AbandonedCartBundle\Twig\ConversionExtension

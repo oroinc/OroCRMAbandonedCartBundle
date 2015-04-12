@@ -4,6 +4,7 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use OroCRM\Bundle\MailChimpBundle\Entity\Campaign;
 
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
@@ -35,19 +36,19 @@ class AbandonedCartConversion
     protected $marketingList;
 
     /**
-     * @var AbandonedCartWorkflow[]|ArrayCollection
+     * @var Campaign[]|ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="AbandonedCartWorkflow")
-     * @ORM\JoinTable(name="orocrm_abandcart_conv_workflow",
+     * @ORM\ManyToMany(targetEntity="OroCRM\Bundle\MailChimpBundle\Entity\Campaign")
+     * @ORM\JoinTable(name="orocrm_abandcart_conv_campaigns",
      *      joinColumns={@ORM\JoinColumn(name="conversion_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="workflow_id", referencedColumnName="id", onDelete="CASCADE")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="mailchimp_campaign_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    protected $workflows;
+    protected $campaigns;
 
     public function __construct()
     {
-        $this->workflows = new ArrayCollection();
+        $this->campaigns = new ArrayCollection();
     }
 
     /**
@@ -78,30 +79,30 @@ class AbandonedCartConversion
     }
 
     /**
-     * @return ArrayCollection|AbandonedCartWorkflow[]
+     * @return ArrayCollection|Campaign[]
      */
-    public function getWorkflows()
+    public function getCampaigns()
     {
-        return $this->workflows;
+        return $this->campaigns;
     }
 
     /**
-     * @param AbandonedCartWorkflow $workflow
+     * @param Campaign $campaign
      */
-    public function removeWorkflow(AbandonedCartWorkflow $workflow)
+    public function removeCampaign(Campaign $campaign)
     {
-        if (!$this->getWorkflows()->contains($workflow)) {
-            $this->getWorkflows()->add($workflow);
+        if (!$this->getCampaigns()->contains($campaign)) {
+            $this->getCampaigns()->add($campaign);
         }
     }
 
     /**
-     * @param AbandonedCartWorkflow $workflow
+     * @param Campaign $campaign
      */
-    public function addWorkflow(AbandonedCartWorkflow $workflow)
+    public function addCampaign(Campaign $campaign)
     {
-        if ($this->getWorkflows()->contains($workflow)) {
-            $this->getWorkflows()->removeElement($workflow);
+        if ($this->getCampaigns()->contains($campaign)) {
+            $this->getCampaigns()->removeElement($campaign);
         }
     }
 

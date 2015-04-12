@@ -21,12 +21,13 @@ class OroCRMAbandonedCartBundle implements Migration
         $this->createOrocrmAbandonedcartWorkflowTable($schema);
         $this->createOrocrmAbandonedcartConversionTable($schema);
         $this->createOrocrmAbandonedcartStatisticsTable($schema);
+        $this->addOrocrmAbandonedcartStatisticsForeignKeys($schema);
         $this->createOrocrmAbandonedcartConversionWorkflowTable($schema);
         $this->addOrocrmAbandonedcartConversionWorkflowForeignKeys($schema);
     }
 
     /**
-     * Create orocrm_abandonedcart_workflow table
+     * Create orocrm_abandcart_workflow table
      *
      * @param Schema $schema
      */
@@ -35,6 +36,9 @@ class OroCRMAbandonedCartBundle implements Migration
         $table = $schema->createTable('orocrm_abandcart_workflow');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('name', 'text', []);
+        $table->addColumn('emails_sent', 'integer', ['notnull' => false]);
+        $table->addColumn('opens', 'integer', ['notnull' => false]);
+        $table->addColumn('clicks', 'integer', ['notnull' => false]);
         $table->setPrimaryKey(['id']);
     }
 
@@ -61,16 +65,27 @@ class OroCRMAbandonedCartBundle implements Migration
     {
         $table = $schema->createTable('orocrm_abandcart_stats');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
-        $table->addColumn('workflow_id', 'integer', ['notnull' => false]);
-        $table->addColumn('emails_sent', 'integer', ['notnull' => false]);
-        $table->addColumn('opens', 'integer', ['notnull' => false]);
-        $table->addColumn('unique_opens', 'integer', ['notnull' => false]);
-        $table->addColumn('clicks', 'integer', ['notnull' => false]);
-        $table->addColumn('unique_clicks', 'integer', ['notnull' => false]);
+        $table->addColumn('marketing_list_id', 'integer', ['notnull' => false]);
         $table->addColumn('converted_to_orders', 'integer', ['notnull' => false]);
         $table->addColumn('total_sum', 'text', ['notnull' => false]);
         $table->setPrimaryKey(['id']);
-        $table->addUniqueIndex(['workflow_id'], 'UNIQ_524B5102C7C2CBA');
+        $table->addUniqueIndex(['marketing_list_id'], 'UNIQ_524B51096434D04');
+    }
+
+    /**
+     * Add orocrm_abandcart_stats foreign keys.
+     *
+     * @param Schema $schema
+     */
+    protected function addOrocrmAbandonedcartStatisticsForeignKeys(Schema $schema)
+    {
+        $table = $schema->getTable('orocrm_abandcart_stats');
+        $table->addForeignKeyConstraint(
+            $schema->getTable('orocrm_marketing_list'),
+            ['marketing_list_id'],
+            ['id'],
+            ['onDelete' => 'CASCADE', 'onUpdate' => null]
+        );
     }
 
     /**

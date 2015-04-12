@@ -15,13 +15,13 @@ class AbandonedCartConversionType extends AbstractType
     {
         $builder
             ->add(
-                'workflows',
+                'campaigns',
                 'entity',
                 array(
-                    'class' => 'OroCRMAbandonedCartBundle:AbandonedCartWorkflow',
+                    'class' => 'OroCRMMailChimpBundle:Campaign',
                     'multiple' => true,
                     'expanded' => true,
-                    'property' => 'name'
+                    'property' => 'title'
                 )
             );
     }
