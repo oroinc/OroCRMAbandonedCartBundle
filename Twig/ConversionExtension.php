@@ -2,7 +2,7 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Twig;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartWorkflow;
+use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 
 class ConversionExtension extends \Twig_Extension
@@ -29,20 +29,20 @@ class ConversionExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction(
-                'get_workflow_related_statistic',
-                array($this, 'getWorkflowRelatedStatistic')
+                'get_abandonedcart_related_statistic',
+                array($this, 'getAbandonedCartRelatedStatistic')
             )
         );
     }
 
     /**
-     * @param AbandonedCartWorkflow $workflow
-     * @return \OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartStatistics
+     * @param AbandonedCartConversion $conversion
+     * @return mixed
      */
-    public function getWorkflowRelatedStatistic(AbandonedCartWorkflow $workflow)
+    public function getAbandonedCartRelatedStatistic(AbandonedCartConversion $conversion)
     {
         return
-            $this->conversionManager->findWorkflowRelatedStatistic($workflow);
+            $this->conversionManager->findAbandonedCartRelatedStatistic($conversion);
     }
 
     /**

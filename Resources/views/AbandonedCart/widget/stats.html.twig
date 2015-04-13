@@ -2,6 +2,7 @@
 
 <div class="row-fluid row-fluid-divider form-horizontal">
     <div class="responsive-cell">
+        {% set stats = get_abandonedcart_related_statistic(conversion) %}
         {% if conversion is not null %}
             {% for campaign in conversion.campaigns %}
                 <div class="responsive-block">
@@ -23,6 +24,10 @@
                     }}
                 </div>
             {% endfor %}
+            <div class="responsive-block">
+                <span>Orders qty: {{ stats.qty }}</span>
+                <span>Total Amount: {{ stats.total }}$</span>
+            </div>
         {% endif %}
     </div>
 </div>
