@@ -1,3 +1,4 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
 {% import 'OroCRMMailChimpBundle::macros.html.twig' as ui %}
 
 <div class="row-fluid row-fluid-divider form-horizontal">
@@ -25,8 +26,9 @@
                 </div>
             {% endfor %}
             <div class="responsive-block">
-                <span>Orders qty: {{ stats.qty }}</span>
-                <span>Total Amount: {{ stats.total }}$</span>
+                <strong>Totals:</strong>
+                {{ UI.renderHtmlProperty('Orders', stats.qty) }}
+                {{ UI.renderHtmlProperty('Total Amount', stats.total~'$') }}
             </div>
         {% endif %}
     </div>
