@@ -39,10 +39,10 @@
 {% block pageHeader %}
     {% if form.vars.value.id %}
         {% set breadcrumbs = {
-        'entity':      form.vars.value,
-        'indexPath':   path('orocrm_abandoned_cart_list'),
-        'indexLabel': 'orocrm.abandonedcart.abandonedcartlist.entity_plural_label'|trans,
-        'entityTitle': entity.name
+            'entity':      form.vars.value,
+            'indexPath':   path('orocrm_abandoned_cart_list'),
+            'indexLabel': 'orocrm.abandonedcart.abandonedcartlist.entity_plural_label'|trans,
+            'entityTitle': entity.name
         } %}
         {{ parent() }}
     {% else %}
@@ -64,91 +64,91 @@
 
     {% set ownerDataBlock = oro_form_process(ownerDataBlock, form) %}
     {% set dataBlocks = [{
-            'title': 'General'|trans,
-            'class': 'active',
-            'subblocks': [
-                {
-                    'title': '',
-                    'data': [
-                        form_row(form.name, {'label': 'orocrm.abandonedcart.abandonedcartlist.name.label'}),
-                        form_row(form.description, {
-                            'label': 'orocrm.abandonedcart.abandonedcartlist.description.label',
-                            'attr': {
-                                'class': 'segment-descr'
-                            }
-                        })
-                    ]
-                },
-                {
-                    'title': '',
-                    'data': [
-                        form_row(form.entity, {'label': 'orocrm.marketinglist.entity.label'}),
-                    ] | merge(ownerDataBlock.dataBlocks[0].subblocks[0].data)
-                }
-            ]
-        }]
-    %}
+        'title': 'General'|trans,
+        'class': 'active',
+        'subblocks': [
+            {
+                'title': '',
+                'data': [
+                    form_row(form.name, {'label': 'orocrm.abandonedcart.abandonedcartlist.name.label'}),
+                    form_row(form.description, {
+                        'label': 'orocrm.abandonedcart.abandonedcartlist.description.label',
+                        'attr': {
+                            'class': 'segment-descr'
+                        }
+                    })
+                ]
+            },
+            {
+                'title': '',
+                'data': [
+                    form_row(form.entity, {'label': 'orocrm.marketinglist.entity.label'}),
+                ] | merge(ownerDataBlock.dataBlocks[0].subblocks[0].data)
+            }
+        ]
+    }]
+%}
 
-        {% set hasEntity = form.vars.value is not empty and form.vars.value.entity is defined and form.vars.value.entity is not empty %}
-        {% set columnsComponentOptions = {
+    {% set hasEntity = form.vars.value is not empty and form.vars.value.entity is defined and form.vars.value.entity is not empty %}
+    {% set columnsComponentOptions = {
         'entityChoiceSelector': '#orocrm_abandonedcart_list_form_entity',
         'fieldsChoiceSelector': '#contact-information-fields-list',
         'contactInformationFields': hasEntity ? get_contact_information_fields_info() : []
-        } %}
+    } %}
 
-        {% set type = 'orocrm_abandonedcart_list' %}
-        {% set columnsDesigner %}
-        <div data-page-component-module="orocrmmarketinglist/js/app/components/columns-component"
-             data-page-component-options="{{ columnsComponentOptions|json_encode }}"
-             class="abandonedcart-list-qd-columns"
-                >
-            <div id="column-information-notice" class="alert alert-info">
-                <strong>{{ 'orocrm.abandonedcart.form.importance'|trans }}</strong>:
-                {{ 'orocrm.abandonedcart.form.columns_notice'|trans }}:
-                <div id="contact-information-fields-list"></div>
-            </div>
+    {% set type = 'orocrm_abandonedcart_list' %}
+    {% set columnsDesigner %}
+    <div data-page-component-module="orocrmmarketinglist/js/app/components/columns-component"
+         data-page-component-options="{{ columnsComponentOptions|json_encode }}"
+         class="abandonedcart-list-qd-columns"
+            >
+        <div id="column-information-notice" class="alert alert-info">
+            <strong>{{ 'orocrm.abandonedcart.form.importance'|trans }}</strong>:
+            {{ 'orocrm.abandonedcart.form.columns_notice'|trans }}:
+            <div id="contact-information-fields-list"></div>
+        </div>
 
-            {{ QD.query_designer_column_form(
+        {{ QD.query_designer_column_form(
             form.column,
             {'id': type ~ '-column-form'},
             {'entity_choice_id': 'orocrm_abandonedcart_list_form_entity'},
             ['column', 'label', 'sorting', 'action']
-            ) }}
+        ) }}
 
-            {{ QD.query_designer_column_list(
+        {{ QD.query_designer_column_list(
             {'id': type ~ '-column-list', 'rowId': type ~ '-column-row'},
             ['column', 'label', 'sorting', 'action']
-            ) }}
+        ) }}
 
-        </div>
-        {% endset %}
+    </div>
+    {% endset %}
 
-        {% set dataBlocks = dataBlocks|merge( [{
-            'title' : 'oro.segment.form.designer'|trans,
-            'content_attr': {'id': type ~ '-designer'},
-            'subblocks': [
-                {
-                    'title': 'oro.segment.form.columns'|trans,
-                    'spanClass': type ~ '-columns responsive-cell',
-                    'data': [
-                        columnsDesigner
-                    ]
-                },
-                {
-                    'title': 'oro.segment.form.filters'|trans,
-                    'spanClass': type ~  '-filters responsive-cell',
-                    'data': [
-                        segmentQD.query_designer_condition_builder({
-                            'id': type ~ '-condition-builder',
-                            'criteria_list_id': 'filter-criteria-list',
-                            'entity_choice_id': 'orocrm_abandonedcart_list_form_entity',
-                            'currentSegmentId': entity.id|default(null),
-                            'page_limit': constant('\\Oro\\Bundle\\SegmentBundle\\Entity\\Manager\\SegmentManager::PER_PAGE')
-                        })
-                    ]
-                },
-            ]
-        }] ) %}
+    {% set dataBlocks = dataBlocks|merge( [{
+        'title' : 'oro.segment.form.designer'|trans,
+        'content_attr': {'id': type ~ '-designer'},
+        'subblocks': [
+            {
+                'title': 'oro.segment.form.columns'|trans,
+                'spanClass': type ~ '-columns responsive-cell',
+                'data': [
+                    columnsDesigner
+                ]
+            },
+            {
+                'title': 'oro.segment.form.filters'|trans,
+                'spanClass': type ~  '-filters responsive-cell',
+                'data': [
+                    segmentQD.query_designer_condition_builder({
+                        'id': type ~ '-condition-builder',
+                        'criteria_list_id': 'filter-criteria-list',
+                        'entity_choice_id': 'orocrm_abandonedcart_list_form_entity',
+                        'currentSegmentId': entity.id|default(null),
+                        'page_limit': constant('\\Oro\\Bundle\\SegmentBundle\\Entity\\Manager\\SegmentManager::PER_PAGE')
+                    })
+                ]
+            },
+        ]
+    }] ) %}
 
     {% set data = {
         'formErrors': form_errors(form)? form_errors(form) : null,

@@ -3,25 +3,17 @@ orocrm:
         abandonedcartlist:
             entity_plural_label: Abandoned Cart Campaigns
             entity_label: Abandoned Cart Campaign
-            id.label: Id
             name.label: Name
             description.label: Description
             owner.label: Owner
-            organization.label: Organization
-            segment.label: Segment
-            created_at.label: Created At
-            updated_at.label: Updated At
 
         block:
             general: General Information
-            items: Items
             removed: Removed Items
 
         form:
             importance: Important
             columns_notice: At least one column with contact information must be selected. Available contact information fields
-
-        segment_name_pattern: %name% segment
 
         entity:
             label:   Entity
