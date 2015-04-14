@@ -46,4 +46,20 @@ class CampaignExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->campaignExtension->getAbandonedCartRelatedCampaign($marketingList);
     }
+
+    public function testGetFunctions()
+    {
+        $functions = $this->campaignExtension->getFunctions();
+        $this->assertCount(1, $functions);
+
+        $expectedFunctions = array(
+            'get_abandoned_cart_related_campaign'
+        );
+
+        /** @var \Twig_SimpleFunction $function */
+        foreach ($functions as $function) {
+            $this->assertInstanceOf('\Twig_SimpleFunction', $function);
+            $this->assertContains($function->getName(), $expectedFunctions);
+        }
+    }
 }
