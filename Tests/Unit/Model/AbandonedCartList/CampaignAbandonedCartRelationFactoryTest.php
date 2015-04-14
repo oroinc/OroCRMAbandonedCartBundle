@@ -34,4 +34,3 @@ class CampaignAbandonedCartRelationFactoryTest extends \PHPUnit_Framework_TestCa
         $this->assertEquals($marketingList, $campaignAbandonedCartRelation->getMarketingList());
     }
 }
-

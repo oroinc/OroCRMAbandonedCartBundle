@@ -30,11 +30,13 @@
         'entity': entity,
         'indexPath': path('orocrm_abandoned_cart_list'),
         'indexLabel': 'orocrm.abandonedcart.abandonedcartlist.entity_plural_label'|trans,
-        'entityTitle': entity.name
+        'entityTitle': entity.name|default('N/A'),
     } %}
     {{ parent() }}
 {% endblock pageHeader %}
+
 {% set campaign = get_abandoned_cart_related_campaign(entity) %}
+
 {% block content_data %}
     {%- set listInformation -%}
     <div class="row-fluid form-horizontal">

@@ -3,7 +3,6 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use OroCRM\Bundle\AbandonedCartBundle\Model\MarketingList\AbandonedCartSource;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 use OroCRM\Bundle\MarketingListBundle\Model\MarketingListSourceInterface;
@@ -41,8 +40,8 @@ class PredefinedMarketingListFactory
         $marketingList->setEntity(self::ENTITY_CART_FULL_NAME);
 
         $type = $this->objectManager->find(
-        'OroCRMMarketingListBundle:MarketingListType',
-        MarketingListType::TYPE_DYNAMIC
+            'OroCRMMarketingListBundle:MarketingListType',
+            MarketingListType::TYPE_DYNAMIC
         );
 
         $marketingList->setType($type);

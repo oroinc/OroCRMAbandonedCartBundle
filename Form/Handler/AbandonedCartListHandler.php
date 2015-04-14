@@ -2,14 +2,13 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Form\Handler;
 
-use OroCRM\Bundle\MarketingListBundle\Model\MarketingListSourceInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\ValidatorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
+use OroCRM\Bundle\MarketingListBundle\Model\MarketingListSourceInterface;
 use OroCRM\Bundle\MarketingListBundle\Form\Handler\MarketingListHandler;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;

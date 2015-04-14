@@ -2,20 +2,20 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Controller;
 
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\Util\Codes;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartList;
+
 use OroCRM\Bundle\MarketingListBundle\Datagrid\ConfigurationProvider;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 /**
  * @Route("/abandoned-cart")
@@ -107,8 +107,7 @@ class AbandonedCartController extends Controller
      */
     public function deleteAction(MarketingList $marketingList)
     {
-        /** @var EntityManager $em */
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManagerForClass('OroCRMMarketingListBundle:MarketingList');
 
         $em->remove($marketingList);
         $em->flush();
