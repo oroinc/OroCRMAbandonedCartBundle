@@ -5,7 +5,13 @@
     <div class="responsive-cell">
         {% if conversion is not null %}
             {% set stats = get_abandonedcart_related_statistic(conversion) %}
+            {% set sent = 0 %}
+            {% set opens = 0 %}
+            {% set clicks = 0 %}
             {% for campaign in conversion.campaigns %}
+                {% set sent = sent + campaign.emailsSent %}
+                {% set opens = opens + campaign.opens %}
+                {% set clicks = clicks + campaign.usersWhoClicked %}
                 <div class="responsive-block">
                     <strong>{{ campaign.title }}</strong>
                     {{ ui.renderAttributeWithTooltip(
@@ -20,15 +26,18 @@
                     }}
                     {{ ui.renderAttributeWithTooltip(
                         'orocrm.mailchimp.emailcampaign.clicks.label',
-                        campaign.clicks|oro_format_decimal,
+                        campaign.usersWhoClicked|oro_format_decimal,
                         'orocrm.mailchimp.emailcampaign.clicks.tooltip')
                     }}
                 </div>
             {% endfor %}
             <div class="responsive-block">
                 <strong>Totals:</strong>
+                {{ UI.renderHtmlProperty('Sent', sent) }}
+                {{ UI.renderHtmlProperty('Opens', opens) }}
+                {{ UI.renderHtmlProperty('Clicks', clicks) }}
                 {{ UI.renderHtmlProperty('Orders', stats.qty) }}
-                {{ UI.renderHtmlProperty('Total Amount', stats.total~'$') }}
+                {{ UI.renderHtmlProperty('Total Amount', stats.total|oro_format_currency) }}
             </div>
         {% endif %}
     </div>
