@@ -12,12 +12,12 @@ class CampaignExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var CampaignExtension
      */
-    private $campaignExtension;
+    protected $campaignExtension;
 
     /**
      * @var CampaignAbandonedCartRelationManager
      */
-    private $campaignAbandonedCartRelationManager;
+    protected $campaignAbandonedCartRelationManager;
 
     protected function setUp()
     {

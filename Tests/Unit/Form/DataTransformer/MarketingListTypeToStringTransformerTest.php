@@ -2,10 +2,8 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Form\DataTransformer;
 
-use OroCRM\Bundle\AbandonedCartBundle\Form\DataTransformer\MarketingListTypeToStringTransformer;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
+use OroCRM\Bundle\AbandonedCartBundle\Form\DataTransformer\MarketingListTypeToStringTransformer;
 
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -14,21 +12,21 @@ class MarketingListTypeToStringTransformerTest extends \PHPUnit_Framework_TestCa
     /**
      * @var MarketingListTypeToStringTransformer
      */
-    private $marketingListTypeToStringTransformer;
+    protected $marketingListTypeToStringTransformer;
 
     /**
-     * @var ObjectManager
+     * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    private $om;
+    protected $managerRegistry;
 
     /**
-     * @var ObjectRepository
+     * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    private $repository;
+    protected $repository;
 
     protected function setUp()
     {
-        $this->om = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
+        $this->managerRegistry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -36,7 +34,7 @@ class MarketingListTypeToStringTransformerTest extends \PHPUnit_Framework_TestCa
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->marketingListTypeToStringTransformer = new MarketingListTypeToStringTransformer($this->om);
+        $this->marketingListTypeToStringTransformer = new MarketingListTypeToStringTransformer($this->managerRegistry);
     }
 
     public function testTransform()
@@ -52,7 +50,7 @@ class MarketingListTypeToStringTransformerTest extends \PHPUnit_Framework_TestCa
         $value = 'dynamic';
         $marketingListType = new MarketingListType(MarketingListType::TYPE_DYNAMIC);
 
-        $this->om->expects($this->once())
+        $this->managerRegistry->expects($this->once())
             ->method('getRepository')
             ->with('OroCRMMarketingListBundle:MarketingListType')
             ->will($this->returnValue($this->repository));
@@ -72,7 +70,7 @@ class MarketingListTypeToStringTransformerTest extends \PHPUnit_Framework_TestCa
     {
         $value = 'dynamic';
 
-        $this->om->expects($this->once())
+        $this->managerRegistry->expects($this->once())
             ->method('getRepository')
             ->with('OroCRMMarketingListBundle:MarketingListType')
             ->will($this->returnValue($this->repository));

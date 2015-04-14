@@ -11,7 +11,7 @@ class CampaignAbandonedCartRelationFactoryTest extends \PHPUnit_Framework_TestCa
     /**
      * @var CampaignAbandonedCartRelationFactory
      */
-    private $factory;
+    protected $factory;
 
     protected function setUp()
     {

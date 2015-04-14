@@ -12,17 +12,17 @@ class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @var PredefinedMarketingListFactory
      */
-    private $factory;
+    protected $factory;
 
     /**
      * @var ObjectManager
      */
-    private $objectManager;
+    protected $objectManager;
 
     /**
      * @var MarketingListSourceInterface
      */
-    private $source;
+    protected $source;
 
     protected function setUp()
     {

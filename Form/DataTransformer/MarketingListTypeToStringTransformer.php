@@ -4,22 +4,23 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
+
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 
 class MarketingListTypeToStringTransformer implements DataTransformerInterface
 {
     /**
-     * @var ObjectManager
+     * @var ManagerRegistry
      */
-    private $om;
+    protected $managerRegistry;
 
     /**
-     * @param ObjectManager $om
+     * @param ManagerRegistry $managerRegistry
      */
-    public function __construct(ObjectManager $om)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        $this->om = $om;
+        $this->managerRegistry = $managerRegistry;
     }
 
     /**
@@ -41,7 +42,7 @@ class MarketingListTypeToStringTransformer implements DataTransformerInterface
             return null;
         }
 
-        $marketingListType = $this->om
+        $marketingListType = $this->managerRegistry
             ->getRepository('OroCRMMarketingListBundle:MarketingListType')
             ->findOneBy(array('name' => $value))
         ;

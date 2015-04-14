@@ -14,12 +14,12 @@ class PredefinedMarketingListFactory
     /**
      * @var ObjectManager
      */
-    private $objectManager;
+    protected $objectManager;
 
     /**
      * @var MarketingListSourceInterface
      */
-    private $source;
+    protected $source;
 
     /**
      * @param ObjectManager $objectManager

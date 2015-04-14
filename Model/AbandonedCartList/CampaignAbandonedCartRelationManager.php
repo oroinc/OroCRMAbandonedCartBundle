@@ -2,24 +2,25 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
+
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 
 class CampaignAbandonedCartRelationManager
 {
     /**
-     * @var EntityManager
+     * @var ManagerRegistry
      */
-    private $em;
+    protected $managerRegistry;
 
     /**
-     * @param EntityManager $entityManager
+     * @param ManagerRegistry $managerRegistry
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        $this->em = $entityManager;
+        $this->managerRegistry = $managerRegistry;
     }
 
     /**
@@ -43,6 +44,6 @@ class CampaignAbandonedCartRelationManager
      */
     protected function getCampaignAbandonedCartRelationRepo()
     {
-        return $this->em->getRepository('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation');
+        return $this->managerRegistry->getRepository('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation');
     }
 }

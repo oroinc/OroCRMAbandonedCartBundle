@@ -2,25 +2,27 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Form\Type;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
+
 use OroCRM\Bundle\AbandonedCartBundle\Form\DataTransformer\MarketingListTypeToStringTransformer;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class AbandonedCartHiddenMarketingListTypeType extends AbstractType
 {
     /**
-     * @var ObjectManager
+     * @var ManagerRegistry
      */
-    private $om;
+    protected $managerRegistry;
 
     /**
-     * @param ObjectManager $om
+     * @param ManagerRegistry $managerRegistry
      */
-    public function __construct(ObjectManager $om)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        $this->om = $om;
+        $this->managerRegistry = $managerRegistry;
     }
 
     /**
@@ -28,7 +30,7 @@ class AbandonedCartHiddenMarketingListTypeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $typeTransformer = new MarketingListTypeToStringTransformer($this->om);
+        $typeTransformer = new MarketingListTypeToStringTransformer($this->managerRegistry);
         
         $builder
             ->addModelTransformer($typeTransformer);

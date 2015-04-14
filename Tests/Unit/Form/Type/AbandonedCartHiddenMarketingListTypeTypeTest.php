@@ -13,16 +13,18 @@ class AbandonedCartHiddenMarketingListTypeTypeTest extends \PHPUnit_Framework_Te
     protected $abandonedCartHiddenMarketingListTypeType;
 
     /**
-     * @var ObjectManager
+     * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    protected $om;
+    protected $managerRegistry;
 
     protected function setUp()
     {
-        $this->om = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
+        $this->managerRegistry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
             ->getMock();
-        $this->abandonedCartHiddenMarketingListTypeType = new AbandonedCartHiddenMarketingListTypeType($this->om);
+        $this->abandonedCartHiddenMarketingListTypeType = new AbandonedCartHiddenMarketingListTypeType(
+            $this->managerRegistry
+        );
     }
 
     public function testBuildForm()

@@ -24,7 +24,7 @@ services:
     orocrm_abandonedcart_list.form.type.marketing_type_hidden:
         class: %orocrm_abandonedcart_list.form.type.marketing_type_hidden.class%
         arguments:
-            - @doctrine.orm.entity_manager
+            - @doctrine
         tags:
             - { name: form.type, alias: orocrm_abandonedcart_list_marketing_list_type_hidden }
 
