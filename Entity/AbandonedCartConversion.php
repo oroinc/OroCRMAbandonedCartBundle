@@ -46,6 +46,9 @@ class AbandonedCartConversion
      */
     protected $campaigns;
 
+    /**
+     * Construct
+     */
     public function __construct()
     {
         $this->campaigns = new ArrayCollection();

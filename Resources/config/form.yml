@@ -43,6 +43,8 @@ services:
 
     orocrm_mailchimp.form.type.abandonedcart_list_conversion:
         class: %orocrm_mailchimp.form.type.abandonedcart_list_conversion.class%
+        arguments:
+            - @orocrm_abandonedcart.conversion_manager
         tags:
             - { name: form.type, alias: "orocrm_mailchimp_abandonedcart_list_conversion" }
 

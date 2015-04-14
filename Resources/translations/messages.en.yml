@@ -31,7 +31,7 @@ orocrm:
         conversion:
             name: Conversion
             button:
-                enable: 'Workflow Automation Sync'
+                enable: 'Related Campaigns'
             message:
                 update: 'MailChimp Automation Workflows updated'
             dialog:
@@ -41,3 +41,10 @@ orocrm:
                     cancel: Cancel
                 title:
                     connect: MailChimp Workflow Automation
+            title:
+                summary: Summary
+                orders: Orders
+                total: Total
+
+        datagrid:
+            campaign_name_label: Name

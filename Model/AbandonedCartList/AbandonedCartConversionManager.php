@@ -79,4 +79,16 @@ class AbandonedCartConversionManager
 
         return $result;
     }
+
+    /**
+     * @param AbandonedCartConversion $conversion
+     * @return mixed
+     */
+    public function findStaticSegment(AbandonedCartConversion $conversion)
+    {
+        $marketingList = $conversion->getMarketingList();
+        return $this->em
+            ->getRepository('OroCRMMailChimpBundle:StaticSegment')
+            ->findOneBy(['marketingList' => $marketingList]);
+    }
 }
