@@ -39,7 +39,7 @@ class AbandonedCartConversion
      * @var Campaign[]|ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="OroCRM\Bundle\MailChimpBundle\Entity\Campaign")
-     * @ORM\JoinTable(name="orocrm_abandcart_conv_campaigns",
+     * @ORM\JoinTable(name="orocrm_abandcart_conv_camps",
      *      joinColumns={@ORM\JoinColumn(name="conversion_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="mailchimp_campaign_id", referencedColumnName="id", onDelete="CASCADE")}
      * )

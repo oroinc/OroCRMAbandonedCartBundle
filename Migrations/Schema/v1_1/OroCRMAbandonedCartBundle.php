@@ -20,8 +20,8 @@ class OroCRMAbandonedCartBundle implements Migration
         /** Tables generation **/
         $this->createOrocrmAbandcartConvTable($schema);
         $this->addOrocrmAbandcartConvForeignKeys($schema);
-        $this->createOrocrmAbandcartConvCampaignsTable($schema);
-        $this->addOrocrmAbandcartConvCampaignsForeignKeys($schema);
+        $this->createOrocrmAbandcartConvCampsTable($schema);
+        $this->addOrocrmAbandcartConvCampsForeignKeys($schema);
 
     }
 
@@ -56,13 +56,13 @@ class OroCRMAbandonedCartBundle implements Migration
     }
 
     /**
-     * Create orocrm_abandcart_conv_campaigns table
+     * Create orocrm_abandcart_conv_camps table
      *
      * @param Schema $schema
      */
-    protected function createOrocrmAbandcartConvCampaignsTable(Schema $schema)
+    protected function createOrocrmAbandcartConvCampsTable(Schema $schema)
     {
-        $table = $schema->createTable('orocrm_abandcart_conv_campaigns');
+        $table = $schema->createTable('orocrm_abandcart_conv_camps');
         $table->addColumn('conversion_id', 'integer', []);
         $table->addColumn('mailchimp_campaign_id', 'integer', []);
         $table->setPrimaryKey(['conversion_id', 'mailchimp_campaign_id']);
@@ -71,13 +71,13 @@ class OroCRMAbandonedCartBundle implements Migration
     }
 
     /**
-     * Add orocrm_abandcart_conv_campaigns foreign keys.
+     * Add orocrm_abandcart_conv_camps foreign keys.
      *
      * @param Schema $schema
      */
-    protected function addOrocrmAbandcartConvCampaignsForeignKeys(Schema $schema)
+    protected function addOrocrmAbandcartConvCampsForeignKeys(Schema $schema)
     {
-        $table = $schema->getTable('orocrm_abandcart_conv_campaigns');
+        $table = $schema->getTable('orocrm_abandcart_conv_camps');
         $table->addForeignKeyConstraint(
             $schema->getTable('orocrm_abandcart_conv'),
             ['conversion_id'],
