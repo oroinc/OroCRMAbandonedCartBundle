@@ -106,6 +106,6 @@ class AbandonedCartConversion
     {
         if (!$this->getCampaigns()->contains($campaign)) {
             $this->getCampaigns()->add($campaign);
-        }    }
-
+        }
+    }
 }
