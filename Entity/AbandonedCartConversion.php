@@ -94,8 +94,8 @@ class AbandonedCartConversion
      */
     public function removeCampaign(Campaign $campaign)
     {
-        if (!$this->getCampaigns()->contains($campaign)) {
-            $this->getCampaigns()->add($campaign);
+        if ($this->getCampaigns()->contains($campaign)) {
+            $this->getCampaigns()->removeElement($campaign);
         }
     }
 
