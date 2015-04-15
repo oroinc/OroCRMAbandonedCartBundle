@@ -81,7 +81,8 @@ class AbandonedCartConversionController extends Controller
      */
     protected function getConversionByMarketingList(MarketingList $marketingList)
     {
-        $conversion = $this->get('orocrm_abandonedcart.conversion_manager')->findConversionByMarketingList($marketingList);
+        $conversion = $this->get('orocrm_abandonedcart.conversion_manager')
+            ->findConversionByMarketingList($marketingList);
 
         if (!$conversion) {
             $conversion = $this->get('orocrm_abandonedcart_list.conversion_factory')->create($marketingList);
