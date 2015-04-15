@@ -10,7 +10,7 @@ class ConversionFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @var ConversionFactory
      */
-    private $factory;
+    protected $factory;
 
     protected function setUp()
     {

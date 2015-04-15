@@ -2,22 +2,20 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Twig;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartStatistics;
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartWorkflow;
+use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use OroCRM\Bundle\AbandonedCartBundle\Twig\ConversionExtension;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 
 class ConversionExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var ConversionExtension
      */
-    private $conversionExtension;
+    protected $conversionExtension;
 
     /**
-     * @var AbandonedCartConversionManager
+     * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    private $conversionManager;
+    protected $conversionManager;
 
     protected function setUp()
     {
@@ -27,21 +25,37 @@ class ConversionExtensionTest extends \PHPUnit_Framework_TestCase
         $this->conversionExtension = new ConversionExtension($this->conversionManager);
     }
 
-    public function testName()
+    public function testGetName()
     {
         $this->assertEquals('orocrm_abandonedcart_conversion', $this->conversionExtension->getName());
     }
 
-    public function testGetWorkflowRelatedStatistic()
+    public function testGetAbandonedCartRelatedStatistic()
     {
-        $workflow = new AbandonedCartWorkflow();
-        $statistic = new AbandonedCartStatistics();
+        $conversion = new AbandonedCartConversion();
+        $result = [];
 
         $this->conversionManager
             ->expects($this->once())
-            ->method('findWorkflowRelatedStatistic')
-            ->will($this->returnValue($statistic));
+            ->method('findAbandonedCartRelatedStatistic')
+            ->will($this->returnValue($result));
 
-        $this->conversionExtension->getWorkflowRelatedStatistic($workflow);
+        $this->conversionExtension->getAbandonedCartRelatedStatistic($conversion);
+    }
+
+    public function testGetFunctions()
+    {
+        $functions = $this->conversionExtension->getFunctions();
+        $this->assertCount(1, $functions);
+
+        $expectedFunctions = array(
+            'get_abandonedcart_related_statistic'
+        );
+
+        /** @var \Twig_SimpleFunction $function */
+        foreach ($functions as $function) {
+            $this->assertInstanceOf('\Twig_SimpleFunction', $function);
+            $this->assertContains($function->getName(), $expectedFunctions);
+        }
     }
 }

@@ -5,7 +5,6 @@
 {% if conversion is not null %}
     {% set stats = get_abandonedcart_related_statistic(conversion) %}
 
-    <strong>Summary:</strong>
     <strong>{{ 'orocrm.abandonedcart.conversion.title.summary'|trans }}</strong>
     {{ UI.renderHtmlProperty('orocrm.abandonedcart.conversion.title.orders'|trans, stats.qty) }}
     {{ UI.renderHtmlProperty('orocrm.abandonedcart.conversion.title.total'|trans, stats.total|oro_format_currency) }}

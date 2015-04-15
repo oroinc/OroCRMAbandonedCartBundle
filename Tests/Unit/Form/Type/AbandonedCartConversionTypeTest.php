@@ -11,32 +11,20 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
      */
     protected $abandonedCartConversionType;
 
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $conversionManager;
+
     protected function setUp()
     {
-        $this->abandonedCartConversionType = new AbandonedCartConversionType();
-    }
-
-    public function testBuildForm()
-    {
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')
+        $this->conversionManager = $this->getMockBuilder(
+                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager'
+            )
             ->disableOriginalConstructor()
             ->getMock();
 
-        $builder->expects($this->once())
-            ->method('add')
-            ->with(
-                'workflows',
-                'entity',
-                [
-                    'class' => 'OroCRMAbandonedCartBundle:AbandonedCartWorkflow',
-                    'multiple' => true,
-                    'expanded' => true,
-                    'property' => 'name'
-                ]
-            )
-            ->will($this->returnSelf());
-
-        $this->abandonedCartConversionType->buildForm($builder, []);
+        $this->abandonedCartConversionType = new AbandonedCartConversionType($this->conversionManager);
     }
 
     public function testSetDefaultOptions()

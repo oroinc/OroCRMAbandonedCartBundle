@@ -14,17 +14,17 @@ class MarketingListTypeToStringTransformerTest extends \PHPUnit_Framework_TestCa
     /**
      * @var MarketingListTypeToStringTransformer
      */
-    private $marketingListTypeToStringTransformer;
+    protected $marketingListTypeToStringTransformer;
 
     /**
      * @var ObjectManager
      */
-    private $om;
+    protected $om;
 
     /**
      * @var ObjectRepository
      */
-    private $repository;
+    protected $repository;
 
     protected function setUp()
     {

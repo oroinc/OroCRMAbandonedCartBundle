@@ -2,38 +2,45 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 use Oro\Bundle\EntityExtendBundle\Tools\ExtendHelper;
-use Oro\Bundle\TrackingBundle\Entity\TrackingVisitEvent;
+
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 
 class AbandonedCartConversionManager
 {
     /**
-     * @var EntityManager
+     * @var ManagerRegistry
      */
-    private $em;
+    protected $managerRegistry;
 
     /**
      * @var CampaignAbandonedCartRelationManager
      */
-    private $campaignAbandonedCartRelationManager;
+    protected $campaignAbandonedCartRelationManager;
 
     /**
-     * @param EntityManager $entityManager
+     * @var TrackingStatProviderFactory
+     */
+    protected $statProviderFactory;
+
+    /**
+     * @param ManagerRegistry $managerRegistry
      * @param CampaignAbandonedCartRelationManager $campaignAbandonedCartRelationManager
+     * @param TrackingStatProviderFactory $statProviderFactory
      */
     public function __construct(
-        EntityManager $entityManager,
-        CampaignAbandonedCartRelationManager $campaignAbandonedCartRelationManager
+        ManagerRegistry $managerRegistry,
+        CampaignAbandonedCartRelationManager $campaignAbandonedCartRelationManager,
+        TrackingStatProviderFactory $statProviderFactory
     )
     {
-        $this->em = $entityManager;
+        $this->managerRegistry = $managerRegistry;
         $this->campaignAbandonedCartRelationManager = $campaignAbandonedCartRelationManager;
+        $this->statProviderFactory = $statProviderFactory;
     }
 
     /**
@@ -42,22 +49,20 @@ class AbandonedCartConversionManager
      */
     public function findConversionByMarketingList(MarketingList $marketingList)
     {
-        $conversionRepository = $this->em->getRepository('OroCRMAbandonedCartBundle:AbandonedCartConversion');
+        $conversionRepository = $this->managerRegistry
+            ->getRepository('OroCRMAbandonedCartBundle:AbandonedCartConversion');
+
         return $conversionRepository->findOneBy(array('marketingList' => $marketingList->getId()));
     }
 
     /**
      * @param AbandonedCartConversion $conversion
-     * @return mixed
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @return Tracking\StatResult
      */
     public function findAbandonedCartRelatedStatistic(AbandonedCartConversion $conversion)
     {
         $marketingList = $conversion->getMarketingList();
         $campaign = $this->campaignAbandonedCartRelationManager->getCampaignByMarketingList($marketingList);
-
-        $qb = $this->em->getRepository('OroTrackingBundle:TrackingVisitEvent')
-            ->createQueryBuilder('te');
 
         $orderAssociationName = ExtendHelper::buildAssociationName(
             'OroCRM\Bundle\MagentoBundle\Entity\Order',
@@ -69,15 +74,14 @@ class AbandonedCartConversionManager
             'association'
         );
 
-        $result = $qb
-            ->select('sum(o.totalAmount) as total, count(o.id) as qty')
-            ->join('te.' . $orderAssociationName, 'o')
-            ->where('te.' . $campaignAssociationName . '= :campaignId')
-            ->setParameter('campaignId', $campaign->getId())
-            ->getQuery()
-            ->getOneOrNullResult();
+        $trackingStatProvider = $this->statProviderFactory->create(
+            $orderAssociationName,
+            $campaignAssociationName
+        );
 
-        return $result;
+        $statResult = $trackingStatProvider->getStatResult($campaign);
+
+        return $statResult;
     }
 
     /**
@@ -87,7 +91,7 @@ class AbandonedCartConversionManager
     public function findStaticSegment(AbandonedCartConversion $conversion)
     {
         $marketingList = $conversion->getMarketingList();
-        return $this->em
+        return $this->managerRegistry
             ->getRepository('OroCRMMailChimpBundle:StaticSegment')
             ->findOneBy(['marketingList' => $marketingList]);
     }

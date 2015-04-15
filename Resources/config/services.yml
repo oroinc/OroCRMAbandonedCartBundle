@@ -14,6 +14,7 @@ parameters:
     orocrm_abandonedcart_list.campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
     orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationFactory
     orocrm_abandonedcart_list.conversion_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\ConversionFactory
+    orocrm_abandonedcart_list.tracking_stat_provider_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory
 
 services:
     orocrm_abandonedcart_list.twig.extension.contact_information_fields:
@@ -40,13 +41,14 @@ services:
     orocrm_abandonedcart.abandoned_cart_list.campaign_manager:
         class: %orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class%
         arguments:
-            - @doctrine.orm.entity_manager
+            - @doctrine
 
     orocrm_abandonedcart.conversion_manager:
         class: %orocrm_abandonedcart.conversion_manager.class%
         arguments:
-            - @doctrine.orm.entity_manager
+            - @doctrine
             - @orocrm_abandonedcart.abandoned_cart_list.campaign_manager
+            - @orocrm_abandonedcart_list.tracking_stat_provider_factory
 
     orocrm_abandonedcart.marketing_list.source:
         class: %orocrm_abandonedcart.marketing_list.source.class%
@@ -73,3 +75,8 @@ services:
 
     orocrm_abandonedcart_list.conversion_factory:
         class: %orocrm_abandonedcart_list.conversion_factory.class%
+
+    orocrm_abandonedcart_list.tracking_stat_provider_factory:
+        class: %orocrm_abandonedcart_list.tracking_stat_provider_factory.class%
+        arguments:
+            - @doctrine.orm.entity_manager

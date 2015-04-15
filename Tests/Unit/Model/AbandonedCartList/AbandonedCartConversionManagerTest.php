@@ -1,0 +1,183 @@
+<?php
+
+namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
+
+use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
+use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
+
+class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * @var AbandonedCartConversionManager
+     */
+    protected $conversionManager;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $managerRegistry;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $repository;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $em;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $marketingList;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $campaignRelationManager;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $campaign;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $statProviderFactory;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $statResult;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $trackingStatProvider;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $conversion;
+
+    protected function setUp()
+    {
+        $this->managerRegistry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->marketingList = $this->getMockBuilder('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->campaign = $this->getMockBuilder('OroCRM\Bundle\CampaignBundle\Entity\Campaign')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->conversion = $this->getMockBuilder('OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->statProviderFactory = $this->getMockBuilder(
+                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory'
+            )
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->statResult = $this->getMockBuilder(
+                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\StatResultInterface'
+           )
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->trackingStatProvider = $this->getMockBuilder(
+                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderInterface'
+            )
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->campaignRelationManager = $this->getMockBuilder(
+                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager'
+            )
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->conversionManager = new AbandonedCartConversionManager(
+            $this->managerRegistry,
+            $this->campaignRelationManager,
+            $this->statProviderFactory
+        );
+    }
+
+    public function testFindConversionByMarketingList()
+    {
+        $this->managerRegistry
+            ->expects($this->once())->method('getRepository')
+            ->with('OroCRMAbandonedCartBundle:AbandonedCartConversion')
+            ->will($this->returnValue($this->repository));
+
+        $this->marketingList
+            ->expects($this->once())->method('getId')
+            ->will($this->returnValue('testId'));
+
+        $this->repository
+            ->expects($this->once())->method('findOneBy')
+            ->with(array('marketingList' => 'testId'))
+            ->will($this->returnValue($this->conversion));
+
+        $this->conversionManager->findConversionByMarketingList($this->marketingList);
+    }
+
+    public function testFindStaticSegment()
+    {
+        $conversion = new AbandonedCartConversion();
+        $conversion->setMarketingList($this->marketingList);
+        $staticSegment = new StaticSegment();
+
+        $this->managerRegistry
+            ->expects($this->once())->method('getRepository')
+            ->with('OroCRMMailChimpBundle:StaticSegment')
+            ->will($this->returnValue($this->repository));
+
+        $this->repository
+            ->expects($this->once())->method('findOneBy')
+            ->with(array('marketingList' => $this->marketingList))
+            ->will($this->returnValue($staticSegment));
+
+        $this->conversionManager->findStaticSegment($conversion);
+    }
+
+    public function testFindAbandonedCartRelatedStatistic()
+    {
+        $this->conversion
+            ->expects($this->once())->method('getMarketingList')
+            ->will($this->returnValue($this->marketingList));
+
+        $this->campaignRelationManager
+            ->expects($this->once())->method('getCampaignByMarketingList')
+            ->with($this->equalTo($this->marketingList))
+            ->will($this->returnValue($this->campaign));
+
+        $this->statProviderFactory
+            ->expects($this->once())->method('create')
+            ->will($this->returnValue($this->trackingStatProvider));
+
+        $this->trackingStatProvider
+            ->expects($this->once())->method('getStatResult')
+            ->with($this->equalTo($this->campaign))
+            ->will($this->returnValue($this->statResult));
+
+        $this->conversionManager->findAbandonedCartRelatedStatistic($this->conversion);
+    }
+}

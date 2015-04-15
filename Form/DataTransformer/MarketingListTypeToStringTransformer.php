@@ -12,7 +12,7 @@ class MarketingListTypeToStringTransformer implements DataTransformerInterface
     /**
      * @var ObjectManager
      */
-    private $om;
+    protected $om;
 
     /**
      * @param ObjectManager $om
