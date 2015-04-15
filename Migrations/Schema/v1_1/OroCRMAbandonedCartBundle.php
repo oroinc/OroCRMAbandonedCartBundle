@@ -18,36 +18,19 @@ class OroCRMAbandonedCartBundle implements Migration
     public function up(Schema $schema, QueryBag $queries)
     {
         /** Tables generation **/
-        $this->createOrocrmAbandonedcartWorkflowTable($schema);
-        $this->createOrocrmAbandonedcartConversionTable($schema);
-        $this->createOrocrmAbandonedcartStatisticsTable($schema);
-        $this->addOrocrmAbandonedcartStatisticsForeignKeys($schema);
-        $this->createOrocrmAbandonedcartConversionWorkflowTable($schema);
-        $this->addOrocrmAbandonedcartConversionWorkflowForeignKeys($schema);
+        $this->createOrocrmAbandcartConvTable($schema);
+        $this->addOrocrmAbandcartConvForeignKeys($schema);
+        $this->createOrocrmAbandcartConvCampaignsTable($schema);
+        $this->addOrocrmAbandcartConvCampaignsForeignKeys($schema);
+
     }
 
     /**
-     * Create orocrm_abandcart_workflow table
+     * Create orocrm_abandcart_conv table
      *
      * @param Schema $schema
      */
-    protected function createOrocrmAbandonedcartWorkflowTable(Schema $schema)
-    {
-        $table = $schema->createTable('orocrm_abandcart_workflow');
-        $table->addColumn('id', 'integer', ['autoincrement' => true]);
-        $table->addColumn('name', 'text', []);
-        $table->addColumn('emails_sent', 'integer', ['notnull' => false]);
-        $table->addColumn('opens', 'integer', ['notnull' => false]);
-        $table->addColumn('clicks', 'integer', ['notnull' => false]);
-        $table->setPrimaryKey(['id']);
-    }
-
-    /**
-     * Create orocrm_abandonedcart_conversion table
-     *
-     * @param Schema $schema
-     */
-    protected function createOrocrmAbandonedcartConversionTable(Schema $schema)
+    protected function createOrocrmAbandcartConvTable(Schema $schema)
     {
         $table = $schema->createTable('orocrm_abandcart_conv');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
@@ -57,29 +40,13 @@ class OroCRMAbandonedCartBundle implements Migration
     }
 
     /**
-     * Create orocrm_abandcart_stats table
+     * Add orocrm_abandcart_conv foreign keys.
      *
      * @param Schema $schema
      */
-    protected function createOrocrmAbandonedcartStatisticsTable(Schema $schema)
+    protected function addOrocrmAbandcartConvForeignKeys(Schema $schema)
     {
-        $table = $schema->createTable('orocrm_abandcart_stats');
-        $table->addColumn('id', 'integer', ['autoincrement' => true]);
-        $table->addColumn('marketing_list_id', 'integer', ['notnull' => false]);
-        $table->addColumn('converted_to_orders', 'integer', ['notnull' => false]);
-        $table->addColumn('total_sum', 'text', ['notnull' => false]);
-        $table->setPrimaryKey(['id']);
-        $table->addUniqueIndex(['marketing_list_id'], 'UNIQ_524B51096434D04');
-    }
-
-    /**
-     * Add orocrm_abandcart_stats foreign keys.
-     *
-     * @param Schema $schema
-     */
-    protected function addOrocrmAbandonedcartStatisticsForeignKeys(Schema $schema)
-    {
-        $table = $schema->getTable('orocrm_abandcart_stats');
+        $table = $schema->getTable('orocrm_abandcart_conv');
         $table->addForeignKeyConstraint(
             $schema->getTable('orocrm_marketing_list'),
             ['marketing_list_id'],
@@ -89,41 +56,39 @@ class OroCRMAbandonedCartBundle implements Migration
     }
 
     /**
-     * Create orocrm_abandcart_conversion_workflow table
+     * Create orocrm_abandcart_conv_campaigns table
      *
      * @param Schema $schema
      */
-    protected function createOrocrmAbandonedcartConversionWorkflowTable(Schema $schema)
+    protected function createOrocrmAbandcartConvCampaignsTable(Schema $schema)
     {
-        $table = $schema->createTable('orocrm_abandcart_conv_workflow');
-        $table->addColumn('workflow_id', 'integer', []);
+        $table = $schema->createTable('orocrm_abandcart_conv_campaigns');
         $table->addColumn('conversion_id', 'integer', []);
-        $table->setPrimaryKey(['workflow_id', 'conversion_id']);
-        $table->addIndex(['workflow_id'], 'IDX_601118BF2C7C2CBA', []);
-        $table->addIndex(['conversion_id'], 'IDX_601118BF4C1FF126', []);
+        $table->addColumn('mailchimp_campaign_id', 'integer', []);
+        $table->setPrimaryKey(['conversion_id', 'mailchimp_campaign_id']);
+        $table->addIndex(['conversion_id'], 'IDX_F07F82054C1FF126', []);
+        $table->addIndex(['mailchimp_campaign_id'], 'IDX_F07F8205828112CC', []);
     }
 
     /**
-     * Add orocrm_abandcart_conversion_workflow foreign keys.
+     * Add orocrm_abandcart_conv_campaigns foreign keys.
      *
      * @param Schema $schema
      */
-    protected function addOrocrmAbandonedcartConversionWorkflowForeignKeys(Schema $schema)
+    protected function addOrocrmAbandcartConvCampaignsForeignKeys(Schema $schema)
     {
-        $table = $schema->getTable('orocrm_abandcart_conv_workflow');
-        $table->addForeignKeyConstraint(
-            $schema->getTable('orocrm_abandcart_workflow'),
-            ['workflow_id'],
-            ['id'],
-            ['onDelete' => 'CASCADE', 'onUpdate' => null]
-        );
+        $table = $schema->getTable('orocrm_abandcart_conv_campaigns');
         $table->addForeignKeyConstraint(
             $schema->getTable('orocrm_abandcart_conv'),
             ['conversion_id'],
             ['id'],
             ['onDelete' => 'CASCADE', 'onUpdate' => null]
         );
+        $table->addForeignKeyConstraint(
+            $schema->getTable('orocrm_mailchimp_campaign'),
+            ['mailchimp_campaign_id'],
+            ['id'],
+            ['onDelete' => 'CASCADE', 'onUpdate' => null]
+        );
     }
-
-
 }
