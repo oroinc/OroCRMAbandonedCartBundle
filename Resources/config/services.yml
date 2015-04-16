@@ -8,8 +8,8 @@ parameters:
     orocrm_abandonedcart_list.campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
     orocrm_abandonedcart_list.extended_merge_var.provider.cart_items.class: OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider
     orocrm_abandonedcart.importexport.strategy.member_cartitems_merge_var.listener.class: OroCRM\Bundle\AbandonedCartBundle\ImportExport\Strategy\CartItemsMergeVarStrategyListener
-
     orocrm_abandonedcart.extended_merge_var.cart_item.template: OroCRMAbandonedCartBundle:ExtendedMergeVar:cartItemMergeVar.txt.twig
+    orocrm_abandonedcart_list.event_listener.datagrid.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartListener
 
 services:
     orocrm_abandonedcart_list.twig.extension.contact_information_fields:
@@ -64,3 +64,11 @@ services:
             - %orocrm_abandonedcart.extended_merge_var.cart_item.template%
         tags:
             - { name: kernel.event_listener, event: oro_importexport.strategy.process_after, method: onProcessAfter }
+
+
+    orocrm_abandonedcart_list.event_listener.datagrid:
+        class: %orocrm_abandonedcart_list.event_listener.datagrid.class%
+        arguments:
+            - @orocrm_marketing_list.model.helper
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.orocrm-marketing-list-items-base-unsubscribe-mixin, method: onBuildBefore }
