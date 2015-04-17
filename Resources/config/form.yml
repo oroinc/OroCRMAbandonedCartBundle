@@ -1,6 +1,5 @@
 parameters:
     orocrm_abandonedcart_list.form.type.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType
-    orocrm_abandonedcart_list.form.type.marketing_type_hidden.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartHiddenMarketingListTypeType
 
     orocrm_abandonedcart.form.handler.abandonedcart_campaign.class: OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartCampaignHandler
     orocrm_abandonedcart.campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
@@ -20,13 +19,6 @@ services:
         arguments:
             - "orocrm_abandonedcart_list_form"
             - "orocrm_abandonedcart_list"
-
-    orocrm_abandonedcart_list.form.type.marketing_type_hidden:
-        class: %orocrm_abandonedcart_list.form.type.marketing_type_hidden.class%
-        arguments:
-            - @doctrine
-        tags:
-            - { name: form.type, alias: orocrm_abandonedcart_list_marketing_list_type_hidden }
 
     orocrm_abandonedcart.campaign_factory:
         class: %orocrm_abandonedcart.campaign_factory.class%

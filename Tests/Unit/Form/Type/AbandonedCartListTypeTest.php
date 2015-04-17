@@ -49,14 +49,6 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             )
             ->will($this->returnSelf());
 
-        $builder->expects($this->at(3))
-            ->method('add')
-            ->with(
-                'type',
-                'orocrm_abandonedcart_list_marketing_list_type_hidden'
-            )
-            ->will($this->returnSelf());
-
         $builder->expects($this->at(4))
             ->method('add')
             ->with(
