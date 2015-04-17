@@ -10,7 +10,7 @@ class CartItemsMergeVarProvider implements ProviderInterface
 {
     const CART_ITEMS_LIMIT = 3;
 
-    const NAME_PREFIX = 'item_';
+    const NAME_PREFIX = 'item';
 
     const CART_ITEM_NAME = '%s_%d';
     const CART_ITEM_LABEL = 'Cart Item (%d)';
