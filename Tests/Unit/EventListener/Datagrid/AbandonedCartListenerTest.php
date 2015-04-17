@@ -43,8 +43,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->abandonedCartCampaignProvider = $this
-            ->getMockBuilder('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface')
-            ->getMock();
+            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
 
         $this->listener = new AbandonedCartListener(
             $this->marketingListHelper,

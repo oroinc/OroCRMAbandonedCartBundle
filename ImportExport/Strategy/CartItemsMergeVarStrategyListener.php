@@ -4,6 +4,7 @@ namespace OroCRM\Bundle\AbandonedCartBundle\ImportExport\Strategy;
 
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
+use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
 use OroCRM\Bundle\MagentoBundle\Entity\Cart;
 use OroCRM\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
 use OroCRM\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
@@ -48,7 +49,7 @@ class CartItemsMergeVarStrategyListener
     {
         $entity = $event->getEntity();
 
-        if (!($entity instanceof MemberExtendedMergeVar)) {
+        if (!$entity instanceof MemberExtendedMergeVar) {
             return;
         }
 
@@ -63,7 +64,7 @@ class CartItemsMergeVarStrategyListener
         $cartItemsMergeVars = $extendedMergeVars
             ->filter(
                 function(ExtendedMergeVar $extendedMergeVar) {
-                    return false !== strpos($extendedMergeVar->getName(), 'item_');
+                    return false !== strpos($extendedMergeVar->getName(), CartItemsMergeVarProvider::NAME_PREFIX);
                 }
             );
 
@@ -73,7 +74,7 @@ class CartItemsMergeVarStrategyListener
 
         $context = $entity->getMergeVarValuesContext();
 
-        if (!isset($context['entity_id'])) {
+        if (!isset($context['entity_id']) || empty($context['entity_id'])) {
             return;
         }
 
@@ -155,7 +156,7 @@ class CartItemsMergeVarStrategyListener
     {
         $name = $cartItemMergeVar->getName();
         $index = str_replace('item_', '', $name);
-        $index = intval($index);
+        $index = abs(intval($index));
         if ($index > 0) {
             $index--;
         }

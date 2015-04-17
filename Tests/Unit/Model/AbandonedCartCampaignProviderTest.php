@@ -25,9 +25,7 @@ class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $registry = $this
-            ->getMockBuilder('Symfony\Bridge\Doctrine\RegistryInterface')
-            ->getMock();
+        $registry = $this->getMock('Symfony\Bridge\Doctrine\RegistryInterface');
 
         $this->repository = $this
             ->getMockBuilder('Doctrine\ORM\EntityRepository')

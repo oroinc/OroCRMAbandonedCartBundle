@@ -8,14 +8,12 @@ use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterfa
 
 class CartItemsMergeVarProvider implements ProviderInterface
 {
-    const CART_ITEM_1_NAME = 'item_1';
-    const CART_ITEM_1_LABEL = 'First Cart Item';
+    const CART_ITEMS_LIMIT = 3;
 
-    const CART_ITEM_2_NAME = 'item_2';
-    const CART_ITEM_2_LABEL = 'Second Cart Item';
+    const NAME_PREFIX = 'item_';
 
-    const CART_ITEM_3_NAME = 'item_3';
-    const CART_ITEM_3_LABEL = 'Third Cart Item';
+    const CART_ITEM_NAME = '%s_%d';
+    const CART_ITEM_LABEL = 'Cart Item (%d)';
 
     /**
      * @var AbandonedCartCampaignProviderInterface
@@ -43,19 +41,14 @@ class CartItemsMergeVarProvider implements ProviderInterface
             return [];
         }
 
-        return [
-            [
-                'name' => self::CART_ITEM_1_NAME,
-                'label' => self::CART_ITEM_1_LABEL
-            ],
-            [
-                'name' => self::CART_ITEM_2_NAME,
-                'label' => self::CART_ITEM_2_LABEL
-            ],
-            [
-                'name' => self::CART_ITEM_3_NAME,
-                'label' => self::CART_ITEM_3_LABEL
-            ]
-        ];
+        $mergeVars = [];
+        for ($i = 1; $i <= self::CART_ITEMS_LIMIT; $i++) {
+            $mergeVars[] = [
+                'name' => sprintf(self::CART_ITEM_NAME, self::NAME_PREFIX, $i),
+                'label' => sprintf(self::CART_ITEM_LABEL, $i)
+            ];
+        }
+
+        return $mergeVars;
     }
 }

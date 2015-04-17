@@ -21,8 +21,7 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->abandonedCartCampaignProvider = $this
-            ->getMockBuilder('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface')
-            ->getMock();
+            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
         $this->provider = new CartItemsMergeVarProvider($this->abandonedCartCampaignProvider);
     }
 
@@ -53,21 +52,26 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->getExpectedExtendedMergeVars(), $actualExtendedMergeVars);
     }
 
+    /**
+     * @return array
+     */
     protected function getExpectedExtendedMergeVars()
     {
-        return [
-            [
-                'name' => CartItemsMergeVarProvider::CART_ITEM_1_NAME,
-                'label' => CartItemsMergeVarProvider::CART_ITEM_1_LABEL
-            ],
-            [
-                'name' => CartItemsMergeVarProvider::CART_ITEM_2_NAME,
-                'label' => CartItemsMergeVarProvider::CART_ITEM_2_LABEL
-            ],
-            [
-                'name' => CartItemsMergeVarProvider::CART_ITEM_3_NAME,
-                'label' => CartItemsMergeVarProvider::CART_ITEM_3_LABEL
-            ]
-        ];
+        $expectedMergeVars = [];
+
+        for ($i = 1; $i <= CartItemsMergeVarProvider::CART_ITEMS_LIMIT; $i++) {
+            $name = sprintf(
+                CartItemsMergeVarProvider::CART_ITEM_NAME,
+                CartItemsMergeVarProvider::NAME_PREFIX,
+                $i
+            );
+            $label = sprintf(CartItemsMergeVarProvider::CART_ITEM_LABEL, $i);
+            $expectedMergeVars[] = [
+                'name' => $name,
+                'label' => $label
+            ];
+        }
+
+        return $expectedMergeVars;
     }
 }
