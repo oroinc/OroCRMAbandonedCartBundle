@@ -22,7 +22,6 @@ class AbandonedCartCampaignListener extends MarketingListListener
         }
         $dataSource = $dataGrid->getDatasource();
         if ($dataSource instanceof OrmDatasource) {
-
             $qb = $dataSource->getQueryBuilder();
 
             $rootAliases = $qb->getRootAliases();

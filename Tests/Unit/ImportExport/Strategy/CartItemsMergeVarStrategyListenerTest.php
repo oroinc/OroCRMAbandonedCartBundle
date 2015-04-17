@@ -178,7 +178,7 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
         $this->entity->setMergeVarValuesContext(['entity_id' => $cartEntityId]);
 
         $firstCartItemMergeVar = new ExtendedMergeVar();
-        $firstCartItemMergeVar->setName('item_1');
+        $firstCartItemMergeVar->setName('item_1')->markSynced();
 
         $this->staticSegment->addExtendedMergeVar($firstCartItemMergeVar);
 
@@ -203,7 +203,7 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
         $this->entity->setMergeVarValuesContext(['entity_id' => $cartEntityId]);
 
         $firstCartItemMergeVar = new ExtendedMergeVar();
-        $firstCartItemMergeVar->setName('item_1');
+        $firstCartItemMergeVar->setName('item_1')->markSynced();
 
         $this->staticSegment->addExtendedMergeVar($firstCartItemMergeVar);
 
@@ -238,9 +238,9 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
         $thirdCartItemMergeVar = new ExtendedMergeVar();
         $emailMergeVar = new ExtendedMergeVar();
 
-        $firstCartItemMergeVar->setName('item_1');
-        $secondCartItemMergeVar->setName('item_2');
-        $thirdCartItemMergeVar->setName('item_3');
+        $firstCartItemMergeVar->setName('item_1')->markSynced();
+        $secondCartItemMergeVar->setName('item_2')->markSynced();
+        $thirdCartItemMergeVar->setName('item_3')->markSynced();
         $emailMergeVar->setName('email');
 
         $this->staticSegment->addExtendedMergeVar($firstCartItemMergeVar);

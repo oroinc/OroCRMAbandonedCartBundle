@@ -30,6 +30,10 @@ class CartItemsMergeVarProvider implements ProviderInterface
         $this->abandonedCartCampaignProvider = $abandonedCartCampaignProvider;
     }
 
+    /**
+     * @param MarketingList $marketingList
+     * @return array
+     */
     public function provideExtendedMergeVars(MarketingList $marketingList)
     {
         $entity = $this->abandonedCartCampaignProvider

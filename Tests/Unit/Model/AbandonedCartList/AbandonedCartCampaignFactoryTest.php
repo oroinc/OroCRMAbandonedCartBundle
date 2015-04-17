@@ -6,7 +6,7 @@ use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
 
-class CampaignAbandonedCartRelationFactoryTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartCampaignFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbandonedCartCampaignFactory

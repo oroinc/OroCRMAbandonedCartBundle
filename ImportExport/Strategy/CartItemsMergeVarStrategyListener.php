@@ -33,7 +33,7 @@ class CartItemsMergeVarStrategyListener
     public function __construct(DoctrineHelper $doctrineHelper, \Twig_Environment $twig, $cartItemTemplate)
     {
         if (false === is_string($cartItemTemplate) || empty($cartItemTemplate)) {
-            throw new \InvalidArgumentException('Cart item template for Extended Merge Var should be provided.');
+            throw new \InvalidArgumentException('Cart item template for Extended Merge Var must be provided.');
         }
         $this->doctrineHelper = $doctrineHelper;
         $this->twig = $twig;
@@ -58,9 +58,16 @@ class CartItemsMergeVarStrategyListener
             return;
         }
 
-        $extendedMergeVars = $staticSegment->getExtendedMergeVars();
+        $extendedMergeVars = $staticSegment->getSyncedExtendedMergeVars();
 
-        if ($extendedMergeVars->isEmpty()) {
+        $cartItemsMergeVars = $extendedMergeVars
+            ->filter(
+                function(ExtendedMergeVar $extendedMergeVar) {
+                    return false !== strpos($extendedMergeVar->getName(), 'item_');
+                }
+            );
+
+        if ($cartItemsMergeVars->isEmpty()) {
             return;
         }
 
@@ -80,13 +87,6 @@ class CartItemsMergeVarStrategyListener
         if (is_null($cart) || $cart->getCartItems()->isEmpty()) {
             return null;
         }
-
-        $cartItemsMergeVars = $extendedMergeVars
-            ->filter(
-                function(ExtendedMergeVar $extendedMergeVar) {
-                    return false !== strpos($extendedMergeVar->getName(), 'item_');
-                }
-            );
 
         $result = [];
         foreach ($cartItemsMergeVars as $cartItemMergeVar) {
