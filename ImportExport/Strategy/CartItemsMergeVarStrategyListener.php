@@ -2,12 +2,15 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\ImportExport\Strategy;
 
+use Doctrine\Common\Collections\Collection;
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
 use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
 use OroCRM\Bundle\MagentoBundle\Entity\Cart;
 use OroCRM\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
 use OroCRM\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
+use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class CartItemsMergeVarStrategyListener
 {
@@ -59,34 +62,16 @@ class CartItemsMergeVarStrategyListener
             return;
         }
 
-        $extendedMergeVars = $staticSegment->getSyncedExtendedMergeVars();
-
-        $cartItemsMergeVars = $extendedMergeVars
-            ->filter(
-                function(ExtendedMergeVar $extendedMergeVar) {
-                    return false !== strpos($extendedMergeVar->getName(), CartItemsMergeVarProvider::NAME_PREFIX);
-                }
-            );
+        $cartItemsMergeVars = $this->receiveExtendedMergeVars($staticSegment);
 
         if ($cartItemsMergeVars->isEmpty()) {
             return;
         }
 
-        $context = $entity->getMergeVarValuesContext();
-
-        if (!isset($context['entity_id']) || empty($context['entity_id'])) {
-            return;
-        }
-
-        $cartEntityClass = $staticSegment
-            ->getMarketingList()
-            ->getSegment()
-            ->getEntity();
-
-        $cart = $this->loadCart($cartEntityClass, $context['entity_id']);
+        $cart = $this->loadCart($entity);
 
         if (is_null($cart) || $cart->getCartItems()->isEmpty()) {
-            return null;
+            return;
         }
 
         $result = [];
@@ -105,15 +90,42 @@ class CartItemsMergeVarStrategyListener
     }
 
     /**
-     * @param $cartEntityClass
-     * @param $cartId
+     * @param StaticSegment $staticSegment
+     * @return Collection|ExtendedMergeVar[]
+     */
+    protected function receiveExtendedMergeVars(StaticSegment $staticSegment)
+    {
+        $extendedMergeVars = $staticSegment->getSyncedExtendedMergeVars();
+        $extendedMergeVars = $extendedMergeVars
+            ->filter(
+                function(ExtendedMergeVar $extendedMergeVar) {
+                    return false !== strpos($extendedMergeVar->getName(), CartItemsMergeVarProvider::NAME_PREFIX);
+                }
+            );
+
+        return $extendedMergeVars;
+    }
+
+    /**
+     * @param MemberExtendedMergeVar $entity
      * @return null|Cart
      */
-    protected function loadCart($cartEntityClass, $cartId)
+    protected function loadCart(MemberExtendedMergeVar $entity)
     {
+        $context = $entity->getMergeVarValuesContext();
+
+        if (!isset($context['entity_id']) || empty($context['entity_id'])) {
+            return null;
+        }
+
+        $cartEntityClass = $entity->getStaticSegment()
+            ->getMarketingList()
+            ->getSegment()
+            ->getEntity();
+
         $cart = $this->doctrineHelper
             ->getEntityRepository($cartEntityClass)
-            ->find($cartId);
+            ->find($context['entity_id']);
 
         return $cart;
     }
