@@ -2,9 +2,9 @@ parameters:
     orocrm_abandonedcart_list.form.type.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType
     orocrm_abandonedcart_list.form.type.marketing_type_hidden.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartHiddenMarketingListTypeType
 
-    orocrm_abandonedcart_list.form.handler.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartListHandler
-    orocrm_abandonedcart_list.campaign_factory: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
-    orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationFactory
+    orocrm_abandonedcart.form.handler.abandonedcart_campaign.class: OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartCampaignHandler
+    orocrm_abandonedcart.campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
+    orocrm_abandonedcart.abandonedcart_campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory
 
 services:
     # AbandonedCartList
@@ -28,14 +28,16 @@ services:
         tags:
             - { name: form.type, alias: orocrm_abandonedcart_list_marketing_list_type_hidden }
 
-    orocrm_abandonedcart_list.campaign_factory:
-        class: %orocrm_abandonedcart_list.campaign_factory.class%
+    orocrm_abandonedcart.campaign_factory:
+        class: %orocrm_abandonedcart.campaign_factory.class%
 
-    orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory:
-        class: %orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory.class%
+    orocrm_abandonedcart.abandonedcart_campaign_factory:
+        class: %orocrm_abandonedcart.abandonedcart_campaign_factory.class%
+        arguments:
+            - @orocrm_abandonedcart.campaign_factory
 
-    orocrm_abandonedcart_list.form.handler.abandoned_cart_list:
-        class: %orocrm_abandonedcart_list.form.handler.abandonedcart_list.class%
+    orocrm_abandonedcart.form.handler.abandonedcart_campaign:
+        class: %orocrm_abandonedcart.form.handler.abandonedcart_campaign.class%
         scope: request
         arguments:
             - @orocrm_abandonedcart_list.form.abandonedcart_list
@@ -43,6 +45,5 @@ services:
             - @doctrine
             - @validator
             - @translator
-            - @orocrm_abandonedcart.marketing_list.source
-            - @orocrm_abandonedcart_list.campaign_factory
-            - @orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory
+            - @orocrm_abandonedcart.abandonedcart_campaign_factory
+            - @orocrm_abandonedcart.provider

@@ -4,7 +4,7 @@ namespace OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid;
 
 use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 use OroCRM\Bundle\MarketingListBundle\Model\MarketingListHelper;
-use OroCRM\Bundle\AbandonedCartBundle\Model\MarketingList\AbandonedCartSource;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
 class AbandonedCartListener
 {
@@ -14,11 +14,20 @@ class AbandonedCartListener
     protected $marketingListHelper;
 
     /**
-     * @param MarketingListHelper $marketingListHelper
+     * @var AbandonedCartCampaignProviderInterface
      */
-    public function __construct(MarketingListHelper $marketingListHelper)
-    {
+    protected $abandonedCartCampaignProvider;
+
+    /**
+     * @param MarketingListHelper $marketingListHelper
+     * @param AbandonedCartCampaignProviderInterface $abandonedCartCampaignProvider
+     */
+    public function __construct(
+        MarketingListHelper $marketingListHelper,
+        AbandonedCartCampaignProviderInterface $abandonedCartCampaignProvider
+    ) {
         $this->marketingListHelper = $marketingListHelper;
+        $this->abandonedCartCampaignProvider = $abandonedCartCampaignProvider;
     }
 
     /**
@@ -41,7 +50,7 @@ class AbandonedCartListener
         $marketingListId = $this->marketingListHelper->getMarketingListIdByGridName($dataGridName);
         $marketingList = $this->marketingListHelper->getMarketingList($marketingListId);
 
-        if ($marketingList->getSource() == AbandonedCartSource::SOURCE_CODE) {
+        if ($this->abandonedCartCampaignProvider->getAbandonedCartCampaign($marketingList)) {
             $config->offsetUnsetByPath('[actions][subscribe]');
         }
     }

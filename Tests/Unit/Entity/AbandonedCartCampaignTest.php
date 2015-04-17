@@ -4,18 +4,18 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Entity;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\CampaignAbandonedCartRelation;
+use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 
-class CampaignAbandonedCartRelationTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartCampaignTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var CampaignAbandonedCartRelation
+     * @var AbandonedCartCampaign
      */
     protected $entity;
 
     protected function setUp()
     {
-        $this->entity = new CampaignAbandonedCartRelation();
+        $this->entity = new AbandonedCartCampaign();
     }
 
     protected function tearDown()
@@ -49,8 +49,8 @@ class CampaignAbandonedCartRelationTest extends \PHPUnit_Framework_TestCase
     public function propertiesDataProvider()
     {
         return array(
-            array('marketingList', $this->getMock('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')),
-            array('campaign', $this->getMock('OroCRM\Bundle\CampaignBundle\Entity\Campaign')),
+            ['marketingList', $this->getMock('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')],
+            ['campaign', $this->getMock('OroCRM\Bundle\CampaignBundle\Entity\Campaign')],
         );
     }
 }

@@ -26,6 +26,11 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
      */
     protected $datagridConfig;
 
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $abandonedCartCampaignProvider;
+
     protected function setUp()
     {
         $this->marketingListHelper = $this
@@ -37,7 +42,14 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->listener = new AbandonedCartListener($this->marketingListHelper);
+        $this->abandonedCartCampaignProvider = $this
+            ->getMockBuilder('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface')
+            ->getMock();
+
+        $this->listener = new AbandonedCartListener(
+            $this->marketingListHelper,
+            $this->abandonedCartCampaignProvider
+        );
     }
 
     public function testOnBuildBeforeWithEmptySubscribeAction()

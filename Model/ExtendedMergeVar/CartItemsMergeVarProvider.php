@@ -2,9 +2,9 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar;
 
-use OroCRM\Bundle\AbandonedCartBundle\Model\MarketingList\AbandonedCartSource;
 use OroCRM\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
 class CartItemsMergeVarProvider implements ProviderInterface
 {
@@ -17,9 +17,25 @@ class CartItemsMergeVarProvider implements ProviderInterface
     const CART_ITEM_3_NAME = 'item_3';
     const CART_ITEM_3_LABEL = 'Third Cart Item';
 
+    /**
+     * @var AbandonedCartCampaignProviderInterface
+     */
+    protected $abandonedCartCampaignProvider;
+
+    /**
+     * @param AbandonedCartCampaignProviderInterface $abandonedCartCampaignProvider
+     */
+    public function __construct(AbandonedCartCampaignProviderInterface $abandonedCartCampaignProvider)
+    {
+        $this->abandonedCartCampaignProvider = $abandonedCartCampaignProvider;
+    }
+
     public function provideExtendedMergeVars(MarketingList $marketingList)
     {
-        if ($marketingList->getSource() !== AbandonedCartSource::SOURCE_CODE) {
+        $entity = $this->abandonedCartCampaignProvider
+            ->getAbandonedCartCampaign($marketingList);
+
+        if (is_null($entity)) {
             return [];
         }
 

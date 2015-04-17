@@ -2,7 +2,7 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\CampaignAbandonedCartRelation;
+use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
@@ -25,7 +25,7 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
     protected $repository;
 
     /**
-     * @var MarketingList
+     * @var \PHPUnit_Framework_MockObject_MockObject
      */
     protected $marketingList;
 
@@ -50,13 +50,13 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
     {
         $campaign = new Campaign();
 
-        $campaignAbandonedCartRelation = new CampaignAbandonedCartRelation();
+        $campaignAbandonedCartRelation = new AbandonedCartCampaign();
         $campaignAbandonedCartRelation->setMarketingList($this->marketingList);
         $campaignAbandonedCartRelation->setCampaign($campaign);
 
         $this->managerRegistry
             ->expects($this->once())->method('getRepository')
-            ->with('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation')
+            ->with('OroCRMAbandonedCartBundle:AbandonedCartCampaign')
             ->will($this->returnValue($this->repository));
 
         $this->marketingList
@@ -80,13 +80,13 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
     {
         $campaign = new Campaign();
 
-        $campaignAbandonedCartRelation = new CampaignAbandonedCartRelation();
+        $campaignAbandonedCartRelation = new AbandonedCartCampaign();
         $campaignAbandonedCartRelation->setMarketingList($this->marketingList);
         $campaignAbandonedCartRelation->setCampaign($campaign);
 
         $this->managerRegistry
             ->expects($this->once())->method('getRepository')
-            ->with('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation')
+            ->with('OroCRMAbandonedCartBundle:AbandonedCartCampaign')
             ->will($this->returnValue($this->repository));
 
         $this->marketingList

@@ -44,6 +44,6 @@ class CampaignAbandonedCartRelationManager
      */
     protected function getCampaignAbandonedCartRelationRepo()
     {
-        return $this->managerRegistry->getRepository('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation');
+        return $this->managerRegistry->getRepository('OroCRMAbandonedCartBundle:AbandonedCartCampaign');
     }
 }

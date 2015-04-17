@@ -2,8 +2,8 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\ExtendedMergeVar;
 
+use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
-use OroCRM\Bundle\AbandonedCartBundle\Model\MarketingList\AbandonedCartSource;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
@@ -13,14 +13,27 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
      */
     protected $provider;
 
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $abandonedCartCampaignProvider;
+
     protected function setUp()
     {
-        $this->provider = new CartItemsMergeVarProvider();
+        $this->abandonedCartCampaignProvider = $this
+            ->getMockBuilder('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface')
+            ->getMock();
+        $this->provider = new CartItemsMergeVarProvider($this->abandonedCartCampaignProvider);
     }
 
-    public function testProvideWhenMarketingListIsNotAbandonedCart()
+    public function testProvideForNotAbandonedCartCampaign()
     {
         $marketingList = new MarketingList();
+
+        $this->abandonedCartCampaignProvider->expects($this->once())
+            ->method('getAbandonedCartCampaign')
+            ->with($marketingList)
+            ->will($this->returnValue(null));
 
         $this->assertEmpty($this->provider->provideExtendedMergeVars($marketingList));
     }
@@ -28,7 +41,11 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
     public function testProvide()
     {
         $marketingList = new MarketingList();
-        $marketingList->setSource(AbandonedCartSource::SOURCE_CODE);
+
+        $this->abandonedCartCampaignProvider->expects($this->once())
+            ->method('getAbandonedCartCampaign')
+            ->with($marketingList)
+            ->will($this->returnValue(new AbandonedCartCampaign()));
 
         $actualExtendedMergeVars = $this->provider->provideExtendedMergeVars($marketingList);
 

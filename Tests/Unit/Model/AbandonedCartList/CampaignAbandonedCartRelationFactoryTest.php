@@ -2,20 +2,28 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationFactory;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
 
 class CampaignAbandonedCartRelationFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var CampaignAbandonedCartRelationFactory
+     * @var AbandonedCartCampaignFactory
      */
     protected $factory;
 
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $campaignFactory;
+
     protected function setUp()
     {
-        $this->factory = new CampaignAbandonedCartRelationFactory();
+        $this->campaignFactory = $this
+            ->getMockBuilder('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory')
+            ->getMock();
+        $this->factory = new AbandonedCartCampaignFactory($this->campaignFactory);
     }
 
     public function testCreate()
@@ -23,14 +31,17 @@ class CampaignAbandonedCartRelationFactoryTest extends \PHPUnit_Framework_TestCa
         $campaign      = new Campaign();
         $marketingList = new MarketingList();
 
-        $campaignAbandonedCartRelation = $this->factory->create($campaign, $marketingList);
+        $this->campaignFactory->expects($this->once())->method('create')
+            ->with($marketingList)->will($this->returnValue($campaign));
+
+        $abandonedCartCampaign = $this->factory->create($marketingList);
 
         $this->assertInstanceOf(
-            'OroCRM\Bundle\AbandonedCartBundle\Entity\CampaignAbandonedCartRelation',
-            $campaignAbandonedCartRelation
+            'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign',
+            $abandonedCartCampaign
         );
 
-        $this->assertEquals($campaign, $campaignAbandonedCartRelation->getCampaign());
-        $this->assertEquals($marketingList, $campaignAbandonedCartRelation->getMarketingList());
+        $this->assertEquals($campaign, $abandonedCartCampaign->getCampaign());
+        $this->assertEquals($marketingList, $abandonedCartCampaign->getMarketingList());
     }
 }

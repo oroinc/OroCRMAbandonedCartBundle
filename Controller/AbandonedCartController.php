@@ -5,7 +5,6 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\Util\Codes;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -71,7 +70,7 @@ class AbandonedCartController extends Controller
      */
     public function createAction()
     {
-        $marketingList = $this->get('orocrm_abandonedcart_list.predefined_marketing_list_factory')->create();
+        $marketingList = $this->get('orocrm_abandonedcart.predefined_marketing_list_factory')->create();
 
         return $this->update($marketingList);
     }
@@ -137,7 +136,7 @@ class AbandonedCartController extends Controller
                 ];
             },
             $this->get('translator')->trans('orocrm.abandonedcart.entity.saved'),
-            $this->get('orocrm_abandonedcart_list.form.handler.abandoned_cart_list')
+            $this->get('orocrm_abandonedcart.form.handler.abandonedcart_campaign')
         );
 
         if (is_array($response)) {

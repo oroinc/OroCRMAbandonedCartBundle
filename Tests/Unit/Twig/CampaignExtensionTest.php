@@ -2,10 +2,10 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Twig;
 
-use OroCRM\Bundle\AbandonedCartBundle\Twig\CampaignExtension;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use OroCRM\Bundle\AbandonedCartBundle\Twig\CampaignExtension;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 
 class CampaignExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,7 +15,7 @@ class CampaignExtensionTest extends \PHPUnit_Framework_TestCase
     protected $campaignExtension;
 
     /**
-     * @var CampaignAbandonedCartRelationManager
+     * @var \PHPUnit_Framework_MockObject_MockObject
      */
     protected $campaignAbandonedCartRelationManager;
 
@@ -31,7 +31,7 @@ class CampaignExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testName()
     {
-        $this->assertEquals('orocrm_abandonedcart_list_campaign', $this->campaignExtension->getName());
+        $this->assertEquals('orocrm_abandonedcart_campaign', $this->campaignExtension->getName());
     }
 
     public function testGetAbandonedCartRelatedCampaign()
@@ -44,7 +44,7 @@ class CampaignExtensionTest extends \PHPUnit_Framework_TestCase
             ->method('getCampaignByMarketingList')
             ->will($this->returnValue($campaign));
 
-        $this->campaignExtension->getAbandonedCartRelatedCampaign($marketingList);
+        $this->campaignExtension->getAbandonedCartCampaign($marketingList);
     }
 
     public function testGetFunctions()
@@ -53,7 +53,7 @@ class CampaignExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $functions);
 
         $expectedFunctions = array(
-            'get_abandoned_cart_related_campaign'
+            'get_abandonedcart_campaign'
         );
 
         /** @var \Twig_SimpleFunction $function */

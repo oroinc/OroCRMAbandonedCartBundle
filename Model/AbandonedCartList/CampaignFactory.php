@@ -10,6 +10,10 @@ class CampaignFactory
     const CAMPAIGN_CODE_POSTFIX = '_code';
     const CAMPAIGN_NAME_POSTFIX = '_name';
 
+    /**
+     * @param MarketingList $marketingList
+     * @return Campaign
+     */
     public function create(MarketingList $marketingList)
     {
         $campaign = new Campaign();

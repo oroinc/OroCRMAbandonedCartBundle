@@ -8,12 +8,12 @@ use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 
 /**
- * Campaign relation with Abandoned Cart List
+ * Abandoned Cart Campaign
  *
  * @ORM\Table(name="orocrm_abandonedcart_campaign")
  * @ORM\Entity()
  */
-class CampaignAbandonedCartRelation
+class AbandonedCartCampaign
 {
     /**
      * @var int
@@ -27,18 +27,16 @@ class CampaignAbandonedCartRelation
     /**
      * @var MarketingList
      *
-     * @ORM\OneToOne(
-     *      targetEntity="OroCRM\Bundle\MarketingListBundle\Entity\MarketingList"
-     * )
-     * @ORM\JoinColumn(name="marketing_list_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\OneToOne(targetEntity="OroCRM\Bundle\MarketingListBundle\Entity\MarketingList")
+     * @ORM\JoinColumn(name="marketing_list_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $marketingList;
 
     /**
      * @var Campaign
      *
-     * @ORM\OneToOne(targetEntity="OroCRM\Bundle\CampaignBundle\Entity\Campaign")
-     * @ORM\JoinColumn(name="campaign_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\OneToOne(targetEntity="OroCRM\Bundle\CampaignBundle\Entity\Campaign", cascade={"persist"})
+     * @ORM\JoinColumn(name="campaign_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $campaign;
 
@@ -65,7 +63,6 @@ class CampaignAbandonedCartRelation
     public function setMarketingList(MarketingList $marketingList)
     {
         $this->marketingList = $marketingList;
-
         return $this;
     }
 
@@ -84,7 +81,6 @@ class CampaignAbandonedCartRelation
     public function setCampaign(Campaign $campaign)
     {
         $this->campaign = $campaign;
-
         return $this;
     }
 }
