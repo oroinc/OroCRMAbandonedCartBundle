@@ -17,6 +17,8 @@ parameters:
 
     orocrm_abandonedcart.extended_merge_var.cart_item.template: OroCRMAbandonedCartBundle:ExtendedMergeVar:cartItemMergeVar.txt.twig
 
+    orocrm_abandonedcart.event_listener.navigation.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\NavigationListener
+
 services:
     orocrm_abandonedcart_list.twig.extension.contact_information_fields:
         class: %orocrm_abandonedcart_list.twig.extension.contact_information_fields.class%
@@ -90,3 +92,11 @@ services:
             - @orocrm_abandonedcart.provider
         tags:
             - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.orocrm-marketing-list-items-base-unsubscribe-mixin, method: onBuildBefore }
+
+    # event listeners
+    orocrm_channel.event_listener.navigation:
+        class: %orocrm_abandonedcart.event_listener.navigation.class%
+        arguments:
+            - @doctrine
+        tags:
+            - { name: kernel.event_listener, event: oro_menu.configure.application_menu, method: onNavigationConfigure }
