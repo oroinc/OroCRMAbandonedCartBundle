@@ -3,7 +3,12 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\ImportExport\Strategy;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityRepository;
+use \Twig_Environment;
+
+use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\SegmentBundle\Entity\Segment;
+use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
 use OroCRM\Bundle\MagentoBundle\Entity\Cart;
 use OroCRM\Bundle\MagentoBundle\Entity\CartItem;
 use OroCRM\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
@@ -22,22 +27,22 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
     protected $listener;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|DoctrineHelper
      */
     protected $doctrineHelper;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|Twig_Environment
      */
     protected $twig;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository
      */
     protected $entityRepository;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|StrategyEvent
      */
     protected $strategyEvent;
 

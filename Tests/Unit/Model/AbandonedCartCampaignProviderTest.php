@@ -2,6 +2,9 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProvider;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
@@ -14,12 +17,12 @@ class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase
     protected $provider;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|EntityManager
      */
     protected $manager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository
      */
     protected $repository;
 

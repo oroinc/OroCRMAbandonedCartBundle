@@ -2,6 +2,10 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\EventListener;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\EventDispatcher\Event;
+
 use Knp\Menu\MenuItem;
 use Knp\Menu\MenuFactory;
 
@@ -18,17 +22,17 @@ class NavigationListenerTest extends \PHPUnit_Framework_TestCase
     protected $navigationListener;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|ManagerRegistry
      */
     protected $registry;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository
      */
     protected $repository;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|Event
      */
     protected $event;
 

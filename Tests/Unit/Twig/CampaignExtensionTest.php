@@ -5,6 +5,7 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Twig;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\AbandonedCartBundle\Twig\CampaignExtension;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 
 class CampaignExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +15,7 @@ class CampaignExtensionTest extends \PHPUnit_Framework_TestCase
     protected $campaignExtension;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|CampaignAbandonedCartRelationManager
      */
     protected $campaignAbandonedCartRelationManager;
 

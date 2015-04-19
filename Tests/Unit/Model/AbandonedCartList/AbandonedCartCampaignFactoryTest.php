@@ -5,6 +5,7 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;
 
 class AbandonedCartCampaignFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +15,7 @@ class AbandonedCartCampaignFactoryTest extends \PHPUnit_Framework_TestCase
     protected $factory;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|CampaignFactory
      */
     protected $campaignFactory;
 

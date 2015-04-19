@@ -3,6 +3,7 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Twig;
 
 use OroCRM\Bundle\AbandonedCartBundle\Twig\ContactInformationFieldsExtension;
+use OroCRM\Bundle\MarketingListBundle\Model\ContactInformationFieldHelper;
 
 class ContactInformationFieldsExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +13,7 @@ class ContactInformationFieldsExtensionTest extends \PHPUnit_Framework_TestCase
     protected $extension;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|ContactInformationFieldHelper
      */
     protected $helper;
 

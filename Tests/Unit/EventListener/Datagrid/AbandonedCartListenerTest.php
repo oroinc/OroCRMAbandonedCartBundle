@@ -2,7 +2,10 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\Datagrid;
 
+use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 use OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartListener;
+use OroCRM\Bundle\MarketingListBundle\Model\MarketingListHelper;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
 class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,12 +15,12 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
     protected $listener;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|MarketingListHelper
      */
     protected $marketingListHelper;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|BuildBefore
      */
     protected $buildBefore;
 
@@ -27,7 +30,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
     protected $datagridConfig;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartCampaignProviderInterface
      */
     protected $abandonedCartCampaignProvider;
 
