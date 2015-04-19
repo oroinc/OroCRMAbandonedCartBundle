@@ -41,6 +41,6 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetName()
     {
-        $this->assertEquals('orocrm_mailchimp_abandonedcart_list_conversion', $this->abandonedCartConversionType->getName());
+        $this->assertEquals('orocrm_abandonedcart_conversion', $this->abandonedCartConversionType->getName());
     }
 }

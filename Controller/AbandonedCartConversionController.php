@@ -2,7 +2,6 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Controller;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 
@@ -13,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 
+use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 /**
@@ -61,9 +61,9 @@ class AbandonedCartConversionController extends Controller
         $conversion = $this->getConversionByMarketingList($marketingList);
 
         /** @var Form $form */
-        $form = $this->get('orocrm_mailchimp.form.abandonedcart_list_conversion');
+        $form = $this->get('orocrm_abandonedcart.form.conversion');
 
-        $handler = $this->get('orocrm_mailchimp.form.handler.conversion_form');
+        $handler = $this->get('orocrm_abandonedcart.form.handler.conversion_form');
 
         $result = ['entity' => $conversion];
         if ($handler->process($conversion)) {

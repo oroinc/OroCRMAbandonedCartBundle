@@ -78,6 +78,6 @@ class AbandonedCartConversionType extends AbstractType
      */
     public function getName()
     {
-        return 'orocrm_mailchimp_abandonedcart_list_conversion';
+        return 'orocrm_abandonedcart_conversion';
     }
 }

@@ -1,12 +1,12 @@
 parameters:
     orocrm_abandonedcart_list.form.type.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType
 
-    orocrm_abandonedcart_list.form.type.marketing_type_hidden.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartHiddenMarketingListTypeType
+    orocrm_abandonedcart.form.handler.abandonedcart_campaign.class: OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartCampaignHandler
+    orocrm_abandonedcart.campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
+    orocrm_abandonedcart.abandonedcart_campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory
 
-    orocrm_abandonedcart_list.form.type.entity_choice.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartEntityChoiceType
-    orocrm_abandonedcart_list.form.handler.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartListHandler
-    orocrm_abandonedcart_list.campaign_factory: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
-    orocrm_abandonedcart_list.campaign_abandonedcart_relation_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationFactory
+    orocrm_abandonedcart.form.type.conversion.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartConversionType
+    orocrm_abandonedcart.form.handler.conversion_form.class: OroCRM\Bundle\AbandonedCartBundle\Form\Handler\ConversionFormHandler
 
 services:
     # AbandonedCartList
@@ -42,3 +42,22 @@ services:
             - @translator
             - @orocrm_abandonedcart.abandonedcart_campaign_factory
             - @orocrm_abandonedcart.provider
+
+    orocrm_abandonedcart.form.type.conversion:
+        class: %orocrm_abandonedcart.form.type.conversion.class%
+        arguments:
+            - @orocrm_abandonedcart.conversion_manager
+        tags:
+            - { name: form.type, alias: "orocrm_abandonedcart_conversion" }
+
+    orocrm_abandonedcart.form.conversion:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments: ["orocrm_abandonedcart_conversion", "orocrm_abandonedcart_conversion", null]
+
+    orocrm_abandonedcart.form.handler.conversion_form:
+        class: %orocrm_abandonedcart.form.handler.conversion_form.class%
+        scope: request
+        arguments: ["@orocrm_abandonedcart.form.conversion", "@request", "@doctrine.orm.entity_manager"]
+
