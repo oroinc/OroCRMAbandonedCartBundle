@@ -1,0 +1,24 @@
+{
+    "name": "oro/crm-abandoned-cart",
+    "description": "OroCRM Abandoned Cart",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Oro, Inc",
+            "homepage": "http://www.orocrm.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "OroCRM\\Bundle\\AbandonedCartBundle": "src/"
+        }
+    },
+    "target-dir": "src/OroCRM/Bundle/AbandonedCartBundle",
+
+    "require": {
+        "php": ">=5.4.9",
+        "oro/crm": "1.x-dev",
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
