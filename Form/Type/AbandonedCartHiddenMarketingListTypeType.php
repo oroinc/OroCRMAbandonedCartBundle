@@ -13,7 +13,7 @@ class AbandonedCartHiddenMarketingListTypeType extends AbstractType
     /**
      * @var ObjectManager
      */
-    protected $om;
+    private $om;
 
     /**
      * @param ObjectManager $om

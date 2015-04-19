@@ -3,33 +3,33 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use OroCRM\Bundle\AbandonedCartBundle\Model\MarketingList\AbandonedCartSource;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
-use OroCRM\Bundle\MarketingListBundle\Model\MarketingListSourceInterface;
 
 class PredefinedMarketingListFactory
 {
-    const ENTITY_CART_FULL_NAME = 'OroCRM\Bundle\MagentoBundle\Entity\Cart';
-
     /**
      * @var ObjectManager
      */
     protected $objectManager;
 
     /**
-     * @var MarketingListSourceInterface
+     * @var string
      */
-    protected $source;
+    protected $cartClassName;
 
     /**
      * @param ObjectManager $objectManager
-     * @param MarketingListSourceInterface $source
+     * @param string $cartClassName
      */
-    public function __construct(ObjectManager $objectManager, MarketingListSourceInterface $source)
+    public function __construct(ObjectManager $objectManager, $cartClassName)
     {
+        if (!is_string($cartClassName) || empty($cartClassName)) {
+            throw new \InvalidArgumentException('Cart class name must be provided.');
+        }
+
         $this->objectManager = $objectManager;
-        $this->source = $source;
+        $this->cartClassName = $cartClassName;
     }
 
     /**
@@ -38,13 +38,15 @@ class PredefinedMarketingListFactory
     public function create()
     {
         $marketingList = new MarketingList();
-        $marketingList->setEntity(self::ENTITY_CART_FULL_NAME);
+        $marketingList->setEntity($this->cartClassName);
 
-        $type = $this->objectManager->find('OroCRMMarketingListBundle:MarketingListType',
-            MarketingListType::TYPE_DYNAMIC);
+        $type = $this->objectManager
+            ->find(
+                'OroCRMMarketingListBundle:MarketingListType',
+                MarketingListType::TYPE_DYNAMIC
+            );
 
         $marketingList->setType($type);
-        $marketingList->setSource($this->source->getCode());
 
         return $marketingList;
     }

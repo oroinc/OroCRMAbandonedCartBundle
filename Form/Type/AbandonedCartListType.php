@@ -2,9 +2,15 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
+
 use Symfony\Component\Form\FormBuilderInterface;
-use Oro\Bundle\QueryDesignerBundle\Form\Type\AbstractQueryDesignerType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Oro\Bundle\QueryDesignerBundle\Form\Type\AbstractQueryDesignerType;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 
 class AbandonedCartListType extends AbstractQueryDesignerType
 {
@@ -16,8 +22,32 @@ class AbandonedCartListType extends AbstractQueryDesignerType
         $builder
             ->add('name', 'text', ['required' => true])
             ->add('description', 'textarea', ['required' => false])
-            ->add('entity', 'hidden', array('data' => 'OroCRM\Bundle\MagentoBundle\Entity\Cart'))
-            ->add('type', 'orocrm_abandonedcart_list_marketing_list_type_hidden');
+            ->add('entity', 'hidden', ['data' => 'OroCRM\Bundle\MagentoBundle\Entity\Cart']);
+
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+
+                $qb = function (EntityRepository $er) {
+                    return $er->createQueryBuilder('mlt')
+                        ->andWhere('mlt.name = :manualTypeName')
+                        ->setParameter('manualTypeName', MarketingListType::TYPE_DYNAMIC)
+                        ->addOrderBy('mlt.name', 'ASC');
+                };
+
+                $form->add(
+                    'type',
+                    'entity',
+                    [
+                        'class' => 'OroCRMMarketingListBundle:MarketingListType',
+                        'property' => 'label',
+                        'required' => true,
+                        'query_builder' => $qb
+                    ]
+                );
+            }
+        );
 
         parent::buildForm($builder, $options);
     }

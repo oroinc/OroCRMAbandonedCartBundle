@@ -3,33 +3,32 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory;
+
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
-use OroCRM\Bundle\MarketingListBundle\Model\MarketingListSourceInterface;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory;
 
 class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var PredefinedMarketingListFactory
      */
-    private $factory;
+    protected $factory;
 
     /**
-     * @var ObjectManager
+     * @var \PHPUnit_Framework_MockObject_MockObject|ObjectManager
      */
-    private $objectManager;
+    protected $objectManager;
 
     /**
-     * @var MarketingListSourceInterface
+     * @var string
      */
-    private $source;
+    protected $cartClassName;
 
     protected function setUp()
     {
+        $this->cartClassName = 'CartClassName';
         $this->objectManager = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')->getMock();
-        $this->source = $this->getMockBuilder('OroCRM\Bundle\MarketingListBundle\Model\MarketingListSourceInterface')
-            ->getMock();
-        $this->factory = new PredefinedMarketingListFactory($this->objectManager, $this->source);
+        $this->factory = new PredefinedMarketingListFactory($this->objectManager, $this->cartClassName);
     }
 
     public function testCreate()
@@ -40,12 +39,10 @@ class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
             ->with('OroCRMMarketingListBundle:MarketingListType', MarketingListType::TYPE_DYNAMIC)
             ->will($this->returnValue($marketingListType));
 
-        $this->source->expects($this->once())->method('getCode')->will($this->returnValue('source_code'));
-
         $marketingList = $this->factory->create();
 
         $this->assertInstanceOf('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList', $marketingList);
         $this->assertEquals($marketingListType, $marketingList->getType());
-        $this->assertEquals('source_code', $marketingList->getSource());
+        $this->assertEquals($this->cartClassName, $marketingList->getEntity());
     }
 }

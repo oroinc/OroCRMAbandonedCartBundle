@@ -14,17 +14,11 @@ class ContactInformationFieldsExtension extends \Twig_Extension
     protected $helper;
 
     /**
-     * @var string
-     */
-    protected $entity;
-
-    /**
      * @param ContactInformationFieldHelper $helper
      */
     public function __construct(ContactInformationFieldHelper $helper)
     {
         $this->helper = $helper;
-        $this->entity = 'OroCRM\Bundle\MagentoBundle\Entity\Cart';
     }
 
     /**
@@ -32,20 +26,20 @@ class ContactInformationFieldsExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction(
-                'get_contact_information_fields_info',
-                array($this, 'getContactInformationFieldsInfo')
+                'get_cart_contact_information_fields_info',
+                [$this, 'getCartContactInformationFieldsInfo']
             )
-        );
+        ];
     }
 
     /**
      * @return array
      */
-    public function getContactInformationFieldsInfo()
+    public function getCartContactInformationFieldsInfo()
     {
-        return $this->helper->getEntityContactInformationColumnsInfo($this->entity);
+        return $this->helper->getEntityContactInformationColumnsInfo('OroCRM\Bundle\MagentoBundle\Entity\Cart');
     }
 
     /**

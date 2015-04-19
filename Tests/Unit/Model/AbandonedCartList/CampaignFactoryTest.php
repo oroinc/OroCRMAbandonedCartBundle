@@ -10,7 +10,7 @@ class CampaignFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @var CampaignFactory
      */
-    private $factory;
+    protected $factory;
 
     protected function setUp()
     {

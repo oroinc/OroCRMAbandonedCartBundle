@@ -2,20 +2,19 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Form\Form;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Doctrine\ORM\EntityManager;
-use FOS\RestBundle\Util\Codes;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
+use FOS\RestBundle\Util\Codes;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
+
 use OroCRM\Bundle\MarketingListBundle\Datagrid\ConfigurationProvider;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 /**
  * @Route("/abandoned-cart")
@@ -73,7 +72,7 @@ class AbandonedCartController extends Controller
      */
     public function createAction()
     {
-        $marketingList = $this->get('orocrm_abandonedcart_list.predefined_marketing_list_factory')->create();
+        $marketingList = $this->get('orocrm_abandonedcart.predefined_marketing_list_factory')->create();
 
         return $this->update($marketingList);
     }
@@ -109,8 +108,7 @@ class AbandonedCartController extends Controller
      */
     public function deleteAction(MarketingList $marketingList)
     {
-        /** @var EntityManager $em */
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManagerForClass('OroCRMMarketingListBundle:MarketingList');
 
         $em->remove($marketingList);
         $em->flush();
@@ -128,19 +126,19 @@ class AbandonedCartController extends Controller
             $entity,
             $this->get('orocrm_abandonedcart_list.form.abandonedcart_list'),
             function (MarketingList $entity) {
-                return array(
+                return [
                     'route'      => 'orocrm_abandoned_cart_list_update',
-                    'parameters' => array('id' => $entity->getId())
-                );
+                    'parameters' => ['id' => $entity->getId()]
+                ];
             },
             function (MarketingList $entity) {
-                return array(
+                return [
                     'route'      => 'orocrm_abandoned_cart_list_view',
-                    'parameters' => array('id' => $entity->getId())
-                );
+                    'parameters' => ['id' => $entity->getId()]
+                ];
             },
             $this->get('translator')->trans('orocrm.abandonedcart.entity.saved'),
-            $this->get('orocrm_abandonedcart_list.form.handler.abandoned_cart_list')
+            $this->get('orocrm_abandonedcart.form.handler.abandonedcart_campaign')
         );
 
         if (is_array($response)) {

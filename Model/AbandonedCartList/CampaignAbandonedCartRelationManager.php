@@ -4,6 +4,7 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
+
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 
@@ -30,6 +31,7 @@ class CampaignAbandonedCartRelationManager
     {
         $campaignAbandonedCartRelation = $this->getCampaignAbandonedCartRelationRepo()
             ->findOneBy(array('marketingList' => $marketingList->getId()));
+
         if ($campaignAbandonedCartRelation) {
             return $campaignAbandonedCartRelation->getCampaign();
         } else {
@@ -42,6 +44,6 @@ class CampaignAbandonedCartRelationManager
      */
     protected function getCampaignAbandonedCartRelationRepo()
     {
-        return $this->managerRegistry->getRepository('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation');
+        return $this->managerRegistry->getRepository('OroCRMAbandonedCartBundle:AbandonedCartCampaign');
     }
 }

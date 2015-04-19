@@ -3,89 +3,76 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Form\Handler;
 
 use Doctrine\ORM\EntityManager;
-
-use OroCRM\Bundle\AbandonedCartBundle\Entity\CampaignAbandonedCartRelation;
-use OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartListHandler;
-use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
-use Symfony\Component\Form\FormInterface;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Validator\ValidatorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use OroCRM\Bundle\MarketingListBundle\Model\MarketingListSourceInterface;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationFactory;
+
+use Oro\Bundle\SegmentBundle\Entity\SegmentType;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
-
-use Doctrine\Common\Persistence\ObjectRepository;
-use Oro\Bundle\SegmentBundle\Entity\SegmentType;
+use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartCampaignHandler;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
 class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var AbandonedCartListHandler
+     * @var AbandonedCartCampaignHandler
      */
-    private $handler;
+    protected $handler;
 
     /**
-     * @var FormInterface
+     * @var \PHPUnit_Framework_MockObject_MockObject|Form
      */
-    private $form;
+    protected $form;
 
     /**
      * @var Request
      */
-    private $request;
+    protected $request;
 
     /**
-     * @var ValidatorInterface
+     * @var \PHPUnit_Framework_MockObject_MockObject|ValidatorInterface
      */
-    private $validator;
+    protected $validator;
 
     /**
-     * @var TranslatorInterface
+     * @var \PHPUnit_Framework_MockObject_MockObject|TranslatorInterface
      */
-    private $translator;
+    protected $translator;
 
     /**
-     * @var MarketingListSourceInterface
+     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartCampaignFactory
      */
-    private $marketingListSource;
-
-    /**
-     * @var CampaignFactory
-     */
-    private $campaignFactory;
-
-    /**
-     * @var CampaignAbandonedCartRelationFactory
-     */
-    private $campaignAbandonedCartRelationFactory;
+    protected $abandonedCartCampaignFactory;
 
     /**
      * @var MarketingList
      */
-    private $marketingList;
+    protected $marketingList;
 
     /**
-     * @var Campaign
+     * @var AbandonedCartCampaign
      */
-    private $campaign;
+    protected $abandonedCartCampaign;
 
     /**
-     * @var CampaignAbandonedCartRelation
+     * @var \PHPUnit_Framework_MockObject_MockObject|EntityManager
      */
-    private $campaignAbandonedCartRelation;
+    protected $manager;
 
     /**
-     * @var EntityManager
+     * @var \PHPUnit_Framework_MockObject_MockObject|ObjectRepository
      */
-    private $manager;
+    protected $repository;
 
     /**
-     * @var ObjectRepository
+     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartCampaignProviderInterface
      */
-    private $repository;
+    protected $abandonedCartCampaignProvider;
 
     protected function setUp()
     {
@@ -107,22 +94,28 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->validator = $this->getMock('Symfony\Component\Validator\ValidatorInterface');
         $this->translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
-        $this->marketingListSource = $this
-            ->getMock('OroCRM\Bundle\MarketingListBundle\Model\MarketingListSourceInterface');
 
-        $this->campaignFactory = $this
-            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory');
-        $this->campaignAbandonedCartRelationFactory = $this
-            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationFactory');
+        $this->abandonedCartCampaignFactory = $this
+            ->getMockBuilder(
+                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory'
+            )
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->abandonedCartCampaignProvider = $this
+            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
 
         $this->marketingList = new MarketingList();
-        $this->campaign = new Campaign();
-        $this->campaignAbandonedCartRelation = new CampaignAbandonedCartRelation();
+        $this->abandonedCartCampaign = new AbandonedCartCampaign();
 
-        $this->handler = new AbandonedCartListHandler(
-            $this->form, $this->request, $registry,
-            $this->validator, $this->translator, $this->marketingListSource,
-            $this->campaignFactory, $this->campaignAbandonedCartRelationFactory
+        $this->handler = new AbandonedCartCampaignHandler(
+            $this->form,
+            $this->request,
+            $registry,
+            $this->validator,
+            $this->translator,
+            $this->abandonedCartCampaignFactory,
+            $this->abandonedCartCampaignProvider
         );
 
         $this->repository = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectRepository')
@@ -139,30 +132,15 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('isValid')
             ->will($this->returnValue(true));
 
-        $this->manager->expects($this->once())
-            ->method('getRepository')
-            ->with('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation')
-            ->will($this->returnValue($this->repository));
-
-        $this->repository
-            ->expects($this->once())->method('findOneBy')
+        $this->abandonedCartCampaignProvider->expects($this->once())
+            ->method('getAbandonedCartCampaign')
+            ->with($this->marketingList)
             ->will($this->returnValue(null));
 
-        $this->campaignFactory->expects($this->once())
+        $this->abandonedCartCampaignFactory->expects($this->once())
             ->method('create')
             ->with($this->marketingList)
-            ->will($this->returnValue($this->campaign));
-
-        $this->manager->expects($this->atLeastOnce())
-            ->method('persist');
-
-        $this->manager->expects($this->atLeastOnce())
-            ->method('flush');
-
-        $this->campaignAbandonedCartRelationFactory->expects($this->once())
-            ->method('create')
-            ->with($this->campaign, $this->marketingList)
-            ->will($this->returnValue($this->campaignAbandonedCartRelation));
+            ->will($this->returnValue($this->abandonedCartCampaign));
 
         $this->handler->process($this->marketingList);
     }
@@ -176,26 +154,21 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('isValid')
             ->will($this->returnValue(true));
 
-        $this->manager->expects($this->once())
-            ->method('getRepository')
-            ->with('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation')
-            ->will($this->returnValue($this->repository));
+        $this->abandonedCartCampaignProvider->expects($this->once())
+            ->method('getAbandonedCartCampaign')
+            ->with($this->marketingList)
+            ->will($this->returnValue($this->abandonedCartCampaign));
 
-        $this->repository
-            ->expects($this->once())->method('findOneBy')
-            ->will($this->returnValue($this->campaignAbandonedCartRelation));
-
-        $this->campaignFactory->expects($this->never())
-            ->method('create');
+        $this->abandonedCartCampaignFactory->expects($this->never())->method('create');
 
         $this->handler->process($this->marketingList);
     }
 
     protected function assertProcessSegment()
     {
-        $formData = array(
+        $formData = [
             'definition' => 'test'
-        );
+        ];
 
         $this->form->expects($this->once())
             ->method('getName')
@@ -224,5 +197,11 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('find')
             ->with('OroSegmentBundle:SegmentType', MarketingListType::TYPE_DYNAMIC)
             ->will($this->returnValue($segmentType));
+    }
+
+    public function testProcessWrongRequest()
+    {
+        $this->request->setMethod('GET');
+        $this->assertFalse($this->handler->process(new MarketingList()));
     }
 }

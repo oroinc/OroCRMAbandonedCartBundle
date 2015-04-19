@@ -2,12 +2,12 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Twig;
 
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 
 class CampaignExtension extends \Twig_Extension
 {
-    const NAME = 'orocrm_abandonedcart_list_campaign';
+    const NAME = 'orocrm_abandonedcart_campaign';
 
     /**
      * @var CampaignAbandonedCartRelationManager
@@ -27,22 +27,22 @@ class CampaignExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction(
-                'get_abandoned_cart_related_campaign',
-                array($this, 'getAbandonedCartRelatedCampaign')
+                'get_abandonedcart_campaign',
+                [$this, 'getAbandonedCartCampaign']
             )
-        );
+        ];
     }
 
     /**
      * @param MarketingList $marketingList
      * @return \OroCRM\Bundle\CampaignBundle\Entity\Campaign
      */
-    public function getAbandonedCartRelatedCampaign(MarketingList $marketingList)
+    public function getAbandonedCartCampaign(MarketingList $marketingList)
     {
-        return
-            $this->campaignAbandonedCartRelationManager->getCampaignByMarketingList($marketingList);
+        return $this->campaignAbandonedCartRelationManager
+            ->getCampaignByMarketingList($marketingList);
     }
 
     /**

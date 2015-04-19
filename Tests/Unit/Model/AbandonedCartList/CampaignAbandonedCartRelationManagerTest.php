@@ -2,7 +2,10 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\CampaignAbandonedCartRelation;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
+
+use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
@@ -15,17 +18,17 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
     protected $campaignAbandonedCartRelationManager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|ManagerRegistry
      */
     protected $managerRegistry;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository
      */
     protected $repository;
 
     /**
-     * @var MarketingList
+     * @var \PHPUnit_Framework_MockObject_MockObject|MarketingList
      */
     protected $marketingList;
 
@@ -49,13 +52,14 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
     public function testGetCampaignByMarketingListIfRelationExists()
     {
         $campaign = new Campaign();
-        $campaignAbandonedCartRelation = new CampaignAbandonedCartRelation();
+
+        $campaignAbandonedCartRelation = new AbandonedCartCampaign();
         $campaignAbandonedCartRelation->setMarketingList($this->marketingList);
         $campaignAbandonedCartRelation->setCampaign($campaign);
 
         $this->managerRegistry
             ->expects($this->once())->method('getRepository')
-            ->with('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation')
+            ->with('OroCRMAbandonedCartBundle:AbandonedCartCampaign')
             ->will($this->returnValue($this->repository));
 
         $this->marketingList
@@ -77,13 +81,14 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
     public function testGetCampaignByMarketingListIfRelationDoesNotExist()
     {
         $campaign = new Campaign();
-        $campaignAbandonedCartRelation = new CampaignAbandonedCartRelation();
+
+        $campaignAbandonedCartRelation = new AbandonedCartCampaign();
         $campaignAbandonedCartRelation->setMarketingList($this->marketingList);
         $campaignAbandonedCartRelation->setCampaign($campaign);
 
         $this->managerRegistry
             ->expects($this->once())->method('getRepository')
-            ->with('OroCRMAbandonedCartBundle:CampaignAbandonedCartRelation')
+            ->with('OroCRMAbandonedCartBundle:AbandonedCartCampaign')
             ->will($this->returnValue($this->repository));
 
         $this->marketingList
@@ -94,6 +99,7 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
             ->expects($this->once())->method('findOneBy')
             ->with(array('marketingList' => 'testId'))
             ->will($this->returnValue(null));
+
 
         $returnedCampaign = $this->campaignAbandonedCartRelationManager
             ->getCampaignByMarketingList($this->marketingList);
