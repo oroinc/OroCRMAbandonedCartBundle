@@ -53,10 +53,11 @@ class AbandonedCartConversionType extends AbstractType
                     'entity',
                     [
                         'class' => 'OroCRMMailChimpBundle:Campaign',
+                        'required' => true,
                         'query_builder' => $qb,
                         'multiple' => true,
                         'expanded' => true,
-                        'property' => 'title'
+                        'property' => 'title',
                     ]
                 );
             }
