@@ -14,10 +14,10 @@ parameters:
 
     orocrm_abandonedcart.marketing_list.datagrid.name: orocrm-marketing-list-grid
     orocrm_abandonedcart.datagrid.name: orocrm-abandonedcart-list-grid
-
     orocrm_abandonedcart.extended_merge_var.cart_item.template: OroCRMAbandonedCartBundle:ExtendedMergeVar:cartItemMergeVar.txt.twig
 
     orocrm_abandonedcart.event_listener.navigation.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\NavigationListener
+    orocrm_abandonedcart.listener.datagrid.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartGridListener
 
 services:
     orocrm_abandonedcart_list.twig.extension.contact_information_fields:
@@ -100,3 +100,8 @@ services:
             - @doctrine
         tags:
             - { name: kernel.event_listener, event: oro_menu.configure.application_menu, method: onNavigationConfigure }
+
+    orocrm_abandonedcart.listener.datagrid.abandonedcart_list:
+        class: %orocrm_abandonedcart.listener.datagrid.abandonedcart_list.class%
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.orocrm-marketing-list-grid, method: onBuildBefore }
