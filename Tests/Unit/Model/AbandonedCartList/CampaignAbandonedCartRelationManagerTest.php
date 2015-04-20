@@ -73,7 +73,7 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
 
         $this->repository
             ->expects($this->once())->method('findOneBy')
-            ->with(array('marketingList' => 'testId'))
+            ->with(['marketingList' => 'testId'])
             ->will($this->returnValue($campaignAbandonedCartRelation));
 
 
@@ -111,5 +111,13 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
             ->getCampaignByMarketingList($this->marketingList);
 
         $this->assertNull($returnedCampaign);
+    }
+
+    public function tearDown()
+    {
+        unset($this->managerRegistry);
+        unset($this->marketingList);
+        unset($this->repository);
+        unset($this->managerRegistry);
     }
 }

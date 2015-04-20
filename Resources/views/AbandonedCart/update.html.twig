@@ -52,7 +52,6 @@
 {% endblock pageHeader %}
 
 {% block content_data %}
-
     {% set id = 'abandonedcart-list-profile' %}
     {% set ownerDataBlock = {
         'dataBlocks': [{
@@ -122,7 +121,6 @@
 
     </div>
     {% endset %}
-
     {% set dataBlocks = dataBlocks|merge( [{
         'title' : 'oro.segment.form.designer'|trans,
         'content_attr': {'id': type ~ '-designer'},

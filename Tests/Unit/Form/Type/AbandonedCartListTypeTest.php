@@ -2,6 +2,9 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
 
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 use OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType;
 
 class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
@@ -57,6 +60,9 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             )
             ->will($this->returnSelf());
 
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|FormBuilder $builder
+         */
         $builder->expects($this->at(4))
             ->method('add')
             ->with(
@@ -71,6 +77,9 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDefaultOptions()
     {
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolverInterface $resolver
+         */
         $resolver = $this->getMock('Symfony\Component\OptionsResolver\OptionsResolverInterface');
         $resolver->expects($this->once())
             ->method('setDefaults')

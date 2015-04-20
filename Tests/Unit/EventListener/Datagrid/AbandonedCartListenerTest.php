@@ -58,7 +58,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->config = array('actions' => array('subscribe' => 1));
+        $this->config = ['actions' => ['subscribe' => 1]];
 
         $this->listener = new AbandonedCartListener(
             $this->marketingListHelper,

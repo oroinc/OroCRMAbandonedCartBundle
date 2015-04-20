@@ -4,7 +4,6 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\ImportExport\Strategy;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
-use \Twig_Environment;
 
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\SegmentBundle\Entity\Segment;
@@ -129,6 +128,9 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|StrategyEvent $strategyEvent
+         */
         $strategyEvent->expects($this->once())
             ->method('getEntity')->will($this->returnValue(new ExtendedMergeVar()));
 

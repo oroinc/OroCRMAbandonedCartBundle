@@ -8,8 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Validator\ValidatorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 use Oro\Bundle\SegmentBundle\Entity\SegmentType;
+use Oro\Bundle\UserBundle\Entity\User;
+
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
@@ -82,6 +85,9 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|RegistryInterface $registry
+         */
         $registry->expects($this->once())
             ->method('getManager')
             ->will($this->returnValue($this->manager));
@@ -179,6 +185,9 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|User $owner
+         */
         $owner = $this->getMockBuilder('Oro\Bundle\UserBundle\Entity\User')
             ->disableOriginalConstructor()
             ->getMock();
