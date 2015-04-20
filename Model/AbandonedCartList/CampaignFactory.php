@@ -7,9 +7,6 @@ use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class CampaignFactory
 {
-    const CAMPAIGN_CODE_POSTFIX = '_code';
-    const CAMPAIGN_NAME_POSTFIX = '_name';
-
     /**
      * @param MarketingList $marketingList
      * @return Campaign
@@ -17,8 +14,13 @@ class CampaignFactory
     public function create(MarketingList $marketingList)
     {
         $campaign = new Campaign();
-        $campaign->setCode($marketingList->getName() . self::CAMPAIGN_CODE_POSTFIX);
-        $campaign->setName($marketingList->getName() . self::CAMPAIGN_NAME_POSTFIX);
+
+        // Strip All Non-Alpha Numeric Characters and Spaces
+        $code = preg_replace("/[^a-z0-9]/i", "_", $marketingList->getName());
+        $code = substr($code, 0, 20) . $marketingList->getId();
+
+        $campaign->setCode($code);
+        $campaign->setName($marketingList->getName());
 
         return $campaign;
     }
