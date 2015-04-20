@@ -40,3 +40,8 @@ orocrm:
 
         datagrid:
             campaign_name_label: Name
+
+        connector:
+            automation_campaign:
+                label: Automation Campaign Connector
+                job: Import automation campaigns from MailChimp
