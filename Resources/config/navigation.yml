@@ -1,7 +1,7 @@
 oro_menu_config:
     items:
         abandoned_cart_list:
-            label: 'orocrm.abandonedcart.abandonedcartlist.entity_plural_label'
+            label: 'orocrm.abandonedcart.entity_plural_label'
             route: 'orocrm_abandoned_cart_list'
             extras:
                 routes: ['orocrm_abandoned_cart_list_*']

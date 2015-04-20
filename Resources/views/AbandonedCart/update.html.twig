@@ -22,7 +22,7 @@
             'aCss': 'no-hash remove-button',
             'id': 'btn-remove-marketing-list',
             'dataId': form.vars.value.id,
-            'entity_label': 'orocrm.abandonedcart.abandonedcartlist.entity_label'|trans
+            'entity_label': 'orocrm.abandonedcart.entity_label'|trans
         }) }}
 
         {{ UI.buttonSeparator() }}
@@ -41,12 +41,12 @@
         {% set breadcrumbs = {
             'entity':      form.vars.value,
             'indexPath':   path('orocrm_abandoned_cart_list'),
-            'indexLabel': 'orocrm.abandonedcart.abandonedcartlist.entity_plural_label'|trans,
+            'indexLabel': 'orocrm.abandonedcart.entity_plural_label'|trans,
             'entityTitle': entity.name
         } %}
         {{ parent() }}
     {% else %}
-        {% set title = 'oro.ui.create_entity'|trans({'%entityName%': 'orocrm.abandonedcart.abandonedcartlist.entity_label'|trans}) %}
+        {% set title = 'oro.ui.create_entity'|trans({'%entityName%': 'orocrm.abandonedcart.entity_label'|trans}) %}
         {% include 'OroUIBundle::page_title_block.html.twig' with { title: title } %}
     {% endif %}
 {% endblock pageHeader %}
@@ -69,9 +69,9 @@
             {
                 'title': '',
                 'data': [
-                    form_row(form.name, {'label': 'orocrm.abandonedcart.abandonedcartlist.name.label'}),
+                    form_row(form.name, {'label': 'orocrm.abandonedcart.name.label'}),
                     form_row(form.description, {
-                        'label': 'orocrm.abandonedcart.abandonedcartlist.description.label',
+                        'label': 'orocrm.abandonedcart.description.label',
                         'attr': {
                             'class': 'segment-descr'
                         }
