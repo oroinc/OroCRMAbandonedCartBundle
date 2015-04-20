@@ -9,6 +9,8 @@ use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketin
 
 class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
 {
+    const MARKETING_LIST_TYPE_CLASS_NAME = 'OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType';
+
     /**
      * @var PredefinedMarketingListFactory
      */
@@ -28,7 +30,11 @@ class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->cartClassName = 'CartClassName';
         $this->objectManager = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')->getMock();
-        $this->factory = new PredefinedMarketingListFactory($this->objectManager, $this->cartClassName);
+        $this->factory = new PredefinedMarketingListFactory(
+            $this->objectManager,
+            $this->cartClassName,
+            self::MARKETING_LIST_TYPE_CLASS_NAME
+        );
     }
 
     public function testCreate()
@@ -36,7 +42,7 @@ class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
         $marketingListType = new MarketingListType(MarketingListType::TYPE_DYNAMIC);
 
         $this->objectManager->expects($this->once())->method('find')
-            ->with('OroCRMMarketingListBundle:MarketingListType', MarketingListType::TYPE_DYNAMIC)
+            ->with(self::MARKETING_LIST_TYPE_CLASS_NAME, MarketingListType::TYPE_DYNAMIC)
             ->will($this->returnValue($marketingListType));
 
         $marketingList = $this->factory->create();
