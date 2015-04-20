@@ -103,13 +103,16 @@ class AbandonedCartController extends Controller
      *      permission="DELETE",
      *      class="OroCRMMarketingListBundle:MarketingList"
      * )
+     *
+     * @param MarketingList $marketingList
+     * @return JsonResponse
      */
     public function deleteAction(MarketingList $marketingList)
     {
         $em = $this->getDoctrine()->getManagerForClass('OroCRMMarketingListBundle:MarketingList');
 
         $em->remove($marketingList);
-        $em->flush();
+        $em->flush($marketingList);
 
         return new JsonResponse('', Codes::HTTP_OK);
     }

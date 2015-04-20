@@ -181,19 +181,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
 
     protected function initDatagridConfig()
     {
-        $rawConfig = $this->config;
         $offsetResult = $this->config['actions'];
-
-        $this->datagridConfig->expects($this->once())
-            ->method('offsetExists')
-            ->with('actions')
-            ->will(
-                $this->returnCallback(
-                    function ($offset) use ($rawConfig) {
-                        return isset($rawConfig[$offset]);
-                    }
-                )
-            );
 
         $this->datagridConfig->expects($this->any())
             ->method('offsetGet')

@@ -38,9 +38,7 @@ class AbandonedCartListener
     public function onBuildBefore(BuildBefore $event)
     {
         $config = $event->getConfig();
-        $actions = isset($config['actions']) ? $config['actions'] : array();
-
-        if (empty($actions['subscribe'])) {
+        if (empty($config['actions']['subscribe'])) {
             return;
         }
 

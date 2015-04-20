@@ -23,7 +23,8 @@ class MarketingListListener
     protected $abandonedCartCampaignClass;
 
     /**
-     * @param string $gridName
+     * @param $gridName
+     * @param $abandonedCartCampaignClass
      */
     public function __construct($gridName, $abandonedCartCampaignClass)
     {
@@ -76,6 +77,6 @@ class MarketingListListener
      */
     protected function isApplicable(DatagridInterface $grid)
     {
-        return $grid->getName() == $this->gridName;
+        return $grid->getName() === $this->gridName;
     }
 }
