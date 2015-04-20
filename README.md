@@ -14,7 +14,3 @@ it means that this is Abandoned Cart Campaign
 
 During Abandoned Cart creation we automatically create campaign, which will
 be used for the conversion. 
-
-
-
-

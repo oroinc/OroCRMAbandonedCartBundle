@@ -92,7 +92,7 @@
     {% set columnsComponentOptions = {
         'entityChoiceSelector': '#orocrm_abandonedcart_list_form_entity',
         'fieldsChoiceSelector': '#contact-information-fields-list',
-        'contactInformationFields': hasEntity ? get_cart_contact_information_fields_info() : []
+        'contactInformationFields': hasEntity ? get_contact_information_fields_info(form.vars.value.entity) : []
     } %}
 
     {% set type = 'orocrm_abandonedcart_list' %}
