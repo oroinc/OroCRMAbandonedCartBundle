@@ -13,6 +13,6 @@ class OroCRMAbandonedCartExtensionTest extends \PHPUnit_Framework_TestCase
         $configuration = new ContainerBuilder();
         $loader = new OroCRMAbandonedCartExtension();
         $loader->load([], $configuration);
-        $this->assertTrue($configuration instanceof ContainerBuilder);
+        $this->assertInstanceOf('Symfony\Component\DependencyInjection\ContainerBuilder', $configuration);
     }
 }

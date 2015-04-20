@@ -32,7 +32,7 @@
     {% if form.vars.value.id or resource_granted('orocrm_abandoned_cart_list_update') %}
         {% set html = html ~ UI.saveAndStayButton() %}
     {% endif %}
-    {#{% set html = html ~ segmentQD.saveAndRefreshButton(entity) %}#}
+
     {{ UI.dropdownSaveButton({'html': html}) }}
 {% endblock %}
 
@@ -89,7 +89,7 @@
     }]
 %}
 
-    {% set hasEntity = form.vars.value is not empty and form.vars.value.entity is defined and form.vars.value.entity is not empty %}
+    {% set hasEntity = form.vars.value is not empty and form.vars.value.entity is not empty %}
     {% set columnsComponentOptions = {
         'entityChoiceSelector': '#orocrm_abandonedcart_list_form_entity',
         'fieldsChoiceSelector': '#contact-information-fields-list',
@@ -158,7 +158,6 @@
 
     {{ UI.scrollData(id, data, form) }}
 
-    {# TODO: remove this check after full support of manual marketing lists CRM-1878 #}
     {{ QD.query_designer_column_chain_template('column-chain-template') }}
     {{ segmentQD.initJsWidgets(type, form, entities, metadata) }}
 {% endblock content_data %}
