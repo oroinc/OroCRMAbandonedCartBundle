@@ -2,6 +2,8 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\ExtendedMergeVar;
 
+use Symfony\Component\Translation\TranslatorInterface;
+
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
@@ -19,11 +21,17 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
      */
     protected $abandonedCartCampaignProvider;
 
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|TranslatorInterface
+     */
+    protected $translator;
+
     protected function setUp()
     {
         $this->abandonedCartCampaignProvider = $this
             ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
-        $this->provider = new CartItemsMergeVarProvider($this->abandonedCartCampaignProvider);
+        $this->translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+        $this->provider = new CartItemsMergeVarProvider($this->abandonedCartCampaignProvider, $this->translator);
     }
 
     public function testProvideForNotAbandonedCartCampaign()
@@ -38,7 +46,12 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($this->provider->provideExtendedMergeVars($marketingList));
     }
 
-    public function testProvide()
+    /**
+     * @dataProvider getExpectedExtendedMergeVars
+     * @param array $expectedTranslations
+     * @param array $expectedMerVars
+     */
+    public function testProvide(array $expectedTranslations, array $expectedMerVars)
     {
         $marketingList = new MarketingList();
 
@@ -47,32 +60,42 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
             ->with($marketingList)
             ->will($this->returnValue(new AbandonedCartCampaign()));
 
+        $this->translator->expects($this->exactly(count($expectedTranslations)))->method('trans')
+            ->will($this->returnValueMap($expectedTranslations));
+
         $actualExtendedMergeVars = $this->provider->provideExtendedMergeVars($marketingList);
 
         $this->assertCount(3, $actualExtendedMergeVars);
-        $this->assertEquals($this->getExpectedExtendedMergeVars(), $actualExtendedMergeVars);
+        $this->assertEquals($expectedMerVars, $actualExtendedMergeVars);
     }
 
     /**
      * @return array
      */
-    protected function getExpectedExtendedMergeVars()
+    public function getExpectedExtendedMergeVars()
     {
-        $expectedMergeVars = [];
-
-        for ($i = 1; $i <= CartItemsMergeVarProvider::CART_ITEMS_LIMIT; $i++) {
-            $name = sprintf(
-                CartItemsMergeVarProvider::CART_ITEM_NAME,
-                CartItemsMergeVarProvider::NAME_PREFIX,
-                $i
-            );
-            $label = sprintf(CartItemsMergeVarProvider::CART_ITEM_LABEL, $i);
-            $expectedMergeVars[] = [
-                'name' => $name,
-                'label' => $label
-            ];
-        }
-
-        return $expectedMergeVars;
+        return [
+            [
+                [
+                    ['orocrm.abandonedcart.cart_item_mergevar.label', ['%index%' => 1], null, null, 'Cart Item (1)'],
+                    ['orocrm.abandonedcart.cart_item_mergevar.label', ['%index%' => 2], null, null, 'Cart Item (2)'],
+                    ['orocrm.abandonedcart.cart_item_mergevar.label', ['%index%' => 3], null, null, 'Cart Item (3)']
+                ],
+                [
+                    [
+                        'name' => 'item_1',
+                        'label' => 'Cart Item (1)'
+                    ],
+                    [
+                        'name' => 'item_2',
+                        'label' => 'Cart Item (2)'
+                    ],
+                    [
+                        'name' => 'item_3',
+                        'label' => 'Cart Item (3)'
+                    ]
+                ]
+            ]
+        ];
     }
 }

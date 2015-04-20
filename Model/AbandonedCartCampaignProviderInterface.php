@@ -11,7 +11,7 @@ interface AbandonedCartCampaignProviderInterface
      * Retrieves AbandonedCart Campaign
      *
      * @param MarketingList $marketingList
-     * @return AbandonedCartCampaign
+     * @return AbandonedCartCampaign|null
      */
     public function getAbandonedCartCampaign(MarketingList $marketingList);
 }

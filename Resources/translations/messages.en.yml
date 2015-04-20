@@ -18,3 +18,5 @@ orocrm:
         entity:
             label:   Entity
             saved:   Abandoned Cart list saved
+
+        cart_item_mergevar.label: Cart Item (%index%)

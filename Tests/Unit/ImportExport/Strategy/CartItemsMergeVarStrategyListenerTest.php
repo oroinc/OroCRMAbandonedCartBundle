@@ -31,7 +31,7 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
     protected $doctrineHelper;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|Twig_Environment
+     * @var \PHPUnit_Framework_MockObject_MockObject|\Twig_Environment
      */
     protected $twig;
 
@@ -123,6 +123,7 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testOnProcessAfterWhenEntityIsNotMemberExtendedMergeVar()
     {
+        /** @var \PHPUnit_Framework_MockObject_MockObject|StrategyEvent $strategyEvent */
         $strategyEvent = $this
             ->getMockBuilder('Oro\Bundle\ImportExportBundle\Event\StrategyEvent')
             ->disableOriginalConstructor()

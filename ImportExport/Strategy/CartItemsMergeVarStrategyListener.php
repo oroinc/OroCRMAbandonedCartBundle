@@ -3,13 +3,15 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\ImportExport\Strategy;
 
 use Doctrine\Common\Collections\Collection;
+
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
-use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
 use OroCRM\Bundle\MagentoBundle\Entity\Cart;
+use OroCRM\Bundle\MagentoBundle\Entity\CartItem;
 use OroCRM\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
 use OroCRM\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
 use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
+use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
 
 class CartItemsMergeVarStrategyListener
 {
@@ -35,7 +37,7 @@ class CartItemsMergeVarStrategyListener
      */
     public function __construct(DoctrineHelper $doctrineHelper, \Twig_Environment $twig, $cartItemTemplate)
     {
-        if (false === is_string($cartItemTemplate) || empty($cartItemTemplate)) {
+        if (!is_string($cartItemTemplate) || empty($cartItemTemplate)) {
             throw new \InvalidArgumentException('Cart item template for Extended Merge Var must be provided.');
         }
         $this->doctrineHelper = $doctrineHelper;
@@ -113,7 +115,7 @@ class CartItemsMergeVarStrategyListener
     {
         $context = $entity->getMergeVarValuesContext();
 
-        if (!isset($context['entity_id']) || empty($context['entity_id'])) {
+        if (empty($context['entity_id'])) {
             return null;
         }
 
@@ -146,7 +148,7 @@ class CartItemsMergeVarStrategyListener
 
         $cartItem = $cartItems->get($cartItemIndex);
 
-        if (is_null($cartItem)) {
+        if (is_null($cartItem) || !$cartItem instanceof CartItem) {
             return null;
         }
 
@@ -167,7 +169,7 @@ class CartItemsMergeVarStrategyListener
     {
         $name = $cartItemMergeVar->getName();
         $index = str_replace('item_', '', $name);
-        $index = abs(intval($index));
+        $index = abs((int) $index);
         if ($index > 0) {
             $index--;
         }

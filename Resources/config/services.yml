@@ -77,6 +77,7 @@ services:
         class: %orocrm_abandonedcart_list.extended_merge_var.provider.cart_items.class%
         arguments:
             - @orocrm_abandonedcart.provider
+            - @translator
         tags:
             - { name: orocrm_mailchimp.extended_merge_vars.provider }
 
