@@ -2,7 +2,6 @@ parameters:
     orocrm_abandonedcart.entity.abandonedcart_campaign.class: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign
     orocrm_abandonedcart.entity.marketing_list_type.class: OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType
 
-    orocrm_abandonedcart_list.twig.extension.contact_information_fields.class: OroCRM\Bundle\AbandonedCartBundle\Twig\ContactInformationFieldsExtension
     orocrm_abandonedcart_list.twig.extension.campaign.class: OroCRM\Bundle\AbandonedCartBundle\Twig\CampaignExtension
     orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager
     orocrm_abandonedcart.predefined_marketing_list_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory
@@ -22,13 +21,6 @@ parameters:
     orocrm_abandonedcart.listener.datagrid.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartGridListener
 
 services:
-    orocrm_abandonedcart_list.twig.extension.contact_information_fields:
-        class: %orocrm_abandonedcart_list.twig.extension.contact_information_fields.class%
-        arguments:
-            - @orocrm_marketing_list.contact_information_field_helper
-        tags:
-            - { name: twig.extension }
-
     orocrm_abandonedcart_list.twig.extension.campaign:
         class: %orocrm_abandonedcart_list.twig.extension.campaign.class%
         arguments:

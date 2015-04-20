@@ -42,4 +42,6 @@ datagrid:
                 launcherOptions:
                     className: 'no-hash mobile-hide'
         options:
+            entityHint: abandoned cart campaigns
             entity_pagination: true
+            export: true
