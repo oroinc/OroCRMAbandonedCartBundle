@@ -107,13 +107,11 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
         $this->marketingListHelper
             ->expects($this->once())
             ->method('getMarketingListIdByGridName')
-            ->with($this->equalTo($gridName))
-            ->will($this->returnValue($marketingList->getId()));
+            ->with($this->equalTo($gridName));
 
         $this->marketingListHelper
             ->expects($this->once())
             ->method('getMarketingList')
-            ->with($this->equalTo($marketingList->getId()))
             ->will($this->returnValue($marketingList));
 
         $this->abandonedCartCampaignProvider

@@ -50,11 +50,14 @@ class AbandonedCartController extends Controller
     public function viewAction(MarketingList $entity)
     {
         $entityConfig = $this->get('orocrm_marketing_list.entity_provider')->getEntity($entity->getEntity());
+        $campaign = $this->get('orocrm_abandonedcart.abandoned_cart_list.campaign_manager')
+            ->getCampaignByMarketingList($entity);
 
         return [
             'entity'   => $entity,
             'config'   => $entityConfig,
             'gridName' => ConfigurationProvider::GRID_PREFIX . $entity->getId(),
+            'campaign' => $campaign,
         ];
     }
 
