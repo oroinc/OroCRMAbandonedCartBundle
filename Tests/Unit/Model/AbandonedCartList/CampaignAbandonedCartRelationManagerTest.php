@@ -83,9 +83,9 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
     {
         $campaign = new Campaign();
 
-        $campaignAbandonedCartRelation = new AbandonedCartCampaign();
-        $campaignAbandonedCartRelation->setMarketingList($this->marketingList);
-        $campaignAbandonedCartRelation->setCampaign($campaign);
+        $AbandonedCartCampaign = new AbandonedCartCampaign();
+        $AbandonedCartCampaign->setMarketingList($this->marketingList);
+        $AbandonedCartCampaign->setCampaign($campaign);
 
         $this->managerRegistry
             ->expects($this->once())->method('getRepository')
