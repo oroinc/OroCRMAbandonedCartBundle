@@ -38,6 +38,7 @@ services:
         class: %orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class%
         arguments:
             - @doctrine
+            - %orocrm_abandonedcart.entity.abandonedcart_campaign.class%
 
     orocrm_abandonedcart.provider:
         class: %orocrm_abandonedcart.provider.class%

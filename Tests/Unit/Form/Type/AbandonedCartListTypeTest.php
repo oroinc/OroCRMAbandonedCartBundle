@@ -6,6 +6,10 @@ use OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType;
 
 class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
 {
+    const CART_CLASS_NAME = 'OroCRM\Bundle\MagentoBundle\Entity\Cart';
+    const MARKETING_LIST_TYPE_CLASS_NAME = 'OroCRM\Bundle\MarketingListBundle\Form\Type\MarketingListType';
+    const MARKETING_LIST_CLASS_NAME = 'OroCRM\Bundle\MarketingListBundle\Entity\MarketingList';
+
     /**
      * @var AbandonedCartListType
      */
@@ -13,7 +17,11 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->abandonedCartListType = new AbandonedCartListType();
+        $this->abandonedCartListType = new AbandonedCartListType(
+            self::CART_CLASS_NAME,
+            self::MARKETING_LIST_TYPE_CLASS_NAME,
+            self::MARKETING_LIST_CLASS_NAME
+        );
     }
 
     public function testBuildForm()
@@ -45,7 +53,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             ->with(
                 'entity',
                 'hidden',
-                ['data' => 'OroCRM\Bundle\MagentoBundle\Entity\Cart']
+                ['data' => self::CART_CLASS_NAME]
             )
             ->will($this->returnSelf());
 
@@ -70,7 +78,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
                 [
                     'column_column_choice_type'   => 'hidden',
                     'filter_column_choice_type'   => 'oro_entity_field_select',
-                    'data_class'                  => 'OroCRM\Bundle\MarketingListBundle\Entity\MarketingList',
+                    'data_class'                  => self::MARKETING_LIST_CLASS_NAME,
                     'intention'                   => 'marketing_list',
                     'cascade_validation'          => true
                 ]

@@ -12,6 +12,8 @@ use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCase
 {
+    const ABANDONED_CART_CAMPAIGN_CLASS_NAME = 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign';
+
     /**
      * @var CampaignAbandonedCartRelationManager
      */
@@ -46,7 +48,10 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->campaignAbandonedCartRelationManager = new CampaignAbandonedCartRelationManager($this->managerRegistry);
+        $this->campaignAbandonedCartRelationManager = new CampaignAbandonedCartRelationManager(
+            $this->managerRegistry,
+            self::ABANDONED_CART_CAMPAIGN_CLASS_NAME
+        );
     }
 
     public function testGetCampaignByMarketingListIfRelationExists()
@@ -59,7 +64,7 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
 
         $this->managerRegistry
             ->expects($this->once())->method('getRepository')
-            ->with('OroCRMAbandonedCartBundle:AbandonedCartCampaign')
+            ->with(self::ABANDONED_CART_CAMPAIGN_CLASS_NAME)
             ->will($this->returnValue($this->repository));
 
         $this->marketingList
@@ -89,7 +94,7 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
 
         $this->managerRegistry
             ->expects($this->once())->method('getRepository')
-            ->with('OroCRMAbandonedCartBundle:AbandonedCartCampaign')
+            ->with(self::ABANDONED_CART_CAMPAIGN_CLASS_NAME)
             ->will($this->returnValue($this->repository));
 
         $this->marketingList

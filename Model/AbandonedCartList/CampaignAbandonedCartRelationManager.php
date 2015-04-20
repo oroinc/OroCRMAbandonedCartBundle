@@ -16,11 +16,18 @@ class CampaignAbandonedCartRelationManager
     protected $managerRegistry;
 
     /**
-     * @param ManagerRegistry $managerRegistry
+     * @var string
      */
-    public function __construct(ManagerRegistry $managerRegistry)
+    protected $abandonedCartCampaignClassName;
+
+    /**
+     * @param ManagerRegistry $managerRegistry
+     * @param $abandonedCartCampaignClassName
+     */
+    public function __construct(ManagerRegistry $managerRegistry, $abandonedCartCampaignClassName)
     {
         $this->managerRegistry = $managerRegistry;
+        $this->abandonedCartCampaignClassName = $abandonedCartCampaignClassName;
     }
 
     /**
@@ -30,13 +37,13 @@ class CampaignAbandonedCartRelationManager
     public function getCampaignByMarketingList(MarketingList $marketingList)
     {
         $campaignAbandonedCartRelation = $this->getCampaignAbandonedCartRelationRepo()
-            ->findOneBy(array('marketingList' => $marketingList->getId()));
+            ->findOneBy(['marketingList' => $marketingList->getId()]);
 
         if ($campaignAbandonedCartRelation) {
             return $campaignAbandonedCartRelation->getCampaign();
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -44,6 +51,6 @@ class CampaignAbandonedCartRelationManager
      */
     protected function getCampaignAbandonedCartRelationRepo()
     {
-        return $this->managerRegistry->getRepository('OroCRMAbandonedCartBundle:AbandonedCartCampaign');
+        return $this->managerRegistry->getRepository($this->abandonedCartCampaignClassName);
     }
 }

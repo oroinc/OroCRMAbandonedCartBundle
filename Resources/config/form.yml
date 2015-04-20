@@ -1,5 +1,5 @@
 parameters:
-    orocrm_abandonedcart_list.form.type.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType
+    orocrm_abandonedcart.form.type.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType
 
     orocrm_abandonedcart.form.handler.abandonedcart_campaign.class: OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartCampaignHandler
     orocrm_abandonedcart.campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
@@ -8,7 +8,7 @@ parameters:
 services:
     # AbandonedCartList
     orocrm_abandonedcart_list.form.type.abandonedcart_list:
-        class: %orocrm_abandonedcart_list.form.type.abandonedcart_list.class%
+        class: %orocrm_abandonedcart.form.type.abandonedcart_list.class%
         arguments:
             - %orocrm_magento.entity.cart.class%
             - %orocrm_marketing_list.form.type.marketing_list.class%
