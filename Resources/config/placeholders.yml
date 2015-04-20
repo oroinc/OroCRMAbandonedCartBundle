@@ -6,3 +6,4 @@ placeholders:
 items:
     orocrm_mailchimp_abandonedcart_enable_conversion_button:
         action: OroCRMAbandonedCartBundle:AbandonedCartConversion:conversionButton
+        applicable: @orocrm_abandonedcart.placeholder.filter.campaigns_button->isApplicable($entity$)

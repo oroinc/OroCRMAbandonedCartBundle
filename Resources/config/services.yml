@@ -27,6 +27,9 @@ parameters:
 
     orocrm_abandonedcart.conversion_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager
 
+    # Placeholder filter
+    orocrm_abandonedcart.placeholder.filter.campaigns_button.class: OroCRM\Bundle\AbandonedCartBundle\Placeholder\CampaignsPlaceholderFilter
+
 services:
     orocrm_abandonedcart_list.twig.extension.contact_information_fields:
         class: %orocrm_abandonedcart_list.twig.extension.contact_information_fields.class%
@@ -135,3 +138,9 @@ services:
         class: %orocrm_abandonedcart_list.tracking_stat_provider_factory.class%
         arguments:
             - @doctrine.orm.entity_manager
+
+    # Placeholder
+    orocrm_abandonedcart.placeholder.filter.campaigns_button:
+        class: %orocrm_abandonedcart.placeholder.filter.campaigns_button.class%
+        arguments:
+            - @orocrm_abandonedcart.provider
