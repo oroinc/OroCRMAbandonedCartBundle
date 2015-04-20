@@ -53,7 +53,7 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param array $expectedUnsets
-     * @param array $parametersData
+     * @param array $parameters
      * @return BuildBefore
      */
     protected function createBuildBeforeEvent(array $expectedUnsets, array $parameters)
