@@ -9,6 +9,10 @@ services:
     # AbandonedCartList
     orocrm_abandonedcart_list.form.type.abandonedcart_list:
         class: %orocrm_abandonedcart_list.form.type.abandonedcart_list.class%
+        arguments:
+            - %orocrm_magento.entity.cart.class%
+            - %orocrm_marketing_list.form.type.marketing_list.class%
+            - %orocrm_marketing_list.entity.class%
         tags:
             - { name: form.type, alias: orocrm_abandonedcart_list }
 
