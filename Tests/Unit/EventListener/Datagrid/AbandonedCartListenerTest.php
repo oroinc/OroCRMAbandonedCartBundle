@@ -5,6 +5,7 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\Datagrid;
 use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 use Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration;
 use OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartListener;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\MarketingListBundle\Model\MarketingListHelper;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
@@ -70,7 +71,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
     {
         $this->buildBefore->expects($this->once())
             ->method('getConfig')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $this->buildBefore->expects($this->never())
             ->method('getDatagrid');
@@ -99,6 +100,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getName')
             ->will($this->returnValue($gridName));
 
+        /** @var \PHPUnit_Framework_MockObject_MockObject|MarketingList $marketingList */
         $marketingList = $this
             ->getMockBuilder('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')
             ->disableOriginalConstructor()
@@ -148,6 +150,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getName')
             ->will($this->returnValue($gridName));
 
+        /** @var \PHPUnit_Framework_MockObject_MockObject|MarketingList $marketingList */
         $marketingList = $this
             ->getMockBuilder('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')
             ->disableOriginalConstructor()

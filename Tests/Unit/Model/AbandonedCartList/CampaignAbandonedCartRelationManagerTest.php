@@ -103,7 +103,7 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
 
         $this->repository
             ->expects($this->once())->method('findOneBy')
-            ->with(array('marketingList' => 'testId'))
+            ->with(['marketingList' => 'testId'])
             ->will($this->returnValue(null));
 
 
