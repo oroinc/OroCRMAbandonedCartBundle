@@ -51,7 +51,6 @@ class CartItemsMergeVarProvider implements ProviderInterface
 
         $mergeVars = [];
         for ($i = 1; $i <= self::CART_ITEMS_LIMIT; $i++) {
-
             $label = $this->translator
                 ->trans(
                     'orocrm.abandonedcart.cart_item_mergevar.label',
