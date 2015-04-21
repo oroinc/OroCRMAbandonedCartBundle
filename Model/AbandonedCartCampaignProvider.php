@@ -3,6 +3,7 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Model;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -35,9 +36,16 @@ class AbandonedCartCampaignProvider implements AbandonedCartCampaignProviderInte
      */
     public function getAbandonedCartCampaign(MarketingList $marketingList)
     {
-        $abandonedCartCampaign = $this->manager
-            ->getRepository($this->abandonedCartCampaignClassName)
+        $abandonedCartCampaign = $this->getAbandonedCartCampaignRepository()
             ->findOneBy(['marketingList' => $marketingList]);
         return $abandonedCartCampaign;
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    protected function getAbandonedCartCampaignRepository()
+    {
+        return $this->manager->getRepository($this->abandonedCartCampaignClassName);
     }
 }

@@ -69,7 +69,7 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
          * @var \PHPUnit_Framework_MockObject_MockObject|DatagridConfiguration $config
          */
         $config = $this->getMockBuilder('Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration')
-            ->setMethods(array('offsetUnsetByPath'))
+            ->setMethods(['offsetUnsetByPath'])
             ->disableOriginalConstructor()
             ->getMock();
 
