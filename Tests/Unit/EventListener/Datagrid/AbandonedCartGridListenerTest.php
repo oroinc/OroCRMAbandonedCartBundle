@@ -2,6 +2,8 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\Datagrid;
 
+use Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration;
+use Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface;
 use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 use OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartGridListener;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
@@ -16,6 +18,11 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->listener = new AbandonedCartGridListener();
+    }
+
+    protected function tearDown()
+    {
+        unset($this->listener);
     }
 
     /**
@@ -58,6 +65,9 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
      */
     protected function createBuildBeforeEvent(array $expectedUnsets, array $parameters)
     {
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|DatagridConfiguration $config
+         */
         $config = $this->getMockBuilder('Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration')
             ->setMethods(array('offsetUnsetByPath'))
             ->disableOriginalConstructor()
@@ -67,13 +77,46 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
             $config->expects($this->at($iteration))->method('offsetUnsetByPath')->with($value);
         }
 
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|DatagridInterface $dataGrid
+         */
         $dataGrid = $this->getMock('Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface');
+
+        $dataGrid->expects($this->any())
+            ->method('getParameters')
+            ->will($this->returnValue($this->createParameterBag($parameters)));
 
         return new BuildBefore($dataGrid, $config);
     }
 
-    protected function tearDown()
+    /**
+     * @param array $data
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function createParameterBag(array $data)
     {
-        unset($this->listener);
+        $parameters = $this->getMock('Oro\Bundle\DataGridBundle\Datagrid\ParameterBag');
+
+        $parameters->expects($this->any())
+            ->method('has')
+            ->will(
+                $this->returnCallback(
+                    function ($key) use ($data) {
+                        return isset($data[$key]);
+                    }
+                )
+            );
+
+        $parameters->expects($this->any())
+            ->method('get')
+            ->will(
+                $this->returnCallback(
+                    function ($key) use ($data) {
+                        return $data[$key];
+                    }
+                )
+            );
+
+        return $parameters;
     }
 }
