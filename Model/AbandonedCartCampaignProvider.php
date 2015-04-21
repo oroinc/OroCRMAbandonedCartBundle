@@ -36,7 +36,7 @@ class AbandonedCartCampaignProvider implements AbandonedCartCampaignProviderInte
     public function getAbandonedCartCampaign(MarketingList $marketingList)
     {
         $abandonedCartCampaign = $this->manager
-            ->getRepository('OroCRMAbandonedCartBundle:AbandonedCartCampaign')
+            ->getRepository($this->abandonedCartCampaignClassName)
             ->findOneBy(['marketingList' => $marketingList]);
         return $abandonedCartCampaign;
     }
