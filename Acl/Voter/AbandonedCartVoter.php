@@ -23,11 +23,6 @@ class AbandonedCartVoter extends AbstractEntityVoter
     /**
      * @var string
      */
-    protected $abandonedCartCampaignClassName;
-
-    /**
-     * @var string
-     */
     protected $integrationChannelClassName;
 
     /**
@@ -42,16 +37,10 @@ class AbandonedCartVoter extends AbstractEntityVoter
 
     /**
      * @param DoctrineHelper $doctrineHelper
-     * @param $abandonedCartCampaignClassName
-     * @param $integrationChannelClassName
+     * @param string $integrationChannelClassName
      */
-    public function __construct(
-        DoctrineHelper $doctrineHelper,
-        $abandonedCartCampaignClassName,
-        $integrationChannelClassName
-    )
+    public function __construct(DoctrineHelper $doctrineHelper, $integrationChannelClassName)
     {
-        $this->abandonedCartCampaignClassName = $abandonedCartCampaignClassName;
         $this->integrationChannelClassName = $integrationChannelClassName;
         parent::__construct($doctrineHelper);
     }

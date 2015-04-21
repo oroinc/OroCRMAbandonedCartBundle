@@ -5,12 +5,16 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
+use Symfony\Bridge\Doctrine\RegistryInterface;
+
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProvider;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase
 {
+    const ABANDONED_CART_CAMPAIGN_CLASS_NAME = 'AbandonedCartClassName';
+
     /**
      * @var AbandonedCartCampaignProvider
      */
@@ -28,6 +32,9 @@ class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|RegistryInterface $registry
+         */
         $registry = $this->getMock('Symfony\Bridge\Doctrine\RegistryInterface');
 
         $this->repository = $this
@@ -44,7 +51,7 @@ class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase
             ->method('getManager')
             ->will($this->returnValue($this->manager));
 
-        $this->provider = new AbandonedCartCampaignProvider($registry);
+        $this->provider = new AbandonedCartCampaignProvider($registry, self::ABANDONED_CART_CAMPAIGN_CLASS_NAME);
     }
 
     protected function tearDown()
