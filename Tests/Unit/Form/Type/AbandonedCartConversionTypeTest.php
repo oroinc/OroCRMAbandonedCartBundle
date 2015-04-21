@@ -19,8 +19,8 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->conversionManager = $this->getMockBuilder(
-                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager'
-            )
+            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 

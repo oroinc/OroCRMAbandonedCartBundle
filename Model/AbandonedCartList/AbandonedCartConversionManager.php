@@ -36,8 +36,7 @@ class AbandonedCartConversionManager
         ManagerRegistry $managerRegistry,
         CampaignAbandonedCartRelationManager $campaignAbandonedCartRelationManager,
         TrackingStatProviderFactory $statProviderFactory
-    )
-    {
+    ) {
         $this->managerRegistry = $managerRegistry;
         $this->campaignAbandonedCartRelationManager = $campaignAbandonedCartRelationManager;
         $this->statProviderFactory = $statProviderFactory;

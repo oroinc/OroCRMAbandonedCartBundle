@@ -85,7 +85,7 @@ class AbandonedCartConversionController extends Controller
             ->findConversionByMarketingList($marketingList);
 
         if (!$conversion) {
-            $conversion = $this->get('orocrm_abandonedcart_list.conversion_factory')->create($marketingList);
+            $conversion = $this->get('orocrm_abandonedcart.conversion_factory')->create($marketingList);
         }
 
         return $conversion;

@@ -90,26 +90,26 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->statProviderFactory = $this->getMockBuilder(
-                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory'
-            )
+            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->statResult = $this->getMockBuilder(
-                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\StatResultInterface'
-           )
+            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\StatResultInterface'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->trackingStatProvider = $this->getMockBuilder(
-                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderInterface'
-            )
+            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderInterface'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->campaignRelationManager = $this->getMockBuilder(
-                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager'
-            )
+            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 
