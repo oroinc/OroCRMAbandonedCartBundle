@@ -69,7 +69,7 @@ class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->manager->expects($this->once())
             ->method('getRepository')
-            ->with('OroCRMAbandonedCartBundle:AbandonedCartCampaign')
+            ->with(self::ABANDONED_CART_CAMPAIGN_CLASS_NAME)
             ->will($this->returnValue($this->repository));
 
         $this->repository->expects($this->once())
