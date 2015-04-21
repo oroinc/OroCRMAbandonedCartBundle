@@ -96,6 +96,7 @@ services:
         arguments:
             - @oro_entity.doctrine_helper
             - %orocrm_abandonedcart.entity.abandonedcart_campaign.class%
+            - %oro_integration.entity.class%
         calls:
             - [setClassName, [%orocrm_abandonedcart.entity.abandonedcart_campaign.class%]]
         tags:

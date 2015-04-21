@@ -12,7 +12,8 @@ use OroCRM\Bundle\MagentoBundle\Provider\ChannelType;
 
 class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
 {
-    const ABANDONED_CART_CAMPAIGN_CLASS_NAME = 'EntityClassName';
+    const ABANDONED_CART_CAMPAIGN_CLASS_NAME = 'AbandonedCartClassName';
+    const INTEGRATION_CHANNEL_CLASS_NAME = 'ChannelClassName';
 
     /**
      * @var AbandonedCartVoter
@@ -30,7 +31,11 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->voter = new AbandonedCartVoter($this->doctrineHelper, self::ABANDONED_CART_CAMPAIGN_CLASS_NAME);
+        $this->voter = new AbandonedCartVoter(
+            $this->doctrineHelper,
+            self::ABANDONED_CART_CAMPAIGN_CLASS_NAME,
+            self::INTEGRATION_CHANNEL_CLASS_NAME
+        );
     }
 
     protected function tearDown()
@@ -70,7 +75,7 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
 
         $this->doctrineHelper->expects($this->any())
             ->method('getEntityRepository')
-            ->with('OroIntegrationBundle:Channel')
+            ->with(self::INTEGRATION_CHANNEL_CLASS_NAME)
             ->will($this->returnValue($repository));
 
         $repository

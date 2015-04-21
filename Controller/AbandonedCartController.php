@@ -112,7 +112,8 @@ class AbandonedCartController extends Controller
      */
     public function deleteAction(MarketingList $marketingList)
     {
-        $em = $this->getDoctrine()->getManagerForClass('OroCRMMarketingListBundle:MarketingList');
+        $class = $this->container->getParameter('orocrm_marketing_list.entity.class');
+        $em = $this->getDoctrine()->getManagerForClass($class);
 
         $em->remove($marketingList);
         $em->flush($marketingList);

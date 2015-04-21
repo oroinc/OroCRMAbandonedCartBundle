@@ -26,6 +26,11 @@ class AbandonedCartVoter extends AbstractEntityVoter
     protected $abandonedCartCampaignClassName;
 
     /**
+     * @var string
+     */
+    protected $integrationChannelClassName;
+
+    /**
      * @var array
      */
     protected $supportedAttributes = [
@@ -38,10 +43,16 @@ class AbandonedCartVoter extends AbstractEntityVoter
     /**
      * @param DoctrineHelper $doctrineHelper
      * @param $abandonedCartCampaignClassName
+     * @param $integrationChannelClassName
      */
-    public function __construct(DoctrineHelper $doctrineHelper, $abandonedCartCampaignClassName)
+    public function __construct(
+        DoctrineHelper $doctrineHelper,
+        $abandonedCartCampaignClassName,
+        $integrationChannelClassName
+    )
     {
         $this->abandonedCartCampaignClassName = $abandonedCartCampaignClassName;
+        $this->integrationChannelClassName = $integrationChannelClassName;
         parent::__construct($doctrineHelper);
     }
 
@@ -51,7 +62,7 @@ class AbandonedCartVoter extends AbstractEntityVoter
     protected function getPermissionForAttribute($class, $identifier, $attribute)
     {
         $enabledMagentoChannel = $this->doctrineHelper
-            ->getEntityRepository('OroIntegrationBundle:Channel')
+            ->getEntityRepository($this->integrationChannelClassName)
             ->findOneBy(['type' => ChannelType::TYPE, 'enabled' => true]);
 
         if (!$enabledMagentoChannel) {
