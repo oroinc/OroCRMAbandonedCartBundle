@@ -34,21 +34,21 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function onBuildBeforeDataProvider()
     {
-        return array(
-            'no filters' => array(
-                'parameters' => array(),
-            ),
-            'filter by type' => array(
-                'parameters' => array(
+        return [
+            'no filters' => [
+                'parameters' => [],
+            ],
+            'filter by type' => [
+                'parameters' => [
                     'listType' => MarketingListType::TYPE_DYNAMIC,
-                ),
-                'expectedUnsets' => array(
+                ],
+                'expectedUnsets' => [
                     '[columns][listType]',
                     '[filters][columns][listType]',
                     '[sorters][columns][listType]',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
