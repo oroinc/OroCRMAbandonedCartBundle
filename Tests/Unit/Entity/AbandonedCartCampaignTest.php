@@ -46,6 +46,9 @@ class AbandonedCartCampaignTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $accessor->getValue($this->entity, $property));
     }
 
+    /**
+     * @return array
+     */
     public function propertiesDataProvider()
     {
         return [

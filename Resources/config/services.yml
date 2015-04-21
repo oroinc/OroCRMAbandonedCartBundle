@@ -45,6 +45,7 @@ services:
         class: %orocrm_abandonedcart.provider.class%
         arguments:
             - @doctrine
+            - %orocrm_abandonedcart.entity.abandonedcart_campaign.class%
 
     orocrm_abandonedcart.marketing_list.datagrid.listener:
         class: %orocrm_abandonedcart.marketing_list.datagrid.listener.class%
@@ -174,7 +175,6 @@ services:
         class: %orocrm_abandonedcart.security.acl.voter.abandonedcart.class%
         arguments:
             - @oro_entity.doctrine_helper
-            - %orocrm_abandonedcart.entity.abandonedcart_campaign.class%
             - %oro_integration.entity.class%
         calls:
             - [setClassName, [%orocrm_abandonedcart.entity.abandonedcart_campaign.class%]]
