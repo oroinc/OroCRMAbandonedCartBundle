@@ -44,6 +44,7 @@ datagrid:
         options:
             entityHint: abandoned cart campaigns
             entity_pagination: true
+            export: true
 
     orocrm-abandonedcart-campaigns-grid:
         source:

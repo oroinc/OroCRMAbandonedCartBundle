@@ -59,9 +59,6 @@ class AbandonedCartController extends Controller
             'config'   => $entityConfig,
             'gridName' => ConfigurationProvider::GRID_PREFIX . $entity->getId(),
             'campaign' => $campaign,
-            'entity'     => $entity,
-            'config'     => $entityConfig,
-            'gridName'   => ConfigurationProvider::GRID_PREFIX . $entity->getId(),
             'conversion' => $conversion
         ];
     }
