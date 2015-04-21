@@ -74,5 +74,5 @@ class AbandonedCartVoter extends AbstractEntityVoter
         }
 
         return $identifier;
-   }
+    }
 }
