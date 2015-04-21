@@ -2,6 +2,8 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Acl\Voter;
 
+use Doctrine\ORM\EntityRepository;
+
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
@@ -10,6 +12,8 @@ use OroCRM\Bundle\MagentoBundle\Provider\ChannelType;
 
 class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
 {
+    const ABANDONED_CART_CAMPAIGN_CLASS_NAME = 'EntityClassName';
+
     /**
      * @var AbandonedCartVoter
      */
@@ -26,7 +30,7 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->voter = new AbandonedCartVoter($this->doctrineHelper);
+        $this->voter = new AbandonedCartVoter($this->doctrineHelper, self::ABANDONED_CART_CAMPAIGN_CLASS_NAME);
     }
 
     protected function tearDown()
@@ -57,6 +61,9 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
             ->with($object, false)
             ->will($this->returnValue(1));
 
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository
+         */
         $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')
             ->disableOriginalConstructor()
             ->getMock();
@@ -101,10 +108,12 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
             [$objectIdentity, $objectIdentityClass, ['VIEW'], true, AbandonedCartVoter::ACCESS_ABSTAIN],
             [$objectIdentity, $objectIdentityClass, ['CREATE'], true, AbandonedCartVoter::ACCESS_ABSTAIN],
             [$objectIdentity, $objectIdentityClass, ['EDIT'], true, AbandonedCartVoter::ACCESS_ABSTAIN],
+            [$objectIdentity, $objectIdentityClass, ['DELETE'], true, AbandonedCartVoter::ACCESS_ABSTAIN],
             // has not active Magento channels
             [$objectIdentity, $objectIdentityClass, ['VIEW'], false, AbandonedCartVoter::ACCESS_DENIED],
             [$objectIdentity, $objectIdentityClass, ['CREATE'], false, AbandonedCartVoter::ACCESS_DENIED],
-            [$objectIdentity, $objectIdentityClass, ['EDIT'], false, AbandonedCartVoter::ACCESS_DENIED]
+            [$objectIdentity, $objectIdentityClass, ['EDIT'], false, AbandonedCartVoter::ACCESS_DENIED],
+            [$objectIdentity, $objectIdentityClass, ['DELETE'], false, AbandonedCartVoter::ACCESS_DENIED]
         ];
     }
 }

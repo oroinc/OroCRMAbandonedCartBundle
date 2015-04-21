@@ -3,14 +3,17 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Acl\Voter;
 
 use Oro\Bundle\SecurityBundle\Acl\Voter\AbstractEntityVoter;
+use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
+
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use OroCRM\Bundle\MagentoBundle\Provider\ChannelType;
 
 class AbandonedCartVoter extends AbstractEntityVoter
 {
-    const ATTRIBUTE_VIEW = 'VIEW';
+    const ATTRIBUTE_VIEW   = 'VIEW';
     const ATTRIBUTE_CREATE = 'CREATE';
-    const ATTRIBUTE_EDIT = 'EDIT';
+    const ATTRIBUTE_EDIT   = 'EDIT';
+    const ATTRIBUTE_DELETE = 'DELETE';
 
     /**
      * @var AbandonedCartCampaign
@@ -18,9 +21,29 @@ class AbandonedCartVoter extends AbstractEntityVoter
     protected $object;
 
     /**
+     * @var string
+     */
+    protected $abandonedCartCampaignClassName;
+
+    /**
      * @var array
      */
-    protected $supportedAttributes = [self::ATTRIBUTE_VIEW, self::ATTRIBUTE_CREATE, self::ATTRIBUTE_EDIT];
+    protected $supportedAttributes = [
+        self::ATTRIBUTE_VIEW,
+        self::ATTRIBUTE_CREATE,
+        self::ATTRIBUTE_EDIT,
+        self::ATTRIBUTE_DELETE
+    ];
+
+    /**
+     * @param DoctrineHelper $doctrineHelper
+     * @param $abandonedCartCampaignClassName
+     */
+    public function __construct(DoctrineHelper $doctrineHelper, $abandonedCartCampaignClassName)
+    {
+        $this->abandonedCartCampaignClassName = $abandonedCartCampaignClassName;
+        parent::__construct($doctrineHelper);
+    }
 
     /**
      * {@inheritdoc}

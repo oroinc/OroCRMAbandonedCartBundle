@@ -95,6 +95,7 @@ services:
         class: %orocrm_abandonedcart.security.acl.voter.abandonedcart.class%
         arguments:
             - @oro_entity.doctrine_helper
+            - %orocrm_abandonedcart.entity.abandonedcart_campaign.class%
         calls:
             - [setClassName, [%orocrm_abandonedcart.entity.abandonedcart_campaign.class%]]
         tags:
