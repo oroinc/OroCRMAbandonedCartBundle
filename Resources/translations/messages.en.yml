@@ -1,11 +1,10 @@
 orocrm:
     abandonedcart:
-        abandonedcartlist:
-            entity_plural_label: Abandoned Cart Campaigns
-            entity_label: Abandoned Cart Campaign
-            name.label: Name
-            description.label: Description
-            owner.label: Owner
+        entity_plural_label: Abandoned Cart Campaigns
+        entity_label: Abandoned Cart Campaign
+        name.label: Name
+        description.label: Description
+        owner.label: Owner
 
         block:
             general: General Information
@@ -45,3 +44,5 @@ orocrm:
             automation_campaign:
                 label: Automation Campaign Connector
                 job: Import automation campaigns from MailChimp
+
+        cart_item_mergevar.label: Cart Item (%index%)

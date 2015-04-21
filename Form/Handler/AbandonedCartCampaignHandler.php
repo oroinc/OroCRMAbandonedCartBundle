@@ -57,9 +57,9 @@ class AbandonedCartCampaignHandler extends MarketingListHandler
         if (parent::process($marketingList)) {
             $this->processAbandonedCartCampaign($marketingList);
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

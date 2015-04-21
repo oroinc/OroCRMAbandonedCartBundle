@@ -3,6 +3,7 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Collections\Criteria;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -15,6 +16,33 @@ use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 class AbandonedCartListType extends AbstractQueryDesignerType
 {
     /**
+     * @var string
+     */
+    protected $cartClassName;
+
+    /**
+     * @var string
+     */
+    protected $marketingListTypeClassName;
+
+    /**
+     * @var string
+     */
+    protected $marketingListClassName;
+
+    /**
+     * @param $cartClassName
+     * @param $marketingListTypeClassName
+     * @param $marketingListClassName
+     */
+    public function __construct($cartClassName, $marketingListTypeClassName, $marketingListClassName)
+    {
+        $this->cartClassName = $cartClassName;
+        $this->marketingListTypeClassName = $marketingListTypeClassName;
+        $this->marketingListClassName = $marketingListClassName;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -22,7 +50,7 @@ class AbandonedCartListType extends AbstractQueryDesignerType
         $builder
             ->add('name', 'text', ['required' => true])
             ->add('description', 'textarea', ['required' => false])
-            ->add('entity', 'hidden', ['data' => 'OroCRM\Bundle\MagentoBundle\Entity\Cart']);
+            ->add('entity', 'hidden', ['data' => $this->cartClassName]);
 
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
@@ -33,14 +61,14 @@ class AbandonedCartListType extends AbstractQueryDesignerType
                     return $er->createQueryBuilder('mlt')
                         ->andWhere('mlt.name = :manualTypeName')
                         ->setParameter('manualTypeName', MarketingListType::TYPE_DYNAMIC)
-                        ->addOrderBy('mlt.name', 'ASC');
+                        ->addOrderBy('mlt.name', Criteria::ASC);
                 };
 
                 $form->add(
                     'type',
                     'entity',
                     [
-                        'class' => 'OroCRMMarketingListBundle:MarketingListType',
+                        'class' => $this->marketingListTypeClassName,
                         'property' => 'label',
                         'required' => true,
                         'query_builder' => $qb
@@ -73,7 +101,7 @@ class AbandonedCartListType extends AbstractQueryDesignerType
         $options = array_merge(
             $this->getDefaultOptions(),
             [
-                'data_class' => 'OroCRM\Bundle\MarketingListBundle\Entity\MarketingList',
+                'data_class' => $this->marketingListClassName,
                 'intention' => 'marketing_list',
                 'cascade_validation' => true
             ]

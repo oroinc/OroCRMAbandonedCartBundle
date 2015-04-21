@@ -23,7 +23,7 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
      * @param array $expectedUnsets
      * @dataProvider onBuildBeforeDataProvider
      */
-    public function testOnBuildBefore(array $parameters, array $expectedUnsets = array())
+    public function testOnBuildBefore(array $parameters, array $expectedUnsets = [])
     {
         $buildBeforeEvent = $this->createBuildBeforeEvent($expectedUnsets, $parameters);
         $this->listener->onBuildBefore($buildBeforeEvent);
@@ -53,7 +53,7 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param array $expectedUnsets
-     * @param array $parametersData
+     * @param array $parameters
      * @return BuildBefore
      */
     protected function createBuildBeforeEvent(array $expectedUnsets, array $parameters)

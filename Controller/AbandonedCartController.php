@@ -50,9 +50,15 @@ class AbandonedCartController extends Controller
     public function viewAction(MarketingList $entity)
     {
         $entityConfig = $this->get('orocrm_marketing_list.entity_provider')->getEntity($entity->getEntity());
+        $campaign = $this->get('orocrm_abandonedcart.abandoned_cart_list.campaign_manager')
+            ->getCampaignByMarketingList($entity);
         $conversion = $this->get('orocrm_abandonedcart.conversion_manager')->findConversionByMarketingList($entity);
 
         return [
+            'entity'   => $entity,
+            'config'   => $entityConfig,
+            'gridName' => ConfigurationProvider::GRID_PREFIX . $entity->getId(),
+            'campaign' => $campaign,
             'entity'     => $entity,
             'config'     => $entityConfig,
             'gridName'   => ConfigurationProvider::GRID_PREFIX . $entity->getId(),
@@ -105,13 +111,16 @@ class AbandonedCartController extends Controller
      *      permission="DELETE",
      *      class="OroCRMMarketingListBundle:MarketingList"
      * )
+     *
+     * @param MarketingList $marketingList
+     * @return JsonResponse
      */
     public function deleteAction(MarketingList $marketingList)
     {
         $em = $this->getDoctrine()->getManagerForClass('OroCRMMarketingListBundle:MarketingList');
 
         $em->remove($marketingList);
-        $em->flush();
+        $em->flush($marketingList);
 
         return new JsonResponse('', Codes::HTTP_OK);
     }

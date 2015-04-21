@@ -1,7 +1,7 @@
 oro_menu_config:
     items:
         abandoned_cart_list:
-            label: 'orocrm.abandonedcart.abandonedcartlist.entity_plural_label'
+            label: 'orocrm.abandonedcart.entity_plural_label'
             route: 'orocrm_abandoned_cart_list'
             extras:
                 routes: ['orocrm_abandoned_cart_list_*']
@@ -16,7 +16,5 @@ oro_menu_config:
 oro_titles:
     orocrm_abandoned_cart_list:  ~
     orocrm_abandoned_cart_list_view: '%%entityName%%'
-    orocrm_abandoned_cart_list_update: '%%entityName%% - Edit'
+    orocrm_abandoned_cart_list_update: %%entityName%% - oro.ui.edit
     orocrm_abandoned_cart_list_create: oro.ui.create_entity
-
-

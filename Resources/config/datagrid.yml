@@ -42,6 +42,7 @@ datagrid:
                 launcherOptions:
                     className: 'no-hash mobile-hide'
         options:
+            entityHint: abandoned cart campaigns
             entity_pagination: true
 
     orocrm-abandonedcart-campaigns-grid:
@@ -101,3 +102,4 @@ datagrid:
                         expr: 'SUM(mc.opens)'
                     usersWhoClicked:
                         expr: 'SUM(mc.usersWhoClicked)'
+            export: true

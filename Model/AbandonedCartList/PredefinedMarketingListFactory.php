@@ -19,10 +19,16 @@ class PredefinedMarketingListFactory
     protected $cartClassName;
 
     /**
-     * @param ObjectManager $objectManager
-     * @param string $cartClassName
+     * @var string
      */
-    public function __construct(ObjectManager $objectManager, $cartClassName)
+    protected $marketingListTypeClassName;
+
+    /**
+     * @param ObjectManager $objectManager
+     * @param $cartClassName
+     * @param $marketingListTypeClassName
+     */
+    public function __construct(ObjectManager $objectManager, $cartClassName, $marketingListTypeClassName)
     {
         if (!is_string($cartClassName) || empty($cartClassName)) {
             throw new \InvalidArgumentException('Cart class name must be provided.');
@@ -30,6 +36,7 @@ class PredefinedMarketingListFactory
 
         $this->objectManager = $objectManager;
         $this->cartClassName = $cartClassName;
+        $this->marketingListTypeClassName = $marketingListTypeClassName;
     }
 
     /**
@@ -42,7 +49,7 @@ class PredefinedMarketingListFactory
 
         $type = $this->objectManager
             ->find(
-                'OroCRMMarketingListBundle:MarketingListType',
+                $this->marketingListTypeClassName,
                 MarketingListType::TYPE_DYNAMIC
             );
 

@@ -22,7 +22,7 @@
             'aCss': 'no-hash remove-button',
             'id': 'btn-remove-marketing-list',
             'dataId': form.vars.value.id,
-            'entity_label': 'orocrm.abandonedcart.abandonedcartlist.entity_label'|trans
+            'entity_label': 'orocrm.abandonedcart.entity_label'|trans
         }) }}
 
         {{ UI.buttonSeparator() }}
@@ -32,7 +32,7 @@
     {% if form.vars.value.id or resource_granted('orocrm_abandoned_cart_list_update') %}
         {% set html = html ~ UI.saveAndStayButton() %}
     {% endif %}
-    {#{% set html = html ~ segmentQD.saveAndRefreshButton(entity) %}#}
+
     {{ UI.dropdownSaveButton({'html': html}) }}
 {% endblock %}
 
@@ -41,18 +41,17 @@
         {% set breadcrumbs = {
             'entity':      form.vars.value,
             'indexPath':   path('orocrm_abandoned_cart_list'),
-            'indexLabel': 'orocrm.abandonedcart.abandonedcartlist.entity_plural_label'|trans,
+            'indexLabel': 'orocrm.abandonedcart.entity_plural_label'|trans,
             'entityTitle': entity.name
         } %}
         {{ parent() }}
     {% else %}
-        {% set title = 'oro.ui.create_entity'|trans({'%entityName%': 'orocrm.abandonedcart.abandonedcartlist.entity_label'|trans}) %}
+        {% set title = 'oro.ui.create_entity'|trans({'%entityName%': 'orocrm.abandonedcart.entity_label'|trans}) %}
         {% include 'OroUIBundle::page_title_block.html.twig' with { title: title } %}
     {% endif %}
 {% endblock pageHeader %}
 
 {% block content_data %}
-
     {% set id = 'abandonedcart-list-profile' %}
     {% set ownerDataBlock = {
         'dataBlocks': [{
@@ -70,9 +69,9 @@
             {
                 'title': '',
                 'data': [
-                    form_row(form.name, {'label': 'orocrm.abandonedcart.abandonedcartlist.name.label'}),
+                    form_row(form.name, {'label': 'orocrm.abandonedcart.name.label'}),
                     form_row(form.description, {
-                        'label': 'orocrm.abandonedcart.abandonedcartlist.description.label',
+                        'label': 'orocrm.abandonedcart.description.label',
                         'attr': {
                             'class': 'segment-descr'
                         }
@@ -89,11 +88,11 @@
     }]
 %}
 
-    {% set hasEntity = form.vars.value is not empty and form.vars.value.entity is defined and form.vars.value.entity is not empty %}
+    {% set hasEntity = form.vars.value is not empty and form.vars.value.entity is not empty %}
     {% set columnsComponentOptions = {
         'entityChoiceSelector': '#orocrm_abandonedcart_list_form_entity',
         'fieldsChoiceSelector': '#contact-information-fields-list',
-        'contactInformationFields': hasEntity ? get_cart_contact_information_fields_info() : []
+        'contactInformationFields': hasEntity ? get_contact_information_fields_info(form.vars.value.entity) : []
     } %}
 
     {% set type = 'orocrm_abandonedcart_list' %}
@@ -119,10 +118,8 @@
             {'id': type ~ '-column-list', 'rowId': type ~ '-column-row'},
             ['column', 'label', 'sorting', 'action']
         ) }}
-
     </div>
     {% endset %}
-
     {% set dataBlocks = dataBlocks|merge( [{
         'title' : 'oro.segment.form.designer'|trans,
         'content_attr': {'id': type ~ '-designer'},
@@ -158,7 +155,6 @@
 
     {{ UI.scrollData(id, data, form) }}
 
-    {# TODO: remove this check after full support of manual marketing lists CRM-1878 #}
     {{ QD.query_designer_column_chain_template('column-chain-template') }}
     {{ segmentQD.initJsWidgets(type, form, entities, metadata) }}
 {% endblock content_data %}

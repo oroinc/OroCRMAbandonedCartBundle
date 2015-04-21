@@ -20,12 +20,13 @@ class CampaignFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreate()
     {
         $marketingList = new MarketingList();
-        $marketingList->setName('name');
+        $marketingList->setName('test campaign na$me');
 
         $campaign = $this->factory->create($marketingList);
 
         $this->assertInstanceOf('OroCRM\Bundle\CampaignBundle\Entity\Campaign', $campaign);
-        $this->assertEquals($campaign->getCode(), $marketingList->getName() . CampaignFactory::CAMPAIGN_CODE_POSTFIX);
-        $this->assertEquals($campaign->getName(), $marketingList->getName() . CampaignFactory::CAMPAIGN_NAME_POSTFIX);
+
+        $this->assertEquals($campaign->getCode(), 'test_campaign_na_me');
+        $this->assertEquals($campaign->getName(), $marketingList->getName());
     }
 }
