@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\ImportExport\Strategy;
+namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\ImportExport;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
