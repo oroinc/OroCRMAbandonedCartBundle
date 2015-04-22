@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\ImportExport\Strategy;
+namespace OroCRM\Bundle\AbandonedCartBundle\EventListener\ImportExport;
 
 use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
@@ -42,13 +42,7 @@ class CampaignCodeMergeVarStrategyListener
             return;
         }
 
-        $extendedMergeVars = $staticSegment->getExtendedMergeVars();
-
-        if ($extendedMergeVars->isEmpty()) {
-            return;
-        }
-
-        $campaignCodeMergeVar = $extendedMergeVars
+        $campaignCodeMergeVar = $staticSegment->getExtendedMergeVars()
             ->filter(
                 function(ExtendedMergeVar $extendedMergeVar) {
                     return $extendedMergeVar->getName() === CampaignCodeMergeVarProvider::CAMPAIGN_CODE_NAME;

@@ -13,11 +13,6 @@ class AutomationCampaignIterator extends CampaignIterator
     protected $campaignIterator;
 
     /**
-     * @var array
-     */
-    protected $filters;
-
-    /**
      * @param CampaignIterator $campaignIterator
      */
     public function __construct(CampaignIterator $campaignIterator)

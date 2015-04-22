@@ -68,6 +68,26 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
      */
     protected $conversion;
 
+    /**
+     * @var string
+     */
+    protected $magentoOrderClassName;
+
+    /**
+     * @var string
+     */
+    protected $campaignClassName;
+
+    /**
+     * @var string
+     */
+    protected $staticSegmentClassName;
+
+    /**
+     * @var string
+     */
+    protected $abandonedCartConversion;
+
     protected function setUp()
     {
         $this->managerRegistry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
@@ -118,10 +138,19 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->magentoOrderClassName = 'MagentoOrderClassName';
+        $this->campaignClassName = 'CampaignClassName';
+        $this->staticSegmentClassName = 'StaticSegmentClassName';
+        $this->abandonedCartConversion = 'AbandonedCartConversionClassName';
+
         $this->conversionManager = new AbandonedCartConversionManager(
             $this->managerRegistry,
             $this->campaignRelationManager,
-            $this->statProviderFactory
+            $this->statProviderFactory,
+            $this->magentoOrderClassName,
+            $this->campaignClassName,
+            $this->staticSegmentClassName,
+            $this->abandonedCartConversion
         );
     }
 
@@ -129,7 +158,7 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->managerRegistry
             ->expects($this->once())->method('getRepository')
-            ->with('OroCRMAbandonedCartBundle:AbandonedCartConversion')
+            ->with($this->abandonedCartConversion)
             ->will($this->returnValue($this->repository));
 
         $this->marketingList
@@ -152,7 +181,7 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->managerRegistry
             ->expects($this->once())->method('getRepository')
-            ->with('OroCRMMailChimpBundle:StaticSegment')
+            ->with($this->staticSegmentClassName)
             ->will($this->returnValue($this->repository));
 
         $this->repository

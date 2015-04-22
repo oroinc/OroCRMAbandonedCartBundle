@@ -19,11 +19,22 @@ class AbandonedCartConversionType extends AbstractType
     protected $conversionManager;
 
     /**
-     * @param AbandonedCartConversionManager $conversionManager
+     * @var string
      */
-    public function __construct(AbandonedCartConversionManager $conversionManager)
+    protected $mailChimpCampaignClassName;
+
+    /**
+     * @param AbandonedCartConversionManager $conversionManager
+     * @param string $mailChimpCampaignClassName
+     */
+    public function __construct(AbandonedCartConversionManager $conversionManager, $mailChimpCampaignClassName)
     {
+        if (!is_string($mailChimpCampaignClassName) || empty($mailChimpCampaignClassName)) {
+            throw new \InvalidArgumentException('MailChimpCampaign class name should be provided.');
+        }
+
         $this->conversionManager = $conversionManager;
+        $this->mailChimpCampaignClassName = $mailChimpCampaignClassName;
     }
 
     /**
@@ -52,7 +63,7 @@ class AbandonedCartConversionType extends AbstractType
                     'campaigns',
                     'entity',
                     [
-                        'class' => 'OroCRMMailChimpBundle:Campaign',
+                        'class' => $this->mailChimpCampaignClassName,
                         'required' => true,
                         'query_builder' => $qb,
                         'multiple' => true,

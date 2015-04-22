@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\ImportExport\Strategy;
+namespace OroCRM\Bundle\AbandonedCartBundle\EventListener\ImportExport;
 
 use Doctrine\Common\Collections\Collection;
 

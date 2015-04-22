@@ -2,14 +2,15 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar;
 
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
-use OroCRM\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use OroCRM\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
 class CampaignCodeMergeVarProvider implements ProviderInterface
 {
     const CAMPAIGN_CODE_NAME = 'campaign_code';
-    const CAMPAIGN_CODE_LABEL = 'Campaign Code';
 
     /**
      * @var AbandonedCartCampaignProviderInterface
@@ -17,11 +18,20 @@ class CampaignCodeMergeVarProvider implements ProviderInterface
     protected $abandonedCartCampaignProvider;
 
     /**
-     * @param AbandonedCartCampaignProviderInterface $abandonedCartCampaignProvider
+     * @var TranslatorInterface
      */
-    public function __construct(AbandonedCartCampaignProviderInterface $abandonedCartCampaignProvider)
-    {
+    protected $translator;
+
+    /**
+     * @param AbandonedCartCampaignProviderInterface $abandonedCartCampaignProvider
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(
+        AbandonedCartCampaignProviderInterface $abandonedCartCampaignProvider,
+        TranslatorInterface $translator
+    ) {
         $this->abandonedCartCampaignProvider = $abandonedCartCampaignProvider;
+        $this->translator = $translator;
     }
 
     /**
@@ -39,7 +49,7 @@ class CampaignCodeMergeVarProvider implements ProviderInterface
         return [
             [
                 'name' => self::CAMPAIGN_CODE_NAME,
-                'label' => self::CAMPAIGN_CODE_LABEL
+                'label' => $this->translator->trans('orocrm.abandonedcart.campaign_code_mergevar.label')
             ]
         ];
     }

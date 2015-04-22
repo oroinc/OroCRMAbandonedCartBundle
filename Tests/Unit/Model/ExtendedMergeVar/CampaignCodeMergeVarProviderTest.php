@@ -2,6 +2,8 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\ExtendedMergeVar;
 
+use Symfony\Component\Translation\TranslatorInterface;
+
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
@@ -19,11 +21,17 @@ class CampaignCodeMergeVarProviderTest extends \PHPUnit_Framework_TestCase
      */
     protected $abandonedCartCampaignProvider;
 
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|TranslatorInterface
+     */
+    protected $translator;
+
     protected function setUp()
     {
         $this->abandonedCartCampaignProvider = $this
             ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
-        $this->provider = new CampaignCodeMergeVarProvider($this->abandonedCartCampaignProvider);
+        $this->translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+        $this->provider = new CampaignCodeMergeVarProvider($this->abandonedCartCampaignProvider, $this->translator);
     }
 
     public function testProvideForNotAbandonedCartCampaign()
@@ -40,9 +48,10 @@ class CampaignCodeMergeVarProviderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider getExpectedExtendedMergeVars
-     * @param array $expected
+     * @param array $expectedTranslations
+     * @param array $expectedMerVars
      */
-    public function testProvide($expected)
+    public function testProvide(array $expectedTranslations, $expectedMerVars)
     {
         $marketingList = new MarketingList();
 
@@ -51,9 +60,12 @@ class CampaignCodeMergeVarProviderTest extends \PHPUnit_Framework_TestCase
             ->with($marketingList)
             ->will($this->returnValue(new AbandonedCartCampaign()));
 
+        $this->translator->expects($this->exactly(count($expectedTranslations)))->method('trans')
+            ->will($this->returnValueMap($expectedTranslations));
+
         $actualExtendedMergeVars = $this->provider->provideExtendedMergeVars($marketingList);
 
-        $this->assertEquals($expected, $actualExtendedMergeVars);
+        $this->assertEquals($expectedMerVars, $actualExtendedMergeVars);
     }
 
     /**
@@ -64,9 +76,12 @@ class CampaignCodeMergeVarProviderTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 [
+                    ['orocrm.abandonedcart.campaign_code_mergevar.label', [], null, null, 'Campaign Code'],
+                ],
+                [
                     [
-                        'name' => CampaignCodeMergeVarProvider::CAMPAIGN_CODE_NAME,
-                        'label' => CampaignCodeMergeVarProvider::CAMPAIGN_CODE_LABEL
+                        'name' => 'campaign_code',
+                        'label' => 'Campaign Code'
                     ]
                 ]
             ]

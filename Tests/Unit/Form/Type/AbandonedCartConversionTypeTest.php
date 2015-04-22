@@ -19,6 +19,11 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
      */
     protected $conversionManager;
 
+    /**
+     * @var string
+     */
+    protected $mailChimpCampaignClassName;
+
     protected function setUp()
     {
         $this->conversionManager = $this->getMockBuilder(
@@ -26,13 +31,16 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
         )
             ->disableOriginalConstructor()
             ->getMock();
-
-        $this->abandonedCartConversionType = new AbandonedCartConversionType($this->conversionManager);
+        $this->mailChimpCampaignClassName = 'ClassName';
+        $this->abandonedCartConversionType = new AbandonedCartConversionType(
+            $this->conversionManager,
+            $this->mailChimpCampaignClassName
+        );
     }
 
     public function testSetDefaultOptions()
     {
-        /* @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolverInterface $resolver */
+        /** @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolverInterface $resolver */
         $resolver = $this->getMock('Symfony\Component\OptionsResolver\OptionsResolverInterface');
 
         $resolver->expects($this->once())

@@ -31,9 +31,9 @@ class AbandonedCartListType extends AbstractQueryDesignerType
     protected $marketingListClassName;
 
     /**
-     * @param $cartClassName
-     * @param $marketingListTypeClassName
-     * @param $marketingListClassName
+     * @param string $cartClassName
+     * @param string $marketingListTypeClassName
+     * @param string $marketingListClassName
      */
     public function __construct($cartClassName, $marketingListTypeClassName, $marketingListClassName)
     {

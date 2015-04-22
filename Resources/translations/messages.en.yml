@@ -46,6 +46,7 @@ orocrm:
                 job: Import automation campaigns from MailChimp
 
         cart_item_mergevar.label: Cart Item (%index%)
+        campaign_code_mergevar.label: Campaign Code
 
         acl:
             action:
