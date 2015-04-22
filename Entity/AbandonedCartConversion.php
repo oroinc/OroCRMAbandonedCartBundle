@@ -4,8 +4,9 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use OroCRM\Bundle\MailChimpBundle\Entity\Campaign;
+use Doctrine\Common\Collections\Collection;
 
+use OroCRM\Bundle\MailChimpBundle\Entity\Campaign;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 /**
@@ -36,7 +37,7 @@ class AbandonedCartConversion
     protected $marketingList;
 
     /**
-     * @var Campaign[]|ArrayCollection
+     * @var Campaign[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="OroCRM\Bundle\MailChimpBundle\Entity\Campaign")
      * @ORM\JoinTable(name="orocrm_abandcart_conv_camps",
@@ -73,7 +74,7 @@ class AbandonedCartConversion
 
     /**
      * @param $marketingList
-     * @return $this
+     * @return AbandonedCartConversion
      */
     public function setMarketingList(MarketingList $marketingList)
     {

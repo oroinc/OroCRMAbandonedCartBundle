@@ -25,8 +25,8 @@ class TrackingStatProvider implements TrackingStatProviderInterface
 
     /**
      * @param EntityManager $entityManager
-     * @param $orderAssociationName
-     * @param $campaignAssociationName
+     * @param string $orderAssociationName
+     * @param string $campaignAssociationName
      */
     public function __construct(EntityManager $entityManager, $orderAssociationName, $campaignAssociationName)
     {

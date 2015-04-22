@@ -66,8 +66,6 @@ class OroCRMAbandonedCartBundle implements Migration
         $table->addColumn('conversion_id', 'integer', []);
         $table->addColumn('mailchimp_campaign_id', 'integer', []);
         $table->setPrimaryKey(['conversion_id', 'mailchimp_campaign_id']);
-        $table->addIndex(['conversion_id'], 'IDX_F07F82054C1FF126', []);
-        $table->addIndex(['mailchimp_campaign_id'], 'IDX_F07F8205828112CC', []);
     }
 
     /**

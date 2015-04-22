@@ -31,7 +31,7 @@ class AbandonedCartConversionController extends Controller
      *      class="OroCRMMarketingListBundle:MarketingList",
      *      options={"id" = "entity"}
      * )
-     * @AclAncestor("orocrm_mailchimp")
+     * @AclAncestor("orocrm_abandonedcart")
      *
      * @Template
      *
@@ -51,6 +51,7 @@ class AbandonedCartConversionController extends Controller
      *      name="orocrm_abandoned_cart_manage_workflow",
      *      requirements={"id"="\d+"}
      * )
+     * @AclAncestor("orocrm_abandonedcart")
      *
      * @Template
      * @param MarketingList $marketingList

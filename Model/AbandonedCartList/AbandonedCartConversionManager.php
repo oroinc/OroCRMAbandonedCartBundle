@@ -44,7 +44,7 @@ class AbandonedCartConversionManager
 
     /**
      * @param MarketingList $marketingList
-     * @return \OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion
+     * @return AbandonedCartConversion
      */
     public function findConversionByMarketingList(MarketingList $marketingList)
     {
