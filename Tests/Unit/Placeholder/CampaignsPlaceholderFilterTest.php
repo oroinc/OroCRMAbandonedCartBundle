@@ -97,6 +97,11 @@ class CampaignsPlaceholderFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testIsApplicableWhenAbandonedCartAndCampaign()
     {
+        $this->abandonedCartCampaignProvider
+            ->expects($this->once())
+            ->method('getAbandonedCartCampaign')
+            ->will($this->returnValue(true));
+
         $this->managerRegistry
             ->expects($this->at(0))->method('getRepository')
             ->with(self::STAT_SEGMENT_CLASS_NAME)
@@ -117,11 +122,6 @@ class CampaignsPlaceholderFilterTest extends \PHPUnit_Framework_TestCase
             ->with(['staticSegment' => $this->staticSegment])
             ->will($this->returnValue($this->mailchimpCampaign));
 
-        $this->abandonedCartCampaignProvider
-            ->expects($this->once())
-            ->method('getAbandonedCartCampaign')
-            ->will($this->returnValue(true));
-
         $this->assertEquals(
             true,
             $this->placeholderFilter->isApplicable($this->marketingList)
@@ -130,6 +130,11 @@ class CampaignsPlaceholderFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testIsApplicableWhenAbandonedCartAndNoCampaign()
     {
+        $this->abandonedCartCampaignProvider
+            ->expects($this->once())
+            ->method('getAbandonedCartCampaign')
+            ->will($this->returnValue(true));
+
         $this->managerRegistry
             ->expects($this->at(0))->method('getRepository')
             ->with(self::STAT_SEGMENT_CLASS_NAME)
@@ -150,11 +155,6 @@ class CampaignsPlaceholderFilterTest extends \PHPUnit_Framework_TestCase
             ->with(['staticSegment' => $this->staticSegment])
             ->will($this->returnValue(null));
 
-        $this->abandonedCartCampaignProvider
-            ->expects($this->once())
-            ->method('getAbandonedCartCampaign')
-            ->will($this->returnValue(true));
-
         $this->assertEquals(
             false,
             $this->placeholderFilter->isApplicable($this->marketingList)
@@ -163,30 +163,13 @@ class CampaignsPlaceholderFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testIsApplicableWhenMarketingList()
     {
-        $this->managerRegistry
-            ->expects($this->at(0))->method('getRepository')
-            ->with(self::STAT_SEGMENT_CLASS_NAME)
-            ->will($this->returnValue($this->repository));
-
-        $this->repository
-            ->expects($this->at(0))->method('findOneBy')
-            ->with(['marketingList' => $this->marketingList])
-            ->will($this->returnValue($this->staticSegment));
-
-        $this->managerRegistry
-            ->expects($this->at(1))->method('getRepository')
-            ->with(self::MAILCHIMP_CAMPAIGN_CLASS_NAME)
-            ->will($this->returnValue($this->repository));
-
-        $this->repository
-            ->expects($this->at(1))->method('findOneBy')
-            ->with(['staticSegment' => $this->staticSegment])
-            ->will($this->returnValue($this->mailchimpCampaign));
-
         $this->abandonedCartCampaignProvider
             ->expects($this->once())
             ->method('getAbandonedCartCampaign')
             ->will($this->returnValue(false));
+
+        $this->managerRegistry
+            ->expects($this->never())->method('getRepository');
 
         $this->assertEquals(
             false,

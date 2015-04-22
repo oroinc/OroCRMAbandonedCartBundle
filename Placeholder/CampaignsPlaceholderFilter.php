@@ -55,11 +55,13 @@ class CampaignsPlaceholderFilter
      */
     public function isApplicable($entity)
     {
-        $staticSegment = $this->getStaticSegment($entity);
-        $mailchimpCampaign = $this->getMailchimpCampaign($staticSegment);
+        if ($this->abandonedCartCampaignProvider->getAbandonedCartCampaign($entity)) {
+            $staticSegment = $this->getStaticSegment($entity);
+            $mailchimpCampaign = $this->getMailchimpCampaign($staticSegment);
 
-        if ($this->abandonedCartCampaignProvider->getAbandonedCartCampaign($entity) && $mailchimpCampaign) {
-            return true;
+            if ($mailchimpCampaign) {
+                return true;
+            }
         }
 
         return false;

@@ -38,14 +38,13 @@ class TrackingStatProvider implements TrackingStatProviderInterface
     /**
      * @param Campaign $campaign
      * @return StatResult
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getStatResult(Campaign $campaign)
     {
         $qb = $this->em->getRepository('OroTrackingBundle:TrackingVisitEvent')
             ->createQueryBuilder('te');
 
-        $result = $qb->expr()
+        $result = $qb
             ->select('sum(o.totalAmount) as total, count(o.id) as qty')
             ->join('te.' . $this->orderAssociationName, 'o')
             ->where('te.' . $this->campaignAssociationName . '= :campaignId')
