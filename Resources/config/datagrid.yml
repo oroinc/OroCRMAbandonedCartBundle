@@ -109,3 +109,4 @@ datagrid:
                     usersWhoClicked:
                         expr: 'SUM(mc.usersWhoClicked)'
             export: true
+            entityHint: abandoned cart conversion
