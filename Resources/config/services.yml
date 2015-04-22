@@ -108,7 +108,10 @@ services:
     orocrm_abandonedcart.placeholder.filter.campaigns_button:
         class: %orocrm_abandonedcart.placeholder.filter.campaigns_button.class%
         arguments:
+            - @doctrine
             - @orocrm_abandonedcart.provider
+            - %orocrm_mailchimp.entity.static_segment.class%
+            - %orocrm_mailchimp.entity.campaign.class%
 
     #Conversion
     orocrm_abandonedcart.twig.extension.conversion:
