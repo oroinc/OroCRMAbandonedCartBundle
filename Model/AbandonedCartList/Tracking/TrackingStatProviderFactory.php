@@ -20,8 +20,8 @@ class TrackingStatProviderFactory
     }
 
     /**
-     * @param $orderAssociationName
-     * @param $campaignAssociationName
+     * @param string $orderAssociationName
+     * @param string $campaignAssociationName
      * @return TrackingStatProvider
      */
     public function create($orderAssociationName, $campaignAssociationName)
