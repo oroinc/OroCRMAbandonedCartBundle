@@ -45,13 +45,14 @@ class TrackingStatProvider implements TrackingStatProviderInterface
         $qb = $this->em->getRepository('OroTrackingBundle:TrackingVisitEvent')
             ->createQueryBuilder('te');
 
-        $result = $qb
+        $result = $qb->expr()
             ->select('sum(o.totalAmount) as total, count(o.id) as qty')
             ->join('te.' . $this->orderAssociationName, 'o')
             ->where('te.' . $this->campaignAssociationName . '= :campaignId')
             ->setParameter('campaignId', $campaign->getId())
+            ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getSingleResult();
 
         if (!is_array($result)) {
             $result = ['total' => 0,'qty' =>0];

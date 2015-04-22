@@ -19,7 +19,7 @@ class StatResult implements StatResultInterface
      */
     public function __construct(array $result)
     {
-        if (empty($result['total']) || empty($result['qty'])) {
+        if (!array_key_exists('total', $result) || !array_key_exists('qty', $result)) {
             throw new \InvalidArgumentException('Total and Qty should not be empty');
         }
         $this->total = $result['total'];
