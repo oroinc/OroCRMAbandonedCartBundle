@@ -108,5 +108,6 @@ datagrid:
                         expr: 'SUM(mc.opens)'
                     usersWhoClicked:
                         expr: 'SUM(mc.usersWhoClicked)'
-            export: true
+        options:
             entityHint: abandoned cart conversion
+            export: true
