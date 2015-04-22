@@ -25,7 +25,6 @@ parameters:
     orocrm_abandonedcart.placeholder.filter.campaigns_button.class: OroCRM\Bundle\AbandonedCartBundle\Placeholder\CampaignsPlaceholderFilter
 
     #Conversion
-    orocrm_abandonedcart.twig.extension.conversion.class: OroCRM\Bundle\AbandonedCartBundle\Twig\ConversionExtension
     orocrm_abandonedcart.tracking_stat_provider_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory
     orocrm_abandonedcart.conversion_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\ConversionFactory
     orocrm_abandonedcart.extended_merge_var.provider.campaign_code.class: OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CampaignCodeMergeVarProvider
@@ -115,13 +114,6 @@ services:
             - %orocrm_mailchimp.entity.campaign.class%
 
     #Conversion
-    orocrm_abandonedcart.twig.extension.conversion:
-        class: %orocrm_abandonedcart.twig.extension.conversion.class%
-        arguments:
-            - @orocrm_abandonedcart.conversion_manager
-        tags:
-            - { name: twig.extension }
-
     orocrm_abandonedcart.conversion_manager:
         class: %orocrm_abandonedcart.conversion_manager.class%
         arguments:

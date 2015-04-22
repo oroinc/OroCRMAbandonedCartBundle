@@ -194,10 +194,6 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testFindAbandonedCartRelatedStatistic()
     {
-        $this->conversion
-            ->expects($this->once())->method('getMarketingList')
-            ->will($this->returnValue($this->marketingList));
-
         $this->campaignRelationManager
             ->expects($this->once())->method('getCampaignByMarketingList')
             ->with($this->equalTo($this->marketingList))
@@ -212,6 +208,6 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo($this->campaign))
             ->will($this->returnValue($this->statResult));
 
-        $this->conversionManager->findAbandonedCartRelatedStatistic($this->conversion);
+        $this->conversionManager->findAbandonedCartRelatedStatistic($this->marketingList);
     }
 }

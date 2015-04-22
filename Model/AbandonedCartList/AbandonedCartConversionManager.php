@@ -95,12 +95,11 @@ class AbandonedCartConversionManager
     }
 
     /**
-     * @param AbandonedCartConversion $conversion
+     * @param MarketingList $marketingList
      * @return Tracking\StatResult
      */
-    public function findAbandonedCartRelatedStatistic(AbandonedCartConversion $conversion)
+    public function findAbandonedCartRelatedStatistic(MarketingList $marketingList)
     {
-        $marketingList = $conversion->getMarketingList();
         $campaign = $this->campaignAbandonedCartRelationManager->getCampaignByMarketingList($marketingList);
 
         $orderAssociationName = ExtendHelper::buildAssociationName(
