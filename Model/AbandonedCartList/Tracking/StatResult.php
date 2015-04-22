@@ -19,6 +19,9 @@ class StatResult implements StatResultInterface
      */
     public function __construct(array $result)
     {
+        if (empty($result['total']) || empty($result['qty'])) {
+            throw new \InvalidArgumentException('Total and Qty should not be empty');
+        }
         $this->total = $result['total'];
         $this->qty = $result['qty'];
     }

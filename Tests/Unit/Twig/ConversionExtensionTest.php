@@ -49,9 +49,9 @@ class ConversionExtensionTest extends \PHPUnit_Framework_TestCase
         $functions = $this->conversionExtension->getFunctions();
         $this->assertCount(1, $functions);
 
-        $expectedFunctions = array(
+        $expectedFunctions = [
             'get_abandonedcart_related_statistic'
-        );
+        ];
 
         /** @var \Twig_SimpleFunction $function */
         foreach ($functions as $function) {

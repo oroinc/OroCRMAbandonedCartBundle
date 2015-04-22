@@ -138,7 +138,7 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->repository
             ->expects($this->once())->method('findOneBy')
-            ->with(array('marketingList' => 'testId'))
+            ->with(['marketingList' => 'testId'])
             ->will($this->returnValue($this->conversion));
 
         $this->conversionManager->findConversionByMarketingList($this->marketingList);

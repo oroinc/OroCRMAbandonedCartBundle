@@ -27,7 +27,7 @@ class AutomationCampaignIteratorTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['getCampaigns'])
             ->disableOriginalConstructor()
             ->getMock();
-        $this->campaignIterator = new CampaignIterator($this->client, array(), self::TEST_BATCH_SIZE);
+        $this->campaignIterator = new CampaignIterator($this->client, [], self::TEST_BATCH_SIZE);
     }
 
     protected function tearDown()

@@ -27,12 +27,12 @@ class ConversionExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction(
                 'get_abandonedcart_related_statistic',
-                array($this, 'getAbandonedCartRelatedStatistic')
+                [$this, 'getAbandonedCartRelatedStatistic']
             )
-        );
+        ];
     }
 
     /**
