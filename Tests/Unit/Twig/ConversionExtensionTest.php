@@ -4,6 +4,7 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Twig;
 
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use OroCRM\Bundle\AbandonedCartBundle\Twig\ConversionExtension;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 
 class ConversionExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,7 +14,7 @@ class ConversionExtensionTest extends \PHPUnit_Framework_TestCase
     protected $conversionExtension;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartConversionManager
      */
     protected $conversionManager;
 

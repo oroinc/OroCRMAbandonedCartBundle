@@ -2,9 +2,14 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +19,7 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
     protected $conversionManager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|ManagerRegistry
      */
     protected $managerRegistry;
 
@@ -29,12 +34,12 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
     protected $em;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|MarketingList
      */
     protected $marketingList;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|CampaignAbandonedCartRelationManager
      */
     protected $campaignRelationManager;
 
@@ -44,7 +49,7 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
     protected $campaign;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|TrackingStatProviderFactory
      */
     protected $statProviderFactory;
 
@@ -59,7 +64,7 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
     protected $trackingStatProvider;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartConversion
      */
     protected $conversion;
 

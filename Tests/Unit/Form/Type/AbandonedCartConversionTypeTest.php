@@ -2,7 +2,10 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 use OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartConversionType;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 
 class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +15,7 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
     protected $abandonedCartConversionType;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartConversionManager
      */
     protected $conversionManager;
 
@@ -29,7 +32,9 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDefaultOptions()
     {
+        /* @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolverInterface $resolver */
         $resolver = $this->getMock('Symfony\Component\OptionsResolver\OptionsResolverInterface');
+
         $resolver->expects($this->once())
             ->method('setDefaults')
             ->with(

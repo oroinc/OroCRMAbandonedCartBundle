@@ -50,7 +50,12 @@ datagrid:
         source:
             type: orm
             query:
-                select: [ conv.id, mc.title, mc.emailsSent, mc.opens, mc.usersWhoClicked]
+                select:
+                    - conv.id
+                    - mc.title
+                    - mc.emailsSent
+                    - mc.opens
+                    - mc.usersWhoClicked
                 from:
                     - { table: OroCRMAbandonedCartBundle:AbandonedCartConversion, alias: conv }
                 join:
