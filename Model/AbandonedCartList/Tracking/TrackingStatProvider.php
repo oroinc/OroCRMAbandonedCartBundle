@@ -24,15 +24,26 @@ class TrackingStatProvider implements TrackingStatProviderInterface
     protected $campaignAssociationName;
 
     /**
+     * @var string
+     */
+    protected $trackingVisitEventClassName;
+
+    /**
      * @param EntityManager $entityManager
      * @param string $orderAssociationName
-     * @param string $campaignAssociationName
+     * @param string$campaignAssociationName
+     * @param string $trackingVisitEventClassName
      */
-    public function __construct(EntityManager $entityManager, $orderAssociationName, $campaignAssociationName)
-    {
+    public function __construct(
+        EntityManager $entityManager,
+        $orderAssociationName,
+        $campaignAssociationName,
+        $trackingVisitEventClassName
+    ) {
         $this->em = $entityManager;
         $this->orderAssociationName = $orderAssociationName;
         $this->campaignAssociationName = $campaignAssociationName;
+        $this->trackingVisitEventClassName = $trackingVisitEventClassName;
     }
 
     /**
@@ -41,7 +52,7 @@ class TrackingStatProvider implements TrackingStatProviderInterface
      */
     public function getStatResult(Campaign $campaign)
     {
-        $qb = $this->em->getRepository('OroTrackingBundle:TrackingVisitEvent')
+        $qb = $this->em->getRepository($this->trackingVisitEventClassName)
             ->createQueryBuilder('te');
 
         $result = $qb

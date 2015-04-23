@@ -49,6 +49,11 @@ class AbandonedCartConversionManager
     protected $abandonedCartConversionClassName;
 
     /**
+     * @var string
+     */
+    protected $trackingVisitEventClassName;
+
+    /**
      * @param ManagerRegistry $managerRegistry
      * @param CampaignAbandonedCartRelationManager $campaignAbandonedCartRelationManager
      * @param TrackingStatProviderFactory $statProviderFactory
@@ -56,6 +61,7 @@ class AbandonedCartConversionManager
      * @param string $campaignClassName
      * @param string $staticSegmentClassName
      * @param string $abandonedCartConversionClassName
+     * @param string $trackingVisitEventClassName
      */
     public function __construct(
         ManagerRegistry $managerRegistry,
@@ -64,13 +70,15 @@ class AbandonedCartConversionManager
         $magentoOrderClassName,
         $campaignClassName,
         $staticSegmentClassName,
-        $abandonedCartConversionClassName
+        $abandonedCartConversionClassName,
+        $trackingVisitEventClassName
     ) {
         $this->assertClassNames(
             $magentoOrderClassName,
             $campaignClassName,
             $staticSegmentClassName,
-            $abandonedCartConversionClassName
+            $abandonedCartConversionClassName,
+            $trackingVisitEventClassName
         );
 
         $this->managerRegistry = $managerRegistry;
@@ -80,6 +88,7 @@ class AbandonedCartConversionManager
         $this->campaignClassName = $campaignClassName;
         $this->staticSegmentClassName = $staticSegmentClassName;
         $this->abandonedCartConversionClassName = $abandonedCartConversionClassName;
+        $this->trackingVisitEventClassName = $trackingVisitEventClassName;
     }
 
     /**
@@ -114,7 +123,8 @@ class AbandonedCartConversionManager
 
         $trackingStatProvider = $this->statProviderFactory->create(
             $orderAssociationName,
-            $campaignAssociationName
+            $campaignAssociationName,
+            $this->trackingVisitEventClassName
         );
 
         $statResult = $trackingStatProvider->getStatResult($campaign);

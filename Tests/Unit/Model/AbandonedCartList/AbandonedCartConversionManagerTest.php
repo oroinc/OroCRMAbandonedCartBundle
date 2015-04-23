@@ -88,6 +88,11 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
      */
     protected $abandonedCartConversion;
 
+    /**
+     * @var string
+     */
+    protected $trackingVisitEventClassName;
+
     protected function setUp()
     {
         $this->managerRegistry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
@@ -142,6 +147,7 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
         $this->campaignClassName = 'CampaignClassName';
         $this->staticSegmentClassName = 'StaticSegmentClassName';
         $this->abandonedCartConversion = 'AbandonedCartConversionClassName';
+        $this->trackingVisitEventClassName = 'TrackingVisitEventClassName';
 
         $this->conversionManager = new AbandonedCartConversionManager(
             $this->managerRegistry,
@@ -150,7 +156,8 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
             $this->magentoOrderClassName,
             $this->campaignClassName,
             $this->staticSegmentClassName,
-            $this->abandonedCartConversion
+            $this->abandonedCartConversion,
+            $this->trackingVisitEventClassName
         );
     }
 

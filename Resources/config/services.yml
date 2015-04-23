@@ -3,6 +3,8 @@ parameters:
     orocrm_abandonedcart.entity.abandonedcart_conversion.class: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion
     orocrm_abandonedcart.entity.marketing_list_type.class: OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType
 
+    orocrm_abandonedcart.entity.tracking_visit_event.class: Oro\Bundle\TrackingBundle\Entity\TrackingVisitEvent
+
     orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager
     orocrm_abandonedcart.predefined_marketing_list_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory
     orocrm_abandonedcart.campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
@@ -124,6 +126,7 @@ services:
             - %orocrm_campaign.entity.class%
             - %orocrm_mailchimp.entity.static_segment.class%
             - %orocrm_abandonedcart.entity.abandonedcart_conversion.class%
+            - %orocrm_abandonedcart.entity.tracking_visit_event.class%
 
     orocrm_abandonedcart.extended_merge_var.provider.campaign_code:
         class: %orocrm_abandonedcart.extended_merge_var.provider.campaign_code.class%
@@ -139,7 +142,7 @@ services:
     orocrm_abandonedcart.tracking_stat_provider_factory:
         class: %orocrm_abandonedcart.tracking_stat_provider_factory.class%
         arguments:
-            - @doctrine.orm.entity_manager
+            - @doctrine
 
     orocrm_abandonedcart.connector.automation_campaign:
         class: %orocrm_abandonedcart.connector.automation_campaign.class%

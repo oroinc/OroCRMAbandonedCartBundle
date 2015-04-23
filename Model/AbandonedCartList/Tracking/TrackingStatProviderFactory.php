@@ -3,6 +3,7 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class TrackingStatProviderFactory
 {
@@ -12,21 +13,27 @@ class TrackingStatProviderFactory
     protected $em;
 
     /**
-     * @param EntityManager $entityManager
+     * @param RegistryInterface $registry
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(RegistryInterface $registry)
     {
-        $this->em = $entityManager;
+        $this->em = $registry->getManager();
     }
 
     /**
-     * @param string $orderAssociationName
-     * @param string $campaignAssociationName
+     * @param $orderAssociationName
+     * @param $campaignAssociationName
+     * @param $trackingVisitEventClassName
      * @return TrackingStatProvider
      */
-    public function create($orderAssociationName, $campaignAssociationName)
+    public function create($orderAssociationName, $campaignAssociationName, $trackingVisitEventClassName)
     {
-        $statProvider = new TrackingStatProvider($this->em, $orderAssociationName, $campaignAssociationName);
+        $statProvider = new TrackingStatProvider(
+            $this->em,
+            $orderAssociationName,
+            $campaignAssociationName,
+            $trackingVisitEventClassName
+        );
         return $statProvider;
     }
 }
