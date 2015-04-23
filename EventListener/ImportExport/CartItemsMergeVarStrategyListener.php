@@ -100,7 +100,7 @@ class CartItemsMergeVarStrategyListener
         $extendedMergeVars = $extendedMergeVars
             ->filter(
                 function(ExtendedMergeVar $extendedMergeVar) {
-                    return false !== strpos($extendedMergeVar->getName(), CartItemsMergeVarProvider::NAME_PREFIX);
+                    return preg_match($this->getCartItemRegExp(), $extendedMergeVar->getName());
                 }
             );
 
@@ -167,12 +167,24 @@ class CartItemsMergeVarStrategyListener
      */
     protected function extractCartItemIndex(ExtendedMergeVar $cartItemMergeVar)
     {
-        $name = $cartItemMergeVar->getName();
-        $index = str_replace('item_', '', $name);
-        $index = abs((int) $index);
+        preg_match($this->getCartItemRegExp(), $cartItemMergeVar->getName(), $matches);
+        if (empty($matches[1])) {
+            return 0;
+        }
+
+        $index = abs((int) $matches[1]);
         if ($index > 0) {
             $index--;
         }
+
         return $index;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCartItemRegExp()
+    {
+        return sprintf('/%s_([0-9]+)/', CartItemsMergeVarProvider::NAME_PREFIX);
     }
 }

@@ -158,6 +158,18 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
         $this->listener->onProcessAfter($this->strategyEvent);
 
         $this->assertEmpty($this->entity->getMergeVarValues());
+
+        $emailMergeVar = new ExtendedMergeVar();
+        $itemCountMergeVar = new ExtendedMergeVar();
+        $emailMergeVar->setName('email');
+        $itemCountMergeVar->setName('item_count');
+
+        $this->staticSegment->addExtendedMergeVar($emailMergeVar);
+        $this->staticSegment->addExtendedMergeVar($itemCountMergeVar);
+
+        $this->listener->onProcessAfter($this->strategyEvent);
+
+        $this->assertEmpty($this->entity->getMergeVarValues());
     }
 
     public function testOnProcessAfterWhenContextNotHasEntityId()
