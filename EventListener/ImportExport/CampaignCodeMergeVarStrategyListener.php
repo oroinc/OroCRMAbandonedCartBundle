@@ -57,12 +57,6 @@ class CampaignCodeMergeVarStrategyListener
         $abandonedCartCampaign = $this->abandonedCartCampaignProvider
             ->getAbandonedCartCampaign($staticSegment->getMarketingList());
 
-        $mergeVarValues = $entity->getMergeVarValues();
-        $mergeVarValues = array_merge(
-            $mergeVarValues,
-            [$campaignCodeMergeVar->getTag() => $abandonedCartCampaign->getCampaign()->getCode()]
-        );
-
-        $entity->setMergeVarValues($mergeVarValues);
+        $entity->addMergeVarValue($campaignCodeMergeVar->getTag(), $abandonedCartCampaign->getCampaign()->getCode());
     }
 }

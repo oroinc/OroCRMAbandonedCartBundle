@@ -75,19 +75,13 @@ class CartItemsMergeVarStrategyListener
             return;
         }
 
-        $result = [];
         foreach ($cartItemsMergeVars as $cartItemMergeVar) {
             $cartItemMergeVarValue = $this->prepareCartItemMergeVarValue($cartItemMergeVar, $cart);
             if (is_null($cartItemMergeVarValue)) {
                 continue;
             }
-            $result[$cartItemMergeVar->getTag()] = $cartItemMergeVarValue;
+            $entity->addMergeVarValue($cartItemMergeVar->getTag(), $cartItemMergeVarValue);
         }
-
-        $mergeVarValues = $entity->getMergeVarValues();
-        $mergeVarValues = array_merge($mergeVarValues, $result);
-
-        $entity->setMergeVarValues($mergeVarValues);
     }
 
     /**
