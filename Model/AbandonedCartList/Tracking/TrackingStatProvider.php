@@ -65,7 +65,7 @@ class TrackingStatProvider implements TrackingStatProviderInterface
             ->getSingleResult();
 
         if (!is_array($result)) {
-            $result = ['total' => 0,'qty' =>0];
+            $result = ['total' => 0, 'qty' => 0];
         }
 
         $statResult = new StatResult($result);

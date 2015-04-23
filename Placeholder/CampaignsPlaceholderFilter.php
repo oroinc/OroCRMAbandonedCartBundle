@@ -59,9 +59,7 @@ class CampaignsPlaceholderFilter
             $staticSegment = $this->getStaticSegment($entity);
             $mailchimpCampaign = $this->getMailchimpCampaign($staticSegment);
 
-            if ($mailchimpCampaign) {
-                return true;
-            }
+            return (bool)$mailchimpCampaign;
         }
 
         return false;
