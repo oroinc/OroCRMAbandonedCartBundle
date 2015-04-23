@@ -64,6 +64,7 @@ class AbandonedCartConversionController extends Controller
         /** @var Form $form */
         $form = $this->get('orocrm_abandonedcart.form.conversion');
 
+        // TODO remove after Fix/bap 7098 #3509 will merged
         $handler = $this->get('orocrm_abandonedcart.form.handler.conversion_form');
 
         $result = ['entity' => $conversion];
