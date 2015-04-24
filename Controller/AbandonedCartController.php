@@ -220,7 +220,7 @@ class AbandonedCartController extends Controller
     protected function findStaticSegmentByMarketingList(MarketingList $marketingList)
     {
         return $this->getDoctrine()
-            ->getRepository('OroCRMMailChimpBundle:StaticSegment')
+            ->getRepository($this->container->getParameter('orocrm_mailchimp.entity.static_segment.class'))
             ->findOneBy(['marketingList' => $marketingList]);
     }
 }

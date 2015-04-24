@@ -56,7 +56,7 @@ class AbandonedCartRelatedCampaignsManager
     public function isApplicable($entity)
     {
         if ($this->abandonedCartCampaignProvider->getAbandonedCartCampaign($entity)) {
-            return $this->getMailchimpCampaign($entity);
+            return $this->isMailchimpCampaign($entity);
         }
 
         return false;
@@ -79,7 +79,7 @@ class AbandonedCartRelatedCampaignsManager
      * @param MarketingList $marketingList
      * @return bool
      */
-    protected function getMailchimpCampaign(MarketingList $marketingList)
+    protected function isMailchimpCampaign(MarketingList $marketingList)
     {
         $staticSegment = $this->managerRegistry
             ->getRepository($this->staticSegmentClassName)
