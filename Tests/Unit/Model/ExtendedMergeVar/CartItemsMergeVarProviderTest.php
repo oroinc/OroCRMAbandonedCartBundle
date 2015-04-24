@@ -113,34 +113,4 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
             ]
         ];
     }
-
-    /**
-     * @return array
-     */
-    public function __getExpectedExtendedMergeVars()
-    {
-        return [
-            [
-                [
-                    ['orocrm.abandonedcart.cart_item_mergevar.label', ['%index%' => 1], null, null, 'Cart Item (1)'],
-                    ['orocrm.abandonedcart.cart_item_mergevar.label', ['%index%' => 2], null, null, 'Cart Item (2)'],
-                    ['orocrm.abandonedcart.cart_item_mergevar.label', ['%index%' => 3], null, null, 'Cart Item (3)']
-                ],
-                [
-                    [
-                        'name' => 'item_1',
-                        'label' => 'Cart Item (1)'
-                    ],
-                    [
-                        'name' => 'item_2',
-                        'label' => 'Cart Item (2)'
-                    ],
-                    [
-                        'name' => 'item_3',
-                        'label' => 'Cart Item (3)'
-                    ]
-                ]
-            ]
-        ];
-    }
 }
