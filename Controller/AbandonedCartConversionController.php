@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
@@ -19,31 +20,6 @@ use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
  */
 class AbandonedCartConversionController extends Controller
 {
-    /**
-     * @Route(
-     *      "/enable/{entity}",
-     *      name="orocrm_abandoned_cart_enable_conversion",
-     *      requirements={"entity"="\d+"}
-     * )
-     * @ParamConverter(
-     *      "marketingList",
-     *      class="OroCRMMarketingListBundle:MarketingList",
-     *      options={"id" = "entity"}
-     * )
-     * @AclAncestor("orocrm_abandonedcart")
-     *
-     * @Template
-     *
-     * @param MarketingList $marketingList
-     * @return array
-     */
-    public function conversionButtonAction(MarketingList $marketingList)
-    {
-        return [
-            'marketingList' => $marketingList
-        ];
-    }
-
     /**
      * @Route(
      *      "/manage-workflow/{id}",

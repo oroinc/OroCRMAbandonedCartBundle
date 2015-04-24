@@ -1,25 +1,25 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Placeholder;
+namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
 
-use OroCRM\Bundle\AbandonedCartBundle\Placeholder\CampaignsPlaceholderFilter;
+use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartRelatedCampaignsManager;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
 use OroCRM\Bundle\MailChimpBundle\Entity\Campaign;
 
-class CampaignsPlaceholderFilterTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartRelatedCampaignsManagerTest extends \PHPUnit_Framework_TestCase
 {
     const STAT_SEGMENT_CLASS_NAME = 'staticSegmentClassName';
     const MAILCHIMP_CAMPAIGN_CLASS_NAME = 'mailchimpCampaignClassName';
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|CampaignsPlaceholderFilter
+     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartRelatedCampaignsManager
      */
-    protected $placeholderFilter;
+    protected $abandonedCartRelatedCampaignsManager;
 
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartCampaignProviderInterface
@@ -76,7 +76,7 @@ class CampaignsPlaceholderFilterTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->placeholderFilter = new CampaignsPlaceholderFilter(
+        $this->abandonedCartRelatedCampaignsManager = new AbandonedCartRelatedCampaignsManager(
             $this->managerRegistry,
             $this->abandonedCartCampaignProvider,
             self::STAT_SEGMENT_CLASS_NAME,
@@ -124,7 +124,7 @@ class CampaignsPlaceholderFilterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             true,
-            $this->placeholderFilter->isApplicable($this->marketingList)
+            $this->abandonedCartRelatedCampaignsManager->isApplicable($this->marketingList)
         );
     }
 
@@ -157,7 +157,7 @@ class CampaignsPlaceholderFilterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             false,
-            $this->placeholderFilter->isApplicable($this->marketingList)
+            $this->abandonedCartRelatedCampaignsManager->isApplicable($this->marketingList)
         );
     }
 
@@ -173,7 +173,7 @@ class CampaignsPlaceholderFilterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             false,
-            $this->placeholderFilter->isApplicable($this->marketingList)
+            $this->abandonedCartRelatedCampaignsManager->isApplicable($this->marketingList)
         );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Placeholder;
+namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -9,7 +9,7 @@ use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
-class CampaignsPlaceholderFilter
+class AbandonedCartRelatedCampaignsManager
 {
     /**
      * @var ManagerRegistry
@@ -56,10 +56,7 @@ class CampaignsPlaceholderFilter
     public function isApplicable($entity)
     {
         if ($this->abandonedCartCampaignProvider->getAbandonedCartCampaign($entity)) {
-            $staticSegment = $this->getStaticSegment($entity);
-            $mailchimpCampaign = $this->getMailchimpCampaign($staticSegment);
-
-            return (bool)$mailchimpCampaign;
+            return $this->isMailchimpCampaign($entity);
         }
 
         return false;
@@ -79,15 +76,23 @@ class CampaignsPlaceholderFilter
     }
 
     /**
-     * @param StaticSegment $staticSegment
-     * @return Campaign|null
+     * @param MarketingList $marketingList
+     * @return bool
      */
-    protected function getMailchimpCampaign(StaticSegment $staticSegment)
+    protected function isMailchimpCampaign(MarketingList $marketingList)
     {
-        $mailchimpCampaign = $this->managerRegistry
-            ->getRepository($this->mailchimpCampaignClassName)
-            ->findOneBy(['staticSegment' => $staticSegment]);
+        $staticSegment = $this->managerRegistry
+            ->getRepository($this->staticSegmentClassName)
+            ->findOneBy(['marketingList' => $marketingList]);
 
-        return $mailchimpCampaign;
+        if (!$staticSegment) {
+            return false;
+        } else {
+            $mailchimpCampaign = $this->managerRegistry
+                ->getRepository($this->mailchimpCampaignClassName)
+                ->findOneBy(['staticSegment' => $staticSegment]);
+        }
+
+        return (bool)$mailchimpCampaign;
     }
 }
