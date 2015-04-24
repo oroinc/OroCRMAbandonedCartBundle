@@ -19,7 +19,6 @@ parameters:
 
     orocrm_abandonedcart.marketing_list.datagrid.name: orocrm-marketing-list-grid
     orocrm_abandonedcart.datagrid.name: orocrm-abandonedcart-list-grid
-    orocrm_abandonedcart.extended_merge_var.cart_item.template: OroCRMAbandonedCartBundle:ExtendedMergeVar:cartItemMergeVar.txt.twig
 
     orocrm_abandonedcart.listener.datagrid.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartGridListener
 
@@ -86,8 +85,7 @@ services:
         class: %orocrm_abandonedcart.importexport.strategy.member_cartitems_merge_var.listener.class%
         arguments:
             - @oro_entity.doctrine_helper
-            - @twig
-            - %orocrm_abandonedcart.extended_merge_var.cart_item.template%
+            - @oro_locale.formatter.number
         tags:
             - { name: kernel.event_listener, event: oro_importexport.strategy.process_after, method: onProcessAfter }
 
