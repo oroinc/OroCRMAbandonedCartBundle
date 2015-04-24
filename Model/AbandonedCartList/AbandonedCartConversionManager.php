@@ -172,7 +172,7 @@ class AbandonedCartConversionManager
             throw new \InvalidArgumentException('AbandonedCartConversion class name should be provided.');
         }
         if (!is_string($trackingVisitEventClassName) || empty($trackingVisitEventClassName)) {
-            throw new \InvalidArgumentException('AbandonedCartConversion class name should be provided.');
+            throw new \InvalidArgumentException('Tracking Visit Event class name should be provided.');
         }
     }
 }
