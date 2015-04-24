@@ -46,6 +46,7 @@ orocrm:
 
         datagrid:
             campaign_name_label: Name
+            columns_total_label: Total
 
         connector:
             automation_campaign:

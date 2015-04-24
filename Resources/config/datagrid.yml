@@ -102,6 +102,8 @@ datagrid:
         totals:
             grand_total:
                 columns:
+                    title:
+                        label: 'orocrm.abandonedcart.datagrid.columns_total_label'
                     emailsSent:
                         expr: 'SUM(mc.emailsSent)'
                     opens:
