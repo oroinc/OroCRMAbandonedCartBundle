@@ -11,7 +11,7 @@
                     'status': constant('OroCRM\\Bundle\\MailChimpBundle\\Entity\\StaticSegment::STATUS_SCHEDULED')
                 }|json_encode|raw,
                 'url': path('orocrm_api_update_staticsegment_status', {id: staticSegment.id}),
-                'message': 'orocrm.mailchimp.connection.message.syncronize_scheduled'|trans
+                'message': 'orocrm.abandonedcart.connection.message.syncronize_scheduled'|trans
             },
             'id': 'mailchimp-synchronize-btn',
             'label': 'orocrm.mailchimp.connection.button.synchronize'|trans,
@@ -62,11 +62,11 @@
             {{  UI.deleteLink({
                 'dataUrl': path('orocrm_api_delete_staticsegment', {id: staticSegment.id}),
                 'dataRedirect': path('orocrm_abandoned_cart_list_view', {id: marketingList.id}),
-                'dataMessage': 'orocrm.mailchimp.connection.confirmation.disconnect'|trans,
+                'dataMessage': 'orocrm.abandonedcart.connection.confirmation.disconnect'|trans,
                 'aCss': 'no-hash remove-button',
                 'id': 'btn-remove-mailchimp-connection',
                 'entity_label': 'orocrm.mailchimp.connection.name'|trans,
-                'successMessage': 'orocrm.mailchimp.connection.message.disconnect'|trans,
+                'successMessage': 'orocrm.abandonedcart.connection.message.disconnect'|trans,
                 'title': 'orocrm.mailchimp.connection.button.disconnect'|trans,
                 'label': 'orocrm.mailchimp.connection.button.disconnect'|trans
             }) }}

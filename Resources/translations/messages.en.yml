@@ -19,6 +19,13 @@ orocrm:
             label:   Entity
             saved:   Abandoned Cart list saved
 
+        connection:
+            confirmation:
+                disconnect: 'Are you sure you want to unlink this Abandoned Cart from MailChimp'
+            message:
+                disconnect: 'Abandoned Cart disconnected from MailChimp'
+                syncronize_scheduled: 'Abandoned Cart scheduled to synchronize with MailChimp'
+
         conversion:
             name: Conversion
             button:
