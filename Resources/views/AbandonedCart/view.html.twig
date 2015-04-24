@@ -7,6 +7,7 @@
 {% oro_title_set({params : {"%entityName%": entity.name|default('N/A') }}) %}
 
 {% block navButtons %}
+    {% placeholder abandoned_cart_mailchimp_menu with {entity: entity} %}
     {% if isDesktopVersion() and resource_granted('EDIT', entity) %}
         {{ UI.editButton({
             'path' : path('orocrm_abandoned_cart_list_update', { id: entity.id }),

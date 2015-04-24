@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use FOS\RestBundle\Util\Codes;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -15,6 +16,7 @@ use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 
 use OroCRM\Bundle\MarketingListBundle\Datagrid\ConfigurationProvider;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
 
 /**
  * @Route("/abandoned-cart")
@@ -161,5 +163,64 @@ class AbandonedCartController extends Controller
         }
 
         return $response;
+    }
+
+    /**
+     * @Route(
+     *      "/buttons/{entity}",
+     *      name="orocrm_abandoned_cart_buttons",
+     *      requirements={"entity"="\d+"}
+     * )
+     * @ParamConverter(
+     *      "marketingList",
+     *      class="OroCRMMarketingListBundle:MarketingList",
+     *      options={"id" = "entity"}
+     * )
+     * @AclAncestor("orocrm_abandonedcart")
+     *
+     * @Template
+     *
+     * @param MarketingList $marketingList
+     * @return array
+     */
+    public function connectionButtonsAction(MarketingList $marketingList)
+    {
+        $relatedCampaigns = $this->get('orocrm_abandonedcart.related_campaigns_manager')
+            ->isApplicable($marketingList);
+
+        return [
+            'marketingList' => $marketingList,
+            'staticSegment' => $this->getStaticSegmentByMarketingList($marketingList),
+            'relatedCampaigns' => $relatedCampaigns
+        ];
+    }
+
+    /**
+     * @param MarketingList $marketingList
+     * @return StaticSegment
+     */
+    protected function getStaticSegmentByMarketingList(MarketingList $marketingList)
+    {
+        $staticSegment = $this->findStaticSegmentByMarketingList($marketingList);
+
+        if (!$staticSegment) {
+            $staticSegment = new StaticSegment();
+            $staticSegment->setName(mb_substr($marketingList->getName(), 0, 100));
+            $staticSegment->setSyncStatus(StaticSegment::STATUS_NOT_SYNCED);
+            $staticSegment->setMarketingList($marketingList);
+        }
+
+        return $staticSegment;
+    }
+
+    /**
+     * @param MarketingList $marketingList
+     * @return StaticSegment
+     */
+    protected function findStaticSegmentByMarketingList(MarketingList $marketingList)
+    {
+        return $this->getDoctrine()
+            ->getRepository('OroCRMMailChimpBundle:StaticSegment')
+            ->findOneBy(['marketingList' => $marketingList]);
     }
 }

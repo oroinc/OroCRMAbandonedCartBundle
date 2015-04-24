@@ -23,8 +23,7 @@ parameters:
 
     orocrm_abandonedcart.listener.datagrid.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartGridListener
 
-    # Placeholder filter
-    orocrm_abandonedcart.placeholder.filter.campaigns_button.class: OroCRM\Bundle\AbandonedCartBundle\Placeholder\CampaignsPlaceholderFilter
+    orocrm_abandonedcart.related_campaigns_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartRelatedCampaignsManager
 
     #Conversion
     orocrm_abandonedcart.tracking_stat_provider_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory
@@ -106,9 +105,8 @@ services:
         tags:
             - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.orocrm-marketing-list-grid, method: onBuildBefore }
 
-    # Placeholder
-    orocrm_abandonedcart.placeholder.filter.campaigns_button:
-        class: %orocrm_abandonedcart.placeholder.filter.campaigns_button.class%
+    orocrm_abandonedcart.related_campaigns_manager:
+        class: %orocrm_abandonedcart.related_campaigns_manager.class%
         arguments:
             - @doctrine
             - @orocrm_abandonedcart.provider
