@@ -149,13 +149,15 @@ class AbandonedCartConversionManager
      * @param string $campaignClassName
      * @param string $staticSegmentClassName
      * @param string $abandonedCartConversionClassName
+     * @param string $trackingVisitEventClassName
      * @throws \InvalidArgumentException
      */
     protected function assertClassNames(
         $magentoOrderClassName,
         $campaignClassName,
         $staticSegmentClassName,
-        $abandonedCartConversionClassName
+        $abandonedCartConversionClassName,
+        $trackingVisitEventClassName
     ) {
         if (!is_string($magentoOrderClassName) || empty($magentoOrderClassName)) {
             throw new \InvalidArgumentException('Magento Order class name should be provided.');
@@ -167,6 +169,9 @@ class AbandonedCartConversionManager
             throw new \InvalidArgumentException('StaticSegment class name should be provided.');
         }
         if (!is_string($abandonedCartConversionClassName) || empty($abandonedCartConversionClassName)) {
+            throw new \InvalidArgumentException('AbandonedCartConversion class name should be provided.');
+        }
+        if (!is_string($trackingVisitEventClassName) || empty($trackingVisitEventClassName)) {
             throw new \InvalidArgumentException('AbandonedCartConversion class name should be provided.');
         }
     }

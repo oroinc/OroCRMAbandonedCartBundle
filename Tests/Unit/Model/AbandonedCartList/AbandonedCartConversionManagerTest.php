@@ -193,7 +193,7 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->repository
             ->expects($this->once())->method('findOneBy')
-            ->with(array('marketingList' => $this->marketingList))
+            ->with(['marketingList' => $this->marketingList])
             ->will($this->returnValue($staticSegment));
 
         $this->conversionManager->findStaticSegment($conversion);
