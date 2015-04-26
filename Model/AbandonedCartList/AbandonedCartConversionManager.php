@@ -73,13 +73,11 @@ class AbandonedCartConversionManager
         $abandonedCartConversionClassName,
         $trackingVisitEventClassName
     ) {
-        $this->assertClassNames(
-            $magentoOrderClassName,
-            $campaignClassName,
-            $staticSegmentClassName,
-            $abandonedCartConversionClassName,
-            $trackingVisitEventClassName
-        );
+        $this->assertClassName($magentoOrderClassName, 'Magento Order class name should be provided.');
+        $this->assertClassName($magentoOrderClassName, 'Campaign class name should be provided.');
+        $this->assertClassName($staticSegmentClassName, 'StaticSegment class name should be provided.');
+        $this->assertClassName($abandonedCartConversionClassName, 'Conversion class name should be provided.');
+        $this->assertClassName($trackingVisitEventClassName, 'Tracking Visit Event class name should be provided.');
 
         $this->managerRegistry = $managerRegistry;
         $this->campaignAbandonedCartRelationManager = $campaignAbandonedCartRelationManager;
@@ -145,34 +143,14 @@ class AbandonedCartConversionManager
     }
 
     /**
-     * @param string $magentoOrderClassName
-     * @param string $campaignClassName
-     * @param string $staticSegmentClassName
-     * @param string $abandonedCartConversionClassName
-     * @param string $trackingVisitEventClassName
+     * @param $className
+     * @param $exceptionMessage
      * @throws \InvalidArgumentException
      */
-    protected function assertClassNames(
-        $magentoOrderClassName,
-        $campaignClassName,
-        $staticSegmentClassName,
-        $abandonedCartConversionClassName,
-        $trackingVisitEventClassName
-    ) {
-        if (!is_string($magentoOrderClassName) || empty($magentoOrderClassName)) {
-            throw new \InvalidArgumentException('Magento Order class name should be provided.');
-        }
-        if (!is_string($campaignClassName) || empty($campaignClassName)) {
-            throw new \InvalidArgumentException('MarketingList class name should be provided.');
-        }
-        if (!is_string($staticSegmentClassName) || empty($staticSegmentClassName)) {
-            throw new \InvalidArgumentException('StaticSegment class name should be provided.');
-        }
-        if (!is_string($abandonedCartConversionClassName) || empty($abandonedCartConversionClassName)) {
-            throw new \InvalidArgumentException('AbandonedCartConversion class name should be provided.');
-        }
-        if (!is_string($trackingVisitEventClassName) || empty($trackingVisitEventClassName)) {
-            throw new \InvalidArgumentException('Tracking Visit Event class name should be provided.');
+    protected function assertClassName($className, $exceptionMessage)
+    {
+        if (!is_string($className) || empty($className)) {
+            throw new \InvalidArgumentException($exceptionMessage);
         }
     }
 }
