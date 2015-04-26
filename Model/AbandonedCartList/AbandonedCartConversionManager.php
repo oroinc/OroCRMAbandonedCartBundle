@@ -74,7 +74,7 @@ class AbandonedCartConversionManager
         $trackingVisitEventClassName
     ) {
         $this->assertClassName($magentoOrderClassName, 'Magento Order class name should be provided.');
-        $this->assertClassName($magentoOrderClassName, 'Campaign class name should be provided.');
+        $this->assertClassName($campaignClassName, 'Campaign class name should be provided.');
         $this->assertClassName($staticSegmentClassName, 'StaticSegment class name should be provided.');
         $this->assertClassName($abandonedCartConversionClassName, 'Conversion class name should be provided.');
         $this->assertClassName($trackingVisitEventClassName, 'Tracking Visit Event class name should be provided.');
