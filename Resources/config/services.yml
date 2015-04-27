@@ -24,6 +24,8 @@ parameters:
 
     orocrm_abandonedcart.related_campaigns_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartRelatedCampaignsManager
 
+    orocrm_abandonedcart.listener.datagrid.segment_grid.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\SegmentGridListener
+
     #Conversion
     orocrm_abandonedcart.tracking_stat_provider_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory
     orocrm_abandonedcart.conversion_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\ConversionFactory
@@ -102,6 +104,14 @@ services:
         class: %orocrm_abandonedcart.listener.datagrid.abandonedcart_list.class%
         tags:
             - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.orocrm-marketing-list-grid, method: onBuildBefore }
+
+    orocrm_abandonedcart.listener.datagrid.segment_grid:
+        class: %orocrm_abandonedcart.listener.datagrid.segment_grid.class%
+        arguments:
+            - @orocrm_marketing_list.model.helper
+            - @orocrm_abandonedcart.provider
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.pre, method: onPreBuild }
 
     orocrm_abandonedcart.related_campaigns_manager:
         class: %orocrm_abandonedcart.related_campaigns_manager.class%
