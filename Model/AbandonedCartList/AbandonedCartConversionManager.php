@@ -143,8 +143,8 @@ class AbandonedCartConversionManager
     }
 
     /**
-     * @param $expectedClassName
-     * @param $actualClassName
+     * @param string $expectedClassName
+     * @param string $actualClassName
      * @throws \InvalidArgumentException
      */
     protected function assertClassName($expectedClassName, $actualClassName)
