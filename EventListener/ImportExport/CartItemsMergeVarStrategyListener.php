@@ -1,11 +1,12 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\ImportExport\Strategy;
+namespace OroCRM\Bundle\AbandonedCartBundle\EventListener\ImportExport;
 
 use Doctrine\Common\Collections\Collection;
 
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
+use Oro\Bundle\LocaleBundle\Formatter\NumberFormatter;
 use OroCRM\Bundle\MagentoBundle\Entity\Cart;
 use OroCRM\Bundle\MagentoBundle\Entity\CartItem;
 use OroCRM\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
@@ -21,28 +22,18 @@ class CartItemsMergeVarStrategyListener
     protected $doctrineHelper;
 
     /**
-     * @var \Twig_Environment
+     * @var NumberFormatter
      */
-    protected $twig;
-
-    /**
-     * @var string
-     */
-    protected $cartItemTemplate;
+    protected $numberFormatter;
 
     /**
      * @param DoctrineHelper $doctrineHelper
-     * @param \Twig_Environment $twig
-     * @param string $cartItemTemplate
+     * @param NumberFormatter $numberFormatter
      */
-    public function __construct(DoctrineHelper $doctrineHelper, \Twig_Environment $twig, $cartItemTemplate)
+    public function __construct(DoctrineHelper $doctrineHelper, NumberFormatter $numberFormatter)
     {
-        if (!is_string($cartItemTemplate) || empty($cartItemTemplate)) {
-            throw new \InvalidArgumentException('Cart item template for Extended Merge Var must be provided.');
-        }
         $this->doctrineHelper = $doctrineHelper;
-        $this->twig = $twig;
-        $this->cartItemTemplate = $cartItemTemplate;
+        $this->numberFormatter = $numberFormatter;
     }
 
     /**
@@ -75,19 +66,13 @@ class CartItemsMergeVarStrategyListener
             return;
         }
 
-        $result = [];
         foreach ($cartItemsMergeVars as $cartItemMergeVar) {
             $cartItemMergeVarValue = $this->prepareCartItemMergeVarValue($cartItemMergeVar, $cart);
-            if (is_null($cartItemMergeVarValue)) {
+            if (empty($cartItemMergeVarValue)) {
                 continue;
             }
-            $result[$cartItemMergeVar->getTag()] = $cartItemMergeVarValue;
+            $entity->addMergeVarValue($cartItemMergeVar->getTag(), (string) $cartItemMergeVarValue);
         }
-
-        $mergeVarValues = $entity->getMergeVarValues();
-        $mergeVarValues = array_merge($mergeVarValues, $result);
-
-        $entity->setMergeVarValues($mergeVarValues);
     }
 
     /**
@@ -100,7 +85,7 @@ class CartItemsMergeVarStrategyListener
         $extendedMergeVars = $extendedMergeVars
             ->filter(
                 function(ExtendedMergeVar $extendedMergeVar) {
-                    return false !== strpos($extendedMergeVar->getName(), CartItemsMergeVarProvider::NAME_PREFIX);
+                    return preg_match($this->getCartItemRegExp(), $extendedMergeVar->getName());
                 }
             );
 
@@ -152,11 +137,30 @@ class CartItemsMergeVarStrategyListener
             return null;
         }
 
-        $value = $this->twig
-            ->render(
-                $this->cartItemTemplate,
-                ['item' => $cartItem, 'index' => $cartItemIndex]
-            );
+        preg_match($this->getCartItemRegExp(), $cartItemMergeVar->getName(), $matches);
+
+        if (empty($matches[2])) {
+            return null;
+        }
+
+        $value = null;
+        switch ($matches[2]) {
+            case CartItemsMergeVarProvider::URL_MERGE_VAR:
+                $value = $cartItem->getProductUrl();
+                break;
+            case CartItemsMergeVarProvider::NAME_MERGE_VAR:
+                $value = $cartItem->getName();
+                break;
+            case CartItemsMergeVarProvider::QTY_MERGE_VAR:
+                $value = $this->numberFormatter->formatDecimal($cartItem->getQty());
+                break;
+            case CartItemsMergeVarProvider::PRICE_MERGE_VAR:
+                $value = $this->numberFormatter->formatCurrency($cartItem->getPrice());
+                break;
+            case CartItemsMergeVarProvider::TOTAL_MERGE_VAR:
+                $value = $this->numberFormatter->formatCurrency($cartItem->getRowTotal());
+                break;
+        }
 
         return $value;
     }
@@ -167,12 +171,24 @@ class CartItemsMergeVarStrategyListener
      */
     protected function extractCartItemIndex(ExtendedMergeVar $cartItemMergeVar)
     {
-        $name = $cartItemMergeVar->getName();
-        $index = str_replace('item_', '', $name);
-        $index = abs((int) $index);
+        preg_match($this->getCartItemRegExp(), $cartItemMergeVar->getName(), $matches);
+        if (empty($matches[1])) {
+            return 0;
+        }
+
+        $index = abs((int) $matches[1]);
         if ($index > 0) {
             $index--;
         }
+
         return $index;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCartItemRegExp()
+    {
+        return sprintf('/%s_([0-9]+)_([a-z]+)/', CartItemsMergeVarProvider::NAME_PREFIX);
     }
 }

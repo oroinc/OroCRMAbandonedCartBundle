@@ -76,7 +76,6 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
             ->with(['marketingList' => 'testId'])
             ->will($this->returnValue($campaignAbandonedCartRelation));
 
-
         $returnedCampaign = $this->campaignAbandonedCartRelationManager
             ->getCampaignByMarketingList($this->marketingList);
 

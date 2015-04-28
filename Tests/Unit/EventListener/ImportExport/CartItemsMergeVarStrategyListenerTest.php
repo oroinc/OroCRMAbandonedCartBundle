@@ -1,20 +1,21 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\ImportExport\Strategy;
+namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\ImportExport;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
-use Oro\Bundle\SegmentBundle\Entity\Segment;
 use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
+use Oro\Bundle\LocaleBundle\Formatter\NumberFormatter;
+use Oro\Bundle\SegmentBundle\Entity\Segment;
 use OroCRM\Bundle\MagentoBundle\Entity\Cart;
 use OroCRM\Bundle\MagentoBundle\Entity\CartItem;
+use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
 use OroCRM\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
-use OroCRM\Bundle\AbandonedCartBundle\ImportExport\Strategy\CartItemsMergeVarStrategyListener;
 use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use OroCRM\Bundle\AbandonedCartBundle\EventListener\ImportExport\CartItemsMergeVarStrategyListener;
 
 class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,9 +32,9 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
     protected $doctrineHelper;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\Twig_Environment
+     * @var \PHPUnit_Framework_MockObject_MockObject|NumberFormatter
      */
-    protected $twig;
+    protected $numberFormatter;
 
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository
@@ -44,11 +45,6 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
      * @var \PHPUnit_Framework_MockObject_MockObject|StrategyEvent
      */
     protected $strategyEvent;
-
-    /**
-     * @var string
-     */
-    protected $template;
 
     /**
      * @var MemberExtendedMergeVar
@@ -76,7 +72,9 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
             ->getMockBuilder('Oro\Bundle\EntityBundle\ORM\DoctrineHelper')
             ->disableOriginalConstructor()
             ->getMock();
-        $this->twig = $this->getMockBuilder('\Twig_Environment')->getMock();
+        $this->numberFormatter = $this->getMockBuilder('Oro\Bundle\LocaleBundle\Formatter\NumberFormatter')
+            ->disableOriginalConstructor()
+            ->getMock();
         $this->entityRepository = $this
             ->getMockBuilder('Doctrine\ORM\EntityRepository')
             ->disableOriginalConstructor()
@@ -85,7 +83,6 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
             ->getMockBuilder('Oro\Bundle\ImportExportBundle\Event\StrategyEvent')
             ->disableOriginalConstructor()
             ->getMock();
-        $this->template = 'cartItem.txt.twig';
 
         $this->doctrineHelper->expects($this->any())->method('getEntityRepository')
             ->with(self::SEGMENT_ENTITY_CLASS)->will($this->returnValue($this->entityRepository));
@@ -100,8 +97,7 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
 
         $this->listener = new CartItemsMergeVarStrategyListener(
             $this->doctrineHelper,
-            $this->twig,
-            $this->template
+            $this->numberFormatter
         );
     }
 
@@ -158,6 +154,18 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
         $this->listener->onProcessAfter($this->strategyEvent);
 
         $this->assertEmpty($this->entity->getMergeVarValues());
+
+        $emailMergeVar = new ExtendedMergeVar();
+        $itemCountMergeVar = new ExtendedMergeVar();
+        $emailMergeVar->setName('email');
+        $itemCountMergeVar->setName('item_count');
+
+        $this->staticSegment->addExtendedMergeVar($emailMergeVar);
+        $this->staticSegment->addExtendedMergeVar($itemCountMergeVar);
+
+        $this->listener->onProcessAfter($this->strategyEvent);
+
+        $this->assertEmpty($this->entity->getMergeVarValues());
     }
 
     public function testOnProcessAfterWhenContextNotHasEntityId()
@@ -186,7 +194,7 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
         $this->entity->setMergeVarValuesContext(['entity_id' => $cartEntityId]);
 
         $firstCartItemMergeVar = new ExtendedMergeVar();
-        $firstCartItemMergeVar->setName('item_1')->markSynced();
+        $firstCartItemMergeVar->setName('item_1_name')->markSynced();
 
         $this->staticSegment->addExtendedMergeVar($firstCartItemMergeVar);
 
@@ -211,7 +219,7 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
         $this->entity->setMergeVarValuesContext(['entity_id' => $cartEntityId]);
 
         $firstCartItemMergeVar = new ExtendedMergeVar();
-        $firstCartItemMergeVar->setName('item_1')->markSynced();
+        $firstCartItemMergeVar->setName('item_1_name')->markSynced();
 
         $this->staticSegment->addExtendedMergeVar($firstCartItemMergeVar);
 
@@ -235,9 +243,10 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
 
         $cartItem1 = new CartItem();
         $cartItem2 = new CartItem();
-        $cartItems = new ArrayCollection([$cartItem1, $cartItem2]);
+        $cartItem1->setName('CartItem Name 1');
+        $cartItem2->setName('CartItem Name 2');
 
-        $cart->setCartItems($cartItems);
+        $cart->setCartItems(new ArrayCollection([$cartItem1, $cartItem2]));
 
         $this->entity->setMergeVarValuesContext(['entity_id' => 1]);
 
@@ -246,9 +255,9 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
         $thirdCartItemMergeVar = new ExtendedMergeVar();
         $emailMergeVar = new ExtendedMergeVar();
 
-        $firstCartItemMergeVar->setName('item_1')->markSynced();
-        $secondCartItemMergeVar->setName('item_2')->markSynced();
-        $thirdCartItemMergeVar->setName('item_3')->markSynced();
+        $firstCartItemMergeVar->setName('item_1_name')->markSynced();
+        $secondCartItemMergeVar->setName('item_2_name')->markSynced();
+        $thirdCartItemMergeVar->setName('item_3_name')->markSynced();
         $emailMergeVar->setName('email');
 
         $this->staticSegment->addExtendedMergeVar($firstCartItemMergeVar);
@@ -259,24 +268,16 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
         $this->entityRepository->expects($this->once())->method('find')
             ->with($cartEntityId)->will($this->returnValue($cart));
 
-        $this->twig->expects($this->at(0))->method('render')
-            ->with($this->template, ['item' => $cartItem1, 'index' => 0])
-            ->will($this->returnValue('rendered_template_of_cart_item_1'));
-
-        $this->twig->expects($this->at(1))->method('render')
-            ->with($this->template, ['item' => $cartItem2, 'index' => 1])
-            ->will($this->returnValue('rendered_template_of_cart_item_2'));
-
         $this->listener->onProcessAfter($this->strategyEvent);
 
         $mergeVarValues = $this->entity->getMergeVarValues();
 
         $this->assertNotEmpty($mergeVarValues);
         $this->assertArrayHasKey($firstCartItemMergeVar->getTag(), $mergeVarValues);
-        $this->assertEquals('rendered_template_of_cart_item_1', $mergeVarValues[$firstCartItemMergeVar->getTag()]);
+        $this->assertEquals('CartItem Name 1', $mergeVarValues[$firstCartItemMergeVar->getTag()]);
 
         $this->assertArrayHasKey($secondCartItemMergeVar->getTag(), $mergeVarValues);
-        $this->assertEquals('rendered_template_of_cart_item_2', $mergeVarValues[$secondCartItemMergeVar->getTag()]);
+        $this->assertEquals('CartItem Name 2', $mergeVarValues[$secondCartItemMergeVar->getTag()]);
 
         $this->assertArrayNotHasKey($thirdCartItemMergeVar->getTag(), $mergeVarValues);
         $this->assertArrayNotHasKey($emailMergeVar->getTag(), $mergeVarValues);

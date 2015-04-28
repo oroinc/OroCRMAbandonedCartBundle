@@ -7,6 +7,7 @@
 {% oro_title_set({params : {"%entityName%": entity.name|default('N/A') }}) %}
 
 {% block navButtons %}
+    {% placeholder abandoned_cart_mailchimp_menu with {entity: entity} %}
     {% if isDesktopVersion() and resource_granted('EDIT', entity) %}
         {{ UI.editButton({
             'path' : path('orocrm_abandoned_cart_list_update', { id: entity.id }),
@@ -110,6 +111,11 @@
             [{'data': [syncStatusData]}]
         ) %}
     {% endif %}
+
+    {%- set abandonedCartCampaignStatisticsData -%}
+        {% include 'OroCRMAbandonedCartBundle:AbandonedCartConversion:stats.html.twig' %}
+    {%- endset -%}
+
     {% set dataBlocks = [
         {
             'title': 'orocrm.abandonedcart.block.general'|trans,
@@ -127,7 +133,13 @@
             'subblocks': [
                 {'data' : [removedItemsGrid]}
             ]
-        }
+        },
+        {
+            'title': 'orocrm.abandonedcart.block.conversion'|trans,
+            'subblocks': [
+                {'data' : [abandonedCartCampaignStatisticsData]}
+            ]
+        },
     ] %}
 
     <div data-page-component-module="orocrmmarketinglist/js/app/components/grid-linker"

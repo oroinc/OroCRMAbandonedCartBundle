@@ -9,6 +9,7 @@ orocrm:
         block:
             general: General Information
             removed: Removed Items
+            conversion: Conversion
 
         form:
             importance: Important
@@ -18,4 +19,50 @@ orocrm:
             label:   Entity
             saved:   Abandoned Cart list saved
 
-        cart_item_mergevar.label: Cart Item (%index%)
+        connection:
+            confirmation:
+                disconnect: 'Are you sure you want to unlink this Abandoned Cart from MailChimp'
+            message:
+                disconnect: 'Abandoned Cart disconnected from MailChimp'
+                syncronize_scheduled: 'Abandoned Cart scheduled to synchronize with MailChimp'
+
+        conversion:
+            name: Conversion
+            button:
+                enable: 'Related Campaigns'
+            message:
+                update: 'MailChimp Automation Workflows updated'
+            dialog:
+                button:
+                    update: Update
+                    connect: Enable conversion
+                    cancel: Cancel
+                title:
+                    connect: MailChimp Workflow Automation
+            title:
+                summary: Summary
+                orders: Orders
+                total: Total
+
+        datagrid:
+            campaign_name_label: Name
+            columns_total_label: Total
+
+        connector:
+            automation_campaign:
+                label: Automation Campaign Connector
+                job: Import automation campaigns from MailChimp
+
+        campaign_code_mergevar.label: Campaign Code
+
+        mergevar:
+            cart_item:
+                url.label: Cart Item Product URL (%index%)
+                name.label: Cart Item Name (%index%)
+                qty.label: Cart Item Qty (%index%)
+                price.label: Cart Item Price (%index%)
+                total.label: Cart Item Row Total (%index%)
+
+        acl:
+            action:
+                general: Abandoned Cart Campaign manipulations

@@ -65,7 +65,7 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
 
         $actualExtendedMergeVars = $this->provider->provideExtendedMergeVars($marketingList);
 
-        $this->assertCount(3, $actualExtendedMergeVars);
+        $this->assertCount(15, $actualExtendedMergeVars);
         $this->assertEquals($expectedMerVars, $actualExtendedMergeVars);
     }
 
@@ -77,23 +77,38 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 [
-                    ['orocrm.abandonedcart.cart_item_mergevar.label', ['%index%' => 1], null, null, 'Cart Item (1)'],
-                    ['orocrm.abandonedcart.cart_item_mergevar.label', ['%index%' => 2], null, null, 'Cart Item (2)'],
-                    ['orocrm.abandonedcart.cart_item_mergevar.label', ['%index%' => 3], null, null, 'Cart Item (3)']
+                    ['orocrm.abandonedcart.mergevar.cart_item.url.label', ['%index%' => 1], null, null, 'URL (1)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.name.label', ['%index%' => 1], null, null, 'Name (1)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.qty.label', ['%index%' => 1], null, null, 'Qty (1)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.price.label', ['%index%' => 1], null, null, 'Price (1)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.total.label', ['%index%' => 1], null, null, 'Total (1)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.url.label', ['%index%' => 2], null, null, 'URL (2)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.name.label', ['%index%' => 2], null, null, 'Name (2)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.qty.label', ['%index%' => 2], null, null, 'Qty (2)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.price.label', ['%index%' => 2], null, null, 'Price (2)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.total.label', ['%index%' => 2], null, null, 'Total (2)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.url.label', ['%index%' => 3], null, null, 'URL (3)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.name.label', ['%index%' => 3], null, null, 'Name (3)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.qty.label', ['%index%' => 3], null, null, 'Qty (3)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.price.label', ['%index%' => 3], null, null, 'Price (3)'],
+                    ['orocrm.abandonedcart.mergevar.cart_item.total.label', ['%index%' => 3], null, null, 'Total (3)']
                 ],
                 [
-                    [
-                        'name' => 'item_1',
-                        'label' => 'Cart Item (1)'
-                    ],
-                    [
-                        'name' => 'item_2',
-                        'label' => 'Cart Item (2)'
-                    ],
-                    [
-                        'name' => 'item_3',
-                        'label' => 'Cart Item (3)'
-                    ]
+                    ['name' => 'item_1_url', 'label' => 'URL (1)'],
+                    ['name' => 'item_1_name', 'label' => 'Name (1)'],
+                    ['name' => 'item_1_qty', 'label' => 'Qty (1)'],
+                    ['name' => 'item_1_price', 'label' => 'Price (1)'],
+                    ['name' => 'item_1_total', 'label' => 'Total (1)'],
+                    ['name' => 'item_2_url', 'label' => 'URL (2)'],
+                    ['name' => 'item_2_name', 'label' => 'Name (2)'],
+                    ['name' => 'item_2_qty', 'label' => 'Qty (2)'],
+                    ['name' => 'item_2_price', 'label' => 'Price (2)'],
+                    ['name' => 'item_2_total', 'label' => 'Total (2)'],
+                    ['name' => 'item_3_url', 'label' => 'URL (3)'],
+                    ['name' => 'item_3_name', 'label' => 'Name (3)'],
+                    ['name' => 'item_3_qty', 'label' => 'Qty (3)'],
+                    ['name' => 'item_3_price', 'label' => 'Price (3)'],
+                    ['name' => 'item_3_total', 'label' => 'Total (3)']
                 ]
             ]
         ];
