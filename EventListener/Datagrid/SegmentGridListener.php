@@ -50,6 +50,11 @@ class SegmentGridListener
         }
 
         $marketingList = $this->marketingListHelper->getMarketingList($marketingListId);
+
+        if (!$marketingList) {
+            return;
+        }
+
         $abandonedCartCampaign = $this->abandonedCartCampaignProvider->getAbandonedCartCampaign($marketingList);
         if (!$abandonedCartCampaign) {
             return;
