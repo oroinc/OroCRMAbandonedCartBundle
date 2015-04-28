@@ -1,0 +1,6 @@
+OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion:
+    properties:
+        campaigns:
+            - NotBlank: ~
+        marketingList:
+            - NotBlank: ~

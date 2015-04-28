@@ -1,0 +1,192 @@
+parameters:
+    orocrm_abandonedcart.entity.abandonedcart_campaign.class: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign
+    orocrm_abandonedcart.entity.abandonedcart_conversion.class: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion
+    orocrm_abandonedcart.entity.marketing_list_type.class: OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType
+
+    orocrm_abandonedcart.entity.tracking_visit_event.class: Oro\Bundle\TrackingBundle\Entity\TrackingVisitEvent
+
+    orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager
+    orocrm_abandonedcart.predefined_marketing_list_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory
+    orocrm_abandonedcart.campaign_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory
+
+    orocrm_abandonedcart.extended_merge_var.provider.cart_items.class: OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider
+    orocrm_abandonedcart.importexport.strategy.member_cartitems_merge_var.listener.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\ImportExport\CartItemsMergeVarStrategyListener
+    orocrm_abandonedcart.provider.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProvider
+
+    orocrm_abandonedcart.marketing_list.datagrid.listener.class: OroCRM\Bundle\AbandonedCartBundle\Datagrid\MarketingListListener
+    orocrm_abandonedcart.datagrid.listener.class: OroCRM\Bundle\AbandonedCartBundle\Datagrid\AbandonedCartCampaignListener
+    orocrm_abandonedcart.event_listener.datagrid.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartListener
+
+    orocrm_abandonedcart.marketing_list.datagrid.name: orocrm-marketing-list-grid
+    orocrm_abandonedcart.datagrid.name: orocrm-abandonedcart-list-grid
+
+    orocrm_abandonedcart.listener.datagrid.abandonedcart_list.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartGridListener
+
+    orocrm_abandonedcart.related_campaigns_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartRelatedCampaignsManager
+
+    orocrm_abandonedcart.listener.datagrid.segment_grid.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\SegmentGridListener
+
+    #Conversion
+    orocrm_abandonedcart.tracking_stat_provider_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory
+    orocrm_abandonedcart.conversion_factory.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\ConversionFactory
+    orocrm_abandonedcart.extended_merge_var.provider.campaign_code.class: OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CampaignCodeMergeVarProvider
+    orocrm_abandonedcart.importexport.strategy.member_campaigncode_merge_var.listener.class: OroCRM\Bundle\AbandonedCartBundle\EventListener\ImportExport\CampaignCodeMergeVarStrategyListener
+    orocrm_abandonedcart.conversion_manager.class: OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager
+    orocrm_abandonedcart.connector.automation_campaign.class: OroCRM\Bundle\AbandonedCartBundle\Provider\Connector\AutomationCampaignConnector
+
+    orocrm_abandonedcart.security.acl.voter.abandonedcart.class: OroCRM\Bundle\AbandonedCartBundle\Acl\Voter\AbandonedCartVoter
+
+services:
+    orocrm_abandonedcart.abandoned_cart_list.campaign_manager:
+        class: %orocrm_abandonedcart.abandoned_cart_list.campaign_manager.class%
+        arguments:
+            - @doctrine
+            - %orocrm_abandonedcart.entity.abandonedcart_campaign.class%
+
+    orocrm_abandonedcart.provider:
+        class: %orocrm_abandonedcart.provider.class%
+        arguments:
+            - @doctrine
+            - %orocrm_abandonedcart.entity.abandonedcart_campaign.class%
+
+    orocrm_abandonedcart.marketing_list.datagrid.listener:
+        class: %orocrm_abandonedcart.marketing_list.datagrid.listener.class%
+        arguments:
+            - %orocrm_abandonedcart.marketing_list.datagrid.name%
+            - %orocrm_abandonedcart.entity.abandonedcart_campaign.class%
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.after, method: onBuildAfter }
+
+    orocrm_abandonedcart.datagrid.listener:
+        class: %orocrm_abandonedcart.datagrid.listener.class%
+        arguments:
+            - %orocrm_abandonedcart.datagrid.name%
+            - %orocrm_abandonedcart.entity.abandonedcart_campaign.class%
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.after, method: onBuildAfter }
+
+    orocrm_abandonedcart.predefined_marketing_list_factory:
+        class: %orocrm_abandonedcart.predefined_marketing_list_factory.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - %orocrm_magento.cart.entity.class%
+            - %orocrm_abandonedcart.entity.marketing_list_type.class%
+
+    orocrm_abandonedcart.campaign_factory:
+        class: %orocrm_abandonedcart.campaign_factory.class%
+
+    orocrm_abandonedcart.extended_merge_var.provider.cart_items:
+        class: %orocrm_abandonedcart.extended_merge_var.provider.cart_items.class%
+        arguments:
+            - @orocrm_abandonedcart.provider
+            - @translator
+        tags:
+            - { name: orocrm_mailchimp.extended_merge_vars.provider }
+
+    orocrm_abandonedcart.importexport.strategy.member_cartitems_merge_var.listener:
+        class: %orocrm_abandonedcart.importexport.strategy.member_cartitems_merge_var.listener.class%
+        arguments:
+            - @oro_entity.doctrine_helper
+            - @oro_locale.formatter.number
+        tags:
+            - { name: kernel.event_listener, event: oro_importexport.strategy.process_after, method: onProcessAfter }
+
+    orocrm_abandonedcart.event_listener.datagrid:
+        class: %orocrm_abandonedcart.event_listener.datagrid.class%
+        arguments:
+            - @orocrm_marketing_list.model.helper
+            - @orocrm_abandonedcart.provider
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.orocrm-marketing-list-items-base-unsubscribe-mixin, method: onBuildBefore }
+
+    # event listeners
+    orocrm_abandonedcart.listener.datagrid.abandonedcart_list:
+        class: %orocrm_abandonedcart.listener.datagrid.abandonedcart_list.class%
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.orocrm-marketing-list-grid, method: onBuildBefore }
+
+    orocrm_abandonedcart.listener.datagrid.segment_grid:
+        class: %orocrm_abandonedcart.listener.datagrid.segment_grid.class%
+        arguments:
+            - @orocrm_marketing_list.model.helper
+            - @orocrm_abandonedcart.provider
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.pre, method: onPreBuild }
+
+    orocrm_abandonedcart.related_campaigns_manager:
+        class: %orocrm_abandonedcart.related_campaigns_manager.class%
+        arguments:
+            - @doctrine
+            - @orocrm_abandonedcart.provider
+            - %orocrm_mailchimp.entity.static_segment.class%
+            - %orocrm_mailchimp.entity.campaign.class%
+
+    #Conversion
+    orocrm_abandonedcart.conversion_manager:
+        class: %orocrm_abandonedcart.conversion_manager.class%
+        arguments:
+            - @doctrine
+            - @orocrm_abandonedcart.abandoned_cart_list.campaign_manager
+            - @orocrm_abandonedcart.tracking_stat_provider_factory
+            - %orocrm_magento.order.entity.class%
+            - %orocrm_campaign.entity.class%
+            - %orocrm_mailchimp.entity.static_segment.class%
+            - %orocrm_abandonedcart.entity.abandonedcart_conversion.class%
+            - %orocrm_abandonedcart.entity.tracking_visit_event.class%
+
+    orocrm_abandonedcart.extended_merge_var.provider.campaign_code:
+        class: %orocrm_abandonedcart.extended_merge_var.provider.campaign_code.class%
+        arguments:
+            - @orocrm_abandonedcart.provider
+            - @translator
+        tags:
+            - { name: orocrm_mailchimp.extended_merge_vars.provider }
+
+    orocrm_abandonedcart.conversion_factory:
+        class: %orocrm_abandonedcart.conversion_factory.class%
+
+    orocrm_abandonedcart.tracking_stat_provider_factory:
+        class: %orocrm_abandonedcart.tracking_stat_provider_factory.class%
+        arguments:
+            - @doctrine
+
+    orocrm_abandonedcart.connector.automation_campaign:
+        class: %orocrm_abandonedcart.connector.automation_campaign.class%
+        parent: orocrm_mailchimp.connector.abstract
+        calls:
+            - [setEntityName, [%orocrm_mailchimp.entity.campaign.class%]]
+        tags:
+            - { name: oro_integration.connector, type: automation_campaign, channel_type: mailchimp }
+
+    orocrm_abandonedcart.importexport.processor.automation_campaign.remove:
+        class: %orocrm_mailchimp.importexport.processor.campaign_remove.class%
+        parent: orocrm_mailchimp.importexport.processor.remove.abstract
+        calls:
+            - [setEntityName, [%orocrm_mailchimp.entity.campaign.class%]]
+            - [setSearchField, ['originId']]
+            - [setCampaignType, ['automation']]
+
+    orocrm_abandonedcart.importexport.writer.automation_campaign.remove:
+        class: %orocrm_mailchimp.importexport.writer.campaign_remove.class%
+        arguments:
+            - @doctrine
+            - %orocrm_mailchimp.entity.campaign.class%
+            - 'originId'
+            - 'automation'
+
+    orocrm_abandonedcart.importexport.strategy.member_campaigncode_merge_var.listener:
+        class: %orocrm_abandonedcart.importexport.strategy.member_campaigncode_merge_var.listener.class%
+        arguments:
+            - @orocrm_abandonedcart.provider
+        tags:
+            - { name: kernel.event_listener, event: oro_importexport.strategy.process_after, method: onProcessAfter }
+
+    orocrm_abandonedcart.security.acl.voter.abandonedcart:
+        class: %orocrm_abandonedcart.security.acl.voter.abandonedcart.class%
+        arguments:
+            - @oro_entity.doctrine_helper
+            - %oro_integration.entity.class%
+        calls:
+            - [setClassName, [%orocrm_abandonedcart.entity.abandonedcart_campaign.class%]]
+        tags:
+            - { name: security.voter, priority: 700 }

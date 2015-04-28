@@ -1,0 +1,155 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+{% import 'OroSegmentBundle::macros.html.twig' as segmentQD %}
+
+{% oro_title_set({params : {"%entityName%": entity.name|default('N/A') }}) %}
+
+{% block navButtons %}
+    {% placeholder abandoned_cart_mailchimp_menu with {entity: entity} %}
+    {% if isDesktopVersion() and resource_granted('EDIT', entity) %}
+        {{ UI.editButton({
+            'path' : path('orocrm_abandoned_cart_list_update', { id: entity.id }),
+            'entity_label': 'orocrm.abandonedcart.entity_label'|trans
+        }) }}
+    {% endif %}
+    {% if isDesktopVersion() and resource_granted('DELETE', entity) %}
+        {{ UI.deleteButton({
+            'dataUrl': path('orocrm_abandoned_cart_list_delete', {'id': entity.id}),
+            'dataRedirect': path('orocrm_abandoned_cart_list'),
+            'aCss': 'no-hash remove-button',
+            'id': 'btn-remove-user',
+            'dataId': entity.id,
+            'entity_label': 'orocrm.abandonedcart.entity_label'|trans
+        }) }}
+    {% endif %}
+{% endblock navButtons %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+        'entity': entity,
+        'indexPath': path('orocrm_abandoned_cart_list'),
+        'indexLabel': 'orocrm.abandonedcart.entity_plural_label'|trans,
+        'entityTitle': entity.name|default('N/A'),
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {%- set listInformation -%}
+    <div class="row-fluid form-horizontal">
+        <div class="responsive-block">
+            {{ UI.renderProperty('orocrm.abandonedcart.name.label'|trans, entity.name) }}
+            {{ UI.renderProperty('orocrm.abandonedcart.description.label'|trans, entity.description) }}
+
+            {% if entity.segment is not empty %}
+                {%- set segmentData -%}
+                {% if resource_granted('oro_segment_view') %}
+                    <a href="{{ path('oro_segment_view', {'id': entity.segment.id}) }}">
+                        {{ entity.segment.name }}
+                    </a>
+                {% else %}
+                    {{ entity.segment.name }}
+                {% endif %}
+                {%- endset -%}
+
+                {{ UI.renderHtmlProperty('oro.segment.entity_label'|trans, segmentData) }}
+            {% endif %}
+
+            {%- if campaign -%}
+                {%- if resource_granted('orocrm_campaign_view') -%}
+                    {% set campaignView = '<a href="' ~ path('orocrm_campaign_view', {'id': campaign.id}) ~ '">' ~ campaign.name ~ '</a>' %}
+                {%- else -%}
+                    {% set campaignView = campaign.name %}
+                {%- endif -%}
+                {{ UI.renderHtmlProperty('orocrm.campaign.emailcampaign.campaign.label'|trans, campaignView) }}
+            {%- endif -%}
+
+            {%- set ownerData -%}
+            {%- if entity.owner -%}
+                {% if resource_granted('oro_user_user_view') %}
+                    <a href="{{ path('oro_user_view', {'id': entity.owner.id}) }}">
+                        {{ entity.owner|oro_format_name|escape }}
+                    </a>
+                {% else %}
+                    {{ entity.owner|oro_format_name|escape }}
+                {% endif %}
+            {%- endif -%}
+            {%- endset -%}
+            {{ UI.renderHtmlProperty('orocrm.abandonedcart.owner.label'|trans, ownerData) }}
+
+        </div>
+        <div class="responsive-block">
+            {{ entityConfig.renderDynamicFields(entity) }}
+        </div>
+    </div>
+    {%- endset -%}
+
+    {%- set syncStatusData -%}
+        {% placeholder marketing_list_sync_info with {marketingList: entity} %}
+    {%- endset -%}
+
+    {% set itemsGridName = gridName ~ '_items' %}
+    {% set removedItemsGridName = gridName ~ '_removed_items' %}
+    {% set itemsMixin = 'orocrm-marketing-list-items-mixin' %}
+    {% set removedItemsMixin = 'orocrm-marketing-list-removed-items-mixin' %}
+    {% if entity.manual %}
+        {% set itemsMixin = 'orocrm-marketing-list-manual-items-mixin' %}
+        {% set removedItemsMixin = 'orocrm-marketing-list-manual-removed-items-mixin' %}
+    {% endif %}
+    {%- set listData -%}
+        {{ dataGrid.renderGrid(itemsGridName, {'grid-mixin': itemsMixin}) }}
+    {%- endset -%}
+    {%- set removedItemsGrid -%}
+        {{  dataGrid.renderGrid(removedItemsGridName, {'grid-mixin': removedItemsMixin}) }}
+    {%- endset -%}
+
+    {% set generalSectionBlocks = [{'data' : [listInformation]}]%}
+    {% if syncStatusData is not empty %}
+        {% set generalSectionBlocks = generalSectionBlocks|merge(
+            [{'data': [syncStatusData]}]
+        ) %}
+    {% endif %}
+
+    {%- set abandonedCartCampaignStatisticsData -%}
+        {% include 'OroCRMAbandonedCartBundle:AbandonedCartConversion:stats.html.twig' %}
+    {%- endset -%}
+
+    {% set dataBlocks = [
+        {
+            'title': 'orocrm.abandonedcart.block.general'|trans,
+            'class': 'active',
+            'subblocks': generalSectionBlocks
+        },
+        {
+            'title': config.plural_label,
+            'subblocks': [
+                {'data' : [listData]}
+            ]
+        },
+        {
+            'title' : 'orocrm.marketinglist.block.removed'|trans,
+            'subblocks': [
+                {'data' : [removedItemsGrid]}
+            ]
+        },
+        {
+            'title': 'orocrm.abandonedcart.block.conversion'|trans,
+            'subblocks': [
+                {'data' : [abandonedCartCampaignStatisticsData]}
+            ]
+        },
+    ] %}
+
+    <div data-page-component-module="orocrmmarketinglist/js/app/components/grid-linker"
+         data-page-component-options="{{ [
+             {main: itemsGridName, secondary: removedItemsGridName},
+             {main: removedItemsGridName, secondary: itemsGridName}
+         ]|json_encode }}"></div>
+
+    {% set id = 'abandonedcartListView' %}
+    {% set data = { 'dataBlocks': dataBlocks } %}
+
+    {{ parent() }}
+{% endblock content_data %}
