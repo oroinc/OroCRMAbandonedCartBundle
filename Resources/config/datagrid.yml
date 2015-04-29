@@ -1,0 +1,115 @@
+datagrid:
+    orocrm-abandonedcart-list-grid:
+        extends: orocrm-marketing-list-grid
+        properties:
+            id: ~
+            view_link:
+                type: url
+                route: orocrm_abandoned_cart_list_view
+                params: [ id ]
+            update_link:
+                type: url
+                route: orocrm_abandoned_cart_list_update
+                params:
+                    - id
+            delete_link:
+                type: url
+                route: orocrm_abandoned_cart_list_delete
+                params:
+                    - id
+        actions:
+            view:
+                type:         navigate
+                label:        oro.grid.action.view
+                link:         view_link
+                icon:         eye-open
+                acl_recource: orocrm_abandoned_cart_list_view
+                rowAction:    true
+            update:
+                type:          navigate
+                acl_resource:  orocrm_abandoned_cart_list_update
+                label:         oro.grid.action.update
+                icon:          edit
+                link:          update_link
+                launcherOptions:
+                    className: 'no-hash mobile-hide'
+            delete:
+                type:          delete
+                acl_resource:  orocrm_abandoned_cart_list_delete
+                label:         oro.grid.action.delete
+                icon:          trash
+                link:          delete_link
+                launcherOptions:
+                    className: 'no-hash mobile-hide'
+        options:
+            entityHint: abandoned cart campaigns
+            entity_pagination: true
+            export: true
+
+    orocrm-abandonedcart-campaigns-grid:
+        source:
+            type: orm
+            query:
+                select:
+                    - conv.id
+                    - mc.title
+                    - mc.emailsSent
+                    - mc.opens
+                    - mc.usersWhoClicked
+                from:
+                    - { table: OroCRMAbandonedCartBundle:AbandonedCartConversion, alias: conv }
+                join:
+                    left:
+                        - { join: conv.campaigns, alias: mc }
+                where:
+                    and:
+                        - conv.marketingList = :marketing_list_id
+            bind_parameters:
+                marketing_list_id: marketingListId
+        columns:
+            title:
+                label: 'orocrm.abandonedcart.datagrid.campaign_name_label'
+            emailsSent:
+                label: 'orocrm.mailchimp.emailcampaign.emailsSent.label'
+            opens:
+                label: 'orocrm.mailchimp.emailcampaign.opens.label'
+            usersWhoClicked:
+                label: 'orocrm.mailchimp.emailcampaign.clicks.label'
+        sorters:
+            columns:
+                title:
+                    data_name: mc.title
+                emailsSent:
+                    data_name: mc.emailsSent
+                opens:
+                    data_name: mc.opens
+                usersWhoClicked:
+                    data_name: mc.usersWhoClicked
+        filters:
+            columns:
+                title:
+                    type: string
+                    data_name: mc.title
+                emailsSent:
+                    type: number
+                    data_name: mc.emailsSent
+                opens:
+                    type: number
+                    data_name: mc.opens
+                usersWhoClicked:
+                    type: number
+                    data_name: mc.usersWhoClicked
+        totals:
+            grand_total:
+                columns:
+                    title:
+                        label: 'orocrm.abandonedcart.datagrid.columns_total_label'
+                    emailsSent:
+                        expr: 'SUM(mc.emailsSent)'
+                    opens:
+                        expr: 'SUM(mc.opens)'
+                    usersWhoClicked:
+                        expr: 'SUM(mc.usersWhoClicked)'
+        options:
+            entityHint: abandoned cart conversion
+            export: true

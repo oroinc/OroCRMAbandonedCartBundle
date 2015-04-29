@@ -1,0 +1,11 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'OroCRMMailChimpBundle::macros.html.twig' as ui %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+
+{% if stats is not null %}
+    <strong>{{ 'orocrm.abandonedcart.conversion.title.summary'|trans }}</strong>
+    {{ UI.renderHtmlProperty('orocrm.abandonedcart.conversion.title.orders'|trans, stats.qty) }}
+    {{ UI.renderHtmlProperty('orocrm.abandonedcart.conversion.title.total'|trans, stats.total|oro_format_currency) }}
+
+    {{ dataGrid.renderGrid('orocrm-abandonedcart-campaigns-grid', {'marketingListId': entity.id}) }}
+{% endif %}
