@@ -84,7 +84,7 @@ class CartItemsMergeVarStrategyListener
         $extendedMergeVars = $staticSegment->getSyncedExtendedMergeVars();
         $extendedMergeVars = $extendedMergeVars
             ->filter(
-                function(ExtendedMergeVar $extendedMergeVar) {
+                function (ExtendedMergeVar $extendedMergeVar) {
                     return preg_match($this->getCartItemRegExp(), $extendedMergeVar->getName());
                 }
             );

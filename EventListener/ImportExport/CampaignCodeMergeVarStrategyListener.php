@@ -44,7 +44,7 @@ class CampaignCodeMergeVarStrategyListener
 
         $campaignCodeMergeVar = $staticSegment->getExtendedMergeVars()
             ->filter(
-                function(ExtendedMergeVar $extendedMergeVar) {
+                function (ExtendedMergeVar $extendedMergeVar) {
                     return $extendedMergeVar->getName() === CampaignCodeMergeVarProvider::CAMPAIGN_CODE_NAME;
                 }
             )->first();
