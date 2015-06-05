@@ -77,22 +77,18 @@ class AbandonedCartListType extends AbstractQueryDesignerType
                 );
             }
         );
-
-        parent::buildForm($builder, $options);
-
         $builder->addEventListener(
             FormEvents::POST_SET_DATA,
             function (FormEvent $event) {
                 $data = $event->getData();
                 if ($data && !$data->getId()) {
-                    $segment = $data->getSegment();
-                    if ($segment) {
-                        $data->setSegment(null);
-                        $event->setData($data);
-                    }
+                    $data->setSegment(null);
+                    $event->setData($data);
                 }
             }
         );
+
+        parent::buildForm($builder, $options);
     }
 
     /**
