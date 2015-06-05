@@ -5,8 +5,6 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Form\Type;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\Criteria;
 
-use Oro\Bundle\SegmentBundle\Entity\Segment;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -81,42 +79,6 @@ class AbandonedCartListType extends AbstractQueryDesignerType
 
         parent::buildForm($builder, $options);
 
-        $builder->addEventListener(
-            FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) {
-                $data = $event->getData();
-                if ($data && !$data->getId()) {
-                    $segment = $data->getSegment();
-                    if (!$segment) {
-                        $segment = new Segment();
-                        $defaultFilter['filters'][] = [
-                            'columnName' => 'status_label',
-                            'criterion' => [
-                                'filter' => 'string',
-                                'data' => [
-                                    'value' => 'Open',
-                                    'type' => '3'
-                                ]
-                            ]
-                        ];
-                        $defaultFilter['filters'][] = 'AND';
-                        $defaultFilter['filters'][] = [
-                            'columnName' => 'itemsQty',
-                            'criterion' => [
-                                'filter' => 'number',
-                                'data' => [
-                                    'value' => 0,
-                                    'type' => '2'
-                                ]
-                            ]
-                        ];
-                        $segment->setDefinition(json_encode($defaultFilter));
-                        $data->setSegment($segment);
-                        $event->setData($data);
-                    }
-                }
-            }
-        );
         $builder->addEventListener(
             FormEvents::POST_SET_DATA,
             function (FormEvent $event) {
