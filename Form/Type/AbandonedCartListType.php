@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Oro\Bundle\QueryDesignerBundle\Form\Type\AbstractQueryDesignerType;
+
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 
 class AbandonedCartListType extends AbstractQueryDesignerType
