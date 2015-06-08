@@ -63,7 +63,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
         /**
          * @var \PHPUnit_Framework_MockObject_MockObject|FormBuilder $builder
          */
-        $builder->expects($this->at(4))
+        $builder->expects($this->at(5))
             ->method('add')
             ->with(
                 'definition',
