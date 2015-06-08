@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Oro\Bundle\QueryDesignerBundle\Form\Type\AbstractQueryDesignerType;
+
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 
 class AbandonedCartListType extends AbstractQueryDesignerType
@@ -74,6 +75,16 @@ class AbandonedCartListType extends AbstractQueryDesignerType
                         'query_builder' => $qb
                     ]
                 );
+            }
+        );
+        $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            function (FormEvent $event) {
+                $data = $event->getData();
+                if ($data && !$data->getId()) {
+                    $data->setSegment(null);
+                    $event->setData($data);
+                }
             }
         );
 

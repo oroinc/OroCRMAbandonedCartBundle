@@ -4,6 +4,8 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
+use Oro\Bundle\SegmentBundle\Entity\Segment;
+
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
 
@@ -56,6 +58,30 @@ class PredefinedMarketingListFactory
             );
 
         $marketingList->setType($type);
+        $segment = new Segment();
+        $defaultFilter['filters'][] = [
+            'columnName' => 'status_label',
+            'criterion' => [
+                'filter' => 'string',
+                'data' => [
+                    'value' => 'Open',
+                    'type' => '3'
+                ]
+            ]
+        ];
+        $defaultFilter['filters'][] = 'AND';
+        $defaultFilter['filters'][] = [
+            'columnName' => 'itemsQty',
+            'criterion' => [
+                'filter' => 'number',
+                'data' => [
+                    'value' => 0,
+                    'type' => '2'
+                ]
+            ]
+        ];
+        $segment->setDefinition(json_encode($defaultFilter));
+        $marketingList->setSegment($segment);
 
         return $marketingList;
     }
