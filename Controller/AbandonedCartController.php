@@ -41,7 +41,7 @@ class AbandonedCartController extends Controller
      *      id="orocrm_abandoned_cart_list_view",
      *      type="entity",
      *      permission="VIEW",
-     *      class="OroCRMAbandonedCartBundle:AbandonedCartCampaign"
+     *      class="OroCRMMarketingListBundle:MarketingList"
      * )
      * @Template
      *
@@ -73,7 +73,7 @@ class AbandonedCartController extends Controller
      *      id="orocrm_abandoned_cart_list_create",
      *      type="entity",
      *      permission="CREATE",
-     *      class="OroCRMAbandonedCartBundle:AbandonedCartCampaign"
+     *      class="OroCRMMarketingListBundle:MarketingList"
      * )
      * @Template("OroCRMAbandonedCartBundle:AbandonedCart:update.html.twig")
      */
@@ -92,7 +92,7 @@ class AbandonedCartController extends Controller
      *      id="orocrm_abandoned_cart_list_update",
      *      type="entity",
      *      permission="EDIT",
-     *      class="OroCRMAbandonedCartBundle:AbandonedCartCampaign"
+     *      class="OroCRMMarketingListBundle:MarketingList"
      * )
      *
      * @param MarketingList $entity
@@ -110,7 +110,7 @@ class AbandonedCartController extends Controller
      *      id="orocrm_abandoned_cart_list_delete",
      *      type="entity",
      *      permission="DELETE",
-     *      class="OroCRMAbandonedCartBundle:AbandonedCartCampaign"
+     *      class="OroCRMMarketingListBundle:MarketingList"
      * )
      *
      * @param MarketingList $marketingList
