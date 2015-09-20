@@ -4,6 +4,8 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 
@@ -12,6 +14,13 @@ use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
  *
  * @ORM\Table(name="orocrm_abandonedcart_campaign")
  * @ORM\Entity()
+ * @Config(
+ *      defaultValues={
+ *          "entity"={
+ *              "icon"="icon-list-alt"
+ *          }
+ *      }
+ * )
  */
 class AbandonedCartCampaign
 {
