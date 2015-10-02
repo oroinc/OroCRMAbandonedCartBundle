@@ -24,6 +24,8 @@ use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
  */
 class AbandonedCartCampaign
 {
+    const CLASS_NAME = 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign';
+
     /**
      * @var int
      *
