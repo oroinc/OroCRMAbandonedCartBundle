@@ -1,7 +1,12 @@
 orocrm:
     abandonedcart:
-        entity_plural_label: Abandoned Cart Campaigns
-        entity_label: Abandoned Cart Campaign
+        abandonedcartcampaign:
+            entity_plural_label: Abandoned Cart Campaigns
+            entity_label: Abandoned Cart Campaign
+            id.label: ID
+            campaign.label: Campaign
+            marketing_list.label: Marketing List
+
         name.label: Name
         description.label: Description
         owner.label: Owner
