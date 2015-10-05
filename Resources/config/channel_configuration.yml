@@ -1,0 +1,13 @@
+orocrm_channel:
+   entity_data:
+       -
+          name: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign
+          dependent:
+              - OroCRM\Bundle\MagentoBundle\Entity\Cart
+          navigation_items:
+              - application_menu.marketing_tab.abandoned_cart_list
+
+   channel_types:
+        magento:
+            entities:
+                - OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign
