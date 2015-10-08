@@ -37,12 +37,17 @@ class CampaignCodeMergeVarProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
+    public function isApplicable(MarketingList $marketingList)
+    {
+        return (bool)$this->abandonedCartCampaignProvider->getAbandonedCartCampaign($marketingList);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function provideExtendedMergeVars(MarketingList $marketingList)
     {
-        $entity = $this->abandonedCartCampaignProvider
-            ->getAbandonedCartCampaign($marketingList);
-
-        if (is_null($entity)) {
+        if (!$this->isApplicable($marketingList)) {
             return [];
         }
 
