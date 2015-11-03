@@ -62,10 +62,10 @@ class PredefinedMarketingListFactory
         $defaultFilter['filters'][] = [
             'columnName' => 'status_label',
             'criterion' => [
-                'filter' => 'string',
+                'filter' => 'dictionary',
                 'data' => [
-                    'value' => 'Open',
-                    'type' => '3'
+                    'value' => ['open'],
+                    'type' => '1'
                 ]
             ]
         ];
