@@ -18,6 +18,9 @@ use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
  *      defaultValues={
  *          "entity"={
  *              "icon"="icon-list-alt"
+ *          },
+ *          "tag"={
+ *              "enabled"=true
  *          }
  *      }
  * )
