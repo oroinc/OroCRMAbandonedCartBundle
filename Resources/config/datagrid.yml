@@ -23,7 +23,7 @@ datagrid:
                 label:        oro.grid.action.view
                 link:         view_link
                 icon:         eye-open
-                acl_recource: orocrm_abandoned_cart_list_view
+                acl_resource: orocrm_abandoned_cart_list_view
                 rowAction:    true
             update:
                 type:          navigate
