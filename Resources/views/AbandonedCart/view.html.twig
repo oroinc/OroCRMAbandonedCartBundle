@@ -60,9 +60,9 @@
 
             {%- if campaign -%}
                 {%- if resource_granted('orocrm_campaign_view') -%}
-                    {% set campaignView = '<a href="' ~ path('orocrm_campaign_view', {'id': campaign.id}) ~ '">' ~ campaign.name ~ '</a>' %}
+                    {% set campaignView = '<a href="' ~ path('orocrm_campaign_view', {'id': campaign.id}) ~ '">' ~ campaign.name|escape ~ '</a>' %}
                 {%- else -%}
-                    {% set campaignView = campaign.name %}
+                    {% set campaignView = campaign.name|escape %}
                 {%- endif -%}
                 {{ UI.renderHtmlProperty('orocrm.campaign.emailcampaign.campaign.label'|trans, campaignView) }}
             {%- endif -%}
