@@ -1,0 +1,4 @@
+oro_api:
+    entities:
+        OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign: ~
+        OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion: ~

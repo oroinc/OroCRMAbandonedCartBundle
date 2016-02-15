@@ -3,6 +3,7 @@
 {% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
 {% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
 {% import 'OroSegmentBundle::macros.html.twig' as segmentQD %}
+{% import 'OroUserBundle::macros.html.twig' as U %}
 
 {% oro_title_set({params : {"%entityName%": entity.name|default('N/A') }}) %}
 
@@ -59,23 +60,18 @@
 
             {%- if campaign -%}
                 {%- if resource_granted('orocrm_campaign_view') -%}
-                    {% set campaignView = '<a href="' ~ path('orocrm_campaign_view', {'id': campaign.id}) ~ '">' ~ campaign.name ~ '</a>' %}
+                    {% set campaignView = '<a href="' ~ path('orocrm_campaign_view', {'id': campaign.id}) ~ '">' ~ campaign.name|escape ~ '</a>' %}
                 {%- else -%}
-                    {% set campaignView = campaign.name %}
+                    {% set campaignView = campaign.name|escape %}
                 {%- endif -%}
                 {{ UI.renderHtmlProperty('orocrm.campaign.emailcampaign.campaign.label'|trans, campaignView) }}
             {%- endif -%}
 
             {%- set ownerData -%}
-            {%- if entity.owner -%}
-                {% if resource_granted('oro_user_user_view') %}
-                    <a href="{{ path('oro_user_view', {'id': entity.owner.id}) }}">
-                        {{ entity.owner|oro_format_name|escape }}
-                    </a>
-                {% else %}
-                    {{ entity.owner|oro_format_name|escape }}
-                {% endif %}
-            {%- endif -%}
+                {%- if entity.owner -%}
+                    {{ U.render_user_name(entity.owner) }}
+                    {{ U.user_business_unit_name(entity.owner) }}
+                {%- endif -%}
             {%- endset -%}
             {{ UI.renderHtmlProperty('orocrm.abandonedcart.owner.label'|trans, ownerData) }}
 
