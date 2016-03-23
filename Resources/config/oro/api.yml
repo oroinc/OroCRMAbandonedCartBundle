@@ -1,5 +1,5 @@
 oro_api:
     entities:
-# todo: AbandonedCartCampaign should be turned after fix AbandonedCartBundle/Acl/Voter/AbandonedCartVoter (CRM-4733)
-#        OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign: ~
+        #TODO: AbandonedCartCampaign should be turned after fix AbandonedCartBundle/Acl/Voter/AbandonedCartVoter (CRM-4733)
+        #OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign: ~
         OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion: ~
