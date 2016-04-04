@@ -71,5 +71,5 @@ orocrm:
         acl:
             action:
                 general:
-                    label: Abandoned Cart Campaign manipulations
+                    label: Manage Abandones Cart Campaigns
                     description: Create segments of abandoned shopping carts in OroCRM and link them to MailChimp campaign automation
