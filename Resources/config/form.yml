@@ -33,24 +33,24 @@ services:
     orocrm_abandonedcart.abandonedcart_campaign_factory:
         class: %orocrm_abandonedcart.abandonedcart_campaign_factory.class%
         arguments:
-            - @orocrm_abandonedcart.campaign_factory
+            - "@orocrm_abandonedcart.campaign_factory"
 
     orocrm_abandonedcart.form.handler.abandonedcart_campaign:
         class: %orocrm_abandonedcart.form.handler.abandonedcart_campaign.class%
         scope: request
         arguments:
-            - @orocrm_abandonedcart_list.form.abandonedcart_list
-            - @request
-            - @doctrine
-            - @validator
-            - @translator
-            - @orocrm_abandonedcart.abandonedcart_campaign_factory
-            - @orocrm_abandonedcart.provider
+            - "@orocrm_abandonedcart_list.form.abandonedcart_list"
+            - "@request"
+            - "@doctrine"
+            - "@validator"
+            - "@translator"
+            - "@orocrm_abandonedcart.abandonedcart_campaign_factory"
+            - "@orocrm_abandonedcart.provider"
 
     orocrm_abandonedcart.form.type.conversion:
         class: %orocrm_abandonedcart.form.type.conversion.class%
         arguments:
-            - @orocrm_abandonedcart.conversion_manager
+            - "@orocrm_abandonedcart.conversion_manager"
             - %orocrm_mailchimp.entity.campaign.class%
         tags:
             - { name: form.type, alias: "orocrm_abandonedcart_conversion" }
