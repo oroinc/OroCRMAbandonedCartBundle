@@ -50,7 +50,7 @@ class AbandonedCartListType extends AbstractQueryDesignerType
     {
         $builder
             ->add('name', 'text', ['required' => true])
-            ->add('description', 'textarea', ['required' => false])
+            ->add('description', 'oro_resizeable_rich_text', ['required' => false])
             ->add('entity', 'hidden', ['data' => $this->cartClassName]);
 
         $builder->addEventListener(
