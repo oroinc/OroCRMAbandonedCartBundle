@@ -6,5 +6,5 @@ placeholders:
 items:
     orocrm_mailchimp_abandoned_cart_buttons:
         action: OroCRMAbandonedCartBundle:AbandonedCart:connectionButtons
-        applicable: @orocrm_mailchimp.placeholder.filter.buttons_filder->isApplicable($entity$)
+        applicable: "@orocrm_mailchimp.placeholder.filter.buttons_filder->isApplicable($entity$)"
 
