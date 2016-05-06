@@ -1,5 +1,6 @@
 orocrm_abandonedcart:
-    label:      orocrm.abandonedcart.acl.action.general
+    label:      orocrm.abandonedcart.acl.action.general.label
+    description: orocrm.abandonedcart.acl.action.general.description
     type:       action
     group_name: ""
     bindings:   ~

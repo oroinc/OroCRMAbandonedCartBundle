@@ -42,7 +42,7 @@
     <div class="row-fluid form-horizontal">
         <div class="responsive-block">
             {{ UI.renderProperty('orocrm.abandonedcart.name.label'|trans, entity.name) }}
-            {{ UI.renderProperty('orocrm.abandonedcart.description.label'|trans, entity.description) }}
+            {{ UI.renderHtmlProperty('orocrm.abandonedcart.description.label'|trans, entity.description) }}
 
             {% if entity.segment is not empty %}
                 {%- set segmentData -%}
