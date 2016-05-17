@@ -185,6 +185,11 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
         $offsetResult = $this->config['actions'];
 
         $this->datagridConfig->expects($this->any())
+            ->method('offsetExists')
+            ->with('actions')
+            ->willReturn(true);
+
+        $this->datagridConfig->expects($this->any())
             ->method('offsetGet')
             ->with('actions')
             ->will($this->returnValue($offsetResult));
