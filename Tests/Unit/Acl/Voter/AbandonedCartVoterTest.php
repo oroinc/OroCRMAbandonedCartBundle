@@ -96,24 +96,80 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
      */
     public function attributesDataProvider()
     {
-        $className = 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartVoter';
         $objectIdentityClass = 'Symfony\Component\Security\Acl\Model\ObjectIdentityInterface';
-        $objectIdentity = $this->getMock($objectIdentityClass);
-        $objectIdentity->expects($this->any())
-            ->method('getType')
-            ->will($this->returnValue($className));
 
         return [
             // has active Magento channels
-            [$objectIdentity, $objectIdentityClass, ['VIEW'], true, AbandonedCartVoter::ACCESS_ABSTAIN],
-            [$objectIdentity, $objectIdentityClass, ['CREATE'], true, AbandonedCartVoter::ACCESS_ABSTAIN],
-            [$objectIdentity, $objectIdentityClass, ['EDIT'], true, AbandonedCartVoter::ACCESS_ABSTAIN],
-            [$objectIdentity, $objectIdentityClass, ['DELETE'], true, AbandonedCartVoter::ACCESS_ABSTAIN],
+            [
+                $this->getObjectIdentityInterfaceMock($objectIdentityClass),
+                $objectIdentityClass,
+                ['VIEW'],
+                true,
+                AbandonedCartVoter::ACCESS_ABSTAIN
+            ],
+            [
+                $this->getObjectIdentityInterfaceMock($objectIdentityClass),
+                $objectIdentityClass,
+                ['CREATE'],
+                true,
+                AbandonedCartVoter::ACCESS_ABSTAIN
+            ],
+            [
+                $this->getObjectIdentityInterfaceMock($objectIdentityClass),
+                $objectIdentityClass,
+                ['EDIT'],
+                true,
+                AbandonedCartVoter::ACCESS_ABSTAIN
+            ],
+            [
+                $this->getObjectIdentityInterfaceMock($objectIdentityClass),
+                $objectIdentityClass,
+                ['DELETE'],
+                true,
+                AbandonedCartVoter::ACCESS_ABSTAIN
+            ],
             // has not active Magento channels
-            [$objectIdentity, $objectIdentityClass, ['VIEW'], false, AbandonedCartVoter::ACCESS_DENIED],
-            [$objectIdentity, $objectIdentityClass, ['CREATE'], false, AbandonedCartVoter::ACCESS_DENIED],
-            [$objectIdentity, $objectIdentityClass, ['EDIT'], false, AbandonedCartVoter::ACCESS_DENIED],
-            [$objectIdentity, $objectIdentityClass, ['DELETE'], false, AbandonedCartVoter::ACCESS_DENIED]
+            [
+                $this->getObjectIdentityInterfaceMock($objectIdentityClass),
+                $objectIdentityClass,
+                ['VIEW'],
+                false,
+                AbandonedCartVoter::ACCESS_DENIED
+            ],
+            [
+                $this->getObjectIdentityInterfaceMock($objectIdentityClass),
+                $objectIdentityClass,
+                ['CREATE'],
+                false,
+                AbandonedCartVoter::ACCESS_DENIED
+            ],
+            [
+                $this->getObjectIdentityInterfaceMock($objectIdentityClass),
+                $objectIdentityClass,
+                ['EDIT'],
+                false,
+                AbandonedCartVoter::ACCESS_DENIED
+            ],
+            [
+                $this->getObjectIdentityInterfaceMock($objectIdentityClass),
+                $objectIdentityClass,
+                ['DELETE'],
+                false,
+                AbandonedCartVoter::ACCESS_DENIED
+            ]
         ];
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|ObjectIdentityInterface
+     */
+    protected function getObjectIdentityInterfaceMock($objectIdentityClass)
+    {
+        $objectIdentity = $this->getMock($objectIdentityClass);
+        $objectIdentity->expects($this->any())
+            ->method('getType')
+            ->will($this->returnValue('OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartVoter'));
+
+        return $objectIdentity;
     }
 }
