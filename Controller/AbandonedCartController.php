@@ -133,21 +133,9 @@ class AbandonedCartController extends Controller
      */
     protected function update(MarketingList $entity)
     {
-        $response = $this->get('oro_form.model.update_handler')->handleUpdate(
+        $response = $this->get('oro_form.model.update_handler')->update(
             $entity,
             $this->get('orocrm_abandonedcart_list.form.abandonedcart_list'),
-            function (MarketingList $entity) {
-                return [
-                    'route'      => 'orocrm_abandoned_cart_list_update',
-                    'parameters' => ['id' => $entity->getId()]
-                ];
-            },
-            function (MarketingList $entity) {
-                return [
-                    'route'      => 'orocrm_abandoned_cart_list_view',
-                    'parameters' => ['id' => $entity->getId()]
-                ];
-            },
             $this->get('translator')->trans('orocrm.abandonedcart.entity.saved'),
             $this->get('orocrm_abandonedcart.form.handler.abandonedcart_campaign')
         );
