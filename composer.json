@@ -15,7 +15,7 @@
     },
     "target-dir": "src/OroCRM/Bundle/AbandonedCartBundle",
     "require": {
-        "php": ">=5.4.9",
+        "php": ">=5.5.9",
         "oro/crm": "self.version",
         "oro/crm-mail-chimp": "self.version"
     },

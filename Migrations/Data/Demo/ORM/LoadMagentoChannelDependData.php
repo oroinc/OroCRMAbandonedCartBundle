@@ -37,8 +37,8 @@ class LoadMagentoChannelDependData extends AbstractDefaultChannelDataFixture
                 $builder->addEntity(AbandonedCartCampaign::CLASS_NAME);
                 $channel = $builder->getChannel();
                 $this->em->persist($channel);
-                $this->em->flush();
             }
+            $this->em->flush();
         }
     }
 }
