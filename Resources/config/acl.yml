@@ -4,3 +4,4 @@ orocrm_abandonedcart:
     type:       action
     group_name: ""
     bindings:   ~
+    category: "sales_data"
