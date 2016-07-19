@@ -101,6 +101,7 @@
 
     {% set hasEntity = form.vars.value is not empty and form.vars.value.entity is not empty %}
     {% set columnsComponentOptions = {
+        'formSelector': '#' ~ form.vars.id,
         'entityChoiceSelector': '#orocrm_abandonedcart_list_form_entity',
         'fieldsChoiceSelector': '#contact-information-fields-list',
         'contactInformationFields': hasEntity ? get_contact_information_fields_info(form.vars.value.entity) : []
