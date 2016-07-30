@@ -126,6 +126,14 @@ class AbandonedCartListType extends AbstractQueryDesignerType
      */
     public function getName()
     {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
         return 'orocrm_abandonedcart_list';
     }
 }
