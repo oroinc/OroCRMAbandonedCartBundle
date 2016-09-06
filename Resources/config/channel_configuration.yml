@@ -1,4 +1,4 @@
-channels:
+orocrm_channel:
    entity_data:
        -
           name: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign

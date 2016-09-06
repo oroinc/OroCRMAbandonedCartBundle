@@ -1,4 +1,4 @@
-datagrids:
+datagrid:
     orocrm-abandonedcart-list-grid:
         extends: orocrm-marketing-list-grid
         properties:
