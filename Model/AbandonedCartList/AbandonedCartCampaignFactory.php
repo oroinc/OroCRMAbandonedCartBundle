@@ -3,7 +3,7 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartCampaignFactory
 {

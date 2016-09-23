@@ -5,8 +5,8 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
 
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\CampaignBundle\Entity\Campaign;
 
 class CampaignAbandonedCartRelationManager
 {

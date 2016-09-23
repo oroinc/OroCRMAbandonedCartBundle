@@ -3,7 +3,7 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class CampaignFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class CampaignFactoryTest extends \PHPUnit_Framework_TestCase
 
         $campaign = $this->factory->create($marketingList);
 
-        $this->assertInstanceOf('OroCRM\Bundle\CampaignBundle\Entity\Campaign', $campaign);
+        $this->assertInstanceOf('Oro\Bundle\CampaignBundle\Entity\Campaign', $campaign);
 
         $this->assertEquals($campaign->getCode(), 'test_campaign_na_me');
         $this->assertEquals($campaign->getName(), $marketingList->getName());

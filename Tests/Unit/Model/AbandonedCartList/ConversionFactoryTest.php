@@ -3,7 +3,7 @@
 namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\ConversionFactory;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class ConversionFactoryTest extends \PHPUnit_Framework_TestCase
 {

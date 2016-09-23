@@ -14,8 +14,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 
-use OroCRM\Bundle\MarketingListBundle\Datagrid\ConfigurationProvider;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Datagrid\ConfigurationProvider;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
 
 /**
@@ -31,7 +31,7 @@ class AbandonedCartController extends Controller
     public function listAction()
     {
         return [
-            'entity_class' => $this->container->getParameter('orocrm_marketing_list.entity.class')
+            'entity_class' => $this->container->getParameter('oro_marketing_list.entity.class')
         ];
     }
 
@@ -41,7 +41,7 @@ class AbandonedCartController extends Controller
      *      id="orocrm_abandoned_cart_list_view",
      *      type="entity",
      *      permission="VIEW",
-     *      class="OroCRMMarketingListBundle:MarketingList"
+     *      class="OroMarketingListBundle:MarketingList"
      * )
      * @Template
      *
@@ -51,7 +51,7 @@ class AbandonedCartController extends Controller
      */
     public function viewAction(MarketingList $entity)
     {
-        $entityConfig = $this->get('orocrm_marketing_list.entity_provider')->getEntity($entity->getEntity());
+        $entityConfig = $this->get('oro_marketing_list.entity_provider')->getEntity($entity->getEntity());
 
         $campaign = $this->get('orocrm_abandonedcart.abandoned_cart_list.campaign_manager')
             ->getCampaignByMarketingList($entity);
@@ -73,7 +73,7 @@ class AbandonedCartController extends Controller
      *      id="orocrm_abandoned_cart_list_create",
      *      type="entity",
      *      permission="CREATE",
-     *      class="OroCRMMarketingListBundle:MarketingList"
+     *      class="OroMarketingListBundle:MarketingList"
      * )
      * @Template("OroCRMAbandonedCartBundle:AbandonedCart:update.html.twig")
      */
@@ -92,7 +92,7 @@ class AbandonedCartController extends Controller
      *      id="orocrm_abandoned_cart_list_update",
      *      type="entity",
      *      permission="EDIT",
-     *      class="OroCRMMarketingListBundle:MarketingList"
+     *      class="OroMarketingListBundle:MarketingList"
      * )
      *
      * @param MarketingList $entity
@@ -110,7 +110,7 @@ class AbandonedCartController extends Controller
      *      id="orocrm_abandoned_cart_list_delete",
      *      type="entity",
      *      permission="DELETE",
-     *      class="OroCRMMarketingListBundle:MarketingList"
+     *      class="OroMarketingListBundle:MarketingList"
      * )
      *
      * @param MarketingList $marketingList
@@ -118,7 +118,7 @@ class AbandonedCartController extends Controller
      */
     public function deleteAction(MarketingList $marketingList)
     {
-        $class = $this->container->getParameter('orocrm_marketing_list.entity.class');
+        $class = $this->container->getParameter('oro_marketing_list.entity.class');
         $em = $this->getDoctrine()->getManagerForClass($class);
 
         $em->remove($marketingList);
@@ -161,7 +161,7 @@ class AbandonedCartController extends Controller
      * )
      * @ParamConverter(
      *      "marketingList",
-     *      class="OroCRMMarketingListBundle:MarketingList",
+     *      class="OroMarketingListBundle:MarketingList",
      *      options={"id" = "entity"}
      * )
      * @AclAncestor("orocrm_abandonedcart")

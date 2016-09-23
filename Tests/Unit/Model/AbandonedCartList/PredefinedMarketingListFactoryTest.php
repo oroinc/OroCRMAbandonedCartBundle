@@ -4,12 +4,12 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory;
 
 class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    const MARKETING_LIST_TYPE_CLASS_NAME = 'OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType';
+    const MARKETING_LIST_TYPE_CLASS_NAME = 'Oro\Bundle\MarketingListBundle\Entity\MarketingListType';
 
     /**
      * @var PredefinedMarketingListFactory
@@ -47,7 +47,7 @@ class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
 
         $marketingList = $this->factory->create();
 
-        $this->assertInstanceOf('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList', $marketingList);
+        $this->assertInstanceOf('Oro\Bundle\MarketingListBundle\Entity\MarketingList', $marketingList);
         $this->assertEquals($marketingListType, $marketingList->getType());
         $this->assertEquals($this->cartClassName, $marketingList->getEntity());
     }

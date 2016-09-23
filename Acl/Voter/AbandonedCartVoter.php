@@ -6,7 +6,7 @@ use Oro\Bundle\SecurityBundle\Acl\Voter\AbstractEntityVoter;
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use OroCRM\Bundle\MagentoBundle\Provider\ChannelType;
+use Oro\Bundle\MagentoBundle\Provider\ChannelType;
 
 class AbandonedCartVoter extends AbstractEntityVoter
 {

@@ -1,7 +1,7 @@
 parameters:
     orocrm_abandonedcart.entity.abandonedcart_campaign.class: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign
     orocrm_abandonedcart.entity.abandonedcart_conversion.class: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion
-    orocrm_abandonedcart.entity.marketing_list_type.class: OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType
+    orocrm_abandonedcart.entity.marketing_list_type.class: Oro\Bundle\MarketingListBundle\Entity\MarketingListType
 
     orocrm_abandonedcart.entity.tracking_visit_event.class: Oro\Bundle\TrackingBundle\Entity\TrackingVisitEvent
 
@@ -69,7 +69,7 @@ services:
         class: %orocrm_abandonedcart.predefined_marketing_list_factory.class%
         arguments:
             - "@doctrine.orm.entity_manager"
-            - %orocrm_magento.cart.entity.class%
+            - %oro_magento.cart.entity.class%
             - %orocrm_abandonedcart.entity.marketing_list_type.class%
 
     orocrm_abandonedcart.campaign_factory:
@@ -94,7 +94,7 @@ services:
     orocrm_abandonedcart.event_listener.datagrid:
         class: %orocrm_abandonedcart.event_listener.datagrid.class%
         arguments:
-            - "@orocrm_marketing_list.model.helper"
+            - "@oro_marketing_list.model.helper"
             - "@orocrm_abandonedcart.provider"
         tags:
             - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.orocrm-marketing-list-items-base-unsubscribe-mixin, method: onBuildBefore }
@@ -108,7 +108,7 @@ services:
     orocrm_abandonedcart.listener.datagrid.segment_grid:
         class: %orocrm_abandonedcart.listener.datagrid.segment_grid.class%
         arguments:
-            - "@orocrm_marketing_list.model.helper"
+            - "@oro_marketing_list.model.helper"
             - "@orocrm_abandonedcart.provider"
         tags:
             - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.pre, method: onPreBuild }
@@ -128,8 +128,8 @@ services:
             - "@doctrine"
             - "@orocrm_abandonedcart.abandoned_cart_list.campaign_manager"
             - "@orocrm_abandonedcart.tracking_stat_provider_factory"
-            - %orocrm_magento.order.entity.class%
-            - %orocrm_campaign.entity.class%
+            - %oro_magento.order.entity.class%
+            - %oro_campaign.entity.class%
             - %orocrm_mailchimp.entity.static_segment.class%
             - %orocrm_abandonedcart.entity.abandonedcart_conversion.class%
             - %orocrm_abandonedcart.entity.tracking_visit_event.class%

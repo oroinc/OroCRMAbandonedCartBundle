@@ -9,7 +9,7 @@ use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConve
 use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -107,11 +107,11 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->marketingList = $this->getMockBuilder('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')
+        $this->marketingList = $this->getMockBuilder('Oro\Bundle\MarketingListBundle\Entity\MarketingList')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->campaign = $this->getMockBuilder('OroCRM\Bundle\CampaignBundle\Entity\Campaign')
+        $this->campaign = $this->getMockBuilder('Oro\Bundle\CampaignBundle\Entity\Campaign')
             ->disableOriginalConstructor()
             ->getMock();
 

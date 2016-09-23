@@ -4,7 +4,7 @@ namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking;
 
 use Doctrine\ORM\EntityManager;
 
-use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
+use Oro\Bundle\CampaignBundle\Entity\Campaign;
 
 class TrackingStatProvider implements TrackingStatProviderInterface
 {

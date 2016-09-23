@@ -10,8 +10,8 @@ use OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType;
 class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
 {
     const CART_CLASS_NAME = 'OroCRM\Bundle\MagentoBundle\Entity\Cart';
-    const MARKETING_LIST_TYPE_CLASS_NAME = 'OroCRM\Bundle\MarketingListBundle\Form\Type\MarketingListType';
-    const MARKETING_LIST_CLASS_NAME = 'OroCRM\Bundle\MarketingListBundle\Entity\MarketingList';
+    const MARKETING_LIST_TYPE_CLASS_NAME = 'Oro\Bundle\MarketingListBundle\Form\Type\MarketingListType';
+    const MARKETING_LIST_CLASS_NAME = 'Oro\Bundle\MarketingListBundle\Entity\MarketingList';
 
     /**
      * @var AbandonedCartListType

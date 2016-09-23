@@ -57,7 +57,7 @@ class AbandonedCartConversionTest extends \PHPUnit_Framework_TestCase
     public function settersAndGettersDataProvider()
     {
         return [
-            ['marketingList', $this->getMock('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')]
+            ['marketingList', $this->getMock('Oro\Bundle\MarketingListBundle\Entity\MarketingList')]
         ];
     }
 }

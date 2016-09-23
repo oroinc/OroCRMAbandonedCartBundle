@@ -2,7 +2,7 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 
 class ConversionFactory

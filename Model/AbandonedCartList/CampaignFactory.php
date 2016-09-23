@@ -2,8 +2,8 @@
 
 namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
-use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\CampaignBundle\Entity\Campaign;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class CampaignFactory
 {

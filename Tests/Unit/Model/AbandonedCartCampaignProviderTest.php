@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 
 use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProvider;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase
 {

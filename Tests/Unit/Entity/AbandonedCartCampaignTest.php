@@ -52,8 +52,8 @@ class AbandonedCartCampaignTest extends \PHPUnit_Framework_TestCase
     public function propertiesDataProvider()
     {
         return [
-            ['marketingList', $this->getMock('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')],
-            ['campaign', $this->getMock('OroCRM\Bundle\CampaignBundle\Entity\Campaign')],
+            ['marketingList', $this->getMock('Oro\Bundle\MarketingListBundle\Entity\MarketingList')],
+            ['campaign', $this->getMock('Oro\Bundle\CampaignBundle\Entity\Campaign')],
         ];
     }
 }
