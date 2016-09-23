@@ -1,7 +1,7 @@
 channels:
    entity_data:
        -
-          name: OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign
+          name: Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign
           dependent:
               - OroCRM\Bundle\MagentoBundle\Entity\Cart
           navigation_items:
@@ -10,4 +10,4 @@ channels:
    channel_types:
         magento:
             entities:
-                - OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign
+                - Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign

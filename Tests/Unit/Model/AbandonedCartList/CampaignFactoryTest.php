@@ -1,8 +1,8 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class CampaignFactoryTest extends \PHPUnit_Framework_TestCase

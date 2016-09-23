@@ -1,12 +1,12 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Migrations\Schema;
+namespace Oro\Bundle\AbandonedCartBundle\Migrations\Schema;
 
 use Doctrine\DBAL\Schema\Schema;
 use Oro\Bundle\MigrationBundle\Migration\Installation;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
-class OroCRMAbandonedCartBundleInstaller implements Installation
+class OroAbandonedCartBundleInstaller implements Installation
 {
     /**
      * {@inheritdoc}

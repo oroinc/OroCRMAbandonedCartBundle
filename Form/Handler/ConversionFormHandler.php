@@ -1,12 +1,13 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Form\Handler;
+namespace Oro\Bundle\AbandonedCartBundle\Form\Handler;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 use Doctrine\Common\Persistence\ObjectManager;
+
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 
 class ConversionFormHandler
 {

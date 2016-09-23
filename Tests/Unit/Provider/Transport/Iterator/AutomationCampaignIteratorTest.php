@@ -1,8 +1,8 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Provider\Transport\Iterator;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Provider\Transport\Iterator;
 
-use OroCRM\Bundle\AbandonedCartBundle\Provider\Transport\Iterator\AutomationCampaignIterator;
+use Oro\Bundle\AbandonedCartBundle\Provider\Transport\Iterator\AutomationCampaignIterator;
 use OroCRM\Bundle\MailChimpBundle\Provider\Transport\Iterator\CampaignIterator;
 use OroCRM\Bundle\MailChimpBundle\Provider\Transport\MailChimpClient;
 

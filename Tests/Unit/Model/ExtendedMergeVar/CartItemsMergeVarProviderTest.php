@@ -1,13 +1,13 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\ExtendedMergeVar;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\ExtendedMergeVar;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
 class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,7 +29,7 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->abandonedCartCampaignProvider = $this
-            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+            ->getMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
         $this->translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
         $this->provider = new CartItemsMergeVarProvider($this->abandonedCartCampaignProvider, $this->translator);
     }
@@ -77,21 +77,21 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 [
-                    ['orocrm.abandonedcart.mergevar.cart_item.url.label', ['%index%' => 1], null, null, 'URL (1)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.name.label', ['%index%' => 1], null, null, 'Name (1)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.qty.label', ['%index%' => 1], null, null, 'Qty (1)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.price.label', ['%index%' => 1], null, null, 'Price (1)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.total.label', ['%index%' => 1], null, null, 'Total (1)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.url.label', ['%index%' => 2], null, null, 'URL (2)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.name.label', ['%index%' => 2], null, null, 'Name (2)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.qty.label', ['%index%' => 2], null, null, 'Qty (2)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.price.label', ['%index%' => 2], null, null, 'Price (2)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.total.label', ['%index%' => 2], null, null, 'Total (2)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.url.label', ['%index%' => 3], null, null, 'URL (3)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.name.label', ['%index%' => 3], null, null, 'Name (3)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.qty.label', ['%index%' => 3], null, null, 'Qty (3)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.price.label', ['%index%' => 3], null, null, 'Price (3)'],
-                    ['orocrm.abandonedcart.mergevar.cart_item.total.label', ['%index%' => 3], null, null, 'Total (3)']
+                    ['oro.abandonedcart.mergevar.cart_item.url.label', ['%index%' => 1], null, null, 'URL (1)'],
+                    ['oro.abandonedcart.mergevar.cart_item.name.label', ['%index%' => 1], null, null, 'Name (1)'],
+                    ['oro.abandonedcart.mergevar.cart_item.qty.label', ['%index%' => 1], null, null, 'Qty (1)'],
+                    ['oro.abandonedcart.mergevar.cart_item.price.label', ['%index%' => 1], null, null, 'Price (1)'],
+                    ['oro.abandonedcart.mergevar.cart_item.total.label', ['%index%' => 1], null, null, 'Total (1)'],
+                    ['oro.abandonedcart.mergevar.cart_item.url.label', ['%index%' => 2], null, null, 'URL (2)'],
+                    ['oro.abandonedcart.mergevar.cart_item.name.label', ['%index%' => 2], null, null, 'Name (2)'],
+                    ['oro.abandonedcart.mergevar.cart_item.qty.label', ['%index%' => 2], null, null, 'Qty (2)'],
+                    ['oro.abandonedcart.mergevar.cart_item.price.label', ['%index%' => 2], null, null, 'Price (2)'],
+                    ['oro.abandonedcart.mergevar.cart_item.total.label', ['%index%' => 2], null, null, 'Total (2)'],
+                    ['oro.abandonedcart.mergevar.cart_item.url.label', ['%index%' => 3], null, null, 'URL (3)'],
+                    ['oro.abandonedcart.mergevar.cart_item.name.label', ['%index%' => 3], null, null, 'Name (3)'],
+                    ['oro.abandonedcart.mergevar.cart_item.qty.label', ['%index%' => 3], null, null, 'Qty (3)'],
+                    ['oro.abandonedcart.mergevar.cart_item.price.label', ['%index%' => 3], null, null, 'Price (3)'],
+                    ['oro.abandonedcart.mergevar.cart_item.total.label', ['%index%' => 3], null, null, 'Total (3)']
                 ],
                 [
                     ['name' => 'item_1_url', 'label' => 'URL (1)'],

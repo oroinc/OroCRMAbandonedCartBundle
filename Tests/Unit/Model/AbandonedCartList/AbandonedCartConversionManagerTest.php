@@ -1,14 +1,14 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
 use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
@@ -115,30 +115,30 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conversion = $this->getMockBuilder('OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion')
+        $this->conversion = $this->getMockBuilder('Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion')
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->statProviderFactory = $this->getMockBuilder(
-            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory'
+            'Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory'
         )
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->statResult = $this->getMockBuilder(
-            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\StatResultInterface'
+            'Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\StatResultInterface'
         )
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->trackingStatProvider = $this->getMockBuilder(
-            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderInterface'
+            'Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderInterface'
         )
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->campaignRelationManager = $this->getMockBuilder(
-            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager'
+            'Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager'
         )
             ->disableOriginalConstructor()
             ->getMock();

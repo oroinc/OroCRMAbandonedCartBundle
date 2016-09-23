@@ -1,17 +1,16 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Migrations\Schema\v1_2;
+namespace Oro\Bundle\AbandonedCartBundle\Migrations\Schema\v1_2;
 
 use Doctrine\DBAL\Schema\Schema;
 
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\ParametrizedSqlMigrationQuery;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
-
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use OroCRM\Bundle\MagentoBundle\Provider\ChannelType;
 
-class OroCRMAbandonedCartBundle implements Migration
+class OroAbandonedCartBundle implements Migration
 {
     /**
      * {@inheritdoc}

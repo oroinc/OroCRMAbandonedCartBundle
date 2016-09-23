@@ -1,4 +1,4 @@
-orocrm:
+oro:
     abandonedcart:
         list:
             change_entity_confirmation: Do you want to clear all template data?

@@ -1,11 +1,10 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Entity;
+namespace Oro\Bundle\AbandonedCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
 
@@ -27,7 +26,7 @@ use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
  */
 class AbandonedCartCampaign
 {
-    const CLASS_NAME = 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign';
+    const CLASS_NAME = 'Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign';
 
     /**
      * @var int

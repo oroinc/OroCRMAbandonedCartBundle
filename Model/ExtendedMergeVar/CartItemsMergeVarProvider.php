@@ -1,12 +1,12 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar;
+namespace Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use OroCRM\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
 class CartItemsMergeVarProvider implements ProviderInterface
 {
@@ -90,7 +90,7 @@ class CartItemsMergeVarProvider implements ProviderInterface
     protected function translateLabel($field, $index)
     {
         return $this->translator->trans(
-            sprintf('orocrm.abandonedcart.mergevar.cart_item.%s.label', $field),
+            sprintf('oro.abandonedcart.mergevar.cart_item.%s.label', $field),
             ['%index%' => $index]
         );
     }

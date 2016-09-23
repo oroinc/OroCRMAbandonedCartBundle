@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Form\Type;
+namespace Oro\Bundle\AbandonedCartBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 
 class AbandonedCartConversionType extends AbstractType
 {
@@ -81,7 +81,7 @@ class AbandonedCartConversionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
-            ['data_class' => 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion']
+            ['data_class' => 'Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion']
         );
     }
 
@@ -98,6 +98,6 @@ class AbandonedCartConversionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'orocrm_abandonedcart_conversion';
+        return 'oro_abandonedcart_conversion';
     }
 }

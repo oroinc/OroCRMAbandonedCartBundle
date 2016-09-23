@@ -1,14 +1,14 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProvider;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProvider;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase

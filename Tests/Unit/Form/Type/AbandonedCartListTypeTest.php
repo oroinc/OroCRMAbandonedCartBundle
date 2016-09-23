@@ -1,17 +1,17 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
 
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType;
+use Oro\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType;
 
 class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
 {
-    const CART_CLASS_NAME = 'OroCRM\Bundle\MagentoBundle\Entity\Cart';
-    const MARKETING_LIST_TYPE_CLASS_NAME = 'OroCRM\Bundle\MarketingListBundle\Form\Type\MarketingListType';
-    const MARKETING_LIST_CLASS_NAME = 'OroCRM\Bundle\MarketingListBundle\Entity\MarketingList';
+    const CART_CLASS_NAME = 'Oro\Bundle\MagentoBundle\Entity\Cart';
+    const MARKETING_LIST_TYPE_CLASS_NAME = 'Oro\Bundle\MarketingListBundle\Form\Type\MarketingListType';
+    const MARKETING_LIST_CLASS_NAME = 'Oro\Bundle\MarketingListBundle\Entity\MarketingList';
 
     /**
      * @var AbandonedCartListType
@@ -98,6 +98,6 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetName()
     {
-        $this->assertEquals('orocrm_abandonedcart_list', $this->abandonedCartListType->getName());
+        $this->assertEquals('oro_abandonedcart_list', $this->abandonedCartListType->getName());
     }
 }

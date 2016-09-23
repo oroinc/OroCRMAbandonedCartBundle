@@ -11,7 +11,7 @@
                     'status': constant('OroCRM\\Bundle\\MailChimpBundle\\Entity\\StaticSegment::STATUS_SCHEDULED')
                 }|json_encode|raw,
                 'url': path('orocrm_api_update_staticsegment_status', {id: staticSegment.id}),
-                'message': 'orocrm.abandonedcart.connection.message.syncronize_scheduled'|trans
+                'message': 'oro.abandonedcart.connection.message.syncronize_scheduled'|trans
             },
             'id': 'mailchimp-synchronize-btn',
             'label': 'orocrm.mailchimp.connection.button.synchronize'|trans,
@@ -46,14 +46,14 @@
                     'page-component-module': 'orocrmmailchimp/js/app/components/connect-btn-component',
                     'page-component-options': {
                         'createOnEvent': 'click',
-                        'message': 'orocrm.abandonedcart.conversion.message.update'|trans,
+                        'message': 'oro.abandonedcart.conversion.message.update'|trans,
                         'options': {
-                            'title': 'orocrm.abandonedcart.conversion.dialog.title.connect'|trans,
+                            'title': 'oro.abandonedcart.conversion.dialog.title.connect'|trans,
                         }
                     }|json_encode|raw
                 },
                 'id': 'mailchimp-connection-btn',
-                'label': 'orocrm.abandonedcart.conversion.button.enable'|trans,
+                'label': 'oro.abandonedcart.conversion.button.enable'|trans,
                 'class': 'no-hash',
                 'iCss': 'icon-dollar'
             }) }}
@@ -62,11 +62,11 @@
             {{  UI.deleteLink({
                 'dataUrl': path('orocrm_api_delete_staticsegment', {id: staticSegment.id}),
                 'dataRedirect': path('orocrm_abandoned_cart_list_view', {id: marketingList.id}),
-                'dataMessage': 'orocrm.abandonedcart.connection.confirmation.disconnect'|trans,
+                'dataMessage': 'oro.abandonedcart.connection.confirmation.disconnect'|trans,
                 'aCss': 'no-hash remove-button',
                 'id': 'btn-remove-mailchimp-connection',
                 'entity_label': 'orocrm.mailchimp.connection.name'|trans,
-                'successMessage': 'orocrm.abandonedcart.connection.message.disconnect'|trans,
+                'successMessage': 'oro.abandonedcart.connection.message.disconnect'|trans,
                 'title': 'orocrm.mailchimp.connection.button.disconnect'|trans,
                 'label': 'orocrm.mailchimp.connection.button.disconnect'|trans
             }) }}

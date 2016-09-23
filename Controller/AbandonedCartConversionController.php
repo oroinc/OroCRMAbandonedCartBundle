@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Controller;
+namespace Oro\Bundle\AbandonedCartBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
@@ -9,8 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 /**
@@ -21,10 +20,10 @@ class AbandonedCartConversionController extends Controller
     /**
      * @Route(
      *      "/manage-workflow/{id}",
-     *      name="orocrm_abandoned_cart_manage_workflow",
+     *      name="oro_abandoned_cart_manage_workflow",
      *      requirements={"id"="\d+"}
      * )
-     * @AclAncestor("orocrm_abandonedcart")
+     * @AclAncestor("oro_abandonedcart")
      *
      * @Template
      * @param MarketingList $marketingList
@@ -35,10 +34,10 @@ class AbandonedCartConversionController extends Controller
         $conversion = $this->getConversionByMarketingList($marketingList);
 
         /** @var Form $form */
-        $form = $this->get('orocrm_abandonedcart.form.conversion');
+        $form = $this->get('oro_abandonedcart.form.conversion');
 
         // TODO remove after Fix/bap 7098 #3509 will merged
-        $handler = $this->get('orocrm_abandonedcart.form.handler.conversion_form');
+        $handler = $this->get('oro_abandonedcart.form.handler.conversion_form');
 
         $result = ['entity' => $conversion];
         if ($handler->process($conversion)) {
@@ -56,11 +55,11 @@ class AbandonedCartConversionController extends Controller
      */
     protected function getConversionByMarketingList(MarketingList $marketingList)
     {
-        $conversion = $this->get('orocrm_abandonedcart.conversion_manager')
+        $conversion = $this->get('oro_abandonedcart.conversion_manager')
             ->findConversionByMarketingList($marketingList);
 
         if (!$conversion) {
-            $conversion = $this->get('orocrm_abandonedcart.conversion_factory')->create($marketingList);
+            $conversion = $this->get('oro_abandonedcart.conversion_factory')->create($marketingList);
         }
 
         return $conversion;

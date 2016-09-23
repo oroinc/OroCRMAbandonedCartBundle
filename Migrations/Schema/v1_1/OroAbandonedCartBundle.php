@@ -1,8 +1,9 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Migrations\Schema\v1_1;
+namespace Oro\Bundle\AbandonedCartBundle\Migrations\Schema\v1_1;
 
 use Doctrine\DBAL\Schema\Schema;
+
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
@@ -10,7 +11,7 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
  * @SuppressWarnings(PHPMD.TooManyMethods)
  * @SuppressWarnings(PHPMD.ExcessiveClassLength)
  */
-class OroCRMAbandonedCartBundle implements Migration
+class OroAbandonedCartBundle implements Migration
 {
     /**
      * {@inheritdoc}
