@@ -9,9 +9,9 @@ use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
 use Oro\Bundle\LocaleBundle\Formatter\NumberFormatter;
 use OroCRM\Bundle\MagentoBundle\Entity\Cart;
 use OroCRM\Bundle\MagentoBundle\Entity\CartItem;
-use OroCRM\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
-use OroCRM\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
-use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
+use Oro\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
+use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
 use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
 
 class CartItemsMergeVarStrategyListener

@@ -16,7 +16,7 @@ use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 
 use OroCRM\Bundle\MarketingListBundle\Datagrid\ConfigurationProvider;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
 
 /**
  * @Route("/abandoned-cart")
@@ -208,7 +208,7 @@ class AbandonedCartController extends Controller
     protected function findStaticSegmentByMarketingList(MarketingList $marketingList)
     {
         return $this->getDoctrine()
-            ->getRepository($this->container->getParameter('orocrm_mailchimp.entity.static_segment.class'))
+            ->getRepository($this->container->getParameter('oro_mailchimp.entity.static_segment.class'))
             ->findOneBy(['marketingList' => $marketingList]);
     }
 }

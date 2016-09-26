@@ -12,9 +12,9 @@ use Oro\Bundle\SegmentBundle\Entity\Segment;
 use OroCRM\Bundle\MagentoBundle\Entity\Cart;
 use OroCRM\Bundle\MagentoBundle\Entity\CartItem;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
-use OroCRM\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
-use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
+use Oro\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
+use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
 use OroCRM\Bundle\AbandonedCartBundle\EventListener\ImportExport\CartItemsMergeVarStrategyListener;
 
 class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
