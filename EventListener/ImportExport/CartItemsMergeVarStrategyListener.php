@@ -12,7 +12,7 @@ use Oro\Bundle\MagentoBundle\Entity\CartItem;
 use Oro\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
 use Oro\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
 use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
-use Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
+use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
 
 class CartItemsMergeVarStrategyListener
 {
