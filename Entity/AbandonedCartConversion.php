@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-use OroCRM\Bundle\MailChimpBundle\Entity\Campaign;
+use Oro\Bundle\MailChimpBundle\Entity\Campaign;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 /**
@@ -39,7 +39,7 @@ class AbandonedCartConversion
     /**
      * @var Campaign[]|Collection
      *
-     * @ORM\ManyToMany(targetEntity="OroCRM\Bundle\MailChimpBundle\Entity\Campaign")
+     * @ORM\ManyToMany(targetEntity="Oro\Bundle\MailChimpBundle\Entity\Campaign")
      * @ORM\JoinTable(name="orocrm_abandcart_conv_camps",
      *      joinColumns={@ORM\JoinColumn(name="conversion_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="mailchimp_campaign_id", referencedColumnName="id",
