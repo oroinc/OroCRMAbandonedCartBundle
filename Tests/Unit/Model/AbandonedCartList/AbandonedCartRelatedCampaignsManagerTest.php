@@ -8,8 +8,8 @@ use Doctrine\ORM\EntityRepository;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartRelatedCampaignsManager;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
-use OroCRM\Bundle\MailChimpBundle\Entity\Campaign;
+use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MailChimpBundle\Entity\Campaign;
 
 class AbandonedCartRelatedCampaignsManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -68,11 +68,11 @@ class AbandonedCartRelatedCampaignsManagerTest extends \PHPUnit_Framework_TestCa
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->staticSegment = $this->getMockBuilder('OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment')
+        $this->staticSegment = $this->getMockBuilder('Oro\Bundle\MailChimpBundle\Entity\StaticSegment')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->mailchimpCampaign = $this->getMockBuilder('OroCRM\Bundle\MailChimpBundle\Entity\Campaign')
+        $this->mailchimpCampaign = $this->getMockBuilder('Oro\Bundle\MailChimpBundle\Entity\Campaign')
             ->disableOriginalConstructor()
             ->getMock();
 

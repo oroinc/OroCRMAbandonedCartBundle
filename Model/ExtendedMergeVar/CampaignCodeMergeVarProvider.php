@@ -6,7 +6,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
+use Oro\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
 
 class CampaignCodeMergeVarProvider implements ProviderInterface
 {

@@ -8,7 +8,7 @@ use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
 use Oro\Bundle\EntityExtendBundle\Tools\ExtendHelper;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
 
 class AbandonedCartConversionManager
 {

@@ -5,7 +5,7 @@ namespace Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar;
 use Symfony\Component\Translation\TranslatorInterface;
 
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
-use OroCRM\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
+use Oro\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class CartItemsMergeVarProvider implements ProviderInterface

@@ -4,9 +4,9 @@ namespace Oro\Bundle\AbandonedCartBundle\Provider\Connector;
 
 use Oro\Bundle\AbandonedCartBundle\Provider\Transport\Iterator\AutomationCampaignIterator;
 use Oro\Bundle\IntegrationBundle\Provider\ConnectorInterface;
-use OroCRM\Bundle\MailChimpBundle\Entity\Campaign;
-use OroCRM\Bundle\MailChimpBundle\Provider\Connector\AbstractMailChimpConnector;
-use OroCRM\Bundle\MailChimpBundle\Provider\Transport\Iterator\CampaignIterator;
+use Oro\Bundle\MailChimpBundle\Entity\Campaign;
+use Oro\Bundle\MailChimpBundle\Provider\Connector\AbstractMailChimpConnector;
+use Oro\Bundle\MailChimpBundle\Provider\Transport\Iterator\CampaignIterator;
 
 class AutomationCampaignConnector extends AbstractMailChimpConnector implements ConnectorInterface
 {

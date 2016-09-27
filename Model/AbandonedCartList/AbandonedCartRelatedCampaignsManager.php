@@ -5,7 +5,7 @@ namespace Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
-use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartRelatedCampaignsManager

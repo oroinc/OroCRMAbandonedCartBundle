@@ -8,7 +8,7 @@ use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
-use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
 use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase

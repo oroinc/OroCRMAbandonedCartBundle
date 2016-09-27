@@ -70,11 +70,11 @@ datagrids:
             title:
                 label: 'oro.abandonedcart.datagrid.campaign_name_label'
             emailsSent:
-                label: 'orocrm.mailchimp.emailcampaign.emailsSent.label'
+                label: 'oro.mailchimp.emailcampaign.emailsSent.label'
             opens:
-                label: 'orocrm.mailchimp.emailcampaign.opens.label'
+                label: 'oro.mailchimp.emailcampaign.opens.label'
             usersWhoClicked:
-                label: 'orocrm.mailchimp.emailcampaign.clicks.label'
+                label: 'oro.mailchimp.emailcampaign.clicks.label'
         sorters:
             columns:
                 title:

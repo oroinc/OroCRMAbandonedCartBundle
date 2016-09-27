@@ -81,7 +81,7 @@ services:
             - "@oro_abandonedcart.provider"
             - "@translator"
         tags:
-            - { name: orocrm_mailchimp.extended_merge_vars.provider }
+            - { name: oro_mailchimp.extended_merge_vars.provider }
 
     oro_abandonedcart.importexport.strategy.member_cartitems_merge_var.listener:
         class: %oro_abandonedcart.importexport.strategy.member_cartitems_merge_var.listener.class%
@@ -118,8 +118,8 @@ services:
         arguments:
             - "@doctrine"
             - "@oro_abandonedcart.provider"
-            - %orocrm_mailchimp.entity.static_segment.class%
-            - %orocrm_mailchimp.entity.campaign.class%
+            - %oro_mailchimp.entity.static_segment.class%
+            - %oro_mailchimp.entity.campaign.class%
 
     #Conversion
     oro_abandonedcart.conversion_manager:
@@ -130,7 +130,7 @@ services:
             - "@oro_abandonedcart.tracking_stat_provider_factory"
             - %orocrm_magento.order.entity.class%
             - %orocrm_campaign.entity.class%
-            - %orocrm_mailchimp.entity.static_segment.class%
+            - %oro_mailchimp.entity.static_segment.class%
             - %oro_abandonedcart.entity.abandonedcart_conversion.class%
             - %oro_abandonedcart.entity.tracking_visit_event.class%
 
@@ -140,7 +140,7 @@ services:
             - "@oro_abandonedcart.provider"
             - "@translator"
         tags:
-            - { name: orocrm_mailchimp.extended_merge_vars.provider }
+            - { name: oro_mailchimp.extended_merge_vars.provider }
 
     oro_abandonedcart.conversion_factory:
         class: %oro_abandonedcart.conversion_factory.class%
@@ -152,25 +152,25 @@ services:
 
     oro_abandonedcart.connector.automation_campaign:
         class: %oro_abandonedcart.connector.automation_campaign.class%
-        parent: orocrm_mailchimp.connector.abstract
+        parent: oro_mailchimp.connector.abstract
         calls:
-            - [setEntityName, [%orocrm_mailchimp.entity.campaign.class%]]
+            - [setEntityName, [%oro_mailchimp.entity.campaign.class%]]
         tags:
             - { name: oro_integration.connector, type: automation_campaign, channel_type: mailchimp }
 
     oro_abandonedcart.importexport.processor.automation_campaign.remove:
-        class: %orocrm_mailchimp.importexport.processor.campaign_remove.class%
-        parent: orocrm_mailchimp.importexport.processor.remove.abstract
+        class: %oro_mailchimp.importexport.processor.campaign_remove.class%
+        parent: oro_mailchimp.importexport.processor.remove.abstract
         calls:
-            - [setEntityName, [%orocrm_mailchimp.entity.campaign.class%]]
+            - [setEntityName, [%oro_mailchimp.entity.campaign.class%]]
             - [setSearchField, ['originId']]
             - [setCampaignType, ['automation']]
 
     oro_abandonedcart.importexport.writer.automation_campaign.remove:
-        class: %orocrm_mailchimp.importexport.writer.campaign_remove.class%
+        class: %oro_mailchimp.importexport.writer.campaign_remove.class%
         arguments:
             - "@doctrine"
-            - %orocrm_mailchimp.entity.campaign.class%
+            - %oro_mailchimp.entity.campaign.class%
             - 'originId'
             - 'automation'
 

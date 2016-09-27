@@ -3,8 +3,8 @@
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Provider\Transport\Iterator;
 
 use Oro\Bundle\AbandonedCartBundle\Provider\Transport\Iterator\AutomationCampaignIterator;
-use OroCRM\Bundle\MailChimpBundle\Provider\Transport\Iterator\CampaignIterator;
-use OroCRM\Bundle\MailChimpBundle\Provider\Transport\MailChimpClient;
+use Oro\Bundle\MailChimpBundle\Provider\Transport\Iterator\CampaignIterator;
+use Oro\Bundle\MailChimpBundle\Provider\Transport\MailChimpClient;
 
 class AutomationCampaignIteratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +23,7 @@ class AutomationCampaignIteratorTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->client = $this
-            ->getMockBuilder('OroCRM\Bundle\MailChimpBundle\Provider\Transport\MailChimpClient')
+            ->getMockBuilder('Oro\Bundle\MailChimpBundle\Provider\Transport\MailChimpClient')
             ->setMethods(['getCampaigns'])
             ->disableOriginalConstructor()
             ->getMock();
