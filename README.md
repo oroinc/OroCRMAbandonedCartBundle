@@ -1,4 +1,4 @@
-OroCRMAbandonedCartBundle
+OroAbandonedCartBundle
 ===================
 
 This Bundle provides management of Abandoned Cart Campaigns, which are used

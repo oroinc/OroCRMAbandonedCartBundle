@@ -1,11 +1,11 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory;
 
 class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
 {

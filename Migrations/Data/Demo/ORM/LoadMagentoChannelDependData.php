@@ -1,10 +1,10 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Migrations\Data\Demo\ORM;
+namespace Oro\Bundle\AbandonedCartBundle\Migrations\Data\Demo\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use Oro\Bundle\ChannelBundle\Entity\Channel;
 use Oro\Bundle\ChannelBundle\Migrations\Data\ORM\AbstractDefaultChannelDataFixture;
 use Oro\Bundle\MagentoBundle\Provider\ChannelType;

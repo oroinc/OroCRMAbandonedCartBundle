@@ -1,2 +1,2 @@
 bundles:
-    - { name: OroCRM\Bundle\AbandonedCartBundle\OroCRMAbandonedCartBundle, priority: 150 }
+    - { name: Oro\Bundle\AbandonedCartBundle\OroAbandonedCartBundle, priority: 150 }

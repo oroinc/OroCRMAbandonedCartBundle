@@ -1,11 +1,11 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use OroCRM\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartConversionType;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
+use Oro\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartConversionType;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 
 class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,7 +27,7 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->conversionManager = $this->getMockBuilder(
-            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager'
+            'Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager'
         )
             ->disableOriginalConstructor()
             ->getMock();
@@ -46,7 +46,7 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
         $resolver->expects($this->once())
             ->method('setDefaults')
             ->with(
-                ['data_class' => 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion']
+                ['data_class' => 'Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion']
             );
 
         $this->abandonedCartConversionType->setDefaultOptions($resolver);
@@ -54,6 +54,6 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetName()
     {
-        $this->assertEquals('orocrm_abandonedcart_conversion', $this->abandonedCartConversionType->getName());
+        $this->assertEquals('oro_abandonedcart_conversion', $this->abandonedCartConversionType->getName());
     }
 }

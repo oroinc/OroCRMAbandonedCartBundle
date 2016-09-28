@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Form\Type;
+namespace Oro\Bundle\AbandonedCartBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\Criteria;
@@ -134,6 +134,6 @@ class AbandonedCartListType extends AbstractQueryDesignerType
      */
     public function getBlockPrefix()
     {
-        return 'orocrm_abandonedcart_list';
+        return 'oro_abandonedcart_list';
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\ExtendedMergeVar;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\ExtendedMergeVar;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
-use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CampaignCodeMergeVarProvider;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
+use Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CampaignCodeMergeVarProvider;
 
 class CampaignCodeMergeVarProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,7 +29,7 @@ class CampaignCodeMergeVarProviderTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->abandonedCartCampaignProvider = $this
-            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+            ->getMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
         $this->translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
         $this->provider = new CampaignCodeMergeVarProvider($this->abandonedCartCampaignProvider, $this->translator);
     }
@@ -76,7 +76,7 @@ class CampaignCodeMergeVarProviderTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 [
-                    ['orocrm.abandonedcart.campaign_code_mergevar.label', [], null, null, 'Campaign Code'],
+                    ['oro.abandonedcart.campaign_code_mergevar.label', [], null, null, 'Campaign Code'],
                 ],
                 [
                     [

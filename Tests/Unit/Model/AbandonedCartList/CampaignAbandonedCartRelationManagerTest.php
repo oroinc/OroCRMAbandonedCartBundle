@@ -1,18 +1,18 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 use Oro\Bundle\CampaignBundle\Entity\Campaign;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCase
 {
-    const ABANDONED_CART_CAMPAIGN_CLASS_NAME = 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign';
+    const ABANDONED_CART_CAMPAIGN_CLASS_NAME = 'Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign';
 
     /**
      * @var CampaignAbandonedCartRelationManager

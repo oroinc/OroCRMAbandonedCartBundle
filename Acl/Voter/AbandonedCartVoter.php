@@ -1,11 +1,10 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Acl\Voter;
+namespace Oro\Bundle\AbandonedCartBundle\Acl\Voter;
 
 use Oro\Bundle\SecurityBundle\Acl\Voter\AbstractEntityVoter;
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
-
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use Oro\Bundle\MagentoBundle\Provider\ChannelType;
 
 class AbandonedCartVoter extends AbstractEntityVoter

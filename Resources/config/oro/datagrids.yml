@@ -1,20 +1,20 @@
 datagrids:
-    orocrm-abandonedcart-list-grid:
+    oro-abandonedcart-list-grid:
         extends: orocrm-marketing-list-grid
         properties:
             id: ~
             view_link:
                 type: url
-                route: orocrm_abandoned_cart_list_view
+                route: oro_abandoned_cart_list_view
                 params: [ id ]
             update_link:
                 type: url
-                route: orocrm_abandoned_cart_list_update
+                route: oro_abandoned_cart_list_update
                 params:
                     - id
             delete_link:
                 type: url
-                route: orocrm_abandoned_cart_list_delete
+                route: oro_abandoned_cart_list_delete
                 params:
                     - id
         actions:
@@ -23,11 +23,11 @@ datagrids:
                 label:        oro.grid.action.view
                 link:         view_link
                 icon:         eye-open
-                acl_resource: orocrm_abandoned_cart_list_view
+                acl_resource: oro_abandoned_cart_list_view
                 rowAction:    true
             update:
                 type:          navigate
-                acl_resource:  orocrm_abandoned_cart_list_update
+                acl_resource:  oro_abandoned_cart_list_update
                 label:         oro.grid.action.update
                 icon:          edit
                 link:          update_link
@@ -35,7 +35,7 @@ datagrids:
                     className: 'no-hash mobile-hide'
             delete:
                 type:          delete
-                acl_resource:  orocrm_abandoned_cart_list_delete
+                acl_resource:  oro_abandoned_cart_list_delete
                 label:         oro.grid.action.delete
                 icon:          trash
                 link:          delete_link
@@ -46,7 +46,7 @@ datagrids:
             entity_pagination: true
             export: true
 
-    orocrm-abandonedcart-campaigns-grid:
+    oro-abandonedcart-campaigns-grid:
         source:
             type: orm
             query:
@@ -57,7 +57,7 @@ datagrids:
                     - mc.opens
                     - mc.usersWhoClicked
                 from:
-                    - { table: OroCRMAbandonedCartBundle:AbandonedCartConversion, alias: conv }
+                    - { table: OroAbandonedCartBundle:AbandonedCartConversion, alias: conv }
                 join:
                     left:
                         - { join: conv.campaigns, alias: mc }
@@ -68,7 +68,7 @@ datagrids:
                 marketing_list_id: marketingListId
         columns:
             title:
-                label: 'orocrm.abandonedcart.datagrid.campaign_name_label'
+                label: 'oro.abandonedcart.datagrid.campaign_name_label'
             emailsSent:
                 label: 'oro.mailchimp.emailcampaign.emailsSent.label'
             opens:
@@ -103,7 +103,7 @@ datagrids:
             grand_total:
                 columns:
                     title:
-                        label: 'orocrm.abandonedcart.datagrid.columns_total_label'
+                        label: 'oro.abandonedcart.datagrid.columns_total_label'
                     emailsSent:
                         expr: 'SUM(mc.emailsSent)'
                     opens:

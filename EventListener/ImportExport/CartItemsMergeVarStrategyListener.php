@@ -1,9 +1,10 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\EventListener\ImportExport;
+namespace Oro\Bundle\AbandonedCartBundle\EventListener\ImportExport;
 
 use Doctrine\Common\Collections\Collection;
 
+use Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
 use Oro\Bundle\LocaleBundle\Formatter\NumberFormatter;
@@ -12,7 +13,6 @@ use Oro\Bundle\MagentoBundle\Entity\CartItem;
 use Oro\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
 use Oro\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
 use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
-use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
 
 class CartItemsMergeVarStrategyListener
 {

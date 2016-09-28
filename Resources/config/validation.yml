@@ -1,4 +1,4 @@
-OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion:
+Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion:
     properties:
         campaigns:
             - NotBlank: ~

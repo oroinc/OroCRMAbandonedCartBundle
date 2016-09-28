@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Datagrid;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Datagrid;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
@@ -8,7 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 use Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface;
 use Oro\Bundle\DataGridBundle\Datasource\Orm\OrmDatasource;
 use Oro\Bundle\DataGridBundle\Event\BuildAfter;
-use OroCRM\Bundle\AbandonedCartBundle\Datagrid\MarketingListListener;
+use Oro\Bundle\AbandonedCartBundle\Datagrid\MarketingListListener;
 
 class MarketingListListenerTest extends \PHPUnit_Framework_TestCase
 {

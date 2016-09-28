@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Form\Handler;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Form\Handler;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -10,15 +10,14 @@ use Symfony\Component\Validator\ValidatorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartCampaignHandler;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use Oro\Bundle\SegmentBundle\Entity\SegmentType;
 use Oro\Bundle\UserBundle\Entity\User;
-
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use OroCRM\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartCampaignHandler;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
 class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -103,13 +102,13 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->abandonedCartCampaignFactory = $this
             ->getMockBuilder(
-                'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory'
+                'Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory'
             )
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->abandonedCartCampaignProvider = $this
-            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+            ->getMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
 
         $this->marketingList = new MarketingList();
         $this->abandonedCartCampaign = new AbandonedCartCampaign();

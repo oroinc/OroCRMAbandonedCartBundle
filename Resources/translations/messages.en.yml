@@ -1,4 +1,4 @@
-orocrm:
+oro:
     abandonedcart:
         abandonedcartcampaign:
             entity_plural_label: Abandoned Cart Campaigns
@@ -72,4 +72,4 @@ orocrm:
             action:
                 general:
                     label: Manage abandoned cart campaigns
-                    description: Create segments of abandoned shopping carts in OroCRM and link them to MailChimp campaign automation
+                    description: Create segments of abandoned shopping carts in Oro and link them to MailChimp campaign automation

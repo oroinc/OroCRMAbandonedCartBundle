@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Datagrid;
+namespace Oro\Bundle\AbandonedCartBundle\Datagrid;
 
 use Doctrine\ORM\Query\Expr\Join;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Entity;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Entity;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 
 class AbandonedCartCampaignTest extends \PHPUnit_Framework_TestCase
 {

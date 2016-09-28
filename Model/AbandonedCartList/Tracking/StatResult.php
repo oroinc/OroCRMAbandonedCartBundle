@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking;
+namespace Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking;
 
 class StatResult implements StatResultInterface
 {

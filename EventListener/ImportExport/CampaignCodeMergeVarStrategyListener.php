@@ -1,11 +1,11 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\EventListener\ImportExport;
+namespace Oro\Bundle\AbandonedCartBundle\EventListener\ImportExport;
 
 use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
-use OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CampaignCodeMergeVarProvider;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
+use Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CampaignCodeMergeVarProvider;
 use Oro\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
 use Oro\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
 
