@@ -64,7 +64,7 @@
                 {%- else -%}
                     {% set campaignView = campaign.name|escape %}
                 {%- endif -%}
-                {{ UI.renderHtmlProperty('orocrm.campaign.emailcampaign.campaign.label'|trans, campaignView) }}
+                {{ UI.renderHtmlProperty('oro.campaign.emailcampaign.campaign.label'|trans, campaignView) }}
             {%- endif -%}
 
             {%- set ownerData -%}
@@ -125,7 +125,7 @@
             ]
         },
         {
-            'title' : 'orocrm.marketinglist.block.removed'|trans,
+            'title' : 'oro.marketinglist.block.removed'|trans,
             'subblocks': [
                 {'data' : [removedItemsGrid]}
             ]
