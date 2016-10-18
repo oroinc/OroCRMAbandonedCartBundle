@@ -1,10 +1,10 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid;
+namespace Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid;
 
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use Oro\Bundle\DataGridBundle\Event\BuildBefore;
-use OroCRM\Bundle\MarketingListBundle\Model\MarketingListHelper;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
+use Oro\Bundle\MarketingListBundle\Model\MarketingListHelper;
 
 class AbandonedCartListener
 {

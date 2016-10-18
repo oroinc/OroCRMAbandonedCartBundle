@@ -1,13 +1,12 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
+namespace Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
 use Oro\Bundle\SegmentBundle\Entity\Segment;
-
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingListType;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
 
 class PredefinedMarketingListFactory
 {

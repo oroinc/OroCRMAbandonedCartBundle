@@ -1,9 +1,9 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Provider\Transport\Iterator;
+namespace Oro\Bundle\AbandonedCartBundle\Provider\Transport\Iterator;
 
-use OroCRM\Bundle\MailChimpBundle\Entity\Campaign;
-use OroCRM\Bundle\MailChimpBundle\Provider\Transport\Iterator\CampaignIterator;
+use Oro\Bundle\MailChimpBundle\Entity\Campaign;
+use Oro\Bundle\MailChimpBundle\Provider\Transport\Iterator\CampaignIterator;
 
 class AutomationCampaignIterator extends CampaignIterator
 {

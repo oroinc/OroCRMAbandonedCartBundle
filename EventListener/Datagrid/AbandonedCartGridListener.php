@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid;
+namespace Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid;
 
 use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 use Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration;

@@ -1,6 +1,6 @@
 {
     "name": "oro/crm-abandoned-cart",
-    "description": "OroCRM Abandoned Cart",
+    "description": "Oro Abandoned Cart",
     "license": "OSL-3.0",
     "authors": [
         {
@@ -10,10 +10,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "OroCRM\\Bundle\\AbandonedCartBundle": "src/"
+            "Oro\\Bundle\\AbandonedCartBundle": "src/"
         }
     },
-    "target-dir": "src/OroCRM/Bundle/AbandonedCartBundle",
+    "target-dir": "src/Oro/Bundle/AbandonedCartBundle",
     "require": {
         "php": ">=5.5.9",
         "oro/crm": "1.x-dev",

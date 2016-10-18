@@ -1,14 +1,14 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Acl\Voter;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Acl\Voter;
 
 use Doctrine\ORM\EntityRepository;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
-use OroCRM\Bundle\AbandonedCartBundle\Acl\Voter\AbandonedCartVoter;
-use OroCRM\Bundle\MagentoBundle\Provider\ChannelType;
+use Oro\Bundle\AbandonedCartBundle\Acl\Voter\AbandonedCartVoter;
+use Oro\Bundle\MagentoBundle\Provider\ChannelType;
 
 class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
 {
@@ -54,7 +54,7 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
             ->with($object)
             ->will($this->returnValue($className));
 
-        $this->voter->setClassName('OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartVoter');
+        $this->voter->setClassName('Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartVoter');
 
         $this->doctrineHelper->expects($this->any())
             ->method('getSingleEntityIdentifier')
@@ -168,7 +168,7 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
         $objectIdentity = $this->getMock($objectIdentityClass);
         $objectIdentity->expects($this->any())
             ->method('getType')
-            ->will($this->returnValue('OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartVoter'));
+            ->will($this->returnValue('Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartVoter'));
 
         return $objectIdentity;
     }

@@ -1,9 +1,9 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Model;
+namespace Oro\Bundle\AbandonedCartBundle\Model;
 
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 interface AbandonedCartCampaignProviderInterface
 {

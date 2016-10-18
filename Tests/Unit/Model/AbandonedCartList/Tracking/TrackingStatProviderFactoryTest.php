@@ -1,11 +1,11 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList\Tracking;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList\Tracking;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
 
 class TrackingStatProviderFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -51,7 +51,7 @@ class TrackingStatProviderFactoryTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertInstanceOf(
-            'OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderInterface',
+            'Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderInterface',
             $trackingStatProvider
         );
     }

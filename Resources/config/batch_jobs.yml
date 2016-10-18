@@ -9,8 +9,8 @@ connector:
                     title: import
                     class: Oro\Bundle\BatchBundle\Step\ItemStep
                     services:
-                        reader:    orocrm_abandonedcart.connector.automation_campaign
-                        processor: orocrm_mailchimp.importexport.processor.campaign
+                        reader:    oro_abandonedcart.connector.automation_campaign
+                        processor: oro_mailchimp.importexport.processor.campaign
                         writer:    oro_integration.writer.persistent_batch_writer
                     parameters:
                         batch_size: 25
@@ -18,6 +18,6 @@ connector:
                     title: import
                     class: Oro\Bundle\BatchBundle\Step\ItemStep
                     services:
-                        reader:    orocrm_mailchimp.importexport.reader.processed_entities
-                        processor: orocrm_abandonedcart.importexport.processor.automation_campaign.remove
-                        writer:    orocrm_abandonedcart.importexport.writer.automation_campaign.remove
+                        reader:    oro_mailchimp.importexport.reader.processed_entities
+                        processor: oro_abandonedcart.importexport.processor.automation_campaign.remove
+                        writer:    oro_abandonedcart.importexport.writer.automation_campaign.remove

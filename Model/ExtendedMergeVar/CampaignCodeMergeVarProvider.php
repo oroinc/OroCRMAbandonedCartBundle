@@ -1,12 +1,12 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar;
+namespace Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
 
 class CampaignCodeMergeVarProvider implements ProviderInterface
 {
@@ -54,7 +54,7 @@ class CampaignCodeMergeVarProvider implements ProviderInterface
         return [
             [
                 'name' => self::CAMPAIGN_CODE_NAME,
-                'label' => $this->translator->trans('orocrm.abandonedcart.campaign_code_mergevar.label')
+                'label' => $this->translator->trans('oro.abandonedcart.campaign_code_mergevar.label')
             ]
         ];
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\Datagrid;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\Datagrid;
 
 use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 use Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration;
-use OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartListener;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MarketingListBundle\Model\MarketingListHelper;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
+use Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartListener;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Model\MarketingListHelper;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
 class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,7 +44,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->marketingListHelper = $this
-            ->getMockBuilder('OroCRM\Bundle\MarketingListBundle\Model\MarketingListHelper')
+            ->getMockBuilder('Oro\Bundle\MarketingListBundle\Model\MarketingListHelper')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -53,7 +53,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->abandonedCartCampaignProvider = $this
-            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+            ->getMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
 
         $this->datagridConfig = $this->getMockBuilder('Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration')
             ->disableOriginalConstructor()
@@ -102,7 +102,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
 
         /** @var \PHPUnit_Framework_MockObject_MockObject|MarketingList $marketingList */
         $marketingList = $this
-            ->getMockBuilder('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')
+            ->getMockBuilder('Oro\Bundle\MarketingListBundle\Entity\MarketingList')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -152,7 +152,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
 
         /** @var \PHPUnit_Framework_MockObject_MockObject|MarketingList $marketingList */
         $marketingList = $this
-            ->getMockBuilder('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')
+            ->getMockBuilder('Oro\Bundle\MarketingListBundle\Entity\MarketingList')
             ->disableOriginalConstructor()
             ->getMock();
 

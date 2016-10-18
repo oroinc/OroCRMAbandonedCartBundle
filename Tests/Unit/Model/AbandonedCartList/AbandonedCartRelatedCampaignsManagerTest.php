@@ -1,15 +1,15 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
 
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartRelatedCampaignsManager;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment;
-use OroCRM\Bundle\MailChimpBundle\Entity\Campaign;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartRelatedCampaignsManager;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MailChimpBundle\Entity\Campaign;
 
 class AbandonedCartRelatedCampaignsManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -62,17 +62,17 @@ class AbandonedCartRelatedCampaignsManagerTest extends \PHPUnit_Framework_TestCa
             ->getMock();
 
         $this->abandonedCartCampaignProvider = $this
-            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+            ->getMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
 
-        $this->marketingList = $this->getMockBuilder('OroCRM\Bundle\MarketingListBundle\Entity\MarketingList')
+        $this->marketingList = $this->getMockBuilder('Oro\Bundle\MarketingListBundle\Entity\MarketingList')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->staticSegment = $this->getMockBuilder('OroCRM\Bundle\MailChimpBundle\Entity\StaticSegment')
+        $this->staticSegment = $this->getMockBuilder('Oro\Bundle\MailChimpBundle\Entity\StaticSegment')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->mailchimpCampaign = $this->getMockBuilder('OroCRM\Bundle\MailChimpBundle\Entity\Campaign')
+        $this->mailchimpCampaign = $this->getMockBuilder('Oro\Bundle\MailChimpBundle\Entity\Campaign')
             ->disableOriginalConstructor()
             ->getMock();
 

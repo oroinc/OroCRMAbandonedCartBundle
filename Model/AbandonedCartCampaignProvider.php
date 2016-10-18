@@ -1,13 +1,13 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Model;
+namespace Oro\Bundle\AbandonedCartBundle\Model;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartCampaignProvider implements AbandonedCartCampaignProviderInterface
 {

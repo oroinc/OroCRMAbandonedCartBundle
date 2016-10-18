@@ -1,9 +1,9 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
+namespace Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class ConversionFactory
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
-use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;
+use Oro\Bundle\CampaignBundle\Entity\Campaign;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartCampaignFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +22,7 @@ class AbandonedCartCampaignFactoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->campaignFactory = $this
-            ->getMockBuilder('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory')
+            ->getMockBuilder('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory')
             ->getMock();
         $this->factory = new AbandonedCartCampaignFactory($this->campaignFactory);
     }
@@ -38,7 +38,7 @@ class AbandonedCartCampaignFactoryTest extends \PHPUnit_Framework_TestCase
         $abandonedCartCampaign = $this->factory->create($marketingList);
 
         $this->assertInstanceOf(
-            'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign',
+            'Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign',
             $abandonedCartCampaign
         );
 

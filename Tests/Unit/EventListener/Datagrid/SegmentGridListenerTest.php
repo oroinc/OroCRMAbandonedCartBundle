@@ -1,15 +1,15 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\Datagrid;
+namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\Datagrid;
 
+use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid\SegmentGridListener;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration;
 use Oro\Bundle\DataGridBundle\Datagrid\ParameterBag;
 use Oro\Bundle\DataGridBundle\Event\PreBuild;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\MarketingListBundle\Model\MarketingListHelper;
-use OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use OroCRM\Bundle\AbandonedCartBundle\EventListener\Datagrid\SegmentGridListener;
-use OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MarketingListBundle\Model\MarketingListHelper;
 
 class SegmentGridListenerTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,11 +36,11 @@ class SegmentGridListenerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->marketingListHelper = $this
-            ->getMockBuilder('OroCRM\Bundle\MarketingListBundle\Model\MarketingListHelper')
+            ->getMockBuilder('Oro\Bundle\MarketingListBundle\Model\MarketingListHelper')
             ->disableOriginalConstructor()
             ->getMock();
         $this->abandonedCartCampaignProvider = $this
-            ->getMock('OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+            ->getMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
         $this->config = $this
             ->getMockBuilder('Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration')
             ->disableOriginalConstructor()

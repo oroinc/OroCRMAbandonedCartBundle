@@ -1,8 +1,8 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking;
+namespace Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking;
 
-use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
+use Oro\Bundle\CampaignBundle\Entity\Campaign;
 
 interface TrackingStatProviderInterface
 {

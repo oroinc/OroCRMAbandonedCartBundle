@@ -2,10 +2,10 @@ placeholders:
     placeholders:
         abandoned_cart_mailchimp_menu:
             items:
-                orocrm_mailchimp_abandoned_cart_buttons: ~
+                oro_mailchimp_abandoned_cart_buttons: ~
 
     items:
-        orocrm_mailchimp_abandoned_cart_buttons:
-            action: OroCRMAbandonedCartBundle:AbandonedCart:connectionButtons
-            applicable: "@orocrm_mailchimp.placeholder.filter.buttons_filder->isApplicable($entity$)"
+        oro_mailchimp_abandoned_cart_buttons:
+            action: OroAbandonedCartBundle:AbandonedCart:connectionButtons
+            applicable: "@oro_mailchimp.placeholder.filter.buttons_filder->isApplicable($entity$)"
 

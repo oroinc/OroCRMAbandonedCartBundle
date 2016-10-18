@@ -11,18 +11,18 @@
     {% placeholder abandoned_cart_mailchimp_menu with {entity: entity} %}
     {% if isDesktopVersion() and resource_granted('EDIT', entity) %}
         {{ UI.editButton({
-            'path' : path('orocrm_abandoned_cart_list_update', { id: entity.id }),
-            'entity_label': 'orocrm.abandonedcart.abandonedcartcampaign.entity_label'|trans
+            'path' : path('oro_abandoned_cart_list_update', { id: entity.id }),
+            'entity_label': 'oro.abandonedcart.abandonedcartcampaign.entity_label'|trans
         }) }}
     {% endif %}
     {% if isDesktopVersion() and resource_granted('DELETE', entity) %}
         {{ UI.deleteButton({
-            'dataUrl': path('orocrm_abandoned_cart_list_delete', {'id': entity.id}),
-            'dataRedirect': path('orocrm_abandoned_cart_list'),
+            'dataUrl': path('oro_abandoned_cart_list_delete', {'id': entity.id}),
+            'dataRedirect': path('oro_abandoned_cart_list'),
             'aCss': 'no-hash remove-button',
             'id': 'btn-remove-user',
             'dataId': entity.id,
-            'entity_label': 'orocrm.abandonedcart.abandonedcartcampaign.entity_label'|trans
+            'entity_label': 'oro.abandonedcart.abandonedcartcampaign.entity_label'|trans
         }) }}
     {% endif %}
 {% endblock navButtons %}
@@ -30,8 +30,8 @@
 {% block pageHeader %}
     {% set breadcrumbs = {
         'entity': entity,
-        'indexPath': path('orocrm_abandoned_cart_list'),
-        'indexLabel': 'orocrm.abandonedcart.abandonedcartcampaign.entity_plural_label'|trans,
+        'indexPath': path('oro_abandoned_cart_list'),
+        'indexLabel': 'oro.abandonedcart.abandonedcartcampaign.entity_plural_label'|trans,
         'entityTitle': entity.name|default('N/A'),
     } %}
     {{ parent() }}
@@ -41,8 +41,8 @@
     {%- set listInformation -%}
     <div class="row-fluid form-horizontal">
         <div class="responsive-block">
-            {{ UI.renderProperty('orocrm.abandonedcart.name.label'|trans, entity.name) }}
-            {{ UI.renderHtmlProperty('orocrm.abandonedcart.description.label'|trans, entity.description) }}
+            {{ UI.renderProperty('oro.abandonedcart.name.label'|trans, entity.name) }}
+            {{ UI.renderHtmlProperty('oro.abandonedcart.description.label'|trans, entity.description) }}
 
             {% if entity.segment is not empty %}
                 {%- set segmentData -%}
@@ -64,7 +64,7 @@
                 {%- else -%}
                     {% set campaignView = campaign.name|escape %}
                 {%- endif -%}
-                {{ UI.renderHtmlProperty('orocrm.campaign.emailcampaign.campaign.label'|trans, campaignView) }}
+                {{ UI.renderHtmlProperty('oro.campaign.emailcampaign.campaign.label'|trans, campaignView) }}
             {%- endif -%}
 
             {%- set ownerData -%}
@@ -73,7 +73,7 @@
                     {{ U.user_business_unit_name(entity.owner) }}
                 {%- endif -%}
             {%- endset -%}
-            {{ UI.renderHtmlProperty('orocrm.abandonedcart.owner.label'|trans, ownerData) }}
+            {{ UI.renderHtmlProperty('oro.abandonedcart.owner.label'|trans, ownerData) }}
 
         </div>
         <div class="responsive-block">
@@ -109,12 +109,12 @@
     {% endif %}
 
     {%- set abandonedCartCampaignStatisticsData -%}
-        {% include 'OroCRMAbandonedCartBundle:AbandonedCartConversion:stats.html.twig' %}
+        {% include 'OroAbandonedCartBundle:AbandonedCartConversion:stats.html.twig' %}
     {%- endset -%}
 
     {% set dataBlocks = [
         {
-            'title': 'orocrm.abandonedcart.block.general'|trans,
+            'title': 'oro.abandonedcart.block.general'|trans,
             'class': 'active',
             'subblocks': generalSectionBlocks
         },
@@ -125,13 +125,13 @@
             ]
         },
         {
-            'title' : 'orocrm.marketinglist.block.removed'|trans,
+            'title' : 'oro.marketinglist.block.removed'|trans,
             'subblocks': [
                 {'data' : [removedItemsGrid]}
             ]
         },
         {
-            'title': 'orocrm.abandonedcart.block.conversion'|trans,
+            'title': 'oro.abandonedcart.block.conversion'|trans,
             'subblocks': [
                 {'data' : [abandonedCartCampaignStatisticsData]}
             ]

@@ -1,13 +1,13 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Entity;
+namespace Oro\Bundle\AbandonedCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-use OroCRM\Bundle\MailChimpBundle\Entity\Campaign;
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\MailChimpBundle\Entity\Campaign;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 /**
  * Abandoned Cart Conversion
@@ -30,7 +30,7 @@ class AbandonedCartConversion
      * @var MarketingList
      *
      * @ORM\OneToOne(
-     *      targetEntity="OroCRM\Bundle\MarketingListBundle\Entity\MarketingList"
+     *      targetEntity="Oro\Bundle\MarketingListBundle\Entity\MarketingList"
      * )
      * @ORM\JoinColumn(name="marketing_list_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -39,7 +39,7 @@ class AbandonedCartConversion
     /**
      * @var Campaign[]|Collection
      *
-     * @ORM\ManyToMany(targetEntity="OroCRM\Bundle\MailChimpBundle\Entity\Campaign")
+     * @ORM\ManyToMany(targetEntity="Oro\Bundle\MailChimpBundle\Entity\Campaign")
      * @ORM\JoinTable(name="orocrm_abandcart_conv_camps",
      *      joinColumns={@ORM\JoinColumn(name="conversion_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="mailchimp_campaign_id", referencedColumnName="id",

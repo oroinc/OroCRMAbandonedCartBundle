@@ -1,13 +1,12 @@
 <?php
 
-namespace OroCRM\Bundle\AbandonedCartBundle\Entity;
+namespace Oro\Bundle\AbandonedCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-
-use OroCRM\Bundle\MarketingListBundle\Entity\MarketingList;
-use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\CampaignBundle\Entity\Campaign;
 
 /**
  * Abandoned Cart Campaign
@@ -27,7 +26,7 @@ use OroCRM\Bundle\CampaignBundle\Entity\Campaign;
  */
 class AbandonedCartCampaign
 {
-    const CLASS_NAME = 'OroCRM\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign';
+    const CLASS_NAME = 'Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign';
 
     /**
      * @var int
@@ -41,7 +40,7 @@ class AbandonedCartCampaign
     /**
      * @var MarketingList
      *
-     * @ORM\OneToOne(targetEntity="OroCRM\Bundle\MarketingListBundle\Entity\MarketingList")
+     * @ORM\OneToOne(targetEntity="Oro\Bundle\MarketingListBundle\Entity\MarketingList")
      * @ORM\JoinColumn(name="marketing_list_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $marketingList;
@@ -49,7 +48,7 @@ class AbandonedCartCampaign
     /**
      * @var Campaign
      *
-     * @ORM\OneToOne(targetEntity="OroCRM\Bundle\CampaignBundle\Entity\Campaign", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Oro\Bundle\CampaignBundle\Entity\Campaign", cascade={"persist"})
      * @ORM\JoinColumn(name="campaign_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $campaign;
