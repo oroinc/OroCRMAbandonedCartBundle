@@ -22,7 +22,6 @@ class OroCRMAbandonedCartBundle implements Migration
         $this->addOrocrmAbandcartConvForeignKeys($schema);
         $this->createOrocrmAbandcartConvCampsTable($schema);
         $this->addOrocrmAbandcartConvCampsForeignKeys($schema);
-
     }
 
     /**
