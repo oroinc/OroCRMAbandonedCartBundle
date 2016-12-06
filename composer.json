@@ -17,7 +17,8 @@
     "require": {
         "php": ">=5.6",
         "oro/crm": "1.x-dev",
-        "oro/crm-mail-chimp": "1.x-dev"
+        "oro/crm-mail-chimp": "1.x-dev",
+        "oro/marketing": "1.x-dev"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
