@@ -16,7 +16,7 @@ use Oro\Bundle\CampaignBundle\Entity\Campaign;
  * @Config(
  *      defaultValues={
  *          "entity"={
- *              "icon"="icon-list-alt"
+ *              "icon"="fa-list-alt"
  *          },
  *          "tag"={
  *              "enabled"=true

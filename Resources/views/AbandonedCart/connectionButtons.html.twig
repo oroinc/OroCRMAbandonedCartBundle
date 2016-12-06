@@ -16,7 +16,7 @@
             'id': 'mailchimp-synchronize-btn',
             'label': 'oro.mailchimp.connection.button.synchronize'|trans,
             'class': 'no-hash',
-            'iCss': 'icon-refresh'
+            'iCss': 'fa-refresh'
         }) }}
 
         {{ UI.dropdownItem({
@@ -35,7 +35,7 @@
             'id': 'mailchimp-connection-btn',
             'label': 'oro.mailchimp.connection.button.manage_connection'|trans,
             'class': 'no-hash',
-            'iCss': 'icon-edit'
+            'iCss': 'fa-pencil-square-o'
         }) }}
 
         {% if relatedCampaigns %}
@@ -55,7 +55,7 @@
                 'id': 'mailchimp-connection-btn',
                 'label': 'oro.abandonedcart.conversion.button.enable'|trans,
                 'class': 'no-hash',
-                'iCss': 'icon-dollar'
+                'iCss': 'fa-usd'
             }) }}
         {% endif %}
         <li>
@@ -75,7 +75,7 @@
 
     {{ UI.dropdownButton({
         'label': 'oro.mailchimp.connection.button.group_name'|trans,
-        'iCss': 'icon icon-cog',
+        'iCss': 'fa-cog',
         'html': html
     }) }}
 {% else %}
