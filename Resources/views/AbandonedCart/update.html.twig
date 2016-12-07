@@ -4,7 +4,7 @@
 {% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
 
 {% oro_title_set({params : {"%entityName%": entity.name} }) %}
-{% set formAction = form.vars.value.id ? path('orocrm_abandoned_cart_list_update', { 'id': form.vars.value.id }) : path('orocrm_abandoned_cart_list_create')  %}
+{% set formAction = form.vars.value.id ? path('oro_abandoned_cart_list_update', { 'id': form.vars.value.id }) : path('oro_abandoned_cart_list_create')  %}
 
 {% block head_script %}
     {{ parent() }}
@@ -32,7 +32,7 @@
         'route': 'oro_abandoned_cart_list_view',
         'params': {'id': '$id'}
     }) %}
-    {% if resource_granted('orocrm_abandoned_cart_list_create') %}
+    {% if resource_granted('oro_abandoned_cart_list_create') %}
         {% set html = html ~ UI.saveAndNewButton({
             'route': 'oro_abandoned_cart_list_create'
         }) %}
