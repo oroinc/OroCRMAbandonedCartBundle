@@ -80,7 +80,7 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
         /**
          * @var \PHPUnit_Framework_MockObject_MockObject|DatagridInterface $dataGrid
          */
-        $dataGrid = $this->getMock('Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface');
+        $dataGrid = $this->createMock('Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface');
 
         $dataGrid->expects($this->any())
             ->method('getParameters')
@@ -95,7 +95,7 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
      */
     protected function createParameterBag(array $data)
     {
-        $parameters = $this->getMock('Oro\Bundle\DataGridBundle\Datagrid\ParameterBag');
+        $parameters = $this->createMock('Oro\Bundle\DataGridBundle\Datagrid\ParameterBag');
 
         $parameters->expects($this->any())
             ->method('has')
