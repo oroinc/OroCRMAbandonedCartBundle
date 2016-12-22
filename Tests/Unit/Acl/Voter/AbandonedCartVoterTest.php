@@ -81,7 +81,7 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
         /**
          * @var TokenInterface $token
          */
-        $token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
+        $token = $this->createMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
 
         $this->assertEquals(
             $expected,
@@ -165,7 +165,7 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
      */
     protected function getObjectIdentityInterfaceMock($objectIdentityClass)
     {
-        $objectIdentity = $this->getMock($objectIdentityClass);
+        $objectIdentity = $this->createMock($objectIdentityClass);
         $objectIdentity->expects($this->any())
             ->method('getType')
             ->will($this->returnValue('Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartVoter'));

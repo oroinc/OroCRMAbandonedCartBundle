@@ -53,7 +53,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->abandonedCartCampaignProvider = $this
-            ->getMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+            ->createMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
 
         $this->datagridConfig = $this->getMockBuilder('Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration')
             ->disableOriginalConstructor()
@@ -87,7 +87,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getConfig')
             ->will($this->returnValue($this->datagridConfig));
 
-        $datagrid = $this->getMock('Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface');
+        $datagrid = $this->createMock('Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface');
 
         $this->buildBefore->expects($this->once())
             ->method('getDatagrid')
@@ -137,7 +137,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getConfig')
             ->will($this->returnValue($this->datagridConfig));
 
-        $datagrid = $this->getMock('Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface');
+        $datagrid = $this->createMock('Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface');
 
         $this->buildBefore->expects($this->once())
             ->method('getDatagrid')

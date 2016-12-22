@@ -62,7 +62,7 @@ class AbandonedCartRelatedCampaignsManagerTest extends \PHPUnit_Framework_TestCa
             ->getMock();
 
         $this->abandonedCartCampaignProvider = $this
-            ->getMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+            ->createMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
 
         $this->marketingList = $this->getMockBuilder('Oro\Bundle\MarketingListBundle\Entity\MarketingList')
             ->disableOriginalConstructor()

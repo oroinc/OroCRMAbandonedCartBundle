@@ -29,8 +29,8 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->abandonedCartCampaignProvider = $this
-            ->getMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
-        $this->translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+            ->createMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+        $this->translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $this->provider = new CartItemsMergeVarProvider($this->abandonedCartCampaignProvider, $this->translator);
     }
 
