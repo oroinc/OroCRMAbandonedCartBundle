@@ -97,8 +97,8 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->request = new Request();
 
-        $this->validator = $this->getMock('Symfony\Component\Validator\ValidatorInterface');
-        $this->translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+        $this->validator = $this->createMock('Symfony\Component\Validator\ValidatorInterface');
+        $this->translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
 
         $this->abandonedCartCampaignFactory = $this
             ->getMockBuilder(
@@ -108,7 +108,7 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->abandonedCartCampaignProvider = $this
-            ->getMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+            ->createMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
 
         $this->marketingList = new MarketingList();
         $this->abandonedCartCampaign = new AbandonedCartCampaign();

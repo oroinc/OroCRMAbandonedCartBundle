@@ -44,7 +44,7 @@ class MarketingListListenerTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->datagrid = $this->getMock('Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface');
+        $this->datagrid = $this->createMock('Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface');
         $this->ormDataSource = $this->getMockBuilder('Oro\Bundle\DataGridBundle\Datasource\Orm\OrmDatasource')
             ->disableOriginalConstructor()
             ->getMock();
@@ -73,7 +73,7 @@ class MarketingListListenerTest extends \PHPUnit_Framework_TestCase
 
         $this->datagrid->expects($this->once())->method('getName')->will($this->returnValue($this->gridName));
 
-        $notOrmDatasource = $this->getMock('Oro\Bundle\DataGridBundle\Datasource\DatasourceInterface');
+        $notOrmDatasource = $this->createMock('Oro\Bundle\DataGridBundle\Datasource\DatasourceInterface');
 
         $this->datagrid->expects($this->once())->method('getDatasource')
             ->will($this->returnValue($notOrmDatasource));

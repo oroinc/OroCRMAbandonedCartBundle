@@ -41,7 +41,7 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
     public function testSetDefaultOptions()
     {
         /** @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolverInterface $resolver */
-        $resolver = $this->getMock('Symfony\Component\OptionsResolver\OptionsResolverInterface');
+        $resolver = $this->createMock('Symfony\Component\OptionsResolver\OptionsResolverInterface');
 
         $resolver->expects($this->once())
             ->method('setDefaults')
