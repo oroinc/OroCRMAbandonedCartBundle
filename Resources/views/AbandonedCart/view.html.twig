@@ -88,11 +88,11 @@
 
     {% set itemsGridName = gridName ~ '_items' %}
     {% set removedItemsGridName = gridName ~ '_removed_items' %}
-    {% set itemsMixin = 'orocrm-marketing-list-items-mixin' %}
-    {% set removedItemsMixin = 'orocrm-marketing-list-removed-items-mixin' %}
+    {% set itemsMixin = 'oro-marketing-list-items-mixin' %}
+    {% set removedItemsMixin = 'oro-marketing-list-removed-items-mixin' %}
     {% if entity.manual %}
-        {% set itemsMixin = 'orocrm-marketing-list-manual-items-mixin' %}
-        {% set removedItemsMixin = 'orocrm-marketing-list-manual-removed-items-mixin' %}
+        {% set itemsMixin = 'oro-marketing-list-manual-items-mixin' %}
+        {% set removedItemsMixin = 'oro-marketing-list-manual-removed-items-mixin' %}
     {% endif %}
     {%- set listData -%}
         {{ dataGrid.renderGrid(itemsGridName, {'grid-mixin': itemsMixin}) }}

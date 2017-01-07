@@ -1,6 +1,6 @@
 datagrids:
     oro-abandonedcart-list-grid:
-        extends: orocrm-marketing-list-grid
+        extends: oro-marketing-list-grid
         properties:
             id: ~
             view_link:

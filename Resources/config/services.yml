@@ -17,7 +17,7 @@ parameters:
     oro_abandonedcart.datagrid.listener.class: Oro\Bundle\AbandonedCartBundle\Datagrid\AbandonedCartCampaignListener
     oro_abandonedcart.event_listener.datagrid.class: Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartListener
 
-    oro_abandonedcart.marketing_list.datagrid.name: orocrm-marketing-list-grid
+    oro_abandonedcart.marketing_list.datagrid.name: oro-marketing-list-grid
     oro_abandonedcart.datagrid.name: oro-abandonedcart-list-grid
 
     oro_abandonedcart.listener.datagrid.abandonedcart_list.class: Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartGridListener
@@ -97,13 +97,13 @@ services:
             - "@oro_marketing_list.model.helper"
             - "@oro_abandonedcart.provider"
         tags:
-            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.orocrm-marketing-list-items-base-unsubscribe-mixin, method: onBuildBefore }
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.oro-marketing-list-items-base-unsubscribe-mixin, method: onBuildBefore }
 
     # event listeners
     oro_abandonedcart.listener.datagrid.abandonedcart_list:
         class: %oro_abandonedcart.listener.datagrid.abandonedcart_list.class%
         tags:
-            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.orocrm-marketing-list-grid, method: onBuildBefore }
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.oro-marketing-list-grid, method: onBuildBefore }
 
     oro_abandonedcart.listener.datagrid.segment_grid:
         class: %oro_abandonedcart.listener.datagrid.segment_grid.class%
