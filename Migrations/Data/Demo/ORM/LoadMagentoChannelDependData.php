@@ -18,7 +18,7 @@ class LoadMagentoChannelDependData extends AbstractDefaultChannelDataFixture
     {
         return [
             'Oro\Bundle\OrganizationBundle\Migrations\Data\ORM\LoadOrganizationAndBusinessUnitData',
-            'Oro\Bundle\DemoDataBundle\Migrations\Data\Demo\ORM\LoadMagentoData'
+            'Oro\Bundle\MagentoBundle\Migrations\Data\Demo\ORM\LoadMagentoData'
         ];
     }
 
