@@ -9,11 +9,9 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Oro\\Bundle\\AbandonedCartBundle": "src/"
-        }
+        "psr-4": {"Oro\\Bundle\\AbandonedCartBundle\\": ""},
+        "exclude-from-classmap": ["/Tests/"]
     },
-    "target-dir": "src/Oro/Bundle/AbandonedCartBundle",
     "require": {
         "php": ">=5.6",
         "oro/crm": "1.x-dev",
