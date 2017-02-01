@@ -16,9 +16,8 @@
     "target-dir": "src/Oro/Bundle/AbandonedCartBundle",
     "require": {
         "php": ">=5.6",
-        "oro/crm": "1.x-dev",
-        "oro/crm-mail-chimp": "1.x-dev",
-        "oro/marketing": "1.x-dev"
+        "oro/crm": "2.0.*",
+        "oro/crm-mail-chimp": "2.0.*"
     },
     "extra": {
         "branch-alias": {
