@@ -72,4 +72,4 @@ oro:
             action:
                 general:
                     label: Manage abandoned cart campaigns
-                    description: Create segments of abandoned shopping carts in Oro and link them to MailChimp campaign automation
+                    description: Creates segments of abandoned shopping carts in Oro and link them to MailChimp campaign automation. To use this feature, Connect to MailChimp capability should also be enabled.
