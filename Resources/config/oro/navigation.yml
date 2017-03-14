@@ -5,9 +5,9 @@ navigation:
                 label: 'oro.abandonedcart.abandonedcartcampaign.entity_plural_label'
                 route: 'oro_abandoned_cart_list'
                 display: false
+                position: 10
                 extras:
                     routes: ['oro_abandoned_cart_list_*']
-                    position: 10
         tree:
             application_menu:
                 children:
@@ -17,6 +17,6 @@ navigation:
 
     titles:
         oro_abandoned_cart_list:  ~
-        oro_abandoned_cart_list_view: '%%entityName%%'
-        oro_abandoned_cart_list_update: %%entityName%% - oro.ui.edit
-        oro_abandoned_cart_list_create: oro.ui.create_entity
+        oro_abandoned_cart_list_view: '%entityName%'
+        oro_abandoned_cart_list_update: '%entityName% - oro.ui.edit'
+        oro_abandoned_cart_list_create: 'oro.ui.create_entity'
