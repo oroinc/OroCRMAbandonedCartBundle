@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\AbandonedCartBundle\Acl\Voter\AbandonedCartVoter;
-use Oro\Bundle\MagentoBundle\Provider\ChannelType;
+use Oro\Bundle\MagentoBundle\Provider\MagentoChannelType;
 
 class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
 {
@@ -75,7 +75,7 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
 
         $repository
             ->expects($this->once())->method('findOneBy')
-            ->with(['type' => ChannelType::TYPE, 'enabled' => true])
+            ->with(['type' => MagentoChannelType::TYPE, 'enabled' => true])
             ->will($this->returnValue($enabled));
 
         /**

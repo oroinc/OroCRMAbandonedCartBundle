@@ -5,7 +5,7 @@ namespace Oro\Bundle\AbandonedCartBundle\Acl\Voter;
 use Oro\Bundle\SecurityBundle\Acl\Voter\AbstractEntityVoter;
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use Oro\Bundle\MagentoBundle\Provider\ChannelType;
+use Oro\Bundle\MagentoBundle\Provider\MagentoChannelType;
 
 class AbandonedCartVoter extends AbstractEntityVoter
 {
@@ -49,9 +49,12 @@ class AbandonedCartVoter extends AbstractEntityVoter
      */
     protected function getPermissionForAttribute($class, $identifier, $attribute)
     {
+        /**
+         * @todo Remove dependency on exact magento channel type in CRM-8155
+         */
         $enabledMagentoChannel = $this->doctrineHelper
             ->getEntityRepository($this->integrationChannelClassName)
-            ->findOneBy(['type' => ChannelType::TYPE, 'enabled' => true]);
+            ->findOneBy(['type' => MagentoChannelType::TYPE, 'enabled' => true]);
 
         if (!$enabledMagentoChannel) {
             return self::ACCESS_DENIED;
