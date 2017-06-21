@@ -5,7 +5,7 @@
 {% set pageTitle = 'oro.abandonedcart.abandonedcartcampaign.entity_plural_label'|trans %}
 
 {% block navButtons %}
-    {% if isDesktopVersion() and resource_granted('oro_abandoned_cart_list_create') %}
+    {% if isDesktopVersion() and is_granted('oro_abandoned_cart_list_create') %}
         {{ UI.addButton({
             'path':          path('oro_abandoned_cart_list_create'),
             'entity_label': 'oro.abandonedcart.abandonedcartcampaign.entity_label'|trans
