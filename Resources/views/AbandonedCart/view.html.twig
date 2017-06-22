@@ -9,13 +9,13 @@
 
 {% block navButtons %}
     {% placeholder abandoned_cart_mailchimp_menu with {entity: entity} %}
-    {% if isDesktopVersion() and resource_granted('EDIT', entity) %}
+    {% if isDesktopVersion() and is_granted('EDIT', entity) %}
         {{ UI.editButton({
             'path' : path('oro_abandoned_cart_list_update', { id: entity.id }),
             'entity_label': 'oro.abandonedcart.abandonedcartcampaign.entity_label'|trans
         }) }}
     {% endif %}
-    {% if isDesktopVersion() and resource_granted('DELETE', entity) %}
+    {% if isDesktopVersion() and is_granted('DELETE', entity) %}
         {{ UI.deleteButton({
             'dataUrl': path('oro_abandoned_cart_list_delete', {'id': entity.id}),
             'dataRedirect': path('oro_abandoned_cart_list'),
@@ -46,7 +46,7 @@
 
             {% if entity.segment is not empty %}
                 {%- set segmentData -%}
-                {% if resource_granted('oro_segment_view') %}
+                {% if is_granted('oro_segment_view') %}
                     <a href="{{ path('oro_segment_view', {'id': entity.segment.id}) }}">
                         {{ entity.segment.name }}
                     </a>
@@ -59,7 +59,7 @@
             {% endif %}
 
             {%- if campaign -%}
-                {%- if resource_granted('oro_campaign_view') -%}
+                {%- if is_granted('oro_campaign_view') -%}
                     {% set campaignView = '<a href="' ~ path('oro_campaign_view', {'id': campaign.id}) ~ '">' ~ campaign.name|escape ~ '</a>' %}
                 {%- else -%}
                     {% set campaignView = campaign.name|escape %}
