@@ -7,7 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use Oro\Bundle\ChannelBundle\Entity\Channel;
 use Oro\Bundle\ChannelBundle\Migrations\Data\ORM\AbstractDefaultChannelDataFixture;
-use Oro\Bundle\MagentoBundle\Provider\ChannelType;
+use Oro\Bundle\MagentoBundle\Provider\MagentoChannelType;
 
 class LoadMagentoChannelDependData extends AbstractDefaultChannelDataFixture
 {
@@ -29,7 +29,7 @@ class LoadMagentoChannelDependData extends AbstractDefaultChannelDataFixture
     {
         /** @var Channel|null $channel */
         $channels = $this->em->getRepository('OroChannelBundle:Channel')
-            ->findBy(['channelType' => ChannelType::TYPE]);
+            ->findBy(['channelType' => MagentoChannelType::TYPE]);
 
         if ($channels) {
             foreach ($channels as $channel) {

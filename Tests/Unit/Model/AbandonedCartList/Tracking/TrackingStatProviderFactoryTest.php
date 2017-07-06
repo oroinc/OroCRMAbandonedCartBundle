@@ -43,7 +43,6 @@ class TrackingStatProviderFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-
         $trackingStatProvider = $this->factory->create(
             'orderAssociationName',
             'campaignAssociationName',

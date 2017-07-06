@@ -8,7 +8,7 @@ use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\ParametrizedSqlMigrationQuery;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
-use Oro\Bundle\MagentoBundle\Provider\ChannelType;
+use Oro\Bundle\MagentoBundle\Provider\MagentoChannelType;
 
 class OroAbandonedCartBundle implements Migration
 {
@@ -22,7 +22,7 @@ class OroAbandonedCartBundle implements Migration
                 'INSERT INTO orocrm_channel_entity_name (channel_id, name) '
                 . 'SELECT id, :entity FROM orocrm_channel '
                 . 'WHERE channel_type = :type',
-                ['entity' => AbandonedCartCampaign::CLASS_NAME, 'type' => ChannelType::TYPE]
+                ['entity' => AbandonedCartCampaign::CLASS_NAME, 'type' => MagentoChannelType::TYPE]
             )
         );
     }
