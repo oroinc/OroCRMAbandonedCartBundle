@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Oro\Bundle\QueryDesignerBundle\Form\Type\AbstractQueryDesignerType;
 
@@ -110,14 +110,17 @@ class AbandonedCartListType extends AbstractQueryDesignerType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $options = array_merge(
             $this->getDefaultOptions(),
             [
                 'data_class' => $this->marketingListClassName,
                 'intention' => 'marketing_list',
-                'cascade_validation' => true
+                'cascade_validation' => true,
+                'query_type' => 'segment',
             ]
         );
 

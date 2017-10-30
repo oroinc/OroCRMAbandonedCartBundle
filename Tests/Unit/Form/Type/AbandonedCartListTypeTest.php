@@ -75,12 +75,12 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
         $this->abandonedCartListType->buildForm($builder, []);
     }
 
-    public function testSetDefaultOptions()
+    public function testConfigureOptions()
     {
         /**
          * @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolverInterface $resolver
          */
-        $resolver = $this->createMock('Symfony\Component\OptionsResolver\OptionsResolverInterface');
+        $resolver = $this->createMock('Symfony\Component\OptionsResolver\OptionsResolver');
         $resolver->expects($this->once())
             ->method('setDefaults')
             ->with(
@@ -92,11 +92,12 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
                     'filter_column_choice_type'   => 'oro_entity_field_select',
                     'data_class'                  => self::MARKETING_LIST_CLASS_NAME,
                     'intention'                   => 'marketing_list',
+                    'query_type'                  => 'segment',
                     'cascade_validation'          => true
                 ]
             );
 
-        $this->abandonedCartListType->setDefaultOptions($resolver);
+        $this->abandonedCartListType->configureOptions($resolver);
     }
 
     public function testGetName()
