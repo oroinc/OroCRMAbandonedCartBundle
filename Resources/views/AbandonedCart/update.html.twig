@@ -122,7 +122,7 @@
         {{ QD.query_designer_column_form(
             form.column,
             {'id': type ~ '-column-form'},
-            {'entity_choice_id': 'oro_abandonedcart_list_form_entity'},
+            {},
             ['column', 'label', 'sorting', 'action']
         ) }}
 
@@ -149,7 +149,6 @@
                 'data': [
                     segmentQD.query_designer_condition_builder({
                         'id': type ~ '-condition-builder',
-                        'entity_choice_id': 'oro_abandonedcart_list_form_entity',
                         'currentSegmentId': entity.id|default(null),
                         'page_limit': constant('\\Oro\\Bundle\\SegmentBundle\\Entity\\Manager\\SegmentManager::PER_PAGE'),
                         'metadata': metadata,
