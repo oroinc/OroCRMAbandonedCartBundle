@@ -13,7 +13,7 @@
         "exclude-from-classmap": ["/Tests/"]
     },
     "require": {
-        "php": ">=7.0",
+        "php": "7.1.*",
         "oro/crm": "2.x-dev",
         "oro/crm-mail-chimp": "2.x-dev",
         "oro/marketing": "2.x-dev"
