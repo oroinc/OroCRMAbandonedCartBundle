@@ -3,7 +3,7 @@
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
 
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Oro\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType;
 
@@ -78,7 +78,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
     public function testConfigureOptions()
     {
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolverInterface $resolver
+         * @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolver $resolver
          */
         $resolver = $this->createMock('Symfony\Component\OptionsResolver\OptionsResolver');
         $resolver->expects($this->once())

@@ -2,7 +2,7 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Oro\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartConversionType;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
@@ -38,10 +38,10 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSetDefaultOptions()
+    public function testConfigureOptions()
     {
-        /** @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolverInterface $resolver */
-        $resolver = $this->createMock('Symfony\Component\OptionsResolver\OptionsResolverInterface');
+        /** @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolver $resolver */
+        $resolver = $this->createMock('Symfony\Component\OptionsResolver\OptionsResolver');
 
         $resolver->expects($this->once())
             ->method('setDefaults')
@@ -49,7 +49,7 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
                 ['data_class' => 'Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion']
             );
 
-        $this->abandonedCartConversionType->setDefaultOptions($resolver);
+        $this->abandonedCartConversionType->configureOptions($resolver);
     }
 
     public function testGetName()
