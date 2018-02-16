@@ -3,7 +3,7 @@
 namespace Oro\Bundle\AbandonedCartBundle\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\ValidatorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -27,7 +27,7 @@ class AbandonedCartCampaignHandler extends MarketingListHandler
 
     /**
      * @param FormInterface $form
-     * @param Request $request
+     * @param RequestStack $requestStack
      * @param RegistryInterface $doctrine
      * @param ValidatorInterface $validator
      * @param TranslatorInterface $translator
@@ -36,14 +36,14 @@ class AbandonedCartCampaignHandler extends MarketingListHandler
      */
     public function __construct(
         FormInterface $form,
-        Request $request,
+        RequestStack $requestStack,
         RegistryInterface $doctrine,
         ValidatorInterface $validator,
         TranslatorInterface $translator,
         AbandonedCartCampaignFactory $campaignAbandonedCartRelationFactory,
         AbandonedCartCampaignProviderInterface $abandonedCartCampaignProvider
     ) {
-        parent::__construct($form, $request, $doctrine, $validator, $translator);
+        parent::__construct($form, $requestStack, $doctrine, $validator, $translator);
         $this->abandonedCartCampaignFactory = $campaignAbandonedCartRelationFactory;
         $this->abandonedCartCampaignProvider = $abandonedCartCampaignProvider;
     }
