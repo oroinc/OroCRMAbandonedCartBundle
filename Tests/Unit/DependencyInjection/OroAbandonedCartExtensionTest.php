@@ -2,9 +2,8 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Oro\Bundle\AbandonedCartBundle\DependencyInjection\OroAbandonedCartExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class OroAbandonedCartExtensionTest extends \PHPUnit_Framework_TestCase
 {

@@ -2,11 +2,10 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar;
 
-use Symfony\Component\Translation\TranslatorInterface;
-
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
-use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MailChimpBundle\Model\ExtendedMergeVar\ProviderInterface;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class CampaignCodeMergeVarProvider implements ProviderInterface
 {

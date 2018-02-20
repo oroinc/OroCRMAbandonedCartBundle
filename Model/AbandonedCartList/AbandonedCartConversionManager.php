@@ -3,12 +3,11 @@
 namespace Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
 use Oro\Bundle\EntityExtendBundle\Tools\ExtendHelper;
-use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartConversionManager
 {

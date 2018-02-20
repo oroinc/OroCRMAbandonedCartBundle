@@ -4,12 +4,11 @@ namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
-
-use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartRelatedCampaignsManager;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
-use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
-use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartRelatedCampaignsManager;
 use Oro\Bundle\MailChimpBundle\Entity\Campaign;
+use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
 class AbandonedCartRelatedCampaignsManagerTest extends \PHPUnit_Framework_TestCase
 {

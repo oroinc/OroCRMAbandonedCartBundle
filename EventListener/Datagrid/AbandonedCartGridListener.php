@@ -2,8 +2,8 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid;
 
-use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 use Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration;
+use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 
 class AbandonedCartGridListener
 {

@@ -2,12 +2,11 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\ExtendedMergeVar;
 
-use Symfony\Component\Translation\TranslatorInterface;
-
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
-use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CampaignCodeMergeVarProvider;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class CampaignCodeMergeVarProviderTest extends \PHPUnit_Framework_TestCase
 {

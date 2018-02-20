@@ -3,7 +3,6 @@
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;

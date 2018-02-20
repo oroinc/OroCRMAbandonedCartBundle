@@ -2,10 +2,10 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\Datagrid;
 
+use Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartGridListener;
 use Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration;
 use Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface;
 use Oro\Bundle\DataGridBundle\Event\BuildBefore;
-use Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartGridListener;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
 
 class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase

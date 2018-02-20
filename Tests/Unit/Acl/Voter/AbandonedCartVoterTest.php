@@ -3,12 +3,10 @@
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Acl\Voter;
 
 use Doctrine\ORM\EntityRepository;
-
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-
-use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\AbandonedCartBundle\Acl\Voter\AbandonedCartVoter;
+use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\MagentoBundle\Provider\MagentoChannelType;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
 {

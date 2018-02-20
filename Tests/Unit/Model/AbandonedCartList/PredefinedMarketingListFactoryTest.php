@@ -3,7 +3,6 @@
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ObjectManager;
-
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
 

@@ -3,8 +3,8 @@
 namespace Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid;
 
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
-use Oro\Bundle\DataGridBundle\Event\PreBuild;
 use Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration;
+use Oro\Bundle\DataGridBundle\Event\PreBuild;
 use Oro\Bundle\MarketingListBundle\Model\MarketingListHelper;
 
 class SegmentGridListener

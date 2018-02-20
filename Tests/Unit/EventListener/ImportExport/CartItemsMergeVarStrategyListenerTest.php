@@ -4,18 +4,17 @@ namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\ImportExport;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
-
 use Oro\Bundle\AbandonedCartBundle\EventListener\ImportExport\CartItemsMergeVarStrategyListener;
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;
 use Oro\Bundle\LocaleBundle\Formatter\NumberFormatter;
-use Oro\Bundle\SegmentBundle\Entity\Segment;
 use Oro\Bundle\MagentoBundle\Entity\Cart;
 use Oro\Bundle\MagentoBundle\Entity\CartItem;
-use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MailChimpBundle\Entity\ExtendedMergeVar;
 use Oro\Bundle\MailChimpBundle\Entity\MemberExtendedMergeVar;
 use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Oro\Bundle\SegmentBundle\Entity\Segment;
 
 class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
 {

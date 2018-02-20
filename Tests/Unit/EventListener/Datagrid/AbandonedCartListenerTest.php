@@ -2,12 +2,12 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\EventListener\Datagrid;
 
-use Oro\Bundle\DataGridBundle\Event\BuildBefore;
-use Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration;
 use Oro\Bundle\AbandonedCartBundle\EventListener\Datagrid\AbandonedCartListener;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
+use Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration;
+use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MarketingListBundle\Model\MarketingListHelper;
-use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 
 class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
 {

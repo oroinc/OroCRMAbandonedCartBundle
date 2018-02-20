@@ -4,12 +4,10 @@ namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-
-use Symfony\Bridge\Doctrine\RegistryInterface;
-
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProvider;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase
 {

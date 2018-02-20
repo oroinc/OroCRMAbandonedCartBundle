@@ -2,10 +2,9 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
 use Oro\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartConversionType;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
 {
