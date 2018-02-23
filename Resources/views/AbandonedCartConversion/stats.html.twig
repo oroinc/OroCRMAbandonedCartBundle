@@ -4,8 +4,8 @@
 
 {% if stats is not null %}
     <strong>{{ 'oro.abandonedcart.conversion.title.summary'|trans }}</strong>
-    {{ UI.renderHtmlProperty('oro.abandonedcart.conversion.title.orders'|trans, stats.qty) }}
-    {{ UI.renderHtmlProperty('oro.abandonedcart.conversion.title.total'|trans, stats.total|oro_format_currency) }}
+    {{ UI.renderProperty('oro.abandonedcart.conversion.title.orders'|trans, stats.qty) }}
+    {{ UI.renderProperty('oro.abandonedcart.conversion.title.total'|trans, stats.total|oro_format_currency) }}
 
     {{ dataGrid.renderGrid('oro-abandonedcart-campaigns-grid', {'marketingListId': entity.id}) }}
 {% endif %}
