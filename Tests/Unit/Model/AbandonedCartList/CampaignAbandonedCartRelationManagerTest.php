@@ -4,7 +4,6 @@ namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
-
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCartRelationManager;
 use Oro\Bundle\CampaignBundle\Entity\Campaign;

@@ -2,10 +2,9 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
+use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\MailChimpBundle\Entity\Campaign;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 

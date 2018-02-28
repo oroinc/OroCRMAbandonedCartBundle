@@ -2,8 +2,8 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Entity;
 
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class AbandonedCartConversionTest extends \PHPUnit_Framework_TestCase
 {

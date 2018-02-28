@@ -42,29 +42,20 @@
     <div class="row-fluid form-horizontal">
         <div class="responsive-block">
             {{ UI.renderProperty('oro.abandonedcart.name.label'|trans, entity.name) }}
-            {{ UI.renderHtmlProperty('oro.abandonedcart.description.label'|trans, entity.description) }}
+            {{ UI.renderHtmlProperty('oro.abandonedcart.description.label'|trans, entity.description|oro_html_sanitize) }}
 
             {% if entity.segment is not empty %}
-                {%- set segmentData -%}
-                {% if is_granted('oro_segment_view') %}
-                    <a href="{{ path('oro_segment_view', {'id': entity.segment.id}) }}">
-                        {{ entity.segment.name }}
-                    </a>
-                {% else %}
-                    {{ entity.segment.name }}
-                {% endif %}
-                {%- endset -%}
-
-                {{ UI.renderHtmlProperty('oro.segment.entity_label'|trans, segmentData) }}
+                {{ UI.renderHtmlProperty(
+                    'oro.segment.entity_label'|trans,
+                    UI.entityViewLink(entity.segment, entity.segment.name, 'oro_segment_view')
+                ) }}
             {% endif %}
 
             {%- if campaign -%}
-                {%- if is_granted('oro_campaign_view') -%}
-                    {% set campaignView = '<a href="' ~ path('oro_campaign_view', {'id': campaign.id}) ~ '">' ~ campaign.name|escape ~ '</a>' %}
-                {%- else -%}
-                    {% set campaignView = campaign.name|escape %}
-                {%- endif -%}
-                {{ UI.renderHtmlProperty('oro.campaign.emailcampaign.campaign.label'|trans, campaignView) }}
+                {{ UI.renderHtmlProperty(
+                    'oro.campaign.emailcampaign.campaign.label'|trans,
+                    UI.entityViewLink(campaign, campaign.name, 'oro_campaign_view')
+                ) }}
             {%- endif -%}
 
             {%- set ownerData -%}

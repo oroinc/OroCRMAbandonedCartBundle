@@ -3,7 +3,6 @@
 namespace Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking;
 
 use Doctrine\ORM\EntityManager;
-
 use Oro\Bundle\CampaignBundle\Entity\Campaign;
 
 class TrackingStatProvider implements TrackingStatProviderInterface

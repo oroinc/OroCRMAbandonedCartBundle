@@ -3,10 +3,9 @@
 namespace Oro\Bundle\AbandonedCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Oro\Bundle\CampaignBundle\Entity\Campaign;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
-use Oro\Bundle\CampaignBundle\Entity\Campaign;
 
 /**
  * Abandoned Cart Campaign

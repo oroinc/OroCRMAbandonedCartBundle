@@ -3,13 +3,12 @@
 namespace Oro\Bundle\AbandonedCartBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-
-use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AbandonedCartConversionType extends AbstractType
 {
@@ -78,7 +77,7 @@ class AbandonedCartConversionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             ['data_class' => 'Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartConversion']

@@ -3,7 +3,6 @@
 namespace Oro\Bundle\AbandonedCartBundle\Datagrid;
 
 use Doctrine\ORM\Query\Expr\Join;
-
 use Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface;
 use Oro\Bundle\DataGridBundle\Datasource\Orm\OrmDatasource;
 use Oro\Bundle\DataGridBundle\Event\BuildAfter;

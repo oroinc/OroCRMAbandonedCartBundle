@@ -3,7 +3,6 @@
 namespace Oro\Bundle\AbandonedCartBundle\EventListener\ImportExport;
 
 use Doctrine\Common\Collections\Collection;
-
 use Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvider;
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\ImportExportBundle\Event\StrategyEvent;

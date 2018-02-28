@@ -3,12 +3,11 @@
 namespace Oro\Bundle\AbandonedCartBundle\Migrations\Schema\v1_2;
 
 use Doctrine\DBAL\Schema\Schema;
-
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
+use Oro\Bundle\MagentoBundle\Provider\MagentoChannelType;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\ParametrizedSqlMigrationQuery;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
-use Oro\Bundle\MagentoBundle\Provider\MagentoChannelType;
 
 class OroAbandonedCartBundle implements Migration
 {

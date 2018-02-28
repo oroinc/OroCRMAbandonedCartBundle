@@ -3,10 +3,9 @@
 namespace Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList;
 
 use Doctrine\Common\Persistence\ObjectManager;
-
-use Oro\Bundle\SegmentBundle\Entity\Segment;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
+use Oro\Bundle\SegmentBundle\Entity\Segment;
 
 class PredefinedMarketingListFactory
 {

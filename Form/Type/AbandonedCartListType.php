@@ -2,17 +2,14 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\Criteria;
-
+use Doctrine\ORM\EntityRepository;
+use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
+use Oro\Bundle\QueryDesignerBundle\Form\Type\AbstractQueryDesignerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use Oro\Bundle\QueryDesignerBundle\Form\Type\AbstractQueryDesignerType;
-
-use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
 
 class AbandonedCartListType extends AbstractQueryDesignerType
 {

@@ -2,22 +2,22 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Form\Handler;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Persistence\ObjectRepository;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Form;
-use Symfony\Component\Validator\ValidatorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
-
+use Doctrine\ORM\EntityManager;
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use Oro\Bundle\AbandonedCartBundle\Form\Handler\AbandonedCartCampaignHandler;
-use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
-use Oro\Bundle\SegmentBundle\Entity\SegmentType;
-use Oro\Bundle\UserBundle\Entity\User;
+use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
+use Oro\Bundle\SegmentBundle\Entity\SegmentType;
+use Oro\Bundle\UserBundle\Entity\User;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Validator\ValidatorInterface;
 
 class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -96,6 +96,8 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->request = new Request();
+        $requestStack = new RequestStack();
+        $requestStack->push($this->request);
 
         $this->validator = $this->createMock('Symfony\Component\Validator\ValidatorInterface');
         $this->translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -115,7 +117,7 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->handler = new AbandonedCartCampaignHandler(
             $this->form,
-            $this->request,
+            $requestStack,
             $registry,
             $this->validator,
             $this->translator,

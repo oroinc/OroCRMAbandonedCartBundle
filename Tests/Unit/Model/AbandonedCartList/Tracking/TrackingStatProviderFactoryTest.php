@@ -3,9 +3,8 @@
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList\Tracking;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Bridge\Doctrine\RegistryInterface;
-
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class TrackingStatProviderFactoryTest extends \PHPUnit_Framework_TestCase
 {

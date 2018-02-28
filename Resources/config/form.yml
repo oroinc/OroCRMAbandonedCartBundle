@@ -20,9 +20,8 @@ services:
             - { name: form.type, alias: oro_abandonedcart_list }
 
     oro_abandonedcart_list.form.abandonedcart_list:
-        class:           Symfony\Component\Form\Form
-        factory_method:  createNamed
-        factory_service: form.factory
+        class: Symfony\Component\Form\Form
+        factory: ['@form.factory', createNamed]
         arguments:
             - "oro_abandonedcart_list_form"
             - "oro_abandonedcart_list"
@@ -37,10 +36,9 @@ services:
 
     oro_abandonedcart.form.handler.abandonedcart_campaign:
         class: %oro_abandonedcart.form.handler.abandonedcart_campaign.class%
-        scope: request
         arguments:
             - "@oro_abandonedcart_list.form.abandonedcart_list"
-            - "@request"
+            - "@request_stack"
             - "@doctrine"
             - "@validator"
             - "@translator"
@@ -57,12 +55,10 @@ services:
 
     oro_abandonedcart.form.conversion:
         class: Symfony\Component\Form\Form
-        factory_method: createNamed
-        factory_service: form.factory
+        factory: ['@form.factory', createNamed]
         arguments: ["oro_abandonedcart_conversion", "oro_abandonedcart_conversion", null]
 
     oro_abandonedcart.form.handler.conversion_form:
         class: %oro_abandonedcart.form.handler.conversion_form.class%
-        scope: request
-        arguments: ["@oro_abandonedcart.form.conversion", "@request", "@doctrine.orm.entity_manager"]
+        arguments: ["@oro_abandonedcart.form.conversion", "@request_stack", "@doctrine.orm.entity_manager"]
 

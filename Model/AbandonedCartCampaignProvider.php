@@ -4,10 +4,8 @@ namespace Oro\Bundle\AbandonedCartBundle\Model;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-
-use Symfony\Bridge\Doctrine\RegistryInterface;
-
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class AbandonedCartCampaignProvider implements AbandonedCartCampaignProviderInterface
 {
