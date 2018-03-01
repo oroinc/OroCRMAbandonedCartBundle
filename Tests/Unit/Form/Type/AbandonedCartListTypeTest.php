@@ -90,7 +90,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
                     'column_column_choice_type'   => 'hidden',
                     'filter_column_choice_type'   => 'oro_entity_field_select',
                     'data_class'                  => self::MARKETING_LIST_CLASS_NAME,
-                    'intention'                   => 'marketing_list',
+                    'csrf_token_id'               => 'marketing_list',
                     'query_type'                  => 'segment',
                     'cascade_validation'          => true
                 ]
