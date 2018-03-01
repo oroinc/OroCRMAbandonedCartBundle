@@ -17,6 +17,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
+// TODO: change to Symfony\Component\Validator\Validator\ValidatorInterface in scope of BAP-15236
 use Symfony\Component\Validator\ValidatorInterface;
 
 class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
@@ -99,7 +100,7 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($this->request);
 
-        $this->validator = $this->createMock('Symfony\Component\Validator\ValidatorInterface');
+        $this->validator = $this->createMock(ValidatorInterface::class);
         $this->translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
 
         $this->abandonedCartCampaignFactory = $this
