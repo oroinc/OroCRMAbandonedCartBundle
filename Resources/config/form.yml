@@ -11,11 +11,11 @@ parameters:
 services:
     # AbandonedCartList
     oro_abandonedcart_list.form.type.abandonedcart_list:
-        class: %oro_abandonedcart.form.type.abandonedcart_list.class%
+        class: '%oro_abandonedcart.form.type.abandonedcart_list.class%'
         arguments:
-            - %oro_magento.entity.cart.class%
-            - %oro_abandonedcart.entity.marketing_list_type.class%
-            - %oro_marketing_list.entity.class%
+            - '%oro_magento.entity.cart.class%'
+            - '%oro_abandonedcart.entity.marketing_list_type.class%'
+            - '%oro_marketing_list.entity.class%'
         tags:
             - { name: form.type, alias: oro_abandonedcart_list }
 
@@ -27,15 +27,15 @@ services:
             - "oro_abandonedcart_list"
 
     oro_abandonedcart.campaign_factory:
-        class: %oro_abandonedcart.campaign_factory.class%
+        class: '%oro_abandonedcart.campaign_factory.class%'
 
     oro_abandonedcart.abandonedcart_campaign_factory:
-        class: %oro_abandonedcart.abandonedcart_campaign_factory.class%
+        class: '%oro_abandonedcart.abandonedcart_campaign_factory.class%'
         arguments:
             - "@oro_abandonedcart.campaign_factory"
 
     oro_abandonedcart.form.handler.abandonedcart_campaign:
-        class: %oro_abandonedcart.form.handler.abandonedcart_campaign.class%
+        class: '%oro_abandonedcart.form.handler.abandonedcart_campaign.class%'
         arguments:
             - "@oro_abandonedcart_list.form.abandonedcart_list"
             - "@request_stack"
@@ -46,10 +46,10 @@ services:
             - "@oro_abandonedcart.provider"
 
     oro_abandonedcart.form.type.conversion:
-        class: %oro_abandonedcart.form.type.conversion.class%
+        class: '%oro_abandonedcart.form.type.conversion.class%'
         arguments:
             - "@oro_abandonedcart.conversion_manager"
-            - %oro_mailchimp.entity.campaign.class%
+            - '%oro_mailchimp.entity.campaign.class%'
         tags:
             - { name: form.type, alias: "oro_abandonedcart_conversion" }
 
@@ -59,6 +59,6 @@ services:
         arguments: ["oro_abandonedcart_conversion", "oro_abandonedcart_conversion", null]
 
     oro_abandonedcart.form.handler.conversion_form:
-        class: %oro_abandonedcart.form.handler.conversion_form.class%
+        class: '%oro_abandonedcart.form.handler.conversion_form.class%'
         arguments: ["@oro_abandonedcart.form.conversion", "@request_stack", "@doctrine.orm.entity_manager"]
 
