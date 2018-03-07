@@ -92,7 +92,6 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
                     'data_class'                  => self::MARKETING_LIST_CLASS_NAME,
                     'csrf_token_id'               => 'marketing_list',
                     'query_type'                  => 'segment',
-                    'cascade_validation'          => true
                 ]
             );
 

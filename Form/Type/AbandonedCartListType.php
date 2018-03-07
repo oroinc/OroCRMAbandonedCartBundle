@@ -116,7 +116,6 @@ class AbandonedCartListType extends AbstractQueryDesignerType
             [
                 'data_class' => $this->marketingListClassName,
                 'csrf_token_id' => 'marketing_list',
-                'cascade_validation' => true,
                 'query_type' => 'segment',
             ]
         );
