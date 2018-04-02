@@ -3,6 +3,7 @@
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
 
 use Oro\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -66,7 +67,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             ->method('add')
             ->with(
                 'definition',
-                'hidden',
+                HiddenType::class,
                 ['required' => false]
             )
             ->will($this->returnSelf());
