@@ -178,7 +178,7 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
             'definition' => 'test'
         ];
 
-        $this->form->expects($this->once())
+        $this->form->expects($this->any())
             ->method('getName')
             ->will($this->returnValue('test_form'));
 
