@@ -17,8 +17,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
-// TODO: change to Symfony\Component\Validator\Validator\ValidatorInterface in scope of BAP-15236
-use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
 {
