@@ -4,6 +4,7 @@ namespace Oro\Bundle\AbandonedCartBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -60,14 +61,14 @@ class AbandonedCartConversionType extends AbstractType
 
                 $form->add(
                     'campaigns',
-                    'entity',
+                    EntityType::class,
                     [
                         'class' => $this->mailChimpCampaignClassName,
                         'required' => true,
                         'query_builder' => $qb,
                         'multiple' => true,
                         'expanded' => true,
-                        'property' => 'title',
+                        'choice_label' => 'title',
                     ]
                 );
             }

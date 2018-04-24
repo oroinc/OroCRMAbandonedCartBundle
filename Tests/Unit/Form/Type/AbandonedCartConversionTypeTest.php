@@ -50,9 +50,4 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
 
         $this->abandonedCartConversionType->configureOptions($resolver);
     }
-
-    public function testGetName()
-    {
-        $this->assertEquals('oro_abandonedcart_conversion', $this->abandonedCartConversionType->getName());
-    }
 }

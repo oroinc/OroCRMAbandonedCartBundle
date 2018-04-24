@@ -3,7 +3,10 @@
 namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Form\Type;
 
 use Oro\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType;
+use Oro\Bundle\EntityBundle\Form\Type\EntityFieldSelectType;
+use Oro\Bundle\FormBundle\Form\Type\OroResizeableRichTextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -37,7 +40,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             ->method('add')
             ->with(
                 'name',
-                'text',
+                TextType::class,
                 ['required' => true]
             )
             ->will($this->returnSelf());
@@ -46,7 +49,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             ->method('add')
             ->with(
                 'description',
-                'oro_resizeable_rich_text',
+                OroResizeableRichTextType::class,
                 ['required' => false]
             )
             ->will($this->returnSelf());
@@ -55,7 +58,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             ->method('add')
             ->with(
                 'entity',
-                'hidden',
+                HiddenType::class,
                 ['data' => self::CART_CLASS_NAME]
             )
             ->will($this->returnSelf());
@@ -88,8 +91,8 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
                     'column_column_field_choice_options' => [
                         'exclude_fields' => ['relation_type'],
                     ],
-                    'column_column_choice_type'   => 'hidden',
-                    'filter_column_choice_type'   => 'oro_entity_field_select',
+                    'column_column_choice_type'   => HiddenType::class,
+                    'filter_column_choice_type'   => EntityFieldSelectType::class,
                     'data_class'                  => self::MARKETING_LIST_CLASS_NAME,
                     'csrf_token_id'               => 'marketing_list',
                     'query_type'                  => 'segment',
@@ -97,10 +100,5 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             );
 
         $this->abandonedCartListType->configureOptions($resolver);
-    }
-
-    public function testGetName()
-    {
-        $this->assertEquals('oro_abandonedcart_list', $this->abandonedCartListType->getName());
     }
 }
