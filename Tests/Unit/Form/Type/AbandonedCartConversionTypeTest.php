@@ -6,7 +6,7 @@ use Oro\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartConversionType;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartConversionManager;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartConversionTypeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var AbandonedCartConversionType
@@ -14,7 +14,7 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
     protected $abandonedCartConversionType;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartConversionManager
+     * @var \PHPUnit\Framework\MockObject\MockObject|AbandonedCartConversionManager
      */
     protected $conversionManager;
 
@@ -39,7 +39,7 @@ class AbandonedCartConversionTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testConfigureOptions()
     {
-        /** @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolver $resolver */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|OptionsResolver $resolver */
         $resolver = $this->createMock('Symfony\Component\OptionsResolver\OptionsResolver');
 
         $resolver->expects($this->once())

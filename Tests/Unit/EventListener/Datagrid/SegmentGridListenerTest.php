@@ -11,7 +11,7 @@ use Oro\Bundle\DataGridBundle\Event\PreBuild;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MarketingListBundle\Model\MarketingListHelper;
 
-class SegmentGridListenerTest extends \PHPUnit_Framework_TestCase
+class SegmentGridListenerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var SegmentGridListener
@@ -19,17 +19,17 @@ class SegmentGridListenerTest extends \PHPUnit_Framework_TestCase
     protected $listener;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|MarketingListHelper
+     * @var \PHPUnit\Framework\MockObject\MockObject|MarketingListHelper
      */
     protected $marketingListHelper;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartCampaignProviderInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|AbandonedCartCampaignProviderInterface
      */
     protected $abandonedCartCampaignProvider;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|DatagridConfiguration
+     * @var \PHPUnit\Framework\MockObject\MockObject|DatagridConfiguration
      */
     protected $config;
 

@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartListTypeTest extends \PHPUnit\Framework\TestCase
 {
     const CART_CLASS_NAME = 'Oro\Bundle\MagentoBundle\Entity\Cart';
     const MARKETING_LIST_TYPE_CLASS_NAME = 'Oro\Bundle\MarketingListBundle\Form\Type\MarketingListType';
@@ -64,7 +64,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnSelf());
 
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|FormBuilder $builder
+         * @var \PHPUnit\Framework\MockObject\MockObject|FormBuilder $builder
          */
         $builder->expects($this->at(5))
             ->method('add')
@@ -81,7 +81,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
     public function testConfigureOptions()
     {
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|OptionsResolver $resolver
+         * @var \PHPUnit\Framework\MockObject\MockObject|OptionsResolver $resolver
          */
         $resolver = $this->createMock('Symfony\Component\OptionsResolver\OptionsResolver');
         $resolver->expects($this->once())

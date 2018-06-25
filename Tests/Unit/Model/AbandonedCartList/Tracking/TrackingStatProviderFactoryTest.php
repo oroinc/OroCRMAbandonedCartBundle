@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStatProviderFactory;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class TrackingStatProviderFactoryTest extends \PHPUnit_Framework_TestCase
+class TrackingStatProviderFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var TrackingStatProviderFactory
@@ -14,12 +14,12 @@ class TrackingStatProviderFactoryTest extends \PHPUnit_Framework_TestCase
     protected $factory;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|RegistryInterface $registry
+     * @var \PHPUnit\Framework\MockObject\MockObject|RegistryInterface $registry
      */
     protected $registry;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|EntityManager $em
+     * @var \PHPUnit\Framework\MockObject\MockObject|EntityManager $em
      */
     protected $em;
 

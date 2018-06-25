@@ -10,7 +10,7 @@ use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\Tracking\TrackingStat
 use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
-class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartConversionManagerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var AbandonedCartConversionManager
@@ -18,52 +18,52 @@ class AbandonedCartConversionManagerTest extends \PHPUnit_Framework_TestCase
     protected $conversionManager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ManagerRegistry
+     * @var \PHPUnit\Framework\MockObject\MockObject|ManagerRegistry
      */
     protected $managerRegistry;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     protected $repository;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     protected $em;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|MarketingList
+     * @var \PHPUnit\Framework\MockObject\MockObject|MarketingList
      */
     protected $marketingList;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|CampaignAbandonedCartRelationManager
+     * @var \PHPUnit\Framework\MockObject\MockObject|CampaignAbandonedCartRelationManager
      */
     protected $campaignRelationManager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     protected $campaign;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|TrackingStatProviderFactory
+     * @var \PHPUnit\Framework\MockObject\MockObject|TrackingStatProviderFactory
      */
     protected $statProviderFactory;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     protected $statResult;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     protected $trackingStatProvider;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartConversion
+     * @var \PHPUnit\Framework\MockObject\MockObject|AbandonedCartConversion
      */
     protected $conversion;
 

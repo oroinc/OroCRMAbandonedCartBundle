@@ -8,7 +8,7 @@ use Oro\Bundle\AbandonedCartBundle\Model\ExtendedMergeVar\CartItemsMergeVarProvi
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
+class CartItemsMergeVarProviderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var CartItemsMergeVarProvider
@@ -16,12 +16,12 @@ class CartItemsMergeVarProviderTest extends \PHPUnit_Framework_TestCase
     protected $provider;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartCampaignProviderInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|AbandonedCartCampaignProviderInterface
      */
     protected $abandonedCartCampaignProvider;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|TranslatorInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|TranslatorInterface
      */
     protected $translator;
 

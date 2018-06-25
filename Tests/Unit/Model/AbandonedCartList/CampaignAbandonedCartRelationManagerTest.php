@@ -9,7 +9,7 @@ use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignAbandonedCart
 use Oro\Bundle\CampaignBundle\Entity\Campaign;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
-class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCase
+class CampaignAbandonedCartRelationManagerTest extends \PHPUnit\Framework\TestCase
 {
     const ABANDONED_CART_CAMPAIGN_CLASS_NAME = 'Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign';
 
@@ -19,17 +19,17 @@ class CampaignAbandonedCartRelationManagerTest extends \PHPUnit_Framework_TestCa
     protected $campaignAbandonedCartRelationManager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ManagerRegistry
+     * @var \PHPUnit\Framework\MockObject\MockObject|ManagerRegistry
      */
     protected $managerRegistry;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository
+     * @var \PHPUnit\Framework\MockObject\MockObject|EntityRepository
      */
     protected $repository;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|MarketingList
+     * @var \PHPUnit\Framework\MockObject\MockObject|MarketingList
      */
     protected $marketingList;
 

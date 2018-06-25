@@ -6,7 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\PredefinedMarketingListFactory;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
 
-class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
+class PredefinedMarketingListFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const MARKETING_LIST_TYPE_CLASS_NAME = 'Oro\Bundle\MarketingListBundle\Entity\MarketingListType';
 
@@ -16,7 +16,7 @@ class PredefinedMarketingListFactoryTest extends \PHPUnit_Framework_TestCase
     protected $factory;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ObjectManager
+     * @var \PHPUnit\Framework\MockObject\MockObject|ObjectManager
      */
     protected $objectManager;
 
