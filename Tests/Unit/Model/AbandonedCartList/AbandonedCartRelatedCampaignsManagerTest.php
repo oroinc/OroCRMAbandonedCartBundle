@@ -10,43 +10,43 @@ use Oro\Bundle\MailChimpBundle\Entity\Campaign;
 use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
-class AbandonedCartRelatedCampaignsManagerTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartRelatedCampaignsManagerTest extends \PHPUnit\Framework\TestCase
 {
     const STAT_SEGMENT_CLASS_NAME = 'staticSegmentClassName';
     const MAILCHIMP_CAMPAIGN_CLASS_NAME = 'mailchimpCampaignClassName';
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartRelatedCampaignsManager
+     * @var \PHPUnit\Framework\MockObject\MockObject|AbandonedCartRelatedCampaignsManager
      */
     protected $abandonedCartRelatedCampaignsManager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartCampaignProviderInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|AbandonedCartCampaignProviderInterface
      */
     protected $abandonedCartCampaignProvider;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ManagerRegistry
+     * @var \PHPUnit\Framework\MockObject\MockObject|ManagerRegistry
      */
     protected $managerRegistry;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository
+     * @var \PHPUnit\Framework\MockObject\MockObject|EntityRepository
      */
     protected $repository;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|MarketingList
+     * @var \PHPUnit\Framework\MockObject\MockObject|MarketingList
      */
     protected $marketingList;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|StaticSegment
+     * @var \PHPUnit\Framework\MockObject\MockObject|StaticSegment
      */
     protected $staticSegment;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|Campaign
+     * @var \PHPUnit\Framework\MockObject\MockObject|Campaign
      */
     protected $mailchimpCampaign;
 

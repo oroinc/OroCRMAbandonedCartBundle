@@ -5,7 +5,7 @@ namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\ConversionFactory;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
-class ConversionFactoryTest extends \PHPUnit_Framework_TestCase
+class ConversionFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ConversionFactory

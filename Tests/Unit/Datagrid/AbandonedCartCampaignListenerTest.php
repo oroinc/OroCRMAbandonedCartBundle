@@ -9,7 +9,7 @@ use Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface;
 use Oro\Bundle\DataGridBundle\Datasource\Orm\OrmDatasource;
 use Oro\Bundle\DataGridBundle\Event\BuildAfter;
 
-class AbandonedCartCampaignListenerTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartCampaignListenerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var AbandonedCartCampaignListener
@@ -17,17 +17,17 @@ class AbandonedCartCampaignListenerTest extends \PHPUnit_Framework_TestCase
     protected $listener;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|DatagridInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|DatagridInterface
      */
     protected $datagrid;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|OrmDatasource
+     * @var \PHPUnit\Framework\MockObject\MockObject|OrmDatasource
      */
     protected $ormDataSource;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|QueryBuilder
+     * @var \PHPUnit\Framework\MockObject\MockObject|QueryBuilder
      */
     protected $qb;
 

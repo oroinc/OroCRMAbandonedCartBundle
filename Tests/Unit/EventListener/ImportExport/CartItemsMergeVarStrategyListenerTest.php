@@ -16,7 +16,7 @@ use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\SegmentBundle\Entity\Segment;
 
-class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
+class CartItemsMergeVarStrategyListenerTest extends \PHPUnit\Framework\TestCase
 {
     const SEGMENT_ENTITY_CLASS = 'EntityClass';
 
@@ -26,22 +26,22 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
     protected $listener;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|DoctrineHelper
+     * @var \PHPUnit\Framework\MockObject\MockObject|DoctrineHelper
      */
     protected $doctrineHelper;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|NumberFormatter
+     * @var \PHPUnit\Framework\MockObject\MockObject|NumberFormatter
      */
     protected $numberFormatter;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository
+     * @var \PHPUnit\Framework\MockObject\MockObject|EntityRepository
      */
     protected $entityRepository;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|StrategyEvent
+     * @var \PHPUnit\Framework\MockObject\MockObject|StrategyEvent
      */
     protected $strategyEvent;
 
@@ -118,14 +118,14 @@ class CartItemsMergeVarStrategyListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testOnProcessAfterWhenEntityIsNotMemberExtendedMergeVar()
     {
-        /** @var \PHPUnit_Framework_MockObject_MockObject|StrategyEvent $strategyEvent */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|StrategyEvent $strategyEvent */
         $strategyEvent = $this
             ->getMockBuilder('Oro\Bundle\ImportExportBundle\Event\StrategyEvent')
             ->disableOriginalConstructor()
             ->getMock();
 
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|StrategyEvent $strategyEvent
+         * @var \PHPUnit\Framework\MockObject\MockObject|StrategyEvent $strategyEvent
          */
         $strategyEvent->expects($this->once())
             ->method('getEntity')->will($this->returnValue(new ExtendedMergeVar()));

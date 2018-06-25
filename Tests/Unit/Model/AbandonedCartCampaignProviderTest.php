@@ -9,7 +9,7 @@ use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProvider;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartCampaignProviderTest extends \PHPUnit\Framework\TestCase
 {
     const ABANDONED_CART_CAMPAIGN_CLASS_NAME = 'AbandonedCartClassName';
 
@@ -19,19 +19,19 @@ class AbandonedCartCampaignProviderTest extends \PHPUnit_Framework_TestCase
     protected $provider;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|EntityManager
+     * @var \PHPUnit\Framework\MockObject\MockObject|EntityManager
      */
     protected $manager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository
+     * @var \PHPUnit\Framework\MockObject\MockObject|EntityRepository
      */
     protected $repository;
 
     protected function setUp()
     {
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|RegistryInterface $registry
+         * @var \PHPUnit\Framework\MockObject\MockObject|RegistryInterface $registry
          */
         $registry = $this->createMock('Symfony\Bridge\Doctrine\RegistryInterface');
 

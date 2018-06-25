@@ -9,7 +9,7 @@ use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MarketingListBundle\Model\MarketingListHelper;
 
-class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartListenerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var AbandonedCartListener
@@ -17,22 +17,22 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
     protected $listener;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|MarketingListHelper
+     * @var \PHPUnit\Framework\MockObject\MockObject|MarketingListHelper
      */
     protected $marketingListHelper;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|BuildBefore
+     * @var \PHPUnit\Framework\MockObject\MockObject|BuildBefore
      */
     protected $buildBefore;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|DatagridConfiguration
+     * @var \PHPUnit\Framework\MockObject\MockObject|DatagridConfiguration
      */
     protected $datagridConfig;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartCampaignProviderInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|AbandonedCartCampaignProviderInterface
      */
     protected $abandonedCartCampaignProvider;
 
@@ -100,7 +100,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getName')
             ->will($this->returnValue($gridName));
 
-        /** @var \PHPUnit_Framework_MockObject_MockObject|MarketingList $marketingList */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|MarketingList $marketingList */
         $marketingList = $this
             ->getMockBuilder('Oro\Bundle\MarketingListBundle\Entity\MarketingList')
             ->disableOriginalConstructor()
@@ -150,7 +150,7 @@ class AbandonedCartListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getName')
             ->will($this->returnValue($gridName));
 
-        /** @var \PHPUnit_Framework_MockObject_MockObject|MarketingList $marketingList */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|MarketingList $marketingList */
         $marketingList = $this
             ->getMockBuilder('Oro\Bundle\MarketingListBundle\Entity\MarketingList')
             ->disableOriginalConstructor()

@@ -8,7 +8,7 @@ use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\MagentoBundle\Provider\MagentoChannelType;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartVoterTest extends \PHPUnit\Framework\TestCase
 {
     const INTEGRATION_CHANNEL_CLASS_NAME = 'ChannelClassName';
 
@@ -18,7 +18,7 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
     protected $voter;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|DoctrineHelper
+     * @var \PHPUnit\Framework\MockObject\MockObject|DoctrineHelper
      */
     protected $doctrineHelper;
 
@@ -60,7 +60,7 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(1));
 
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|EntityRepository $repository
+         * @var \PHPUnit\Framework\MockObject\MockObject|EntityRepository $repository
          */
         $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')
             ->disableOriginalConstructor()
@@ -159,7 +159,7 @@ class AbandonedCartVoterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|ObjectIdentityInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|ObjectIdentityInterface
      */
     protected function getObjectIdentityInterfaceMock($objectIdentityClass)
     {

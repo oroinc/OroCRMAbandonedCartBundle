@@ -6,12 +6,12 @@ use Oro\Bundle\AbandonedCartBundle\Provider\Transport\Iterator\AutomationCampaig
 use Oro\Bundle\MailChimpBundle\Provider\Transport\Iterator\CampaignIterator;
 use Oro\Bundle\MailChimpBundle\Provider\Transport\MailChimpClient;
 
-class AutomationCampaignIteratorTest extends \PHPUnit_Framework_TestCase
+class AutomationCampaignIteratorTest extends \PHPUnit\Framework\TestCase
 {
     const TEST_BATCH_SIZE = 2;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|MailChimpClient
+     * @var \PHPUnit\Framework\MockObject\MockObject|MailChimpClient
      */
     protected $client;
 
