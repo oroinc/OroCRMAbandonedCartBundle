@@ -16,6 +16,10 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Abandoned cart list form type
+ * Used for creating abandoned cart lists, extends abstract query designer
+ */
 class AbandonedCartListType extends AbstractQueryDesignerType
 {
     /**
@@ -102,7 +106,7 @@ class AbandonedCartListType extends AbstractQueryDesignerType
     {
         return [
             'column_column_field_choice_options' => [
-                'exclude_fields' => ['relation_type'],
+                'exclude_fields' => ['relationType'],
             ],
             'column_column_choice_type' => HiddenType::class,
             'filter_column_choice_type' => EntityFieldSelectType::class
