@@ -86,7 +86,7 @@ class AbandonedCartListTypeTest extends \PHPUnit_Framework_TestCase
             ->with(
                 [
                     'column_column_field_choice_options' => [
-                        'exclude_fields' => ['relation_type'],
+                        'exclude_fields' => ['relationType'],
                     ],
                     'column_column_choice_type'   => 'hidden',
                     'filter_column_choice_type'   => 'oro_entity_field_select',

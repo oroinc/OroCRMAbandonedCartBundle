@@ -14,6 +14,10 @@ use Oro\Bundle\QueryDesignerBundle\Form\Type\AbstractQueryDesignerType;
 
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
 
+/**
+ * Abandoned cart list form type
+ * Used for creating abandoned cart lists, extends abstract query designer
+ */
 class AbandonedCartListType extends AbstractQueryDesignerType
 {
     /**
@@ -100,7 +104,7 @@ class AbandonedCartListType extends AbstractQueryDesignerType
     {
         return [
             'column_column_field_choice_options' => [
-                'exclude_fields' => ['relation_type'],
+                'exclude_fields' => ['relationType'],
             ],
             'column_column_choice_type' => 'hidden',
             'filter_column_choice_type' => 'oro_entity_field_select'
