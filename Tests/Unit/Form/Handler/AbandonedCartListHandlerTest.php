@@ -135,7 +135,7 @@ class AbandonedCartListHandlerTest extends \PHPUnit\Framework\TestCase
         $this->request->setMethod('POST');
         $this->assertProcessSegment();
 
-        $this->form->expects($this->once())
+        $this->form->expects($this->exactly(2))
             ->method('isValid')
             ->will($this->returnValue(true));
 
@@ -157,7 +157,7 @@ class AbandonedCartListHandlerTest extends \PHPUnit\Framework\TestCase
         $this->request->setMethod('POST');
         $this->assertProcessSegment();
 
-        $this->form->expects($this->once())
+        $this->form->expects($this->exactly(2))
             ->method('isValid')
             ->will($this->returnValue(true));
 
