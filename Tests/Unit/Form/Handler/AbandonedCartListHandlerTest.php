@@ -17,6 +17,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AbandonedCartListHandlerTest extends \PHPUnit\Framework\TestCase
@@ -100,6 +101,9 @@ class AbandonedCartListHandlerTest extends \PHPUnit\Framework\TestCase
         $requestStack->push($this->request);
 
         $this->validator = $this->createMock(ValidatorInterface::class);
+        $this->validator->expects($this->any())
+            ->method('validate')
+            ->willReturn(new ConstraintViolationList());
         $this->translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
 
         $this->abandonedCartCampaignFactory = $this
