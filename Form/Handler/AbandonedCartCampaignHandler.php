@@ -2,6 +2,8 @@
 
 namespace Oro\Bundle\AbandonedCartBundle\Form\Handler;
 
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
@@ -50,6 +52,8 @@ class AbandonedCartCampaignHandler extends MarketingListHandler
     /**
      * @param MarketingList $marketingList
      * @return bool
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function process(MarketingList $marketingList)
     {
@@ -63,14 +67,17 @@ class AbandonedCartCampaignHandler extends MarketingListHandler
 
     /**
      * @param MarketingList $marketingList
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     protected function processAbandonedCartCampaign(MarketingList $marketingList)
     {
         $abandonedCartCampaign = $this->abandonedCartCampaignProvider
             ->getAbandonedCartCampaign($marketingList);
 
-        if (is_null($abandonedCartCampaign)) {
-            $abandonedCartCampaign = $this->abandonedCartCampaignFactory
+        if ($abandonedCartCampaign === null) {
+            $abandonedCartCampaign = $this
+                ->abandonedCartCampaignFactory
                 ->create($marketingList);
         }
 

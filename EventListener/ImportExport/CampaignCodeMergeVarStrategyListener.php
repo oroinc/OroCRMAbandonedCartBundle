@@ -53,7 +53,7 @@ class CampaignCodeMergeVarStrategyListener
             return null;
         }
 
-        /** @var AbandonedCartCampaign $campaignToAbandonedCartRelation */
+        /** @var AbandonedCartCampaign $abandonedCartCampaign */
         $abandonedCartCampaign = $this->abandonedCartCampaignProvider
             ->getAbandonedCartCampaign($staticSegment->getMarketingList());
 
