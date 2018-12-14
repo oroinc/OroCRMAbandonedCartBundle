@@ -5,7 +5,7 @@
 {% import 'OroSegmentBundle::macros.html.twig' as segmentQD %}
 {% import 'OroUserBundle::macros.html.twig' as U %}
 
-{% oro_title_set({params : {"%entityName%": entity.name|default('N/A') }}) %}
+{% oro_title_set({params : {"%entityName%": entity.name|default('N/A'|trans) }}) %}
 
 {% block navButtons %}
     {% placeholder abandoned_cart_mailchimp_menu with {entity: entity} %}
@@ -32,7 +32,7 @@
         'entity': entity,
         'indexPath': path('oro_abandoned_cart_list'),
         'indexLabel': 'oro.abandonedcart.abandonedcartcampaign.entity_plural_label'|trans,
-        'entityTitle': entity.name|default('N/A'),
+        'entityTitle': entity.name|default('N/A'|trans),
     } %}
     {{ parent() }}
 {% endblock pageHeader %}
