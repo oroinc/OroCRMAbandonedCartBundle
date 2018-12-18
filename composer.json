@@ -13,9 +13,9 @@
         "exclude-from-classmap": ["/Tests/"]
     },
     "require": {
-        "oro/crm": "3.2.x-dev",
-        "oro/mailchimp": "3.2.x-dev",
-        "oro/marketing": "3.2.x-dev"
+        "oro/crm": "dev-releaseTests",
+        "oro/mailchimp": "dev-releaseTests",
+        "oro/marketing": "dev-releaseTests"
     },
     "repositories": {
         "oro": {
