@@ -5,7 +5,7 @@ namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Entity;
 use Oro\Bundle\AbandonedCartBundle\Entity\AbandonedCartCampaign;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class AbandonedCartCampaignTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartCampaignTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var AbandonedCartCampaign

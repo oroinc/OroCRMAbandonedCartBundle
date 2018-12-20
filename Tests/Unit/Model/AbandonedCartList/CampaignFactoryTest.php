@@ -5,7 +5,7 @@ namespace Oro\Bundle\AbandonedCartBundle\Tests\Unit\Model\AbandonedCartList;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
-class CampaignFactoryTest extends \PHPUnit_Framework_TestCase
+class CampaignFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var CampaignFactory

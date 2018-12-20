@@ -24,7 +24,7 @@ services:
         factory: ['@form.factory', createNamed]
         arguments:
             - "oro_abandonedcart_list_form"
-            - "oro_abandonedcart_list"
+            - Oro\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartListType
 
     oro_abandonedcart.campaign_factory:
         class: '%oro_abandonedcart.campaign_factory.class%'
@@ -56,7 +56,7 @@ services:
     oro_abandonedcart.form.conversion:
         class: Symfony\Component\Form\Form
         factory: ['@form.factory', createNamed]
-        arguments: ["oro_abandonedcart_conversion", "oro_abandonedcart_conversion", null]
+        arguments: ["oro_abandonedcart_conversion", Oro\Bundle\AbandonedCartBundle\Form\Type\AbandonedCartConversionType, null]
 
     oro_abandonedcart.form.handler.conversion_form:
         class: '%oro_abandonedcart.form.handler.conversion_form.class%'

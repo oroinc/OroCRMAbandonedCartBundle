@@ -1,5 +1,5 @@
 {
-    "name": "oro/crm-abandoned-cart",
+    "name": "oro/magento-abandoned-cart",
     "description": "Oro Abandoned Cart",
     "license": "OSL-3.0",
     "authors": [
@@ -13,10 +13,9 @@
         "exclude-from-classmap": ["/Tests/"]
     },
     "require": {
-        "php": "7.1.*",
-        "oro/crm": "2.x-dev",
-        "oro/crm-mail-chimp": "2.x-dev",
-        "oro/marketing": "2.x-dev"
+        "oro/crm": "3.1.*",
+        "oro/mailchimp": "3.1.*",
+        "oro/marketing": "3.1.*"
     },
     "repositories": {
         "oro": {
@@ -32,8 +31,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "2.x-dev"
+            "dev-master": "3.1-dev"
         }
     }
-
 }

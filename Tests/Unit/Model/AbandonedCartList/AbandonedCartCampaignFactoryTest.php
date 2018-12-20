@@ -7,7 +7,7 @@ use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\CampaignFactory;
 use Oro\Bundle\CampaignBundle\Entity\Campaign;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 
-class AbandonedCartCampaignFactoryTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartCampaignFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var AbandonedCartCampaignFactory
@@ -15,7 +15,7 @@ class AbandonedCartCampaignFactoryTest extends \PHPUnit_Framework_TestCase
     protected $factory;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|CampaignFactory
+     * @var \PHPUnit\Framework\MockObject\MockObject|CampaignFactory
      */
     protected $campaignFactory;
 

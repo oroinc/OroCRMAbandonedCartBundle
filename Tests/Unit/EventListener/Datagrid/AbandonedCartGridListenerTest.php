@@ -8,7 +8,7 @@ use Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface;
 use Oro\Bundle\DataGridBundle\Event\BuildBefore;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
 
-class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartGridListenerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var AbandonedCartGridListener
@@ -66,7 +66,7 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
     protected function createBuildBeforeEvent(array $expectedUnsets, array $parameters)
     {
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DatagridConfiguration $config
+         * @var \PHPUnit\Framework\MockObject\MockObject|DatagridConfiguration $config
          */
         $config = $this->getMockBuilder('Oro\Bundle\DataGridBundle\Datagrid\Common\DatagridConfiguration')
             ->setMethods(['offsetUnsetByPath'])
@@ -78,7 +78,7 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
         }
 
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DatagridInterface $dataGrid
+         * @var \PHPUnit\Framework\MockObject\MockObject|DatagridInterface $dataGrid
          */
         $dataGrid = $this->createMock('Oro\Bundle\DataGridBundle\Datagrid\DatagridInterface');
 
@@ -91,7 +91,7 @@ class AbandonedCartGridListenerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param array $data
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function createParameterBag(array $data)
     {

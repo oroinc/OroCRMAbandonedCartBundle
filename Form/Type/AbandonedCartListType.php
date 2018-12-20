@@ -4,13 +4,22 @@ namespace Oro\Bundle\AbandonedCartBundle\Form\Type;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
+use Oro\Bundle\EntityBundle\Form\Type\EntityFieldSelectType;
+use Oro\Bundle\FormBundle\Form\Type\OroResizeableRichTextType;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
 use Oro\Bundle\QueryDesignerBundle\Form\Type\AbstractQueryDesignerType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Abandoned cart list form type
+ * Used for creating abandoned cart lists, extends abstract query designer
+ */
 class AbandonedCartListType extends AbstractQueryDesignerType
 {
     /**
@@ -46,9 +55,9 @@ class AbandonedCartListType extends AbstractQueryDesignerType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', ['required' => true])
-            ->add('description', 'oro_resizeable_rich_text', ['required' => false])
-            ->add('entity', 'hidden', ['data' => $this->cartClassName]);
+            ->add('name', TextType::class, ['required' => true])
+            ->add('description', OroResizeableRichTextType::class, ['required' => false])
+            ->add('entity', HiddenType::class, ['data' => $this->cartClassName]);
 
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
@@ -64,10 +73,10 @@ class AbandonedCartListType extends AbstractQueryDesignerType
 
                 $form->add(
                     'type',
-                    'entity',
+                    EntityType::class,
                     [
                         'class' => $this->marketingListTypeClassName,
-                        'property' => 'label',
+                        'choice_label' => 'label',
                         'required' => true,
                         'query_builder' => $qb
                     ]
@@ -97,10 +106,10 @@ class AbandonedCartListType extends AbstractQueryDesignerType
     {
         return [
             'column_column_field_choice_options' => [
-                'exclude_fields' => ['relation_type'],
+                'exclude_fields' => ['relationType'],
             ],
-            'column_column_choice_type' => 'hidden',
-            'filter_column_choice_type' => 'oro_entity_field_select'
+            'column_column_choice_type' => HiddenType::class,
+            'filter_column_choice_type' => EntityFieldSelectType::class
         ];
     }
 

@@ -10,17 +10,18 @@ use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface;
 use Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MarketingListBundle\Entity\MarketingListType;
+use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Oro\Bundle\SegmentBundle\Entity\SegmentType;
 use Oro\Bundle\UserBundle\Entity\User;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
-// TODO: change to Symfony\Component\Validator\Validator\ValidatorInterface in scope of BAP-15236
-use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
+class AbandonedCartListHandlerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var AbandonedCartCampaignHandler
@@ -28,7 +29,7 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
     protected $handler;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|Form
+     * @var MockObject|Form
      */
     protected $form;
 
@@ -38,17 +39,17 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
     protected $request;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ValidatorInterface
+     * @var MockObject|ValidatorInterface
      */
     protected $validator;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|TranslatorInterface
+     * @var MockObject|TranslatorInterface
      */
     protected $translator;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartCampaignFactory
+     * @var MockObject|AbandonedCartCampaignFactory
      */
     protected $abandonedCartCampaignFactory;
 
@@ -63,36 +64,35 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
     protected $abandonedCartCampaign;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|EntityManager
+     * @var MockObject|EntityManager
      */
     protected $manager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ObjectRepository
+     * @var MockObject|ObjectRepository
      */
     protected $repository;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|AbandonedCartCampaignProviderInterface
+     * @var MockObject|AbandonedCartCampaignProviderInterface
      */
     protected $abandonedCartCampaignProvider;
 
     protected function setUp()
     {
-        $registry = $this->getMockForAbstractClass('Symfony\Bridge\Doctrine\RegistryInterface');
+        $registry = $this->getMockForAbstractClass(RegistryInterface::class);
 
-        $this->manager = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $this->manager = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|RegistryInterface $registry
+         * @var MockObject|RegistryInterface $registry
          */
         $registry->expects($this->once())
             ->method('getManager')
             ->will($this->returnValue($this->manager));
-
-        $this->form = $this->getMockBuilder('Symfony\Component\Form\Form')
+        $this->form = $this->getMockBuilder(Form::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -101,19 +101,19 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
         $requestStack->push($this->request);
 
         $this->validator = $this->createMock(ValidatorInterface::class);
-        $this->translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
+        $this->validator->expects($this->any())->method('validate')->willReturn([]);
+        $this->translator = $this->createMock(TranslatorInterface::class);
 
         $this->abandonedCartCampaignFactory = $this
-            ->getMockBuilder(
-                'Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartList\AbandonedCartCampaignFactory'
-            )
+            ->getMockBuilder(AbandonedCartCampaignFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->abandonedCartCampaignProvider = $this
-            ->createMock('Oro\Bundle\AbandonedCartBundle\Model\AbandonedCartCampaignProviderInterface');
+            ->createMock(AbandonedCartCampaignProviderInterface::class);
 
         $this->marketingList = new MarketingList();
+        $this->marketingList->setType(new MarketingListType(MarketingListType::TYPE_MANUAL));
         $this->abandonedCartCampaign = new AbandonedCartCampaign();
 
         $this->handler = new AbandonedCartCampaignHandler(
@@ -126,7 +126,7 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
             $this->abandonedCartCampaignProvider
         );
 
-        $this->repository = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectRepository')
+        $this->repository = $this->getMockBuilder(ObjectRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
@@ -136,7 +136,7 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
         $this->request->setMethod('POST');
         $this->assertProcessSegment();
 
-        $this->form->expects($this->once())
+        $this->form->expects($this->exactly(2))
             ->method('isValid')
             ->will($this->returnValue(true));
 
@@ -158,11 +158,12 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
         $this->request->setMethod('POST');
         $this->assertProcessSegment();
 
-        $this->form->expects($this->once())
+        $this->form->expects($this->exactly(2))
             ->method('isValid')
             ->will($this->returnValue(true));
 
-        $this->abandonedCartCampaignProvider->expects($this->once())
+        $this->abandonedCartCampaignProvider
+            ->expects($this->once())
             ->method('getAbandonedCartCampaign')
             ->with($this->marketingList)
             ->will($this->returnValue($this->abandonedCartCampaign));
@@ -183,14 +184,14 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue('test_form'));
 
         $this->request->request->set('test_form', $formData);
-        $businessUnit = $this->getMockBuilder('Oro\Bundle\OrganizationBundle\Entity\BusinessUnit')
+        $businessUnit = $this->getMockBuilder(BusinessUnit::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|User $owner
+         * @var MockObject|User $owner
          */
-        $owner = $this->getMockBuilder('Oro\Bundle\UserBundle\Entity\User')
+        $owner = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
             ->getMock();
 
