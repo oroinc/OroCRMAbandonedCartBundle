@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\ValidatorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -98,6 +99,9 @@ class AbandonedCartListHandlerTest extends \PHPUnit_Framework_TestCase
         $this->request = new Request();
 
         $this->validator = $this->createMock('Symfony\Component\Validator\ValidatorInterface');
+        $this->validator->expects($this->any())
+            ->method('validate')
+            ->willReturn(new ConstraintViolationList());
         $this->translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
 
         $this->abandonedCartCampaignFactory = $this
