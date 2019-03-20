@@ -2,6 +2,12 @@ Please refer first to [UPGRADE.md](UPGRADE.md) for the most important items that
 
 The current file describes significant changes in the code that may affect the upgrade of your customizations.
 
+## 4.0.0-beta
+### Changed
+* In `Oro\Bundle\AbandonedCartBundle\Controller\AbandonedCartController::deleteAction` 
+ (`oro_abandoned_cart_list_delete` route)
+ action the request method was changed to DELETE. 
+
 ## 3.0.0-rc (2018-05-31)
 [Show detailed list of changes](incompatibilities-3-0-rc.md)
 
