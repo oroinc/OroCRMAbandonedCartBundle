@@ -7,10 +7,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use FOS\RestBundle\Util\Codes;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Oro\Bundle\SecurityBundle\Annotation\CsrfProtection;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Oro\Bundle\MarketingListBundle\Datagrid\ConfigurationProvider;
@@ -18,6 +20,7 @@ use Oro\Bundle\MarketingListBundle\Entity\MarketingList;
 use Oro\Bundle\MailChimpBundle\Entity\StaticSegment;
 
 /**
+ * Abandoned Cart Controller
  * @Route("/abandoned-cart")
  */
 class AbandonedCartController extends Controller
@@ -111,6 +114,8 @@ class AbandonedCartController extends Controller
      *      permission="DELETE",
      *      class="OroMarketingListBundle:MarketingList"
      * )
+     * @Method("DELETE")
+     * @CsrfProtection()
      *
      * @param MarketingList $marketingList
      * @return JsonResponse
